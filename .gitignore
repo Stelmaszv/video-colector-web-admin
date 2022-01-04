@@ -1,3 +1,5 @@
 /.idea/
 db.sqlite3
 secret.py
+videocolectorwebadmin/__pycache__/__init__.cpython-38.pyc
+*.pyc
