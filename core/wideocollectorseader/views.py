@@ -37,9 +37,10 @@ class StartSeederView(APIPrototype):
     def add_model(self,item):
         self.Model(
             name=item['name'],
-            banner=item['baner'],
+            banner=item['banner'],
             show_name=item['show_name'],
             avatar=item['avatar'],
             dir=item['dir'],
+            country=item['country'],
             description=item['description']
         ).save()
