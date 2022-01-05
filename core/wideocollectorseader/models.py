@@ -14,7 +14,7 @@ class Producents(models.Model):
     year        = models.DateField(null=True,blank=True)
     added       = models.DateTimeField(auto_now=True)
     rating      = models.IntegerField(default=0)
-    series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='Serie', blank=True)
+    series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
     def __str__(self):
         return self.name
@@ -41,6 +41,25 @@ class Serie(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name
+
+class Star(models.Model):
+    name = models.CharField(max_length=200)
+    view = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
+    avatar = models.CharField(max_length=200, default='', null=True)
+    favourite = models.BooleanField(default=False)
+    description = models.TextField(default='', null=True)
+    weight      = models.IntegerField(default=0)
+    height     = models.IntegerField(default=0)
+    ethnicity = models.CharField(max_length=200, default='', null=True)
+    hair_color = models.CharField(max_length=200, default='', null=True)
+    birth_place = models.CharField(max_length=200, default='', null=True)
+    nationality = models.CharField(max_length=200, default='', null=True)
+    dir = models.CharField(max_length=200, default='', null=True)
+    series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='StarSerie', blank=True)
+    tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
     def __str__(self):
         return self.name
 

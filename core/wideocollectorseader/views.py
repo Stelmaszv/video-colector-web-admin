@@ -4,7 +4,7 @@ from pathlib import Path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import  APIView
-from .models import Producents,Serie,Tag
+from .models import Producents,Serie,Tag,Star
 
 class StartSeederView(APIView):
 
@@ -15,6 +15,7 @@ class StartSeederView(APIView):
     def api_get(self, request, *args, **kwargs):
         opservers=[
             TagSeader(),
+            StarSeader(),
             ProducentSeader(),
             SeriesSeader(),
         ]
@@ -49,6 +50,7 @@ class ApstractSeader(ABC):
         getattr(obj_name,atribute_name).add(name)
 
     def add_one_many_loop(self,item,Model,atribute_name,AddModel):
+        print(item)
         for tag in item:
             Tag=AddModel.objects.get(name=tag)
             getattr(Model, atribute_name).add(Tag)
@@ -101,4 +103,27 @@ class TagSeader(ApstractSeader):
         self.Model(
             name=item['name']
         ).save()
+
+class StarSeader(ApstractSeader):
+
+    file_name = 'Stars.json'
+    Model=Star
+
+    def add_model(self,item):
+        self.Model(
+            name=item['name'],
+            avatar = item['avatar'],
+            description = item['description'],
+            weight=item['weight'],
+            height=item['height'],
+            ethnicity=item['ethnicity'],
+            hair_color=item['hair_color'],
+            birth_place=item['birth_place'],
+            nationality=item['nationality'],
+            dir=item['dir'],
+        ).save()
+        StarItem = Star.objects.latest('id')
+        self.add_one_many_loop(item['tags'], StarItem, 'tags', Tag)
+        self.add_one_many_loop(item['series'], StarItem, 'series', Serie)
+
 
