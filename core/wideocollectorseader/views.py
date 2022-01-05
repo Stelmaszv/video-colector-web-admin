@@ -4,7 +4,7 @@ from pathlib import Path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import  APIView
-from .models import Producents
+from .models import Producents,Serie
 
 class StartSeederView(APIView):
 
@@ -14,7 +14,8 @@ class StartSeederView(APIView):
 
     def api_get(self, request, *args, **kwargs):
         opservers=[
-            ProducentSeader()
+            ProducentSeader(),
+            SeriesSeader()
         ]
         self.opserver(opservers)
         return Response(data=[], status=status.HTTP_200_OK)
@@ -54,5 +55,23 @@ class ProducentSeader(ApstractSeader):
             dir=item['dir'],
             country=item['country'],
             description=item['description']
+        ).save()
+
+class SeriesSeader(ApstractSeader):
+
+    file_name = 'Series.json'
+    Model=Serie
+
+    def add_model(self,item):
+        self.Model(
+            name=item['name'],
+            banner=item['banner'],
+            show_name=item['show_name'],
+            avatar=item['avatar'],
+            dir=item['dir'],
+            country=item['country'],
+            description=item['description'],
+            years = item['years'],
+            number_of_sezons = item['number_of_sezons']
         ).save()
 
