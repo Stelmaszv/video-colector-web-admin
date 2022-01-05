@@ -50,10 +50,14 @@ class ApstractSeader(ABC):
         getattr(obj_name,atribute_name).add(name)
 
     def add_one_many_loop(self,item,Model,atribute_name,AddModel):
-        print(item)
         for tag in item:
             Tag=AddModel.objects.get(name=tag)
             getattr(Model, atribute_name).add(Tag)
+
+    def add_data(self,Data):
+        if Data:
+            return Data
+        return None
 
 class ProducentSeader(ApstractSeader):
 
@@ -121,6 +125,7 @@ class StarSeader(ApstractSeader):
             birth_place=item['birth_place'],
             nationality=item['nationality'],
             dir=item['dir'],
+            date_of_birth = self.add_data(item['date_of_birth'])
         ).save()
         StarItem = Star.objects.latest('id')
         self.add_one_many_loop(item['tags'], StarItem, 'tags', Tag)

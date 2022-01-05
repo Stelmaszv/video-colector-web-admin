@@ -60,6 +60,7 @@ class Star(models.Model):
     dir = models.CharField(max_length=200, default='', null=True)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='StarSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
+    date_of_birth = models.DateField(null=True,blank=True)
     def __str__(self):
         return self.name
 
