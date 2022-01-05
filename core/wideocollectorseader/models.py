@@ -5,16 +5,17 @@ class Producents(models.Model):
     view      = models.IntegerField(default=0)
     likes     = models.IntegerField(default=0)
     favourite = models.BooleanField(default=False)
-    banner    = models.CharField(max_length=200, default='',null=True)
+    banner    = models.CharField(max_length=200, default='',null=True,blank=True)
     show_name = models.CharField(max_length=200,default='',null=True)
     avatar = models.CharField(max_length=200, default='',null=True)
     dir = models.CharField(max_length=200, default='',null=True)
     country = models.CharField(max_length=200, default='',null=True)
     description = models.TextField(default='',null=True)
-    year        = models.DateField(null=True)
+    year        = models.DateField(null=True,blank=True)
     added       = models.DateTimeField(auto_now=True)
     rating      = models.IntegerField(default=0)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='Serie', blank=True)
+    tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
     def __str__(self):
         return self.name
 
@@ -34,6 +35,13 @@ class Serie(models.Model):
     years               = models.CharField(max_length=200, default='', null=True)
     number_of_sezons    = models.IntegerField(default=0)
     Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
+    tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='serietags', blank=True)
     def __str__(self):
         return self.name
+
+class Tag(models.Model):
+    name = models.CharField(max_length=200)
+    def __str__(self):
+        return self.name
+
 

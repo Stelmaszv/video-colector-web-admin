@@ -4,7 +4,7 @@ from pathlib import Path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import  APIView
-from .models import Producents,Serie
+from .models import Producents,Serie,Tag
 
 class StartSeederView(APIView):
 
@@ -14,8 +14,9 @@ class StartSeederView(APIView):
 
     def api_get(self, request, *args, **kwargs):
         opservers=[
+            TagSeader(),
             ProducentSeader(),
-            SeriesSeader()
+            SeriesSeader(),
         ]
         self.opserver(opservers)
         return Response(data=[], status=status.HTTP_200_OK)
@@ -42,10 +43,15 @@ class ApstractSeader(ABC):
         pass
 
     def add_one_many(self,name,Model):
-        return Model.objects.filter(name=name)[0]
+        return Model.objects.get(name=name)
 
     def add_one_many_conection(self,name,obj_name,atribute_name):
         getattr(obj_name,atribute_name).add(name)
+
+    def add_one_many_loop(self,item,Model,atribute_name,AddModel):
+        for tag in item:
+            Tag=AddModel.objects.get(name=tag)
+            getattr(Model, atribute_name).add(Tag)
 
 class ProducentSeader(ApstractSeader):
 
@@ -84,4 +90,15 @@ class SeriesSeader(ApstractSeader):
         ).save()
         SerieItem=Serie.objects.filter(name=item['name'])[0]
         self.add_one_many_conection(SerieItem,Producent,'series')
+        self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
+
+class TagSeader(ApstractSeader):
+
+    file_name = 'Tags.json'
+    Model=Tag
+
+    def add_model(self,item):
+        self.Model(
+            name=item['name']
+        ).save()
 
