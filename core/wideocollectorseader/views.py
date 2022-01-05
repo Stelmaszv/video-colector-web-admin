@@ -41,6 +41,9 @@ class ApstractSeader(ABC):
     def add_model(self,item):
         pass
 
+    def add_one_many(self,name,Model):
+        return Model.objects.filter(name=name)[0]
+
 class ProducentSeader(ApstractSeader):
 
     file_name = 'Producent.json'
@@ -72,6 +75,7 @@ class SeriesSeader(ApstractSeader):
             country=item['country'],
             description=item['description'],
             years = item['years'],
-            number_of_sezons = item['number_of_sezons']
+            number_of_sezons = item['number_of_sezons'],
+            Producent        = self.add_one_many(item['producent'],Producents),
         ).save()
 
