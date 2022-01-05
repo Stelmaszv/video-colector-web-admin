@@ -44,8 +44,8 @@ class ApstractSeader(ABC):
     def add_one_many(self,name,Model):
         return Model.objects.filter(name=name)[0]
 
-    def add_one_many_conection(self,name,obj_name):
-        obj_name.series.add(name)
+    def add_one_many_conection(self,name,obj_name,atribute_name):
+        getattr(obj_name,atribute_name).add(name)
 
 class ProducentSeader(ApstractSeader):
 
@@ -83,5 +83,5 @@ class SeriesSeader(ApstractSeader):
             Producent        = Producent,
         ).save()
         SerieItem=Serie.objects.filter(name=item['name'])[0]
-        self.add_one_many_conection(SerieItem,Producent)
+        self.add_one_many_conection(SerieItem,Producent,'series')
 
