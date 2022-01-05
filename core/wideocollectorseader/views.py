@@ -4,7 +4,7 @@ from pathlib import Path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import  APIView
-from .models import Producents,Serie,Tag,Star
+from .models import Producents,Serie,Tag,Star,Movie
 
 class StartSeederView(APIView):
 
@@ -15,9 +15,10 @@ class StartSeederView(APIView):
     def api_get(self, request, *args, **kwargs):
         opservers=[
             TagSeader(),
-            StarSeader(),
             ProducentSeader(),
             SeriesSeader(),
+            StarSeader(),
+            MoviesSeader()
         ]
         self.opserver(opservers)
         return Response(data=[], status=status.HTTP_200_OK)
@@ -48,7 +49,6 @@ class ApstractSeader(ABC):
 
     def add_one_many_conection(self,name,obj_name,atribute_name):
         getattr(obj_name,atribute_name).add(name)
-
     def add_one_many_loop(self,item,Model,atribute_name,AddModel):
         for tag in item:
             Tag=AddModel.objects.get(name=tag)
@@ -118,6 +118,7 @@ class StarSeader(ApstractSeader):
             name=item['name'],
             avatar = item['avatar'],
             description = item['description'],
+            show_name=item['show_name'],
             weight=item['weight'],
             height=item['height'],
             ethnicity=item['ethnicity'],
@@ -130,5 +131,31 @@ class StarSeader(ApstractSeader):
         StarItem = Star.objects.latest('id')
         self.add_one_many_loop(item['tags'], StarItem, 'tags', Tag)
         self.add_one_many_loop(item['series'], StarItem, 'series', Serie)
+
+class MoviesSeader(ApstractSeader):
+
+    file_name = 'Movies.json'
+    Model=Movie
+
+    def add_model(self,item):
+        serieel = self.add_one_many(item['series'][0], Serie)
+        self.Model(
+            name=item['name'],
+            show_name=item['show_name'],
+            avatar = item['avatar'],
+            poster = item['poster'],
+            description=item['description'],
+            country=item['country'],
+            dir=item['dir'],
+            src=item['src'],
+            date_relesed= self.add_data(item['date_relesed']),
+            serie=serieel
+        ).save()
+        MovieItem = Movie.objects.latest('id')
+        self.add_one_many_loop(item['tags'], MovieItem, 'tags', Tag)
+        self.add_one_many_loop(item['stars'], MovieItem, 'stars', Star)
+        self.add_one_many_conection(MovieItem, serieel, 'movies')
+
+
 
 

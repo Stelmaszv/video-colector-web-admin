@@ -36,6 +36,7 @@ class Serie(models.Model):
     number_of_sezons    = models.IntegerField(default=0)
     Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='serietags', blank=True)
+    movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='SerieMovie', blank=True)
     def __str__(self):
         return self.name
 
@@ -73,6 +74,7 @@ class Movie(models.Model):
     view = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
     avatar = models.CharField(max_length=200, default='', null=True)
+    src = models.CharField(max_length=200, default='', null=True)
     favourite = models.BooleanField(default=False)
     poster = models.CharField(max_length=200, default='', null=True)
     description = models.TextField(default='', null=True)
@@ -81,9 +83,9 @@ class Movie(models.Model):
     dir = models.CharField(max_length=200, default='', null=True)
     added               = models.DateTimeField(auto_now=True)
     rating              = models.IntegerField(default=0)
+    serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True)
-    series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='MovieSerie', blank=True)
     def __str__(self):
         return self.name
 
