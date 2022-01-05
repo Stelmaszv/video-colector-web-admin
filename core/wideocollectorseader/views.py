@@ -65,6 +65,7 @@ class ProducentSeader(ApstractSeader):
     Model=Producents
 
     def add_model(self,item):
+        print('Add Producent '+item['name'])
         self.Model(
             name=item['name'],
             banner=item['banner'],
@@ -82,6 +83,7 @@ class SeriesSeader(ApstractSeader):
 
     def add_model(self,item):
         Producent=self.add_one_many(item['producent'], Producents)
+        print('Add Serie ' + item['name'])
         self.Model(
             name=item['name'],
             banner=item['banner'],
@@ -104,6 +106,7 @@ class TagSeader(ApstractSeader):
     Model=Tag
 
     def add_model(self,item):
+        print('Add Tag ' + item['name'])
         self.Model(
             name=item['name']
         ).save()
@@ -114,6 +117,7 @@ class StarSeader(ApstractSeader):
     Model=Star
 
     def add_model(self,item):
+        print('Add Star ' + item['name'])
         self.Model(
             name=item['name'],
             avatar = item['avatar'],
@@ -139,6 +143,7 @@ class MoviesSeader(ApstractSeader):
 
     def add_model(self,item):
         serieel = self.add_one_many(item['series'][0], Serie)
+        print('Add Movie ' + item['name'])
         self.Model(
             name=item['name'],
             show_name=item['show_name'],
