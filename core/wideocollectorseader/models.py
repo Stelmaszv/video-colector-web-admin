@@ -14,6 +14,7 @@ class Producents(models.Model):
     year        = models.DateField(null=True)
     added       = models.DateTimeField(auto_now=True)
     rating      = models.IntegerField(default=0)
+    series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='Serie', blank=True)
     def __str__(self):
         return self.name
 
@@ -32,6 +33,7 @@ class Serie(models.Model):
     rating              = models.IntegerField(default=0)
     years               = models.CharField(max_length=200, default='', null=True)
     number_of_sezons    = models.IntegerField(default=0)
+    Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
     def __str__(self):
         return self.name
 
