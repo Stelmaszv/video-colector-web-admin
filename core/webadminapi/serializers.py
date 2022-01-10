@@ -2,6 +2,7 @@ from rest_framework import serializers
 from core.wideocollectorseader.models import Movie, Serie, Star, Producents,Tag
 
 
+
 class TagsSerializer(serializers.ModelSerializer):
     class Meta:
         model=Tag
