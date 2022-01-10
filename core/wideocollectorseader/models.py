@@ -65,6 +65,7 @@ class Star(models.Model):
     date_of_birth = models.DateField(null=True,blank=True)
     added               = models.DateTimeField(auto_now=True)
     rating              = models.IntegerField(default=0)
+    movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
     def __str__(self):
         return self.name
 

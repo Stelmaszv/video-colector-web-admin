@@ -1,34 +1,48 @@
 from rest_framework import serializers
-from core.wideocollectorseader.models import Movie, Serie, Star, Producents,Tag
+from core.wideocollectorseader.models import Movie, Serie, Star,Tag
 
+class ShortProducent(serializers.ModelSerializer):
+    class Meta:
+        model=Serie
+        fields = ['id','name','show_name','avatar']
 
+class ShortSeries(serializers.ModelSerializer):
+    Producent = ShortProducent(many=False)
+    class Meta:
+        model=Serie
+        fields = ['id','name','show_name','avatar','Producent']
 
 class TagsSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Tag
-        fields = ['id', 'name']
+        model = Tag
+        fields = '__all__'
 
-class ShortStarsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Star
-        fields = ['id','name','show_name','avatar']
+#Stars
+class SeriesSerlizerForStars(ShortSeries):
+    pass
 
-class ShortProducentSerializer(serializers.ModelSerializer):
+class StarsSerializer(serializers.ModelSerializer):
+    series = SeriesSerlizerForStars(many=True)
+    tags = TagsSerializer(many=True)
     class Meta:
-        model=Producents
-        fields = ['id', 'name','show_name','avatar']
+        model = Star
+        fields = '__all__'
 
-class ShortSeriesSerializer(serializers.ModelSerializer):
-    Producent= ShortProducentSerializer(many=False)
+
+#Movies
+class StarsForMovies(serializers.ModelSerializer):
     class Meta:
-        model=Serie
-        fields = ['id', 'name','show_name','avatar','Producent']
+        model = Star
+        fields = '__all__'
+
+class SeriesSerlizerForMovies(serializers.ModelSerializer):
+    pass
 
 class MoviesSerializer(serializers.ModelSerializer):
-    serie = ShortSeriesSerializer(many=False)
+    stars = StarsForMovies(many=True)
     tags  = TagsSerializer(many=True)
-    stars = ShortStarsSerializer(many=True)
+    serie = SeriesSerlizerForMovies(many=False)
+
     class Meta:
         model = Movie
-        fields = ['id', 'name','show_name','view','likes','avatar','src','favourite','poster','description','country',
-                  'date_relesed','dir','added','rating','stars','serie','tags']
+        fields = '__all__'
