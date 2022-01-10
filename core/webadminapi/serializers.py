@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.wideocollectorseader.models import Movie, Serie, Star,Tag
+from core.wideocollectorseader.models import Movie, Serie, Star,Tag,Producents
 
 class ShortProducent(serializers.ModelSerializer):
     class Meta:
@@ -17,6 +17,17 @@ class TagsSerializer(serializers.ModelSerializer):
         model = Tag
         fields = '__all__'
 
+#Producents
+class SeriesSerlizerForProducent(ShortSeries):
+    pass
+
+class ProducentsSerializer(serializers.ModelSerializer):
+    tags   = TagsSerializer(many=True)
+    series = SeriesSerlizerForProducent(many=True)
+    class Meta:
+        model = Producents
+        fields = '__all__'
+
 #Stars
 class SeriesSerlizerForStars(ShortSeries):
     pass
@@ -27,7 +38,6 @@ class StarsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Star
         fields = '__all__'
-
 
 #Movies
 class StarsForMovies(serializers.ModelSerializer):
