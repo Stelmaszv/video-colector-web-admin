@@ -158,8 +158,15 @@ class MoviesSeader(ApstractSeader):
         ).save()
         MovieItem = Movie.objects.latest('id')
         self.add_one_many_loop(item['tags'], MovieItem, 'tags', Tag)
-        self.add_one_many_loop(item['stars'], MovieItem, 'stars', Star)
         self.add_one_many_conection(MovieItem, serieel, 'movies')
+        self.add_stars(item['stars'],MovieItem)
+
+    def add_stars(self,stars,Model):
+        for star in stars:
+            StarObj=Star.objects.get(name=star)
+            Model.stars.add(StarObj)
+            StarObj.movies.add(Model)
+
 
 
 
