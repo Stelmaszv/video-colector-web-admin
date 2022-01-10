@@ -17,6 +17,19 @@ class TagsSerializer(serializers.ModelSerializer):
         model = Tag
         fields = '__all__'
 
+#Serie
+class ProducentForSerieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producents
+        fields = '__all__'
+
+class SerieSerializer(serializers.ModelSerializer):
+    tags   = TagsSerializer(many=True)
+    Producent = ProducentForSerieSerializer(many=False)
+    class Meta:
+        model = Serie
+        fields = '__all__'
+
 #Producents
 class SeriesSerlizerForProducent(ShortSeries):
     pass

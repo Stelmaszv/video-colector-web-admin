@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
-from core.webadminapi.serializers import MoviesSerializer, StarsSerializer,ProducentsSerializer
-from core.wideocollectorseader.models import Movie,Star,Producents
+from core.webadminapi.serializers import MoviesSerializer, StarsSerializer, ProducentsSerializer, SerieSerializer
+from core.wideocollectorseader.models import Movie,Star,Producents,Serie
 
 class MoviesView(generics.ListAPIView):
     serializer_class = MoviesSerializer
@@ -16,4 +16,9 @@ class StarView(generics.ListAPIView):
 class ProducentsView(generics.ListAPIView):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects.all()
+    pagination_class = PageNumberPagination
+
+class SerieView(generics.ListAPIView):
+    serializer_class = SerieSerializer
+    queryset = Serie.objects.all()
     pagination_class = PageNumberPagination
