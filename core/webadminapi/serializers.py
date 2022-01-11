@@ -17,6 +17,10 @@ class SerieSerializerUpdate(serializers.ModelSerializer):
         model = Serie
         fields = '__all__'
 
+class ProducentsSerializerUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = Producents
+        fields = '__all__'
 
 #Bass
 class ShortProducent(serializers.ModelSerializer):

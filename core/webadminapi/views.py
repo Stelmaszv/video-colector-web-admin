@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from core.webadminapi.serializers import MoviesSerializer, StarsSerializer, ProducentsSerializer, SerieSerializer, \
-    TagsSerializer, MoviesSerializerUpdate, StarsSerializerUpdate, SerieSerializerUpdate
+    TagsSerializer, MoviesSerializerUpdate, StarsSerializerUpdate, SerieSerializerUpdate, ProducentsSerializerUpdate
 from core.wideocollectorseader.models import Movie,Star,Producents,Serie,Tag
 from django.http import Http404
 from rest_framework.views import APIView
@@ -99,6 +99,22 @@ class SerieUpdataView(AbstractUpdateView):
     serializer_class = SerieSerializerUpdate
     queryset = Serie.objects
     Model = Serie
+
+class TagDeteilsView(AbstractUpdateView):
+    serializer_class = TagsSerializer
+    queryset = Tag.objects
+    Model = Tag
+
+class ProducentsDeteilsView(AbstractDeteilsView):
+    serializer_class = ProducentsSerializer
+    queryset = Producents.objects
+    Model = Producents
+
+class ProducentsUpdataView(AbstractUpdateView):
+    serializer_class = ProducentsSerializerUpdate
+    queryset = Producents.objects
+    Model = Producents
+
 
 
 
