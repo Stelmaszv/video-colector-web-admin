@@ -1,4 +1,60 @@
+import json
+import os
+from pathlib import Path
+
 from django.db import models
+
+class AfterSave:
+    def __init__(self,Model,init_array):
+        self.Model=Model
+        for item in init_array:
+            getattr(self,item)()
+
+    def UpdateJSON(self):
+
+        def return_stars(Model):
+            tags=[]
+            for star in Model.stars.all():
+                tags.append(star.name)
+            return tags
+
+        def return_tags(Model):
+            tags=[]
+            for tag in Model.tags.all():
+                tags.append(tag.name)
+            return tags
+
+        def add_data_to_JSON(data):
+            data_str=[]
+            data_str.append(data.year)
+            data_str.append(data.month)
+            data_str.append(data.day)
+            return data_str
+
+        def return_fields(Model):
+            fields=[]
+            fields.append({"db": "show_name", "value" : Model.show_name})
+            fields.append({"db": "description", "value": Model.description})
+            fields.append({"db": "date_relesed", "value": add_data_to_JSON(Model.date_relesed), "data" : "True"})
+            fields.append({"db": "country", "value": Model.country})
+            fields.append({"db": "likes", "value": Model.likes})
+            fields.append({"db": "views", "value": Model.view})
+            fields.append({"db": "rating", "value": Model.rating})
+            return fields
+
+        def retrun_config_json(Model):
+            data={}
+            data['fields']=  return_fields(Model)
+            data['tags']  =  return_tags(Model)
+            data['stars'] =  return_stars(Model)
+            return json.dumps(data)
+        config=self.Model.dir + '/config.JSON'
+
+        if os.path.exists(config):
+            os.remove(config)
+        f = open(config, "x")
+        f.write(retrun_config_json(self.Model))
+        f.close()
 
 class Producents(models.Model):
     name      = models.CharField(max_length=200)
@@ -87,6 +143,12 @@ class Movie(models.Model):
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
+
+    def save(self, *args, **kwargs):
+        super(Movie, self).save(*args, **kwargs)
+        init=['UpdateJSON']
+        AfterSave(self,init)
+
     def __str__(self):
         return self.name
 
