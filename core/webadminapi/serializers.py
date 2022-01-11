@@ -58,7 +58,7 @@ class StarsForMovies(serializers.ModelSerializer):
         model = Star
         fields = '__all__'
 
-class SeriesSerlizerForMovies(serializers.ModelSerializer):
+class SeriesSerlizerForMovies(ShortSeries):
     pass
 
 class MoviesSerializer(serializers.ModelSerializer):
