@@ -12,6 +12,13 @@ class MoviesSerializerUpdate(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
 
+class SerieSerializerUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = Serie
+        fields = '__all__'
+
+
+#Bass
 class ShortProducent(serializers.ModelSerializer):
     class Meta:
         model=Serie
@@ -23,6 +30,7 @@ class ShortSeries(serializers.ModelSerializer):
         model=Serie
         fields = ['id','name','show_name','avatar','Producent']
 
+#Serlisers
 class TagsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
