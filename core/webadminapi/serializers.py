@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from core.wideocollectorseader.models import Movie, Serie, Star,Tag,Producents
 
+#Movies Upadate
 class ShortProducent(serializers.ModelSerializer):
     class Meta:
         model=Serie
@@ -50,6 +51,13 @@ class StarsSerializer(serializers.ModelSerializer):
     tags = TagsSerializer(many=True)
     class Meta:
         model = Star
+        fields = '__all__'
+
+
+#Movies Upadate
+class MoviesSerializerUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
         fields = '__all__'
 
 #Movies

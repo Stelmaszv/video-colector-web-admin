@@ -52,13 +52,13 @@ class Star(models.Model):
     avatar = models.CharField(max_length=200, default='', null=True)
     favourite = models.BooleanField(default=False)
     show_name = models.CharField(max_length=200, default='', null=True)
-    description = models.TextField(default='', null=True)
+    description = models.TextField(default='', null=True,blank=True)
     weight      = models.IntegerField(default=0)
     height     = models.IntegerField(default=0)
     ethnicity = models.CharField(max_length=200, default='', null=True)
     hair_color = models.CharField(max_length=200, default='', null=True)
     birth_place = models.CharField(max_length=200, default='', null=True)
-    nationality = models.CharField(max_length=200, default='', null=True)
+    nationality = models.CharField(max_length=200, default='', null=True,blank=True)
     dir = models.CharField(max_length=200, default='', null=True)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='StarSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
@@ -70,7 +70,7 @@ class Star(models.Model):
         return self.name
 
 class Movie(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200,null=True)
     show_name = models.CharField(max_length=200, default='', null=True)
     view = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
@@ -78,15 +78,15 @@ class Movie(models.Model):
     src = models.CharField(max_length=200, default='', null=True)
     favourite = models.BooleanField(default=False)
     poster = models.CharField(max_length=200, default='', null=True)
-    description = models.TextField(default='', null=True)
-    country = models.CharField(max_length=200, default='', null=True)
+    description = models.TextField(default='', null=True,blank=True)
+    country = models.CharField(max_length=200, default='', null=True,blank=True)
     date_relesed = models.DateField(null=True,blank=True)
     dir = models.CharField(max_length=200, default='', null=True)
     added               = models.DateTimeField(auto_now=True)
     rating              = models.IntegerField(default=0)
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
-    stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True)
-    tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True)
+    stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True,null=True)
+    tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
     def __str__(self):
         return self.name
 
