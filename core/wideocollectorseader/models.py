@@ -26,9 +26,12 @@ class AfterSave:
 
         def add_data_to_JSON(data):
             data_str=[]
-            data_str.append(data.year)
-            data_str.append(data.month)
-            data_str.append(data.day)
+            if hasattr(data,'year'):
+                data_str.append(data.year)
+            if hasattr(data, 'month'):
+                data_str.append(data.month)
+            if hasattr(data, 'day'):
+                data_str.append(data.day)
             return data_str
 
         def return_fields(Model):
