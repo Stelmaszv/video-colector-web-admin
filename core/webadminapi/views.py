@@ -5,7 +5,7 @@ from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from core.webadminapi.serializers import MoviesSerializer, StarsSerializer, ProducentsSerializer, SerieSerializer, \
     TagsSerializer, MoviesSerializerUpdate, StarsSerializerUpdate, SerieSerializerUpdate, ProducentsSerializerUpdate, \
-    PhotoSerializerMovie
+    PhotoSerializerMovie, PhotoSerializerSeries
 from core.wideocollectorseader.models import Movie,Star,Producents,Serie,Tag
 from django.http import Http404
 from rest_framework.views import APIView
@@ -150,6 +150,41 @@ class SerieUpdataView(AbstractUpdateView):
     serializer_class = SerieSerializerUpdate
     queryset = Serie.objects
     Model = Serie
+
+class PhotosSeriesView(generics.ListAPIView):
+    serializer_class = PhotoSerializerSeries
+    queryset = Serie.objects.all()
+    pagination_class = PageNumberPagination
+    Model = Serie
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        miandir=os.listdir(Model.dir+'\photo\DATA')
+        photos=[]
+        for photo in miandir:
+            if photo.endswith(photo_ext):
+                photos.append(
+                    {
+                     "url"     :   Model.dir+'/'+photo,
+                     "name"    :   Model.show_name
+                     },
+                )
+        for Movie in Model.movies.all():
+            for photo in os.listdir(Movie.dir):
+                if photo.endswith(photo_ext):
+                    photos.append(
+                        {
+                            "url": Model.dir + '/' + photo,
+                            "name": Movie.show_name
+                        },
+                    )
+        return photos
 
 class ProducentsView(generics.ListAPIView):
     serializer_class = ProducentsSerializer

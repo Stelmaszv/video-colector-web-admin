@@ -42,7 +42,9 @@ class TagsSerializer(serializers.ModelSerializer):
 #photos
 class PhotoSerializerMovie(serializers.Serializer):
     url = serializers.CharField(max_length=200)
-
+class PhotoSerializerSeries(serializers.Serializer):
+    url  = serializers.CharField(max_length=200)
+    name = serializers.CharField(max_length=200)
 #Serie
 class ProducentForSerieSerializer(serializers.ModelSerializer):
     class Meta:
