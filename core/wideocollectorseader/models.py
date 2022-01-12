@@ -1,7 +1,5 @@
 import json
 import os
-from pathlib import Path
-
 from django.db import models
 
 class AfterSave:
@@ -13,10 +11,10 @@ class AfterSave:
     def UpdateJSON(self):
 
         def return_stars(Model):
-            tags=[]
+            stars=[]
             for star in Model.stars.all():
-                tags.append(star.name)
-            return tags
+                stars.append(star.name)
+            return stars
 
         def return_tags(Model):
             tags=[]
@@ -35,21 +33,25 @@ class AfterSave:
             return data_str
 
         def return_fields(Model):
-            fields=[]
-            fields.append({"db": "show_name", "value" : Model.show_name})
-            fields.append({"db": "description", "value": Model.description})
-            fields.append({"db": "date_relesed", "value": add_data_to_JSON(Model.date_relesed), "data" : "True"})
-            fields.append({"db": "country", "value": Model.country})
-            fields.append({"db": "likes", "value": Model.likes})
-            fields.append({"db": "views", "value": Model.view})
-            fields.append({"db": "rating", "value": Model.rating})
+            allow_fields=["show_name","description","date_relesed","likes","views","rating" ,"country","weight",
+                          "height","ethnicity","hair_color","birth_place","nationality","favourite","poster",
+                          "banner","avatar","date_of_birth"]
+            fields = []
+            for field in Model._meta.get_fields():
+                if field.name in allow_fields:
+                    if field.name != "date_relesed" and field.name !=  "date_of_birth":
+                        fields.append({"db": field.name, "value" : str(getattr(Model,field.name))})
+                    else:
+                        fields.append(
+                            {"db": field.name, "value" : add_data_to_JSON(Model.date_relesed), "data": "True"}
+                        )
             return fields
 
         def retrun_config_json(Model):
             data={}
             data['fields']=  return_fields(Model)
             data['tags']  =  return_tags(Model)
-            data['stars'] =  return_stars(Model)
+            #data['stars'] =  return_stars(Model) #erorr in main collector
             return json.dumps(data)
         config=self.Model.dir + '/config.JSON'
 
@@ -61,7 +63,7 @@ class AfterSave:
 
 class Producents(models.Model):
     name      = models.CharField(max_length=200)
-    view      = models.IntegerField(default=0)
+    views      = models.IntegerField(default=0)
     likes     = models.IntegerField(default=0)
     favourite = models.BooleanField(default=False)
     banner    = models.CharField(max_length=200, default='',null=True,blank=True)
@@ -80,7 +82,7 @@ class Producents(models.Model):
 
 class Serie(models.Model):
     name                = models.CharField(max_length=200)
-    view                = models.IntegerField(default=0)
+    views                = models.IntegerField(default=0)
     likes               = models.IntegerField(default=0)
     favourite           = models.BooleanField(default=False)
     banner              = models.CharField(max_length=200, default='',null=True)
@@ -106,7 +108,7 @@ class Tag(models.Model):
 
 class Star(models.Model):
     name = models.CharField(max_length=200)
-    view = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
     avatar = models.CharField(max_length=200, default='', null=True)
     favourite = models.BooleanField(default=False)
@@ -131,7 +133,7 @@ class Star(models.Model):
 class Movie(models.Model):
     name = models.CharField(max_length=200,null=True)
     show_name = models.CharField(max_length=200, default='', null=True)
-    view = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
     avatar = models.CharField(max_length=200, default='', null=True)
     src = models.CharField(max_length=200, default='', null=True)
