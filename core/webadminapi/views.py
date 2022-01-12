@@ -96,7 +96,7 @@ class MoviePhotosView(generics.ListAPIView):
         for item in os.listdir(Model.dir):
             if item.endswith(photo_ext):
                 photo.append(
-                    {"url"     :   Model.dir+'/'+item}
+                    {"url"     :   Model.dir+'\\'+item}
                 )
         return photo
 
@@ -171,7 +171,7 @@ class PhotosSeriesView(generics.ListAPIView):
             if photo.endswith(photo_ext):
                 photos.append(
                     {
-                     "url"     :   Model.dir+'/'+photo,
+                     "url"     :   Model.dir+'\\'+photo,
                      "name"    :   Model.show_name
                      },
                 )
@@ -180,7 +180,7 @@ class PhotosSeriesView(generics.ListAPIView):
                 if photo.endswith(photo_ext):
                     photos.append(
                         {
-                            "url": Model.dir + '/' + photo,
+                            "url": Movie.dir + '\\' + photo,
                             "name": Movie.show_name
                         },
                     )
@@ -190,6 +190,43 @@ class ProducentsView(generics.ListAPIView):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects.all()
     pagination_class = PageNumberPagination
+
+
+class ProducentsPhotosView(generics.ListAPIView):
+    serializer_class = PhotoSerializerSeries
+    queryset = Producents.objects.all()
+    pagination_class = PageNumberPagination
+    Model = Producents
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        miandir=os.listdir(Model.dir+'\photo\DATA')
+        photos=[]
+        for photo in miandir:
+            if photo.endswith(photo_ext):
+                photos.append(
+                    {
+                     "url"     :   Model.dir+'\\'+photo,
+                     "name"    :   Model.show_name
+                     },
+                )
+        for Serie in Model.series.all():
+            for Movie in Serie.movies.all():
+                for photo in os.listdir(Movie.dir):
+                    if photo.endswith(photo_ext):
+                        photos.append(
+                            {
+                                "url": Movie.dir + '\\' + photo,
+                                "name": Movie.show_name
+                            },
+                        )
+        return photos
 
 class ProducentsDeteilsView(AbstractDeteilsView):
     serializer_class = ProducentsSerializer
