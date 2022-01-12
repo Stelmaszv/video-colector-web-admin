@@ -89,8 +89,6 @@ class StarView(generics.ListAPIView):
     queryset = Star.objects.all()
     pagination_class = PageNumberPagination
 
-
-
 class StarUpdateView(AbstractUpdateView):
     serializer_class = StarsSerializerUpdate
     queryset = Star.objects
@@ -141,6 +139,26 @@ class ProducentsUpdataView(AbstractUpdateView):
     serializer_class = ProducentsSerializerUpdate
     queryset = Producents.objects
     Model = Producents
+
+class ProducentsMoviesView(generics.ListAPIView):
+    serializer_class = MoviesSerializer
+    queryset = Producents.objects.all()
+    pagination_class = PageNumberPagination
+    Model = Producents
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
+    def get_queryset(self):
+        movies =[]
+        Model = self.get_object(self.kwargs.get("pk"))
+        for Serie in Model.series.all():
+            for Movie in Serie.movies.all():
+                movies.append(Movie)
+        return movies
 
 class TagDeteilsView(AbstractUpdateView):
     serializer_class = TagsSerializer
