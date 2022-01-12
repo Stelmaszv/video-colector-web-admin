@@ -54,7 +54,6 @@ class AfterSave:
             #data['stars'] =  return_stars(Model) #erorr in main collector
             return json.dumps(data)
         config=self.Model.dir + '/config.JSON'
-
         if os.path.exists(config):
             os.remove(config)
         f = open(config, "x")
@@ -127,6 +126,12 @@ class Star(models.Model):
     added               = models.DateTimeField(auto_now=True)
     rating              = models.IntegerField(default=0)
     movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
+
+    def save(self, *args, **kwargs):
+        super(Star, self).save(*args, **kwargs)
+        init=['UpdateJSON']
+        AfterSave(self,init)
+
     def __str__(self):
         return self.name
 
