@@ -39,6 +39,9 @@ class TagsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = '__all__'
+#photos
+class PhotoSerializerMovie(serializers.Serializer):
+    url = serializers.CharField(max_length=200)
 
 #Serie
 class ProducentForSerieSerializer(serializers.ModelSerializer):
