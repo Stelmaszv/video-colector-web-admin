@@ -1,7 +1,7 @@
 from core.webadminapi.views import MoviesView, StarView, ProducentsView, SerieView, TagView, MovieUpdataView,\
     MovieDeteilsView,StarDeteilsView,StarUpdateView,SerieUpdataView,SerieDeteilsView,TagDeteilsView,\
     ProducentsDeteilsView,ProducentsUpdataView,MoviesWithStarsView,SerieMoviesView,ProducentsMoviesView,MoviePhotosView,\
-    PhotosSeriesView,ProducentsPhotosView,ProducentStarsView
+    PhotosSeriesView,ProducentsPhotosView,ProducentStarsView,SeriesStarsView
 app_name = 'webadminapi'
 from django.urls import path
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('producents',                           ProducentsView.as_view(), name='producents'),
     path('tags',                                 TagView.as_view(), name='tas'),
     path('series',                               SerieView.as_view(), name='series'),
+    path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),
     path('movieupdata/<int:pk>/',                MovieUpdataView.as_view(), name='movieupdate'),
     path('movies',                               MoviesView.as_view(), name='movies'),
     path('movie/<int:pk>/',                      MovieDeteilsView.as_view(), name='movie'),

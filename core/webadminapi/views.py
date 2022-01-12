@@ -142,6 +142,37 @@ class SerieMoviesView(generics.ListAPIView):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.movies.all()
 
+class SeriesStarsView(generics.ListAPIView):
+    serializer_class = StarsSerializer
+    queryset = Serie.objects.all()
+    pagination_class = PageNumberPagination
+    Model = Serie
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
+    def get_queryset(self):
+        def count(id):
+            count = 0
+            for el in star_counter:
+                if el == id:
+                    count = count + 1
+            return count
+
+        stars = []
+        star_counter = []
+        Model = self.get_object(self.kwargs.get("pk"))
+        for Movie in Model.movies.all():
+            for Star in Movie.stars.all():
+                star_counter.append(Star.id)
+                if count(Star.id) > 2:
+                    if Star not in stars:
+                        stars.append(Star)
+        return stars
+
 class SerieDeteilsView(AbstractDeteilsView):
     serializer_class = SerieSerializer
     queryset = Serie.objects
