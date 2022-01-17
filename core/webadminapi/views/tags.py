@@ -1,7 +1,5 @@
-from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
-
-from core.webadminapi.core import AbstractUpdateView
+from core.webadminapi.core import AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import TagsSerializer
 from core.wideocollectorseader.models import Tag
 
@@ -10,7 +8,7 @@ class TagDeteilsView(AbstractUpdateView):
     queryset = Tag.objects
     Model = Tag
 
-class TagView(generics.ListAPIView):
+class TagView(AbstractGenericsAPIView):
     serializer_class = TagsSerializer
     queryset = Tag.objects.all()
     pagination_class = PageNumberPagination

@@ -16,9 +16,13 @@ class AbstractDeteilsView(APIView):
             raise Http404
 
     def get(self, request, pk, format=None):
-        snippet = self.get_object(pk)
-        serializer = self.serializer_class(snippet)
+        self.query = self.get_object(pk)
+        self.query=self.get_queryset()
+        serializer = self.serializer_class(self.query)
         return Response(serializer.data)
+
+    def get_queryset(self):
+        return self.query
 
 class AbstractUpdateView(AbstractDeteilsView):
 

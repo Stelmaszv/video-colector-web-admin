@@ -36,7 +36,7 @@ class SeriesPhotosView(AbstractGenericsAPIView):
                     )
         return photos
 
-class SerieView(generics.ListAPIView):
+class SerieView(AbstractGenericsAPIView):
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()
     pagination_class = PageNumberPagination
