@@ -82,7 +82,9 @@ class SeriesSeader(ApstractSeader):
     Model=Serie
 
     def add_model(self,item):
-        Producent=self.add_one_many(item['producent'], Producents)
+        Producent=None
+        if len(item['producent']):
+            Producent=self.add_one_many(item['producent'], Producents)
         print('Add Serie ' + item['name'])
         self.Model(
             name=item['name'],
@@ -97,7 +99,8 @@ class SeriesSeader(ApstractSeader):
             Producent        = Producent,
         ).save()
         SerieItem=Serie.objects.filter(name=item['name'])[0]
-        self.add_one_many_conection(SerieItem,Producent,'series')
+        if Producent is not None:
+            self.add_one_many_conection(SerieItem,Producent,'series')
         self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
 
 class TagSeader(ApstractSeader):

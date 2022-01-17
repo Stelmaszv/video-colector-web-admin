@@ -24,6 +24,11 @@ class AbstractDeteilsView(APIView):
     def get_queryset(self):
         return self.query
 
+    def delete(self, request, pk, format=None):
+        self.query = self.get_object(pk)
+        self.query.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class AbstractUpdateView(AbstractDeteilsView):
 
     Model=None

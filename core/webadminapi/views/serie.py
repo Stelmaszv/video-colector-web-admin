@@ -3,7 +3,7 @@ from rest_framework.pagination import PageNumberPagination
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
     PhotoSerializerSeries
-from core.wideocollectorseader.models import Serie, Movie
+from core.wideocollectorseader.models import Serie
 from videocolectorwebadmin.global_setings import photo_ext
 import random
 

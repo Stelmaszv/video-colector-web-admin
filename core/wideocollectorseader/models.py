@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 from django.db import models
 
 class AfterSave:
@@ -40,11 +41,13 @@ class AfterSave:
             for field in Model._meta.get_fields():
                 if field.name in allow_fields:
                     if field.name != "date_relesed" and field.name !=  "date_of_birth":
-                        fields.append({"db": field.name, "value" : str(getattr(Model,field.name))})
+                        if hasattr(self.Model,field.name):
+                            fields.append({"db": field.name, "value" : str(getattr(Model,field.name))})
                     else:
-                        fields.append(
-                            {"db": field.name, "value" : add_data_to_JSON(Model.date_relesed), "data": "True"}
-                        )
+                        if hasattr(self.Model, "date_relesed"):
+                            fields.append(
+                                {"db": field.name, "value" : add_data_to_JSON(Model.date_relesed), "data": "True"}
+                            )
             return fields
 
         def retrun_config_json(Model):
@@ -97,6 +100,11 @@ class Serie(models.Model):
     Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='serietags', blank=True)
     movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='SerieMovie', blank=True)
+
+    def delete(self, *args, **kwargs):
+        shutil.rmtree(self.dir)
+        super(Serie, self).delete(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
@@ -131,6 +139,10 @@ class Star(models.Model):
         super(Star, self).save(*args, **kwargs)
         init=['UpdateJSON']
         AfterSave(self,init)
+
+    def delete(self, *args, **kwargs):
+        shutil.rmtree(self.dir)
+        super(Star, self).delete(*args, **kwargs)
 
     def __str__(self):
         return self.name
