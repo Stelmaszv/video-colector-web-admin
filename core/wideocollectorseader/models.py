@@ -113,6 +113,11 @@ class Serie(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super(Serie, self).save(*args, **kwargs)
+        init = ['UpdateJSON']
+        AfterSave(self, init)
+
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     def __str__(self):
@@ -145,6 +150,7 @@ class Star(models.Model):
         init=['UpdateJSON']
         AfterSave(self,init)
 
+
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
         super(Star, self).delete(*args, **kwargs)
@@ -171,11 +177,11 @@ class Movie(models.Model):
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
 
-
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
         os.remove(self.src)
         super(Movie, self).delete(*args, **kwargs)
+
 
     def save(self, *args, **kwargs):
         super(Movie, self).save(*args, **kwargs)

@@ -45,6 +45,9 @@ class PhotoSerializerMovie(serializers.Serializer):
 class PhotoSerializerSeries(serializers.Serializer):
     url  = serializers.CharField(max_length=200)
     name = serializers.CharField(max_length=200)
+#photos
+class BannerSerializer(serializers.Serializer):
+    url = serializers.CharField(max_length=200)
 #Serie
 class ProducentForSerieSerializer(serializers.ModelSerializer):
     class Meta:

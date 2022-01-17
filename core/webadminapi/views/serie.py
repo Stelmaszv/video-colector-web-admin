@@ -2,7 +2,7 @@ import os
 from rest_framework.pagination import PageNumberPagination
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
-    PhotoSerializerSeries
+    PhotoSerializerSeries, BannerSerializer
 from core.wideocollectorseader.models import Serie
 from videocolectorwebadmin.global_setings import photo_ext
 import random
@@ -35,6 +35,29 @@ class SeriesPhotosView(AbstractGenericsAPIView):
                         },
                     )
         return photos
+
+class SeriesBennersView(AbstractGenericsAPIView):
+    serializer_class = BannerSerializer
+    queryset = Serie.objects.all()
+    pagination_class = PageNumberPagination
+    Model = Serie
+
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        dir= Model.dir+'\\banners'
+        banners=[]
+        if os.path.isdir(dir):
+            list=os.listdir(dir)
+            for photo in list:
+                if photo.endswith(photo_ext):
+                    banners.append(
+                        {
+                            "url": Model.dir + '\\' + photo
+                        },
+                    )
+        else:
+            return banners
+        return banners
 
 class SerieView(AbstractGenericsAPIView):
     serializer_class = SerieSerializer
