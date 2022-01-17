@@ -1,7 +1,22 @@
+from django.contrib.auth import get_user_model, authenticate
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status, generics
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+class Authentication(BasicAuthentication):
+
+    def authenticate(self, request):
+        username = request.data.get('username', None)
+        password = request.data.get('password', None)
+        credentials = {
+            get_user_model().USERNAME_FIELD: username,
+            'password': password
+        }
+        user = authenticate(**credentials)
+        return (user, None)
 
 class AbstractDeteilsView(APIView):
 
@@ -34,6 +49,9 @@ class AbstractUpdateView(AbstractDeteilsView):
     Model=None
     queryset = []
     serializer_class=None
+
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
 
     def put(self, request, pk, format=None):
         snippet = self.get_object(pk)

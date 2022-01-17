@@ -1,7 +1,10 @@
 import json
 import os
 import shutil
+
+from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
+from django.contrib.auth.models import User
 
 class AfterSave:
     def __init__(self,Model,init_array):
@@ -123,6 +126,13 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class ViewsCountStar(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
 class Star(models.Model):
     name = models.CharField(max_length=200)
     views = models.IntegerField(default=0)
@@ -141,9 +151,10 @@ class Star(models.Model):
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='StarSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
     date_of_birth = models.DateField(null=True,blank=True)
+    views_count = models.ManyToManyField(to='wideocollectorseader.ViewsCountStar', related_name='views', blank=True)
     added               = models.DateTimeField(auto_now=True)
     rating              = models.IntegerField(default=0)
-    movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
+    movies              = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
 
     def save(self, *args, **kwargs):
         super(Star, self).save(*args, **kwargs)
@@ -174,7 +185,7 @@ class Movie(models.Model):
     rating              = models.IntegerField(default=0)
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True,null=True)
-    tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
+    tags  = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
