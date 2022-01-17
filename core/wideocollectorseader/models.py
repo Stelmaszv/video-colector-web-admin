@@ -150,7 +150,6 @@ class Star(models.Model):
         init=['UpdateJSON']
         AfterSave(self,init)
 
-
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
         super(Star, self).delete(*args, **kwargs)
@@ -181,7 +180,6 @@ class Movie(models.Model):
         shutil.rmtree(self.dir)
         os.remove(self.src)
         super(Movie, self).delete(*args, **kwargs)
-
 
     def save(self, *args, **kwargs):
         super(Movie, self).save(*args, **kwargs)
