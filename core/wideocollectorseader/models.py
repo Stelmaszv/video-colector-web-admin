@@ -79,6 +79,11 @@ class Producents(models.Model):
     rating      = models.IntegerField(default=0)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
+
+    def delete(self, *args, **kwargs):
+        shutil.rmtree(self.dir)
+        super(Producents, self).delete(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
@@ -165,6 +170,12 @@ class Movie(models.Model):
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
+
+
+    def delete(self, *args, **kwargs):
+        shutil.rmtree(self.dir)
+        os.remove(self.src)
+        super(Movie, self).delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         super(Movie, self).save(*args, **kwargs)
