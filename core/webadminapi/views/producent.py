@@ -1,9 +1,8 @@
 import os
-from django.http import Http404
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView
+from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
     MoviesSerializer, StarsSerializer
 from core.wideocollectorseader.models import Producents, Serie
@@ -16,17 +15,11 @@ class ProducentsView(generics.ListAPIView):
     pagination_class = PageNumberPagination
 
 
-class ProducentsPhotosView(generics.ListAPIView):
+class ProducentsPhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerSeries
     queryset = Producents.objects.all()
     pagination_class = PageNumberPagination
     Model = Producents
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
@@ -62,17 +55,11 @@ class ProducentsUpdataView(AbstractUpdateView):
     queryset = Producents.objects
     Model = Producents
 
-class ProducentsMoviesView(generics.ListAPIView):
+class ProducentsMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
     queryset = Producents.objects.all()
     pagination_class = PageNumberPagination
     Model = Producents
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
     def get_queryset(self):
         movies =[]
@@ -82,17 +69,11 @@ class ProducentsMoviesView(generics.ListAPIView):
                 movies.append(Movie)
         return movies
 
-class ProducentStarsView(generics.ListAPIView):
+class ProducentStarsView(AbstractGenericsAPIView):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
     pagination_class = PageNumberPagination
     Model = Producents
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
     def get_queryset(self):
         def count(id):

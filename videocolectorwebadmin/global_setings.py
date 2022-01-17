@@ -1,0 +1,1 @@
+photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")

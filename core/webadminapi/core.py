@@ -1,6 +1,8 @@
+from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import status, generics
+
 class AbstractDeteilsView(APIView):
 
     Model=None
@@ -37,3 +39,13 @@ class AbstractUpdateView(AbstractDeteilsView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class AbstractGenericsAPIView(generics.ListAPIView):
+
+    Model =None
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404

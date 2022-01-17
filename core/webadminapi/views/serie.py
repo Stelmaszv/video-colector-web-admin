@@ -1,24 +1,17 @@
 import os
-
-from django.http import Http404
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView
+from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
     PhotoSerializerSeries
 from core.wideocollectorseader.models import Serie
-photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
-class SeriesPhotosView(generics.ListAPIView):
+from videocolectorwebadmin.global_setings import photo_ext
+
+class SeriesPhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerSeries
     queryset = Serie.objects.all()
     pagination_class = PageNumberPagination
     Model = Serie
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
@@ -48,33 +41,21 @@ class SerieView(generics.ListAPIView):
     queryset = Serie.objects.all()
     pagination_class = PageNumberPagination
 
-class SerieMoviesView(generics.ListAPIView):
+class SerieMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
     queryset = Serie.objects.all()
     pagination_class = PageNumberPagination
     Model = Serie
 
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
-
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.movies.all()
 
-class SeriesStarsView(generics.ListAPIView):
+class SeriesStarsView(AbstractGenericsAPIView):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
     pagination_class = PageNumberPagination
     Model = Serie
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
     def get_queryset(self):
         def count(id):
