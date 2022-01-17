@@ -44,6 +44,7 @@ class MovieNextInSeriesView(AbstractDeteilsView):
             else:
                 return self.query.serie.movies[0]
             index=index+1
+
 class MoviePhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerMovie
     queryset = Movie.objects.all()

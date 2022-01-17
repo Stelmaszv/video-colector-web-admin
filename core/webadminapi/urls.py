@@ -3,7 +3,7 @@ from core.webadminapi.views.movies import MoviesView, MovieUpdataView, MovieDete
 from core.webadminapi.views.producent import ProducentsView, ProducentsDeteilsView, ProducentsUpdataView, \
     ProducentsMoviesView, ProducentStarsView, ProducentsPhotosView
 from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteilsView, SerieUpdataView, SerieMoviesView, \
-    SeriesPhotosView
+    SeriesPhotosView, SeriesRandomMovieView
 from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView
 from core.webadminapi.views.tags import TagView, TagDeteilsView
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path('seriesphotoview/<int:pk>/',            SeriesPhotosView.as_view(), name='seriesphotoview'),
     path('serieupdata/<int:pk>/',                SerieUpdataView.as_view(), name='serieupdata'),
     path('seriemoviesview/<int:pk>/',            SerieMoviesView.as_view(), name='seriemoviesview'),
+    path('seriesrandommovie/<int:pk>/',          SeriesRandomMovieView.as_view(), name='seriesrandommovie'),
     path('producents',                           ProducentsView.as_view(), name='producents'),
     path('producent/<int:pk>/',                  ProducentsDeteilsView.as_view(), name='producent'),
     path('producentupdata/<int:pk>/',            ProducentsUpdataView.as_view(), name='producentupdata'),

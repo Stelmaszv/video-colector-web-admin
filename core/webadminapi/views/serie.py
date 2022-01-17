@@ -1,11 +1,11 @@
 import os
-from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
     PhotoSerializerSeries
-from core.wideocollectorseader.models import Serie
+from core.wideocollectorseader.models import Serie, Movie
 from videocolectorwebadmin.global_setings import photo_ext
+import random
 
 class SeriesPhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerSeries
@@ -80,6 +80,14 @@ class SerieDeteilsView(AbstractDeteilsView):
     serializer_class = SerieSerializer
     queryset = Serie.objects
     Model = Serie
+
+class SeriesRandomMovieView(AbstractDeteilsView):
+    serializer_class = MoviesSerializer
+    queryset = Serie.objects
+    Model = Serie
+
+    def get_queryset(self):
+        return random.choice(self.query.movies.all())
 
 class SerieUpdataView(AbstractUpdateView):
     serializer_class = SerieSerializerUpdate
