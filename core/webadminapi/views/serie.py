@@ -127,32 +127,17 @@ class SerieAddToFavoriteView(AbstractDeteilsView):
     def exc_action_before_query(self):
         self.add_favorits()
 
-class SerieAddToRatingView(AbstractDeteilsView):
-    serializer_class = SerieSerializer
-    queryset = Serie.objects
-    Model = Serie
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
+class SerieAddToRatingView(SerieAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_raiting()
 
-class SerieAddToLikeView(AbstractDeteilsView):
-    serializer_class = SerieSerializer
-    queryset = Serie.objects
-    Model = Serie
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
+class SerieAddToLikeView(SerieAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_like()
 
-class SerieAddToDisLikeView(AbstractDeteilsView):
-    serializer_class = SerieSerializer
-    queryset = Serie.objects
-    Model = Serie
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
+class SerieAddToDisLikeView(SerieAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_disLikes()
