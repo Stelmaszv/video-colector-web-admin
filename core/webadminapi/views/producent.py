@@ -103,32 +103,14 @@ class ProducentAddToFavoriteView(AbstractDeteilsView):
     def exc_action_before_query(self):
         self.add_favorits()
 
-class ProducentAddToRatingView(AbstractDeteilsView):
-    serializer_class = ProducentsSerializer
-    queryset = Producents.objects
-    Model = Producents
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
-
+class ProducentAddToRatingView(ProducentAddToFavoriteView):
     def exc_action_before_query(self):
         self.add_raiting()
 
-class ProducentAddToLikeView(AbstractDeteilsView):
-    serializer_class = ProducentsSerializer
-    queryset = Producents.objects
-    Model = Producents
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
-
+class ProducentAddToLikeView(ProducentAddToFavoriteView):
     def exc_action_before_query(self):
         self.add_like()
 
-class ProducentAddToDisLikeView(AbstractDeteilsView):
-    serializer_class = ProducentsSerializer
-    queryset = Producents.objects
-    Model = Producents
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
-
+class ProducentAddToDisLikeView(ProducentAddToFavoriteView):
     def exc_action_before_query(self):
         self.add_disLikes()
