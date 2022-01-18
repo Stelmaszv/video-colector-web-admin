@@ -49,6 +49,7 @@ class ApstractSeader(ABC):
 
     def add_one_many_conection(self,name,obj_name,atribute_name):
         getattr(obj_name,atribute_name).add(name)
+
     def add_one_many_loop(self,item,Model,atribute_name,AddModel):
         for tag in item:
             Tag=AddModel.objects.get(name=tag)

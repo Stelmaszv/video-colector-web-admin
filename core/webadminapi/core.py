@@ -34,11 +34,15 @@ class AbstractDeteilsView(APIView):
     def get(self, request, pk, format=None):
         self.query = self.get_object(pk)
         self.query=self.get_queryset()
+        self.exc_action()
         serializer = self.serializer_class(self.query,context={'request': request.user})
         return Response(serializer.data)
 
     def get_queryset(self):
         return self.query
+
+    def exc_action(self):
+        pass
 
 class AbstractUpdateView(AbstractDeteilsView):
 
