@@ -1,5 +1,9 @@
 import os
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
+
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
 from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie, MoviesSerializerUpdate
 from core.wideocollectorseader.models import Movie, Favourite
 from videocolectorwebadmin.global_setings import photo_ext
@@ -29,14 +33,21 @@ class MovieAddToFavoriteView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
     queryset = Movie.objects
     Model = Movie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):
         self.add_favorits()
 
-class MovieAddToLikesView(AbstractDeteilsView):
+class MovieAddToRatingView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
     queryset = Movie.objects
     Model = Movie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_raiting()
 
 class MovieNextInSeriesView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
