@@ -107,5 +107,12 @@ class MoviesSerializer(serializers.ModelSerializer):
         representation['count_likes'] = instance.likes.count()
         representation['count_disLikes'] = instance.disLikes.count()
         representation['count_favourite'] = instance.favourite.count()
-        representation['count_ratings'] = instance.Ratings.count()
+        representation['count_ratings'] = instance.ratings.count()
+        representation['set_avg_rating'] = self.set_avg(instance,representation['count_ratings'])
         return representation
+
+    def set_avg(self,instance,all):
+        sum=0
+        for Rate in instance.ratings.all():
+            sum=sum+Rate.rate
+        return sum/all

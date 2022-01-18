@@ -95,11 +95,11 @@ class Favourite(models.Model):
 
 class Rating(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    Rate = models.IntegerField(default=0)
+    rate = models.IntegerField(default=0)
     added = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+        return "Rate "+str(self.rate)+" - "+str(self.User)+" - "+str(self.added)
 
 class Producents(models.Model):
     name      = models.CharField(max_length=200)
@@ -116,7 +116,7 @@ class Producents(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='ProducentDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='ProducentFavourite', blank=True)
-    Ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',
                                        blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
@@ -145,7 +145,7 @@ class Serie(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Serielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='SerieDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='SerieFavourite', blank=True)
-    Ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',
                                        blank=True)
 
     def delete(self, *args, **kwargs):
@@ -186,7 +186,7 @@ class Star(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Starlikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='StarDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='StarFavourite', blank=True)
-    Ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='StarRating',
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='StarRating',
                                        blank=True)
 
     def save(self, *args, **kwargs):
@@ -203,10 +203,10 @@ class Star(models.Model):
 
 class Movie(models.Model):
     name = models.CharField(max_length=200,null=True)
-    show_name = models.CharField(max_length=200, default='', null=True)
+    show_name = models.CharField(max_length=200, default='', null=True,blank=True)
     avatar = models.CharField(max_length=200, default='', null=True)
     src = models.CharField(max_length=200, default='', null=True)
-    poster = models.CharField(max_length=200, default='', null=True)
+    poster = models.CharField(max_length=200, default='', null=True,blank=True)
     description = models.TextField(default='', null=True,blank=True)
     country = models.CharField(max_length=200, default='', null=True,blank=True)
     date_relesed = models.DateField(null=True,blank=True)
@@ -219,7 +219,7 @@ class Movie(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Movielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='MovieDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='MovieFavourite', blank=True)
-    Ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',
                                        blank=True)
 
     def delete(self, *args, **kwargs):
