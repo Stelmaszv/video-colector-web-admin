@@ -31,32 +31,17 @@ class StarAddToFavoriteView(AbstractDeteilsView):
     def exc_action_before_query(self):
         self.add_favorits()
 
-class StarAddToRatingView(AbstractDeteilsView):
-    serializer_class = StarsSerializer
-    queryset = Star.objects
-    Model = Star
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
+class StarAddToRatingView(StarAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_raiting()
 
 class StarAddToLikeView(AbstractDeteilsView):
-    serializer_class = StarsSerializer
-    queryset = Star.objects
-    Model = Star
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):
         self.add_like()
 
 class StarAddToDisLikeView(AbstractDeteilsView):
-    serializer_class = StarsSerializer
-    queryset = Star.objects
-    Model = Star
-    authentication_classes = (SessionAuthentication, Authentication,)
-    permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):
         self.add_disLikes()
