@@ -133,10 +133,22 @@ class ViewsCountStar(models.Model):
     def __str__(self):
         return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
 
+class LikesCountStar(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
+class DisLikesCountStar(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
 class Star(models.Model):
     name = models.CharField(max_length=200)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
     avatar = models.CharField(max_length=200, default='', null=True)
     favourite = models.BooleanField(default=False)
     show_name = models.CharField(max_length=200, default='', null=True)
@@ -151,7 +163,9 @@ class Star(models.Model):
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='StarSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
     date_of_birth = models.DateField(null=True,blank=True)
-    views_count = models.ManyToManyField(to='wideocollectorseader.ViewsCountStar', related_name='views', blank=True)
+    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountStar', related_name='Starviews', blank=True)
+    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountStar', related_name='Starlikes', blank=True)
+    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountStar', related_name='Stardilikes', blank=True)
     added               = models.DateTimeField(auto_now=True)
     rating              = models.IntegerField(default=0)
     movies              = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
@@ -168,11 +182,30 @@ class Star(models.Model):
     def __str__(self):
         return self.name
 
+class ViewsCountMovies(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
+class LikesCountMovies(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
+class DisLikesCountMovies(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
 class Movie(models.Model):
     name = models.CharField(max_length=200,null=True)
     show_name = models.CharField(max_length=200, default='', null=True)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
     avatar = models.CharField(max_length=200, default='', null=True)
     src = models.CharField(max_length=200, default='', null=True)
     favourite = models.BooleanField(default=False)
@@ -186,6 +219,9 @@ class Movie(models.Model):
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True,null=True)
     tags  = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
+    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountMovies', related_name='Movieviews', blank=True)
+    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountMovies', related_name='Movielikes', blank=True)
+    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountMovies', related_name='Moviedilikes', blank=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
