@@ -100,3 +100,12 @@ class MoviesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['count_views'] = instance.views.count()
+        representation['count_likes'] = instance.likes.count()
+        representation['count_disLikes'] = instance.disLikes.count()
+        representation['count_favourite'] = instance.favourite.count()
+        representation['count_ratings'] = instance.Ratings.count()
+        return representation

@@ -40,11 +40,6 @@ class AbstractDeteilsView(APIView):
     def get_queryset(self):
         return self.query
 
-    def delete(self, request, pk, format=None):
-        self.query = self.get_object(pk)
-        self.query.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 class AbstractUpdateView(AbstractDeteilsView):
 
     Model=None
@@ -69,9 +64,9 @@ class AbstractUpdateView(AbstractDeteilsView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class LargeResultsSetPagination(PageNumberPagination):
-    page_size = 1
+    page_size = 10
     page_size_query_param = 'page_size'
-    max_page_size = 10
+    max_page_size = 20
 
 class AbstractGenericsAPIView(generics.ListAPIView):
 
