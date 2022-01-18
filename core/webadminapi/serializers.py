@@ -1,6 +1,25 @@
 from rest_framework import serializers
 from core.wideocollectorseader.models import Movie, Serie, Star,Tag,Producents
 
+class BaseSeralizer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['count_views'] = instance.views.count()
+        representation['count_likes'] = instance.likes.count()
+        representation['count_disLikes'] = instance.disLikes.count()
+        representation['count_favourite'] = instance.favourite.count()
+        representation['count_ratings'] = instance.ratings.count()
+        representation['set_avg_rating'] = self.set_avg(instance,representation['count_ratings'])
+        return representation
+
+    def set_avg(self,instance,all):
+        if all>0:
+            sum=0
+            for Rate in instance.ratings.all():
+                sum=sum+Rate.rate
+            return sum/all
+        return 0
+
 #Upadates
 class StarsSerializerUpdate(serializers.ModelSerializer):
     class Meta:
@@ -54,7 +73,7 @@ class ProducentForSerieSerializer(serializers.ModelSerializer):
         model = Producents
         fields = '__all__'
 
-class SerieSerializer(serializers.ModelSerializer):
+class SerieSerializer(BaseSeralizer):
     tags   = TagsSerializer(many=True)
     Producent = ProducentForSerieSerializer(many=False)
     class Meta:
@@ -65,7 +84,7 @@ class SerieSerializer(serializers.ModelSerializer):
 class SeriesSerlizerForProducent(ShortSeries):
     pass
 
-class ProducentsSerializer(serializers.ModelSerializer):
+class ProducentsSerializer(BaseSeralizer):
     tags   = TagsSerializer(many=True)
     series = SeriesSerlizerForProducent(many=True)
     class Meta:
@@ -76,7 +95,7 @@ class ProducentsSerializer(serializers.ModelSerializer):
 class SeriesSerlizerForStars(ShortSeries):
     pass
 
-class StarsSerializer(serializers.ModelSerializer):
+class StarsSerializer(BaseSeralizer):
     series = SeriesSerlizerForStars(many=True)
     tags = TagsSerializer(many=True)
     class Meta:
@@ -92,7 +111,7 @@ class StarsForMovies(serializers.ModelSerializer):
 class SeriesSerlizerForMovies(ShortSeries):
     pass
 
-class MoviesSerializer(serializers.ModelSerializer):
+class MoviesSerializer(BaseSeralizer):
     stars = StarsForMovies(many=True)
     tags  = TagsSerializer(many=True)
     serie = SeriesSerlizerForMovies(many=False)
@@ -101,20 +120,4 @@ class MoviesSerializer(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['count_views'] = instance.views.count()
-        representation['count_likes'] = instance.likes.count()
-        representation['count_disLikes'] = instance.disLikes.count()
-        representation['count_favourite'] = instance.favourite.count()
-        representation['count_ratings'] = instance.ratings.count()
-        representation['set_avg_rating'] = self.set_avg(instance,representation['count_ratings'])
-        return representation
 
-    def set_avg(self,instance,all):
-        if all>0:
-            sum=0
-            for Rate in instance.ratings.all():
-                sum=sum+Rate.rate
-            return sum/all
-        return 0
