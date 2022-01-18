@@ -13,13 +13,25 @@ class BaseSeralizer(serializers.ModelSerializer):
         representation['count_ratings'] = instance.ratings.count()
         representation['set_avg_rating'] = self.set_avg(instance,representation['count_ratings'])
         representation['is_favourite'] = self.is_favourite(instance)
+        representation['is_like'] = self.is_like(instance)
+        representation['is_disLikes'] = self.is_disLikes(instance)
         return representation
 
-    def is_favourite(self,instance):
-        for Fav in instance.favourite.all():
+    def base_is(self,instance,attr):
+        array=getattr(instance,attr).all()
+        for Fav in array:
             if Fav.User == self.context.get("request"):
                 return True
         return False
+
+    def is_disLikes(self, instance):
+        return self.base_is(instance,'disLikes')
+
+    def is_like(self, instance):
+        return self.base_is(instance, 'likes')
+
+    def is_favourite(self,instance):
+        return self.base_is(instance, 'favourite')
 
     def set_avg(self,instance,all):
         if all>0:
