@@ -34,7 +34,7 @@ class AbstractDeteilsView(APIView):
     def get(self, request, pk, format=None):
         self.query = self.get_object(pk)
         self.query=self.get_queryset()
-        serializer = self.serializer_class(self.query)
+        serializer = self.serializer_class(self.query,context={'request': request.user})
         return Response(serializer.data)
 
     def get_queryset(self):
@@ -64,9 +64,9 @@ class AbstractUpdateView(AbstractDeteilsView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class LargeResultsSetPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 5
     page_size_query_param = 'page_size'
-    max_page_size = 20
+    max_page_size = 10
 
 class AbstractGenericsAPIView(generics.ListAPIView):
 
@@ -78,3 +78,10 @@ class AbstractGenericsAPIView(generics.ListAPIView):
             return self.Model.objects.get(pk=pk)
         except self.Model.DoesNotExist:
             raise Http404
+
+    def list(self, request):
+        # Note the use of `get_queryset()` instead of `self.queryset`
+        serializer = self.serializer_class(self.get_queryset(), many=True,context={'request': request.user})
+        page = self.paginate_queryset(serializer.data)
+        return self.get_paginated_response(page)
+

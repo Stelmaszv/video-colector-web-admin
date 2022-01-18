@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.fields import CurrentUserDefault
+
 from core.wideocollectorseader.models import Movie, Serie, Star,Tag,Producents
 
 class BaseSeralizer(serializers.ModelSerializer):
@@ -10,7 +12,14 @@ class BaseSeralizer(serializers.ModelSerializer):
         representation['count_favourite'] = instance.favourite.count()
         representation['count_ratings'] = instance.ratings.count()
         representation['set_avg_rating'] = self.set_avg(instance,representation['count_ratings'])
+        representation['is_favourite'] = self.is_favourite(instance)
         return representation
+
+    def is_favourite(self,instance):
+        for Fav in instance.favourite.all():
+            if Fav.User == self.context.get("request"):
+                return True
+        return False
 
     def set_avg(self,instance,all):
         if all>0:
