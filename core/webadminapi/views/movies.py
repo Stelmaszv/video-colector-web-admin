@@ -49,6 +49,26 @@ class MovieAddToRatingView(AbstractDeteilsView):
     def exc_action_before_query(self):
         self.add_raiting()
 
+class MovieAddToLikeView(AbstractDeteilsView):
+    serializer_class = MoviesSerializer
+    queryset = Movie.objects
+    Model = Movie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_like()
+
+class MovieAddToDisLikeView(AbstractDeteilsView):
+    serializer_class = MoviesSerializer
+    queryset = Movie.objects
+    Model = Movie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_disLikes()
+
 class MovieNextInSeriesView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
     queryset = Movie.objects

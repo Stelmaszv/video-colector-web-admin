@@ -7,7 +7,7 @@ from rest_framework import status, generics
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.wideocollectorseader.models import Favourite, Rating
+from core.wideocollectorseader.models import Favourite, Rating, Likes, DisLikess
 
 
 class Authentication(BasicAuthentication):
@@ -65,6 +65,16 @@ class AbstractDeteilsView(APIView):
             Rat = Rating(User=self.request.user,rate=self.request.GET.get('rate'))
             Rat.save()
             self.query.ratings.add(Rat)
+
+    def add_like(self):
+        Lik = Likes(User=self.request.user)
+        Lik.save()
+        self.query.likes.add(Lik)
+
+    def add_disLikes(self):
+        DisLik =DisLikess(User=self.request.user)
+        DisLik.save()
+        self.query.disLikes.add(DisLik)
 
     def exc_action_before_serializer(self):
         pass
