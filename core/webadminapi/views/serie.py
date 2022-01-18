@@ -116,7 +116,6 @@ class SerieUpdataView(AbstractUpdateView):
     queryset = Serie.objects
     Model = Serie
 
-
 #actions
 class SerieAddToFavoriteView(AbstractDeteilsView):
     serializer_class = SerieSerializer

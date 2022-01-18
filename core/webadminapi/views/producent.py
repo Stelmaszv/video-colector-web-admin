@@ -1,8 +1,10 @@
 import os
 from rest_framework import generics
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
+from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
 from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
     MoviesSerializer, StarsSerializer
 from core.wideocollectorseader.models import Producents, Serie
@@ -89,3 +91,44 @@ class ProducentStarsView(AbstractGenericsAPIView):
                         if Star not in stars:
                             stars.append(Star)
         return stars
+
+#actions
+class ProducentAddToFavoriteView(AbstractDeteilsView):
+    serializer_class = ProducentsSerializer
+    queryset = Producents.objects
+    Model = Producents
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_favorits()
+
+class ProducentAddToRatingView(AbstractDeteilsView):
+    serializer_class = ProducentsSerializer
+    queryset = Producents.objects
+    Model = Producents
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_raiting()
+
+class ProducentAddToLikeView(AbstractDeteilsView):
+    serializer_class = ProducentsSerializer
+    queryset = Producents.objects
+    Model = Producents
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_like()
+
+class ProducentAddToDisLikeView(AbstractDeteilsView):
+    serializer_class = ProducentsSerializer
+    queryset = Producents.objects
+    Model = Producents
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_disLikes()
