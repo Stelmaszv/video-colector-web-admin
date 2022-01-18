@@ -66,22 +66,44 @@ class AfterSave:
         f.write(retrun_config_json(self.Model))
         f.close()
 
+class ViewsCountProducents(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
+class LikesCountProducents(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
+class DisLikesCountProducents(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
 class Producents(models.Model):
     name      = models.CharField(max_length=200)
-    views      = models.IntegerField(default=0)
-    likes     = models.IntegerField(default=0)
     favourite = models.BooleanField(default=False)
     banner    = models.CharField(max_length=200, default='',null=True,blank=True)
     show_name = models.CharField(max_length=200,default='',null=True)
     avatar = models.CharField(max_length=200, default='',null=True)
     dir = models.CharField(max_length=200, default='',null=True)
-    country = models.CharField(max_length=200, default='',null=True)
-    description = models.TextField(default='',null=True)
+    country = models.CharField(max_length=200, default='',null=True,blank=True)
+    description = models.TextField(default='',null=True,blank=True)
     year        = models.DateField(null=True,blank=True)
     added       = models.DateTimeField(auto_now=True)
     rating      = models.IntegerField(default=0)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
+    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountProducents', related_name='Producentsviews', blank=True)
+    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountProducents', related_name='Producentslikes', blank=True)
+    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountProducents', related_name='Producentslikes', blank=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
