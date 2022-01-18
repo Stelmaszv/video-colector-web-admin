@@ -11,7 +11,6 @@ class StarDeteilsView(AbstractDeteilsView):
 class StarView(AbstractGenericsAPIView):
     serializer_class = StarsSerializer
     queryset = Star.objects.all()
-    pagination_class = PageNumberPagination
 
 class StarUpdateView(AbstractUpdateView):
     serializer_class = StarsSerializerUpdate

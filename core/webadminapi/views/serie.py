@@ -10,7 +10,6 @@ import random
 class SeriesPhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerSeries
     queryset = Serie.objects.all()
-    pagination_class = PageNumberPagination
     Model = Serie
 
     def get_queryset(self):
@@ -39,7 +38,6 @@ class SeriesPhotosView(AbstractGenericsAPIView):
 class SeriesBennersView(AbstractGenericsAPIView):
     serializer_class = BannerSerializer
     queryset = Serie.objects.all()
-    pagination_class = PageNumberPagination
     Model = Serie
 
     def get_queryset(self):
@@ -62,12 +60,10 @@ class SeriesBennersView(AbstractGenericsAPIView):
 class SerieView(AbstractGenericsAPIView):
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()
-    pagination_class = PageNumberPagination
 
 class SerieMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
     queryset = Serie.objects.all()
-    pagination_class = PageNumberPagination
     Model = Serie
 
     def get_queryset(self):
@@ -77,7 +73,6 @@ class SerieMoviesView(AbstractGenericsAPIView):
 class SeriesStarsView(AbstractGenericsAPIView):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
-    pagination_class = PageNumberPagination
     Model = Serie
 
     def get_queryset(self):

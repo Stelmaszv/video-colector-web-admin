@@ -1,14 +1,16 @@
 import os
+
+from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie, MoviesSerializerUpdate
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
 
-class MoviesView(AbstractGenericsAPIView):
-    serializer_class = MoviesSerializer
+
+class MoviesView(generics.ListAPIView):
     queryset = Movie.objects.all()
-    pagination_class = PageNumberPagination
+    serializer_class = MoviesSerializer
 
 class MoviesWithStarsView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
@@ -48,7 +50,6 @@ class MovieNextInSeriesView(AbstractDeteilsView):
 class MoviePhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerMovie
     queryset = Movie.objects.all()
-    pagination_class = PageNumberPagination
     Model = Movie
 
     def get_queryset(self):

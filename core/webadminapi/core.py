@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model, authenticate
 from django.http import Http404
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status, generics
@@ -67,9 +68,15 @@ class AbstractUpdateView(AbstractDeteilsView):
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class LargeResultsSetPagination(PageNumberPagination):
+    page_size = 1
+    page_size_query_param = 'page_size'
+    max_page_size = 10
+
 class AbstractGenericsAPIView(generics.ListAPIView):
 
     Model =None
+    pagination_class = LargeResultsSetPagination
 
     def get_object(self, pk):
         try:

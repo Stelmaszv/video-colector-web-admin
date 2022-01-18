@@ -12,13 +12,11 @@ photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
 class ProducentsView(generics.ListAPIView):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects.all()
-    pagination_class = PageNumberPagination
 
 
 class ProducentsPhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerSeries
     queryset = Producents.objects.all()
-    pagination_class = PageNumberPagination
     Model = Producents
 
     def get_queryset(self):
@@ -58,7 +56,6 @@ class ProducentsUpdataView(AbstractUpdateView):
 class ProducentsMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
     queryset = Producents.objects.all()
-    pagination_class = PageNumberPagination
     Model = Producents
 
     def get_queryset(self):
@@ -72,7 +69,6 @@ class ProducentsMoviesView(AbstractGenericsAPIView):
 class ProducentStarsView(AbstractGenericsAPIView):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
-    pagination_class = PageNumberPagination
     Model = Producents
 
     def get_queryset(self):

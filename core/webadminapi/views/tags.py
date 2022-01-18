@@ -11,4 +11,3 @@ class TagDeteilsView(AbstractUpdateView):
 class TagView(AbstractGenericsAPIView):
     serializer_class = TagsSerializer
     queryset = Tag.objects.all()
-    pagination_class = PageNumberPagination

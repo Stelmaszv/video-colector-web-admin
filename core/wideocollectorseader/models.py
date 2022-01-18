@@ -1,7 +1,6 @@
 import json
 import os
 import shutil
-
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 from django.contrib.auth.models import User
@@ -66,21 +65,21 @@ class AfterSave:
         f.write(retrun_config_json(self.Model))
         f.close()
 
-class ViewsCountProducents(models.Model):
+class Views(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     added = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
 
-class LikesCountProducents(models.Model):
+class Likes(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     added = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
 
-class DisLikesCountProducents(models.Model):
+class DisLikess(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     added = models.DateTimeField(auto_now=True)
 
@@ -100,10 +99,10 @@ class Producents(models.Model):
     added       = models.DateTimeField(auto_now=True)
     rating      = models.IntegerField(default=0)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
+    views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='ProducentsViews', blank=True)
+    likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
+    disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='ProducentDisLike', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
-    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountProducents', related_name='Producentsviews', blank=True)
-    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountProducents', related_name='Producentslikes', blank=True)
-    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountProducents', related_name='Producentslikes', blank=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
@@ -111,27 +110,6 @@ class Producents(models.Model):
 
     def __str__(self):
         return self.name
-
-class ViewsCountSerie(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
-class LikesCountSerie(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
-class DisLikesCountSerie(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
 
 class Serie(models.Model):
     name                = models.CharField(max_length=200)
@@ -149,9 +127,6 @@ class Serie(models.Model):
     Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='serietags', blank=True)
     movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='SerieMovie', blank=True)
-    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountSerie', related_name='Serieviews', blank=True)
-    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountSerie', related_name='Serielikes', blank=True)
-    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountSerie', related_name='Seriedilikes', blank=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
@@ -170,27 +145,6 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-class ViewsCountStar(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
-class LikesCountStar(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
-class DisLikesCountStar(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
 class Star(models.Model):
     name = models.CharField(max_length=200)
     avatar = models.CharField(max_length=200, default='', null=True)
@@ -207,9 +161,6 @@ class Star(models.Model):
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='StarSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
     date_of_birth = models.DateField(null=True,blank=True)
-    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountStar', related_name='Starviews', blank=True)
-    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountStar', related_name='Starlikes', blank=True)
-    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountStar', related_name='Stardilikes', blank=True)
     added               = models.DateTimeField(auto_now=True)
     rating              = models.IntegerField(default=0)
     movies              = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
@@ -225,27 +176,6 @@ class Star(models.Model):
 
     def __str__(self):
         return self.name
-
-class ViewsCountMovies(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
-class LikesCountMovies(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
-class DisLikesCountMovies(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
 
 class Movie(models.Model):
     name = models.CharField(max_length=200,null=True)
@@ -263,9 +193,6 @@ class Movie(models.Model):
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True,null=True)
     tags  = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True,null=True)
-    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountMovies', related_name='Movieviews', blank=True)
-    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountMovies', related_name='Movielikes', blank=True)
-    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountMovies', related_name='Moviedilikes', blank=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
