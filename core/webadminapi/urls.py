@@ -4,7 +4,8 @@ from core.webadminapi.views.movies import MoviesView, MovieUpdataView, MovieDete
 from core.webadminapi.views.producent import ProducentsView, ProducentsDeteilsView, ProducentsUpdataView, \
     ProducentsMoviesView, ProducentStarsView, ProducentsPhotosView
 from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteilsView, SerieUpdataView, SerieMoviesView, \
-    SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView
+    SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView, SerieAddToFavoriteView, SerieAddToRatingView, \
+    SerieAddToLikeView, SerieAddToDisLikeView
 from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView, StarAddToFavoriteView, \
     StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView
 from core.webadminapi.views.tags import TagView, TagDeteilsView
@@ -43,6 +44,10 @@ urlpatterns = [
     path('seriemoviesview/<int:pk>/',            SerieMoviesView.as_view(), name='seriemoviesview'),
     path('seriesrandommovie/<int:pk>/',          SeriesRandomMovieView.as_view(), name='seriesrandommovie'),
     path('seriesbenners/<int:pk>/',              SeriesBennersView.as_view(), name='seriesbenners'),
+    path('serieaddtofavorite/<int:pk>/',         SerieAddToFavoriteView.as_view(), name='serieaddtofavorite'),
+    path('staraddtorating/<int:pk>/',            SerieAddToRatingView.as_view(), name='staraddtorating'),
+    path('serieaddtolike/<int:pk>/',             SerieAddToLikeView.as_view(), name='serieaddtolike'),
+    path('serieaddtosislike/<int:pk>/',          SerieAddToDisLikeView.as_view(), name='serieaddtosislike'),
     #producent
     path('producents',                           ProducentsView.as_view(), name='producents'),
     path('producent/<int:pk>/',                  ProducentsDeteilsView.as_view(), name='producent'),

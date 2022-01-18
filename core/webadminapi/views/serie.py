@@ -1,6 +1,10 @@
 import os
+
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.pagination import PageNumberPagination
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
+from rest_framework.permissions import IsAuthenticated
+
+from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
     PhotoSerializerSeries, BannerSerializer
 from core.wideocollectorseader.models import Serie
@@ -111,3 +115,45 @@ class SerieUpdataView(AbstractUpdateView):
     serializer_class = SerieSerializerUpdate
     queryset = Serie.objects
     Model = Serie
+
+
+#actions
+class SerieAddToFavoriteView(AbstractDeteilsView):
+    serializer_class = SerieSerializer
+    queryset = Serie.objects
+    Model = Serie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_favorits()
+
+class SerieAddToRatingView(AbstractDeteilsView):
+    serializer_class = SerieSerializer
+    queryset = Serie.objects
+    Model = Serie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_raiting()
+
+class SerieAddToLikeView(AbstractDeteilsView):
+    serializer_class = SerieSerializer
+    queryset = Serie.objects
+    Model = Serie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_like()
+
+class SerieAddToDisLikeView(AbstractDeteilsView):
+    serializer_class = SerieSerializer
+    queryset = Serie.objects
+    Model = Serie
+    authentication_classes = (SessionAuthentication, Authentication,)
+    permission_classes = [IsAuthenticated]
+
+    def exc_action_before_query(self):
+        self.add_disLikes()
