@@ -90,10 +90,29 @@ class Producents(models.Model):
     def __str__(self):
         return self.name
 
+class ViewsCountSerie(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
+class LikesCountSerie(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
+class DisLikesCountSerie(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
+
 class Serie(models.Model):
     name                = models.CharField(max_length=200)
-    views                = models.IntegerField(default=0)
-    likes               = models.IntegerField(default=0)
     favourite           = models.BooleanField(default=False)
     banner              = models.CharField(max_length=200, default='',null=True)
     show_name           = models.CharField(max_length=200,default='',null=True)
@@ -108,6 +127,9 @@ class Serie(models.Model):
     Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='serietags', blank=True)
     movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='SerieMovie', blank=True)
+    views = models.ManyToManyField(to='wideocollectorseader.ViewsCountSerie', related_name='Serieviews', blank=True)
+    likes = models.ManyToManyField(to='wideocollectorseader.LikesCountSerie', related_name='Serielikes', blank=True)
+    dislikes = models.ManyToManyField(to='wideocollectorseader.DisLikesCountSerie', related_name='Seriedilikes', blank=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
