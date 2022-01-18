@@ -1,7 +1,7 @@
 import os
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie, MoviesSerializerUpdate
-from core.wideocollectorseader.models import Movie
+from core.wideocollectorseader.models import Movie, Favourite
 from videocolectorwebadmin.global_setings import photo_ext
 
 class MoviesView(AbstractGenericsAPIView):
@@ -21,6 +21,19 @@ class MoviesWithStarsView(AbstractGenericsAPIView):
         return movies
 
 class MovieDeteilsView(AbstractDeteilsView):
+    serializer_class = MoviesSerializer
+    queryset = Movie.objects
+    Model = Movie
+
+class MovieAddToFavoriteView(AbstractDeteilsView):
+    serializer_class = MoviesSerializer
+    queryset = Movie.objects
+    Model = Movie
+
+    def exc_action_before_query(self):
+        self.add_favorits()
+
+class MovieAddToLikesView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
     queryset = Movie.objects
     Model = Movie

@@ -7,6 +7,9 @@ from rest_framework import status, generics
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from core.wideocollectorseader.models import Favourite
+
+
 class Authentication(BasicAuthentication):
 
     def authenticate(self, request):
@@ -33,16 +36,38 @@ class AbstractDeteilsView(APIView):
 
     def get(self, request, pk, format=None):
         self.query = self.get_object(pk)
+        self.exc_action_before_query()
         self.query=self.get_queryset()
-        self.exc_action()
+        self.exc_action_before_serializer()
         serializer = self.serializer_class(self.query,context={'request': request.user})
         return Response(serializer.data)
 
     def get_queryset(self):
         return self.query
 
-    def exc_action(self):
+    def add_favorits(self):
+        is_favourite = self.is_favourite(self.query)
+        if is_favourite is False:
+            Fav = Favourite(User=self.request.user)
+            Fav.save()
+            self.query.favourite.add(Fav)
+        else:
+            list = self.query.favourite.all()
+            for Fav in list:
+                if Fav.User == self.request.user:
+                    self.query.favourite.remove(Fav)
+
+    def exc_action_before_query(self):
         pass
+
+    def exc_action_before_serializer(self):
+        pass
+
+    def is_favourite(self,instance):
+        for Fav in self.query.favourite.all():
+            if Fav.User == self.request.user:
+                return True
+        return False
 
 class AbstractUpdateView(AbstractDeteilsView):
 
