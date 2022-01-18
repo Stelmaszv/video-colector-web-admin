@@ -112,7 +112,9 @@ class MoviesSerializer(serializers.ModelSerializer):
         return representation
 
     def set_avg(self,instance,all):
-        sum=0
-        for Rate in instance.ratings.all():
-            sum=sum+Rate.rate
-        return sum/all
+        if all>0:
+            sum=0
+            for Rate in instance.ratings.all():
+                sum=sum+Rate.rate
+            return sum/all
+        return 0
