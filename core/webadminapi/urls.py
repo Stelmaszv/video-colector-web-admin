@@ -5,7 +5,8 @@ from core.webadminapi.views.producent import ProducentsView, ProducentsDeteilsVi
     ProducentsMoviesView, ProducentStarsView, ProducentsPhotosView
 from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteilsView, SerieUpdataView, SerieMoviesView, \
     SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView
-from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView
+from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView, StarAddToFavoriteView, \
+    StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView
 from core.webadminapi.views.tags import TagView, TagDeteilsView
 
 app_name = 'webadminapi'
@@ -27,6 +28,10 @@ urlpatterns = [
     path('stars',                                StarView.as_view(), name='stars'),
     path('star/<int:pk>/',                       StarDeteilsView.as_view(), name='star'),
     path('starupdate/<int:pk>/',                 StarUpdateView.as_view(), name='starupdate'),
+    path('staraddtofavorite/<int:pk>/',          StarAddToFavoriteView.as_view(), name='staraddtofavorite'),
+    path('staraddrating/<int:pk>/',              StarAddToRatingView.as_view(), name='staraddrating'),
+    path('staraddtolike/<int:pk>/',              StarAddToLikeView.as_view(), name='staraddtolike'),
+    path('staraddtodislike/<int:pk>/',           StarAddToDisLikeView.as_view(), name='staraddtodislike'),
     #series
     path('series',                               SerieView.as_view(), name='series'),
     path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),
