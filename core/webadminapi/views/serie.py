@@ -1,9 +1,12 @@
 import os
+
+from django.http import Http404
+from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
-from core.webadminapi.filters import SerieFilter
+from core.webadminapi.filters import SerieFilter, MovieFilter
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
     PhotoSerializerSeries, BannerSerializer
 from core.wideocollectorseader.models import Serie
@@ -67,16 +70,25 @@ class SerieView(AbstractGenericsAPIView):
     filterset_class  = SerieFilter
     order_by ='-added'
 
-class SerieMoviesView(AbstractGenericsAPIView):
+class SerieMoviesView(generics.ListAPIView):
     serializer_class = MoviesSerializer
     queryset = Serie.objects.all()
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = MovieFilter
+    order_by ='-added'
     Model = Serie
 
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.movies.all()
 
-class SeriesStarsView(AbstractGenericsAPIView):
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
+class SeriesStarsView(generics.ListAPIView):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
     Model = Serie
@@ -99,6 +111,12 @@ class SeriesStarsView(AbstractGenericsAPIView):
                     if Star not in stars:
                         stars.append(Star)
         return stars
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
 
 class SerieDeteilsView(AbstractDeteilsView):
     serializer_class = SerieSerializer

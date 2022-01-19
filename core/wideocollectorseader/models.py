@@ -183,7 +183,6 @@ class Serie(models.Model):
         super(Serie, self).save(*args, **kwargs)
         UpdateJSON(self)
 
-
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     def __str__(self):

@@ -1,9 +1,12 @@
 import os
+
+from django.http import Http404
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
+from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication, \
+    LargeResultsSetPagination
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
     MoviesSerializer, StarsSerializer
@@ -57,7 +60,7 @@ class ProducentsUpdataView(AbstractUpdateView):
     queryset = Producents.objects
     Model = Producents
 
-class ProducentsMoviesView(AbstractGenericsAPIView):
+class ProducentsMoviesView(generics.ListAPIView):
     serializer_class = MoviesSerializer
     queryset = Producents.objects.all()
     Model = Producents
@@ -70,9 +73,16 @@ class ProducentsMoviesView(AbstractGenericsAPIView):
                 movies.append(Movie)
         return movies
 
-class ProducentStarsView(AbstractGenericsAPIView):
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
+class ProducentStarsView(generics.ListAPIView):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
+    pagination_class = LargeResultsSetPagination
     Model = Producents
 
     def get_queryset(self):
@@ -93,6 +103,12 @@ class ProducentStarsView(AbstractGenericsAPIView):
                         if Star not in stars:
                             stars.append(Star)
         return stars
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
 
 #actions
 class ProducentAddToFavoriteView(AbstractDeteilsView):

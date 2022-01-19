@@ -124,7 +124,7 @@ class AbstractGenericsAPIView(generics.ListAPIView):
             raise Http404
 
     def list(self, request):
-        queryset =self.get_queryset()
+        queryset =self.get_queryset(self.kwargs.get("pk"))
         queryset=self.filter_queryset(queryset)
         serializer = self.serializer_class(queryset, many=True,context={'request': request.user})
         page = self.paginate_queryset(serializer.data)
