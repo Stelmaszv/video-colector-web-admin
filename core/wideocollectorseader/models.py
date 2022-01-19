@@ -111,6 +111,10 @@ class Producents(models.Model):
     description = models.TextField(default='',null=True,blank=True)
     year        = models.DateField(null=True,blank=True)
     added       = models.DateTimeField(auto_now=True)
+    avg_rating = models.DecimalField(default=0,max_digits=5, decimal_places=2)
+    likes_count = models.IntegerField(default=0)
+    disLikes_count = models.IntegerField(default=0)
+    ratings_count = models.IntegerField(default=0)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='ProducentsViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
@@ -119,6 +123,26 @@ class Producents(models.Model):
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',
                                        blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
+
+    def save(self, *args, **kwargs):
+        self.set_model()
+        super(Producents, self).save(*args, **kwargs)
+
+    def set_model(self):
+        self.avg_rating  = self.set_avg()
+        self.likes_count = self.likes.count()
+        self.disLikes_count = self.disLikes.count()
+        self.ratings_count = self.ratings.count()
+
+    def set_avg(self):
+        query=self.ratings.all()
+        all = len(query)
+        if all > 0:
+            sum=0
+            for Rate in query:
+                sum=sum+Rate.rate
+            return sum/all
+        return 0
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
@@ -138,6 +162,10 @@ class Serie(models.Model):
     added               = models.DateTimeField(auto_now=True)
     years               = models.CharField(max_length=200, default='', null=True,blank=True)
     number_of_sezons    = models.IntegerField(default=0)
+    avg_rating = models.DecimalField(default=0,max_digits=5, decimal_places=2)
+    likes_count = models.IntegerField(default=0)
+    disLikes_count = models.IntegerField(default=0)
+    ratings_count = models.IntegerField(default=0)
     Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='serietags', blank=True)
     movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='SerieMovie', blank=True)
@@ -156,9 +184,26 @@ class Serie(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        self.set_model()
         super(Serie, self).save(*args, **kwargs)
         init = ['UpdateJSON']
         AfterSave(self, init)
+
+    def set_model(self):
+        self.avg_rating  = self.set_avg()
+        self.likes_count = self.likes.count()
+        self.disLikes_count = self.disLikes.count()
+        self.ratings_count = self.ratings.count()
+
+    def set_avg(self):
+        query=self.ratings.all()
+        all = len(query)
+        if all > 0:
+            sum=0
+            for Rate in query:
+                sum=sum+Rate.rate
+            return sum/all
+        return 0
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
@@ -181,6 +226,10 @@ class Star(models.Model):
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
     date_of_birth = models.DateField(null=True,blank=True)
     added               = models.DateTimeField(auto_now=True)
+    avg_rating = models.DecimalField(default=0,max_digits=5, decimal_places=2)
+    likes_count = models.IntegerField(default=0)
+    disLikes_count = models.IntegerField(default=0)
+    ratings_count = models.IntegerField(default=0)
     movies              = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='StarViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Starlikes', blank=True)
@@ -190,9 +239,26 @@ class Star(models.Model):
                                        blank=True)
 
     def save(self, *args, **kwargs):
+        self.set_model()
         super(Star, self).save(*args, **kwargs)
         init=['UpdateJSON']
         AfterSave(self,init)
+
+    def set_model(self):
+        self.avg_rating  = self.set_avg()
+        self.likes_count = self.likes.count()
+        self.disLikes_count = self.disLikes.count()
+        self.ratings_count = self.ratings.count()
+
+    def set_avg(self):
+        query=self.ratings.all()
+        all = len(query)
+        if all > 0:
+            sum=0
+            for Rate in query:
+                sum=sum+Rate.rate
+            return sum/all
+        return 0
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
