@@ -1,5 +1,4 @@
 import os
-import django_filters
 from rest_framework import status, generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -10,8 +9,7 @@ from videocolectorwebadmin.global_setings import photo_ext
 from django_filters import rest_framework as filters
 from core.webadminapi.filters import MovieFilter
 
-
-class MoviesView(generics.ListAPIView):
+class MoviesView(AbstractGenericsAPIView):
     queryset = Movie.objects.all()
     serializer_class = MoviesSerializer
     filter_backends = [filters.DjangoFilterBackend]

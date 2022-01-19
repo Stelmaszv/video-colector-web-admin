@@ -112,14 +112,6 @@ class LargeResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 10
 
-
-
-
-class ProductFilter(django_filters.FilterSet):
-    class Meta:
-        model = Movie
-        fields = ['name']
-
 class AbstractGenericsAPIView(generics.ListAPIView):
 
     Model =None
@@ -132,23 +124,16 @@ class AbstractGenericsAPIView(generics.ListAPIView):
             raise Http404
 
     def list(self, request):
-        # Note the use of `get_queryset()` instead of `self.queryset`
-        filter = ProductFilter(request.GET, queryset=self.get_queryset())
-        print(filter)
-        serializer = self.serializer_class(self.get_queryset(), many=True,context={'request': request.user})
+        queryset =self.get_queryset()
+        queryset=self.filter_queryset(queryset)
+        serializer = self.serializer_class(queryset, many=True,context={'request': request.user})
         page = self.paginate_queryset(serializer.data)
         return self.get_paginated_response(page)
 
-    def search(self):
-        show_name =self.if_var(self.request.GET.get('show_name'))
-        print(show_name)
-        if show_name:
-            self.Model.objects.filter(name=show_name)
-        else:
-            return self.Model.objects.all()
+    def filter_queryset(self, queryset):
 
-    def if_var(self,var):
-        if var != None:
-            return var
-        return ''
+        for backend in list(self.filter_backends):
+            queryset = backend().filter_queryset(self.request, self.queryset, view=self)
+
+        return queryset
 
