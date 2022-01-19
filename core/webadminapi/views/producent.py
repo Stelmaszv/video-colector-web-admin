@@ -1,10 +1,10 @@
 import os
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
-
+from django_filters import rest_framework as filters
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
+from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
     MoviesSerializer, StarsSerializer
 from core.wideocollectorseader.models import Producents, Serie
@@ -14,7 +14,9 @@ photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
 class ProducentsView(generics.ListAPIView):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects.all()
-
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = ProducentsFilter
+    order_by ='-added'
 
 class ProducentsPhotosView(AbstractGenericsAPIView):
     serializer_class = PhotoSerializerSeries

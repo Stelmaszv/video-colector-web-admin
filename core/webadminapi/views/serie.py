@@ -1,10 +1,9 @@
 import os
-
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.pagination import PageNumberPagination
+from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
-
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
+from core.webadminapi.filters import SerieFilter
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
     PhotoSerializerSeries, BannerSerializer
 from core.wideocollectorseader.models import Serie
@@ -64,6 +63,9 @@ class SeriesBennersView(AbstractGenericsAPIView):
 class SerieView(AbstractGenericsAPIView):
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = SerieFilter
+    order_by ='-added'
 
 class SerieMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
