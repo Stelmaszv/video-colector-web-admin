@@ -1,7 +1,8 @@
 from core.wideocollectorseader.models import Movie
 from django_filters import rest_framework as filters
-class MovieFilter(filters.FilterSet):
+class BaseFilter(filters.FilterSet):
     name = filters.CharFilter(lookup_expr='icontains')
+    avg_rating = filters.CharFilter(lookup_expr='icontains')
     class Meta:
         model = Movie
-        fields = ['name','tags','stars','country']
+        fields = '__all__'

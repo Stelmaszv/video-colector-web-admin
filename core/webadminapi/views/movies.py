@@ -7,14 +7,14 @@ from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie,
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from django_filters import rest_framework as filters
-from core.webadminapi.filters import MovieFilter
+from core.webadminapi.filters import BaseFilter
 
 class MoviesView(AbstractGenericsAPIView):
     queryset = Movie.objects.all()
     serializer_class = MoviesSerializer
     filter_backends = [filters.DjangoFilterBackend]
-    filterset_class  = MovieFilter
-    Model = Movie
+    filterset_class  = BaseFilter
+    order_by ='-date_relesed'
 
 class MoviesWithStarsView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer

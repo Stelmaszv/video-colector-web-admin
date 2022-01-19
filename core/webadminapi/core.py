@@ -133,7 +133,7 @@ class AbstractGenericsAPIView(generics.ListAPIView):
     def filter_queryset(self, queryset):
 
         for backend in list(self.filter_backends):
-            queryset = backend().filter_queryset(self.request, self.queryset, view=self)
+            queryset = backend().filter_queryset(self.request, self.queryset, view=self).order_by(self.order_by)
 
         return queryset
 

@@ -6,12 +6,6 @@ from core.wideocollectorseader.models import Movie, Serie, Star,Tag,Producents
 class BaseSeralizer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['count_views'] = instance.views.count()
-        representation['count_likes'] = instance.likes.count()
-        representation['count_disLikes'] = instance.disLikes.count()
-        representation['count_favourite'] = instance.favourite.count()
-        representation['count_ratings'] = instance.ratings.count()
-        representation['set_avg_rating'] = self.set_avg(instance,representation['count_ratings'])
         representation['is_favourite'] = self.is_favourite(instance)
         representation['is_like'] = self.is_like(instance)
         representation['is_disLikes'] = self.is_disLikes(instance)
@@ -32,14 +26,6 @@ class BaseSeralizer(serializers.ModelSerializer):
 
     def is_favourite(self,instance):
         return self.base_is(instance, 'favourite')
-
-    def set_avg(self,instance,all):
-        if all>0:
-            sum=0
-            for Rate in instance.ratings.all():
-                sum=sum+Rate.rate
-            return sum/all
-        return 0
 
 #Upadates
 class StarsSerializerUpdate(serializers.ModelSerializer):

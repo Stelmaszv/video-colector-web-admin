@@ -212,6 +212,10 @@ class Movie(models.Model):
     date_relesed = models.DateField(null=True,blank=True)
     dir = models.CharField(max_length=200, default='', null=True)
     added               = models.DateTimeField(auto_now=True)
+    avg_rating = models.DecimalField(max_digits=5, decimal_places=2)
+    likes_count = models.IntegerField(default=0)
+    disLikes_count = models.IntegerField(default=0)
+    ratings_count = models.IntegerField(default=0)
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True)
     tags  = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True)
@@ -219,8 +223,7 @@ class Movie(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Movielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='MovieDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='MovieFavourite', blank=True)
-    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',
-                                       blank=True)
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',blank=True)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
@@ -228,9 +231,27 @@ class Movie(models.Model):
         super(Movie, self).delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):
+        self.set_model()
         super(Movie, self).save(*args, **kwargs)
         init=['UpdateJSON']
         AfterSave(self,init)
+        self.set_model()
+
+    def set_model(self):
+        self.avg_rating  = self.set_avg()
+        self.likes_count = self.likes.count()
+        self.disLikes_count = self.disLikes.count()
+        self.ratings_count = self.ratings.count()
+
+    def set_avg(self):
+        query=self.ratings.all()
+        all = len(query)
+        if all > 0:
+            sum=0
+            for Rate in query:
+                sum=sum+Rate.rate
+            return sum/all
+        return 0
 
     def __str__(self):
         return self.name
