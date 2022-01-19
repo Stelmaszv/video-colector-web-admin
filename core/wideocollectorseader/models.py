@@ -3,67 +3,78 @@ import os
 import shutil
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
-from django.contrib.auth.models import User
 
-class AfterSave:
-    def __init__(self,Model,init_array):
-        self.Model=Model
-        for item in init_array:
-            getattr(self,item)()
 
-    def UpdateJSON(self):
+def set_model(Model):
+    def set_avg(Model):
+        query=Model.ratings.all()
+        all = len(query)
+        if all > 0:
+            sum=0
+            for Rate in query:
+                sum=sum+Rate.rate
+            return sum/all
+        return 0
+    Model.avg_rating = set_avg(Model)
+    Model.likes_count = Model.likes.count()
+    Model.disLikes_count = Model.disLikes.count()
+    Model.ratings_count = Model.ratings.count()
+    return Model
 
-        def return_stars(Model):
-            stars=[]
-            for star in Model.stars.all():
-                stars.append(star.name)
-            return stars
+def UpdateJSON(Model):
 
-        def return_tags(Model):
-            tags=[]
-            for tag in Model.tags.all():
-                tags.append(tag.name)
-            return tags
+    def return_stars(Model):
+        stars=[]
+        for star in Model.stars.all():
+            stars.append(star.name)
+        return stars
 
-        def add_data_to_JSON(data):
-            data_str=[]
-            if hasattr(data,'year'):
-                data_str.append(data.year)
-            if hasattr(data, 'month'):
-                data_str.append(data.month)
-            if hasattr(data, 'day'):
-                data_str.append(data.day)
-            return data_str
+    def return_tags(Model):
+        tags=[]
+        for tag in Model.tags.all():
+            tags.append(tag.name)
+        return tags
 
-        def return_fields(Model):
-            allow_fields=["show_name","description","date_relesed","country","weight",
-                          "height","ethnicity","hair_color","birth_place","nationality","poster",
-                          "banner","avatar","date_of_birth"]
-            fields = []
-            for field in Model._meta.get_fields():
-                if field.name in allow_fields:
-                    if field.name != "date_relesed" and field.name !=  "date_of_birth":
-                        if hasattr(self.Model,field.name):
-                            fields.append({"db": field.name, "value" : str(getattr(Model,field.name))})
-                    else:
-                        if hasattr(self.Model, "date_relesed"):
-                            fields.append(
-                                {"db": field.name, "value" : add_data_to_JSON(Model.date_relesed), "data": "True"}
-                            )
+    def add_data_to_JSON(data):
+        data_str=[]
+        if hasattr(data,'year'):
+            data_str.append(data.year)
+        if hasattr(data, 'month'):
+            data_str.append(data.month)
+        if hasattr(data, 'day'):
+            data_str.append(data.day)
+        return data_str
+
+    def return_fields(Model):
+        allow_fields=["show_name","description","date_relesed","country","weight",
+                        "height","ethnicity","hair_color","birth_place","nationality","poster",
+                        "banner","avatar","date_of_birth"]
+        fields = []
+        for field in Model._meta.get_fields():
+            if field.name in allow_fields:
+                if field.name != "date_relesed" and field.name !=  "date_of_birth":
+                    if hasattr(Model,field.name):
+                        fields.append({"db": field.name, "value" : str(getattr(Model,field.name))})
+                else:
+                    if hasattr(Model, "date_relesed"):
+                        fields.append(
+                            {"db": field.name, "value" : add_data_to_JSON(Model.date_relesed), "data": "True"}
+                        )
             return fields
 
-        def retrun_config_json(Model):
-            data={}
-            data['fields']=  return_fields(Model)
-            data['tags']  =  return_tags(Model)
-            #data['stars'] =  return_stars(Model) #erorr in main collector
-            return json.dumps(data)
-        config=self.Model.dir + '/config.JSON'
-        if os.path.exists(config):
-            os.remove(config)
-        f = open(config, "x")
-        f.write(retrun_config_json(self.Model))
-        f.close()
+    def retrun_config_json(Model):
+        data={}
+        data['fields']=  return_fields(Model)
+        data['tags']  =  return_tags(Model)
+        #data['stars'] =  return_stars(Model) #erorr in main collector
+        return json.dumps(data)
+
+    config=Model.dir + '/config.JSON'
+    if os.path.exists(config):
+        os.remove(config)
+    f = open(config, "x")
+    f.write(retrun_config_json(Model))
+    f.close()
 
 class Views(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
@@ -125,24 +136,8 @@ class Producents(models.Model):
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
     def save(self, *args, **kwargs):
-        self.set_model()
+        set_model(self)
         super(Producents, self).save(*args, **kwargs)
-
-    def set_model(self):
-        self.avg_rating  = self.set_avg()
-        self.likes_count = self.likes.count()
-        self.disLikes_count = self.disLikes.count()
-        self.ratings_count = self.ratings.count()
-
-    def set_avg(self):
-        query=self.ratings.all()
-        all = len(query)
-        if all > 0:
-            sum=0
-            for Rate in query:
-                sum=sum+Rate.rate
-            return sum/all
-        return 0
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
@@ -184,26 +179,10 @@ class Serie(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.set_model()
+        set_model(self)
         super(Serie, self).save(*args, **kwargs)
-        init = ['UpdateJSON']
-        AfterSave(self, init)
+        UpdateJSON(self)
 
-    def set_model(self):
-        self.avg_rating  = self.set_avg()
-        self.likes_count = self.likes.count()
-        self.disLikes_count = self.disLikes.count()
-        self.ratings_count = self.ratings.count()
-
-    def set_avg(self):
-        query=self.ratings.all()
-        all = len(query)
-        if all > 0:
-            sum=0
-            for Rate in query:
-                sum=sum+Rate.rate
-            return sum/all
-        return 0
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
@@ -239,26 +218,9 @@ class Star(models.Model):
                                        blank=True)
 
     def save(self, *args, **kwargs):
-        self.set_model()
+        set_model(self)
         super(Star, self).save(*args, **kwargs)
-        init=['UpdateJSON']
-        AfterSave(self,init)
-
-    def set_model(self):
-        self.avg_rating  = self.set_avg()
-        self.likes_count = self.likes.count()
-        self.disLikes_count = self.disLikes.count()
-        self.ratings_count = self.ratings.count()
-
-    def set_avg(self):
-        query=self.ratings.all()
-        all = len(query)
-        if all > 0:
-            sum=0
-            for Rate in query:
-                sum=sum+Rate.rate
-            return sum/all
-        return 0
+        UpdateJSON(self)
 
     def delete(self, *args, **kwargs):
         shutil.rmtree(self.dir)
@@ -297,27 +259,9 @@ class Movie(models.Model):
         super(Movie, self).delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):
-        self.set_model()
+        set_model(self)
         super(Movie, self).save(*args, **kwargs)
-        init=['UpdateJSON']
-        AfterSave(self,init)
-        self.set_model()
-
-    def set_model(self):
-        self.avg_rating  = self.set_avg()
-        self.likes_count = self.likes.count()
-        self.disLikes_count = self.disLikes.count()
-        self.ratings_count = self.ratings.count()
-
-    def set_avg(self):
-        query=self.ratings.all()
-        all = len(query)
-        if all > 0:
-            sum=0
-            for Rate in query:
-                sum=sum+Rate.rate
-            return sum/all
-        return 0
+        UpdateJSON(self)
 
     def __str__(self):
         return self.name
