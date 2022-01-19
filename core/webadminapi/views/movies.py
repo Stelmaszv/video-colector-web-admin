@@ -1,16 +1,22 @@
 import os
-
+import django_filters
+from rest_framework import status, generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
 from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie, MoviesSerializerUpdate
-from core.wideocollectorseader.models import Movie, Favourite
+from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
+from django_filters import rest_framework as filters
+from core.webadminapi.filters import MovieFilter
 
-class MoviesView(AbstractGenericsAPIView):
+
+class MoviesView(generics.ListAPIView):
     queryset = Movie.objects.all()
     serializer_class = MoviesSerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = MovieFilter
+    Model = Movie
 
 class MoviesWithStarsView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer

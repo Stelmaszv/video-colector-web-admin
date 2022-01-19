@@ -36,8 +36,8 @@ class AfterSave:
             return data_str
 
         def return_fields(Model):
-            allow_fields=["show_name","description","date_relesed","likes","views","rating" ,"country","weight",
-                          "height","ethnicity","hair_color","birth_place","nationality","favourite","poster",
+            allow_fields=["show_name","description","date_relesed","country","weight",
+                          "height","ethnicity","hair_color","birth_place","nationality","poster",
                           "banner","avatar","date_of_birth"]
             fields = []
             for field in Model._meta.get_fields():

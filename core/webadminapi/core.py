@@ -6,9 +6,8 @@ from rest_framework.views import APIView
 from rest_framework import status, generics
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-
-from core.wideocollectorseader.models import Favourite, Rating, Likes, DisLikess
-
+from core.wideocollectorseader.models import Favourite, Rating, Likes, DisLikess, Movie
+import django_filters
 
 class Authentication(BasicAuthentication):
 
@@ -113,6 +112,14 @@ class LargeResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 10
 
+
+
+
+class ProductFilter(django_filters.FilterSet):
+    class Meta:
+        model = Movie
+        fields = ['name']
+
 class AbstractGenericsAPIView(generics.ListAPIView):
 
     Model =None
@@ -126,7 +133,22 @@ class AbstractGenericsAPIView(generics.ListAPIView):
 
     def list(self, request):
         # Note the use of `get_queryset()` instead of `self.queryset`
+        filter = ProductFilter(request.GET, queryset=self.get_queryset())
+        print(filter)
         serializer = self.serializer_class(self.get_queryset(), many=True,context={'request': request.user})
         page = self.paginate_queryset(serializer.data)
         return self.get_paginated_response(page)
+
+    def search(self):
+        show_name =self.if_var(self.request.GET.get('show_name'))
+        print(show_name)
+        if show_name:
+            self.Model.objects.filter(name=show_name)
+        else:
+            return self.Model.objects.all()
+
+    def if_var(self,var):
+        if var != None:
+            return var
+        return ''
 
