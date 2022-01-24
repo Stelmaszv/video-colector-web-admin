@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule,Title } from '@angular/platform-browser';
 import { AppRoutingModule} from './/app-routing.module';
+import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { NavabrComponent } from './navabr/navabr.component';
 import { MoviesComponent } from './movies/movies.component';
@@ -22,6 +23,7 @@ import { ProducentComponent } from './producent/producent.component';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [Title],
