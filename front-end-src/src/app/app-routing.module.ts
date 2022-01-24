@@ -8,7 +8,11 @@ import { SeriesComponent } from './series/series.component'
 import { ProducentComponent } from './producent/producent.component'
 const routes: Routes = [
   {
-  path: '',
+    path: '',
+    component: StartComponentComponent
+  },
+  {
+  path: 'start',
   component: StartComponentComponent
   },
   {
@@ -24,7 +28,7 @@ const routes: Routes = [
     component: SeriesComponent
   },
   {
-    path: 'series',
+    path: 'producents',
     component: ProducentComponent
   }
 ];
