@@ -5,13 +5,19 @@ import { AppComponent } from './app.component';
 import { NavabrComponent } from './navabr/navabr.component';
 import { MoviesComponent } from './movies/movies.component';
 import { StartComponentComponent } from './start-component/start-component.component';
+import { SeriesComponent } from './series/series.component';
+import { StarsComponent } from './stars/stars.component';
+import { ProducentComponent } from './producent/producent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavabrComponent,
     MoviesComponent,
-    StartComponentComponent
+    StartComponentComponent,
+    SeriesComponent,
+    StarsComponent,
+    ProducentComponent
   ],
   imports: [
     AppRoutingModule,

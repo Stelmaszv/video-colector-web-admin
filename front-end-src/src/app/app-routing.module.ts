@@ -2,11 +2,30 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StartComponentComponent } from './start-component/start-component.component'
-
+import { MoviesComponent } from './movies/movies.component'
+import { StarsComponent } from './stars/stars.component'
+import { SeriesComponent } from './series/series.component'
+import { ProducentComponent } from './producent/producent.component'
 const routes: Routes = [
   {
   path: '',
   component: StartComponentComponent
+  },
+  {
+    path: 'movies',
+    component: MoviesComponent
+  },
+  {
+    path: 'stars',
+    component: StarsComponent
+  },
+  {
+    path: 'series',
+    component: SeriesComponent
+  },
+  {
+    path: 'series',
+    component: ProducentComponent
   }
 ];
 
