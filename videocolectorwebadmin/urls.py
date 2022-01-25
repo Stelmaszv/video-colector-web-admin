@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+
+from core.wideocollectorseader.views import StarView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.wideocollectorseader.urls')),
-    path('', include('core.webadminapi.urls'))
+    path('', include('core.webadminapi.urls')),
+    path('', StarView.as_view(), name='start')
 ]
