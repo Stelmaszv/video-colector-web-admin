@@ -7,6 +7,7 @@ import { HttpService } from '../http.service';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
+  mode ='cover'
   movies : any;
 
   constructor(private httpService: HttpService) { }
@@ -16,7 +17,6 @@ export class MoviesComponent implements OnInit {
     
     
     .subscribe(
-
       (response) => {
         console.log(this.movies=response)
       }

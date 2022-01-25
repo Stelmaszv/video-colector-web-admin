@@ -1,9 +1,39 @@
 <app-navabr></app-navabr>
+<main class='content container movies'>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col" *ngFor="let movie of movies.results">
+    <ng-template [ngIf]="mode=='poster'">
+    <div class="card">
+      <img src="{{movie.poster}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{movie.show_name}}</h5>
+        <p class="card-text">{{movie.description}}</p>
+      </div>
+      <ng-template [ngIf]="movie.stars">
+      <div class="card-body">
+        <a *ngFor="let star of movie.stars" href="#" class="card-link">{{star.name}}</a>
+      </div>
+      </ng-template>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="mode=='cover'">
+    <div class="col">
+      <div class="card cart-item">
+        <img src="{{movie.avatar}}" class="card-img-top cover" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{movie.show_name}}</h5>
+          <p class="card-text">{{movie.show_name}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a href="" class="card-link">{{movie.serie.show_name}}</a></li>
+          <li class="list-group-item" *ngFor="let star of movie.stars">
+            <a href="'+index_round.dir+'/stars_id.html" class="card-link">{{star.name}}</a>
+          </li>
+        </ul>
 
-
-<ul>
-    <li *ngFor="let movie of movies.results">
-      {{movie.name}}
-      <img src="{{movie.avatar}}">
-    </li>
-</ul>
+      </div>
+    </div>
+  </ng-template>
+  </div>
+</div>
+</main>
