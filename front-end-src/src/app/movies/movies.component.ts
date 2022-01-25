@@ -11,6 +11,9 @@ import { StarsComponent } from '../stars/stars.component';
 export class MoviesComponent implements OnInit {
   mode ='cover'
   movies : any;
+  results : any;
+  url='http://127.0.0.1:8000/movies'
+  data: any;
 
   constructor(private httpService: HttpService) { }
 
@@ -46,23 +49,59 @@ export class MoviesComponent implements OnInit {
     return better_stars;
   }
 
+  private add_if_not_exist(movie:any):boolean{
+    let stan=true
+    for (let item of this.data){
+        if (item.id==movie.id){
+          stan = false
+        }
+    }
+    return stan
+  }
+
   private set_results():void{
-    this.movies=this.movies.results
-    
-    for (let movie of this.movies){
+    for (let movie of this.results.results){
       movie['js_stars']=this.set_stars(movie)
       movie['more']=this.set_more(movie)
+      if (this.add_if_not_exist(movie)){
+        this.data.push(movie)
+      }
     }
   }
 
   public ngOnInit(): void {
-    this.httpService.get_url('http://127.0.0.1:8000/movies')
-    
-    
-    .subscribe(
+    this.data=[]
+    this.load_data()
+    this.scroller()
+  }
+
+  private scroller(){
+    let obj=this
+    window.addEventListener("scroll", (event) => {
+      var limit = document.body.offsetHeight - window.innerHeight;
+      let scrol_pos=90/100*limit
+        if (window.scrollY>scrol_pos){
+          if (obj.data.length < obj.results.count){
+            obj.url = obj.set_next()
+            obj.load_data()
+          }
+        }
+    });
+  }
+
+  private set_next():string{
+    if (this.results.next != null){
+      return this.results.next
+    }else{
+      return this.url
+    }
+  }
+
+  private load_data():void{
+    this.httpService.get_url(this.url).subscribe(
       (response) => {
         if (response.hasOwnProperty('results')){
-          this.movies=response
+          this.results=response
           this.set_results()
         }
       }

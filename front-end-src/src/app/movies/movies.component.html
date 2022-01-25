@@ -24,7 +24,7 @@
 <ng-template [ngIf]="mode=='cover'">
 <div class="container">
   <div class="row">
-    <div class="col" *ngFor="let movie of movies">
+    <div class="col" *ngFor="let movie of data">
       <div class="card cart-item">
         <img src="{{movie.avatar}}" class="card-img-top cover" alt="...">
         <div class="card-body">
