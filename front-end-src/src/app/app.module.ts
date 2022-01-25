@@ -9,6 +9,7 @@ import { StartComponentComponent } from './start-component/start-component.compo
 import { SeriesComponent } from './series/series.component';
 import { StarsComponent } from './stars/stars.component';
 import { ProducentComponent } from './producent/producent.component';
+import { StringLenghtPipe } from './string-lenght.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProducentComponent } from './producent/producent.component';
     StartComponentComponent,
     SeriesComponent,
     StarsComponent,
-    ProducentComponent
+    ProducentComponent,
+    StringLenghtPipe
   ],
   imports: [
     AppRoutingModule,
