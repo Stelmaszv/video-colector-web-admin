@@ -3,7 +3,7 @@
 <ng-template [ngIf]="mode=='poster'">
   <div class="container">
     <div class="row row-cols-2">
-      <div class="col" *ngFor="let movie of movies">
+      <div class="col" *ngFor="let movie of data">
         <div class="card">
           <img src="{{movie.poster}}" class="card-img-top" alt="...">
           <div class="card-body">
