@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
+import { Component} from '@angular/core';
 import {BaseListComponent} from '../base-list/base-list.component'
 @Component({
   selector: 'app-stars',

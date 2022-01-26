@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-
+import {BaseListComponent} from '../base-list/base-list.component'
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
-export class MoviesComponent implements OnInit {
-  mode ='cover'
-  movies : any;
-  results : any;
-  url='http://127.0.0.1:8000/movies'
-  data: any;
+export class MoviesComponent extends BaseListComponent {
+  mode ='poster'
 
-  constructor(private httpService: HttpService) { }
+  protected override url='http://127.0.0.1:8000/movies'
 
   private set_more(movie:any){
     if (movie.stars.length>2){
@@ -48,63 +44,9 @@ export class MoviesComponent implements OnInit {
     return better_stars;
   }
 
-  private add_if_not_exist(movie:any):boolean{
-    let stan=true
-    for (let item of this.data){
-        if (item.id==movie.id){
-          stan = false
-        }
-    }
-    return stan
+  protected override on_set_results(movie:any):any
+  {
+    movie['js_stars']=this.set_stars(movie)
+    movie['more']=this.set_more(movie)
   }
-
-  private set_results():void{
-    for (let movie of this.results.results){
-      movie['js_stars']=this.set_stars(movie)
-      movie['more']=this.set_more(movie)
-      if (this.add_if_not_exist(movie)){
-        this.data.push(movie)
-      }
-    }
-  }
-
-  public ngOnInit(): void {
-    this.data=[]
-    this.load_data()
-    this.scroller()
-  }
-
-  private scroller(){
-    let obj=this
-    window.addEventListener("scroll", (event) => {
-      var limit = document.body.offsetHeight - window.innerHeight;
-      let scrol_pos=90/100*limit
-        if (window.scrollY>scrol_pos){
-          if (obj.data.length < obj.results.count){
-            obj.url = obj.set_next()
-            obj.load_data()
-          }
-        }
-    });
-  }
-
-  private set_next():string{
-    if (this.results.next != null){
-      return this.results.next
-    }else{
-      return this.url
-    }
-  }
-
-  private load_data():void{
-    this.httpService.get_url(this.url).subscribe(
-      (response) => {
-        if (response.hasOwnProperty('results')){
-          this.results=response
-          this.set_results()
-        }
-      }
-    );
-  }
-
 }

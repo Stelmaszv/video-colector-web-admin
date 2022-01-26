@@ -53,9 +53,27 @@ export class BaseListComponent implements OnInit {
     }
   }
 
+  private set_next():string{
+    if (this.response.next != null){
+      return this.response.next
+    }else{
+      return this.url
+    }
+  }
+
   protected scroller():void
   {
-
+    let obj=this
+    window.addEventListener("scroll", (event) => {
+      var limit = document.body.offsetHeight - window.innerHeight;
+      let scrol_pos=90/100*limit
+        if (window.scrollY>scrol_pos){
+          if (obj.data.length < obj.response.count){
+            obj.url = obj.set_next()
+            obj.load_data()
+          }
+        }
+    })
   }
 
 }
