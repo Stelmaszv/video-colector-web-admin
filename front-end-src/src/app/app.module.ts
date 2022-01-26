@@ -10,6 +10,7 @@ import { SeriesComponent } from './series/series.component';
 import { StarsComponent } from './stars/stars.component';
 import { ProducentComponent } from './producent/producent.component';
 import { StringLenghtPipe } from './string-lenght.pipe';
+import { BaseListComponent } from './base-list/base-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { StringLenghtPipe } from './string-lenght.pipe';
     SeriesComponent,
     StarsComponent,
     ProducentComponent,
-    StringLenghtPipe
+    StringLenghtPipe,
+    BaseListComponent
   ],
   imports: [
     AppRoutingModule,
