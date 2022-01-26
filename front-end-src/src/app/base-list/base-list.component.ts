@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { HttpService } from '../http.service';
 })
 export class BaseListComponent implements OnInit {
   public data:any;
-  protected url='';
+  @Input('url') url= '';
   protected results : any;
   protected response : any;
 
@@ -18,6 +18,10 @@ export class BaseListComponent implements OnInit {
     this.data=[]
     this.load_data()
     this.scroller()
+  }
+
+  public get_data():any{
+    return 'qd'
   }
 
   protected on_set_results(movie:any):any{}

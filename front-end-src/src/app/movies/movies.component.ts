@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component,Input,OnInit} from '@angular/core';
 import {BaseListComponent} from '../base-list/base-list.component'
 
 @Component({
@@ -6,10 +6,8 @@ import {BaseListComponent} from '../base-list/base-list.component'
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
-export class MoviesComponent extends BaseListComponent {
-  mode ='poster'
-
-  protected override url='http://127.0.0.1:8000/movies'
+export class MoviesComponent extends BaseListComponent{
+  mode ='cover'
 
   private set_more(movie:any){
     if (movie.stars.length>2){

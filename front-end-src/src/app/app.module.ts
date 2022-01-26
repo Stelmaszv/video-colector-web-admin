@@ -11,6 +11,7 @@ import { StarsComponent } from './stars/stars.component';
 import { ProducentComponent } from './producent/producent.component';
 import { StringLenghtPipe } from './string-lenght.pipe';
 import { BaseListComponent } from './base-list/base-list.component';
+import { MoviesFilterComponent } from './movies-filter/movies-filter.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BaseListComponent } from './base-list/base-list.component';
     StarsComponent,
     ProducentComponent,
     StringLenghtPipe,
-    BaseListComponent
+    BaseListComponent,
+    MoviesFilterComponent
   ],
   imports: [
     AppRoutingModule,
