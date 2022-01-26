@@ -4,15 +4,15 @@
   <div class="container">
     <div class="row row-cols-2">
       <div class="col" *ngFor="let movie of data">
-        <div class="card">
+        <div class="card cart_poster_item">
           <img src="{{movie.poster}}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{movie.show_name}}</h5>
-            <p class="card-text">{{movie.description}}</p>
+            <p class="card-text">{{movie.description | stringLenght  }}</p>
           </div>
           <ng-template [ngIf]="movie.stars">
-          <div class="card-body">
-            <a *ngFor="let star of movie.stars" href="#" class="card-link">{{star.name}}</a>
+          <div class="card-body star_list">
+            <a *ngFor="let star of movie.js_stars_poster" href="#" class="card-link star_item">{{star.name}}</a>
           </div>
           </ng-template>
         </div>

@@ -34,7 +34,7 @@ export class BaseListComponent implements OnInit {
     );
   }
 
-  private add_if_not_exist(data:any):boolean{
+  protected add_if_not_exist(data:any):boolean{
     let stan=true
     for (let item of this.data){
         if (item.id==data.id){

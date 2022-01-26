@@ -39,6 +39,22 @@
         height: 14rem;
     }
 }
+
+
+.cart_poster_item{
+    margin: 15px;
+    .star_list{
+        a{
+            &.star_item{
+                font-style: italic;
+                text-decoration: none;
+            }
+        }
+
+
+    }
+}
+
 .cart-item{
     width:13rem; 
     margin:1rem;
