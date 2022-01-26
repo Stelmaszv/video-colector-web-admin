@@ -36,7 +36,7 @@
           <li class="list-group-item">
             <a *ngFor="let star of movie.js_stars" href="'+index_round.dir+'/stars_id.html" class="card-link">{{star.name}}</a>
             <ng-template [ngIf]="movie.more">
-              and {{movie.more}}
+              + <i>{{movie.more}}</i>
             </ng-template>
           </li>
         </ul>
