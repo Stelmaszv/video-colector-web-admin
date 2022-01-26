@@ -15,6 +15,14 @@ export class MoviesComponent extends BaseListComponent{
     name: new FormControl(),
   });
 
+  change_mode(){
+    if (this.mode=='cover'){
+      this.mode='poster'
+    }else if(this.mode=='poster'){
+      this.mode='cover'
+    }
+  }
+
   serch(){
     this.page=1;
     this.data=[]
