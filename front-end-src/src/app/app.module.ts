@@ -12,7 +12,8 @@ import { ProducentComponent } from './producent/producent.component';
 import { StringLenghtPipe } from './string-lenght.pipe';
 import { BaseListComponent } from './base-list/base-list.component';
 import { MoviesFilterComponent } from './movies-filter/movies-filter.component';
-
+import { BaseFilterComponent } from './base-filter/base-filter.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,13 +25,15 @@ import { MoviesFilterComponent } from './movies-filter/movies-filter.component';
     ProducentComponent,
     StringLenghtPipe,
     BaseListComponent,
-    MoviesFilterComponent
+    MoviesFilterComponent,
+    BaseFilterComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [Title],
   bootstrap: [AppComponent]

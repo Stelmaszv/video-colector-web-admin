@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StartComponentComponent } from './start-component/start-component.component'
 import { MoviesComponent } from './movies/movies.component'
-import {MoviesFilterComponent} from './movies-filter/movies-filter.component'
 import { StarsComponent } from './stars/stars.component'
 import { SeriesComponent } from './series/series.component'
 import { ProducentComponent } from './producent/producent.component'
@@ -18,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'movies',
-    component: MoviesFilterComponent
+    component: MoviesComponent
   },
   {
     path: 'stars',

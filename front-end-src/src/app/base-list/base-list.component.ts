@@ -8,9 +8,11 @@ import { HttpService } from '../http.service';
 })
 export class BaseListComponent implements OnInit {
   public data:any;
-  @Input('url') url= '';
+  public url=''
+  public filter_url=""
   protected results : any;
   protected response : any;
+  protected page=1;
 
   constructor(protected httpService: HttpService) { }
 
@@ -20,15 +22,11 @@ export class BaseListComponent implements OnInit {
     this.scroller()
   }
 
-  public get_data():any{
-    return 'qd'
-  }
-
   protected on_set_results(movie:any):any{}
 
   protected load_data():void
   {
-    this.httpService.get_url(this.url).subscribe(
+    this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
       (response) => {
         if (response.hasOwnProperty('results')){
           this.response=response
@@ -57,11 +55,11 @@ export class BaseListComponent implements OnInit {
     }
   }
 
-  private set_next():string{
+  private set_next():number{
     if (this.response.next != null){
-      return this.response.next
+      return this.page+1
     }else{
-      return this.url
+      return this.page
     }
   }
 
@@ -73,7 +71,7 @@ export class BaseListComponent implements OnInit {
       let scrol_pos=90/100*limit
         if (window.scrollY>scrol_pos){
           if (obj.data.length < obj.response.count){
-            obj.url = obj.set_next()
+            obj.page = obj.set_next()
             obj.load_data()
           }
         }

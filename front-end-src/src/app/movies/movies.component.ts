@@ -1,5 +1,6 @@
-import { Component,Input,OnInit} from '@angular/core';
+import { Component} from '@angular/core';
 import {BaseListComponent} from '../base-list/base-list.component'
+import { FormControl ,FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-movies',
@@ -8,6 +9,19 @@ import {BaseListComponent} from '../base-list/base-list.component'
 })
 export class MoviesComponent extends BaseListComponent{
   mode ='cover'
+  public override url='http://127.0.0.1:8000/movies?page='
+
+  search = new FormGroup({
+    name: new FormControl(),
+  });
+
+  serch(){
+    this.page=1;
+    this.data=[]
+    this.filter_url='name='+this.search.value.name
+    this.load_data()
+    console.log(this.url)
+  }
 
   private set_more(movie:any){
     if (movie.stars.length>2){
