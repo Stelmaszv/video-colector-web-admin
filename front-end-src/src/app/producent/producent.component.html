@@ -1,2 +1,15 @@
 <app-navabr></app-navabr>
-<p>producent works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col" *ngFor="let producent of data">
+            <div class="card series-cart">
+                <img src="{{producent.avatar}}" class="card-img-top">
+                <div class="card-body">
+                </div>
+                <h5 class="card-title">{{producent.show_name}}</h5>
+                <p class="card-text">{{producent.description}}</p>
+                <a href="'+serie.dir+'/series_id.html" class="btn btn-primary">{{producent.show_name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

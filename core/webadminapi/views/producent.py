@@ -14,7 +14,7 @@ from core.wideocollectorseader.models import Producents, Serie
 
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
 
-class ProducentsView(generics.ListAPIView):
+class ProducentsView(AbstractGenericsAPIView):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects.all()
     filter_backends = [filters.DjangoFilterBackend]
