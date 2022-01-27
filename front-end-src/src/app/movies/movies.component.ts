@@ -39,35 +39,27 @@ export class MoviesComponent extends BaseListComponent{
       }
       return false
   }
-  add_star(add_star:any){
+  private array_filter(array:any[],add:number){
     let stan=false
-    for (let tag of this.stars_form){
-      if (tag==add_star){
+    for (let el of array){
+      if (el==add){
         stan= true
       }
     }
     
     if (stan){
-      this.stars_form.splice(add_star)
+      array.splice(add)
     }else{
-      this.stars_form.push(add_star)
+      array.push(add)
     }
   }
 
-  add_tag(add_tag:any){
-    let stan=false
-    for (let tag of this.tags_form){
-      if (tag==add_tag){
-        stan= true
-      }
-    }
+  add_star(add_star:number){
+    this.array_filter(this.stars_form,add_star)
+  }
 
-    if (stan){
-      this.tags_form.splice(add_tag)
-    }else{
-      this.tags_form.push(add_tag)
-    }
-
+  add_tag(add_tag:number){
+    this.array_filter(this.tags_form,add_tag)
   }
 
   load_select(){
