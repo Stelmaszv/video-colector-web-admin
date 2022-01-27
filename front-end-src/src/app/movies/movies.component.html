@@ -13,7 +13,7 @@
       </select>
   </div>
   <div class="col">
-    <select class="series-search" (change)="serch()" aria-label="Default select example">
+    <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="series">
       <option selected>Select Series</option>
       <option *ngFor="let serie of series_select" value="{{serie.id}}" >{{serie.name}}</option>
     </select>
@@ -37,20 +37,22 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Search Filtr</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <ul>
-          <li *ngFor="let tag of tags">{{tag.name}}</li>
-        </ul>
-        <ul>
-          <li *ngFor="let star of stars">{{star.name}}</li>
-        </ul>
+        <p class="h6">Tags</p>
+        <select class="form-select" multiple aria-label="multiple select example">
+          <option   *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}">{{tag.name}}</option>
+        </select>
+        
+        <p class="h6">Stars</p>
+        <select class="form-select" multiple aria-label="multiple select example">
+          <option   *ngFor="let star of stars" value="{{star.id}}">{{star.name}}</option>
+        </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="serch()" data-bs-dismiss="modal">Save</button>
       </div>
     </div>
   </div>

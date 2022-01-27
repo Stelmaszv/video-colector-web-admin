@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import {BaseListComponent} from '../base-list/base-list.component'
 import { FormControl ,FormGroup} from '@angular/forms';
+import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
 @Component({
   selector: 'app-movies',
@@ -12,6 +13,7 @@ export class MoviesComponent extends BaseListComponent{
   series_select:any
   tags:any
   stars:any
+  tags_form:any
   public override url='http://127.0.0.1:8000/movies?page='
   series_select_url = 'http://127.0.0.1:8000/series_select'
   tag_select_url = 'http://127.0.0.1:8000/tags'
@@ -23,7 +25,33 @@ export class MoviesComponent extends BaseListComponent{
   });
 
   override onInit(){
+      this.tags_form=[]
       this.load_select()
+  }
+
+  add_if_not_exist_in_array(addtag:any):boolean{
+      for (let tag of this.tags_form){
+        if (tag==addtag){
+          return true
+        }
+      }
+      return false
+  }
+
+  add_tag(add_tag:any){
+    let stan=false
+    for (let tag of this.tags_form){
+      if (tag==add_tag){
+        stan= true
+      }
+    }
+
+    if (stan){
+      this.tags_form.splice(add_tag)
+    }else{
+      this.tags_form.push(add_tag)
+    }
+
   }
 
   load_select(){
@@ -36,7 +64,6 @@ export class MoviesComponent extends BaseListComponent{
 
   load_items_for_form():void
   {
-    console.log('load')
     this.httpService.get_url(this.tag_select_url).subscribe(
       (response) => {
           this.tags=response
@@ -64,8 +91,14 @@ export class MoviesComponent extends BaseListComponent{
     for (let item of form_elments){
       if (this.search.value[item]!=null){
         let string =item+'='+this.search.value[item]
-        this.filter_url+=string
+        this.filter_url+=string+'&'
       }
+      
+    }
+
+    for (let tag of this.tags_form){
+      let string ='tags='+tag
+      this.filter_url+=string+'&'
     }
 
   }
