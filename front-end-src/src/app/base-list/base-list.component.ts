@@ -13,6 +13,7 @@ export class BaseListComponent implements OnInit {
   protected results : any;
   protected response : any;
   protected page=1;
+  loading:any=true
 
   constructor(protected httpService: HttpService) { }
 
@@ -32,15 +33,19 @@ export class BaseListComponent implements OnInit {
 
   protected load_data():void
   {
-    console.log(this.url+this.page+'&'+this.filter_url)
-    this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
-      (response) => {
-        if (response.hasOwnProperty('results')){
-          this.response=response
-          this.set_results()
+    if (this.loading){
+      this.loading=false
+      console.log(this.url+this.page+'&'+this.filter_url)
+      this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
+        (response) => {
+          if (response.hasOwnProperty('results')){
+            this.response=response
+            this.set_results()
+            this.loading=true
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   protected add_if_not_exist(data:any):boolean{
@@ -74,14 +79,16 @@ export class BaseListComponent implements OnInit {
   {
     let obj=this
     window.addEventListener("scroll", (event) => {
-      var limit = document.body.offsetHeight - window.innerHeight;
-      let scrol_pos=90/100*limit
-        if (window.scrollY>scrol_pos){
-          if (obj.data.length < obj.response.count){
-            obj.page = obj.set_next()
-            obj.load_data()
+      if (obj.loading){
+        var limit = document.body.offsetHeight - window.innerHeight;
+        let scrol_pos=90/100*limit
+          if (window.scrollY>scrol_pos){
+            if (obj.data.length < obj.response.count){
+              obj.page = obj.set_next()
+              obj.load_data()
+            }
           }
-        }
+      }
     })
   }
 

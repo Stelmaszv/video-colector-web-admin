@@ -89,6 +89,8 @@ class SeriesSeader(ApstractSeader):
         if len(item['producent']):
             Producent=self.add_one_many(item['producent'], Producents)
         print('Add Serie ' + item['name'])
+        print(Producent)
+
         self.Model(
             name=item['name'],
             banner=item['banner'],
@@ -98,13 +100,15 @@ class SeriesSeader(ApstractSeader):
             country=item['country'],
             description=item['description'],
             years = item['years'],
-            number_of_sezons = item['number_of_sezons'],
-            Producent        = Producent,
+            number_of_sezons = item['number_of_sezons']
         ).save()
-        SerieItem=Serie.objects.filter(name=item['name'])[0]
-        if Producent is not None:
-            self.add_one_many_conection(SerieItem,Producent,'series')
-        self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
+        print('HERE')
+        #SerieItem=Serie.objects.filter(name=item['name'])[0]
+
+        #if Producent is not None:
+            ##self.add_one_many_conection(SerieItem,Producent,'series')
+        ##self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
+
 
 class TagSeader(ApstractSeader):
 

@@ -188,7 +188,7 @@ class Serie(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        set_model(self)
+        #set_model(self)
         super(Serie, self).save(*args, **kwargs)
         """
         set_model(self)
@@ -282,7 +282,7 @@ class Movie(models.Model):
         """
 
     def save(self, *args, **kwargs):
-        set_model(self)
+        #set_model(self)
         super(Movie, self).save(*args, **kwargs)
         """
         set_model(self)
