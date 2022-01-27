@@ -19,7 +19,13 @@ export class BaseListComponent implements OnInit {
   public ngOnInit(): void {
     this.data=[]
     this.load_data()
+    this.onInit()
     this.scroller()
+  }
+
+  public onInit():void
+  {
+
   }
 
   protected on_set_results(movie:any):any{}

@@ -11,11 +11,25 @@ export class MoviesComponent extends BaseListComponent{
   mode ='cover'
   series_select:any
   public override url='http://127.0.0.1:8000/movies?page='
+  series_select_url = 'http://127.0.0.1:8000/series_select'
 
   search = new FormGroup({
     name: new FormControl(),
     series: new FormControl(),
   });
+
+  public override onInit():void{
+      this.load_select()
+  }
+
+  protected load_select():void
+  {
+    this.httpService.get_url(this.series_select_url).subscribe(
+      (response) => {
+          this.series_select=response
+      }
+    );
+  }
 
   change_mode(){
     if (this.mode=='cover'){

@@ -15,7 +15,9 @@
   <div class="col">
     <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="series">
       <option selected>Select Series</option>
-      {{series_select}}
+      <option *ngFor="let option of series_select" value="{{option.id}}">
+          {{option.name}}
+      </option>
     </select>
   </div>
   <div class="col">
