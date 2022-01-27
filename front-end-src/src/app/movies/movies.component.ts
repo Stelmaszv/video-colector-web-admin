@@ -36,6 +36,7 @@ export class MoviesComponent extends BaseListComponent{
 
   load_items_for_form():void
   {
+    console.log('load')
     this.httpService.get_url(this.tag_select_url).subscribe(
       (response) => {
           this.tags=response
