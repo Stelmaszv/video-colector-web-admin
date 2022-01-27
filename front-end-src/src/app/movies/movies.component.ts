@@ -9,6 +9,7 @@ import { FormControl ,FormGroup} from '@angular/forms';
 })
 export class MoviesComponent extends BaseListComponent{
   mode ='cover'
+  series_select:any
   public override url='http://127.0.0.1:8000/movies?page='
 
   search = new FormGroup({
@@ -23,16 +24,14 @@ export class MoviesComponent extends BaseListComponent{
       this.mode='cover'
     }
   }
-  
+
   set_form(){
     let form_elments = Object.keys(this.search.value);
     let count=0
     this.filter_url=''
-    console.log(this.search.value)
     for (let item of form_elments){
       if (this.search.value[item]!=null){
         let string =item+'='+this.search.value[item]
-        console.log(string)
         this.filter_url+=string
       }
     }

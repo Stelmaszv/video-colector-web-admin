@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
 from core.webadminapi.filters import SerieFilter, MovieFilter
 from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
-    PhotoSerializerSeries, BannerSerializer
+    PhotoSerializerSeries, BannerSerializer,SerieSlectSerializer
 from core.wideocollectorseader.models import Serie
 from videocolectorwebadmin.global_setings import photo_ext
 import random
@@ -69,6 +69,10 @@ class SerieView(AbstractGenericsAPIView):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = SerieFilter
     order_by ='-added'
+
+class SelectOptionView(generics.ListAPIView):
+    serializer_class = SerieSlectSerializer
+    queryset = Serie.objects.all()
 
 class SerieMoviesView(generics.ListAPIView):
     serializer_class = MoviesSerializer

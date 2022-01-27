@@ -13,8 +13,9 @@
       </select>
   </div>
   <div class="col">
-    <select class="series-search" (change)="serch()" aria-label="Default select example">
+    <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="series">
       <option selected>Select Series</option>
+      {{series_select}}
     </select>
   </div>
   <div class="col">

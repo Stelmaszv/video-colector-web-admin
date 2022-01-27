@@ -54,6 +54,11 @@ class ShortProducent(serializers.ModelSerializer):
         model=Serie
         fields = ['id','name','show_name','avatar']
 
+class SerieSlectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Serie
+        fields = ['id','name']
+
 class ShortSeries(serializers.ModelSerializer):
     Producent = ShortProducent(many=False)
     class Meta:
