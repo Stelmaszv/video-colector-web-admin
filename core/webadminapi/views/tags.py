@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from core.webadminapi.core import AbstractUpdateView, AbstractGenericsAPIView
 from core.webadminapi.serializers import TagsSerializer
@@ -8,6 +9,6 @@ class TagDeteilsView(AbstractUpdateView):
     queryset = Tag.objects
     Model = Tag
 
-class TagView(AbstractGenericsAPIView):
+class TagView(generics.ListAPIView):
     serializer_class = TagsSerializer
     queryset = Tag.objects.all()
