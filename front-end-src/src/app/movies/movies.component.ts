@@ -14,6 +14,7 @@ export class MoviesComponent extends BaseListComponent{
   tags:any
   stars:any
   tags_form:any
+  stars_form:any
   public override url='http://127.0.0.1:8000/movies?page='
   series_select_url = 'http://127.0.0.1:8000/series_select'
   tag_select_url = 'http://127.0.0.1:8000/tags'
@@ -26,6 +27,7 @@ export class MoviesComponent extends BaseListComponent{
 
   override onInit(){
       this.tags_form=[]
+      this.stars_form=[]
       this.load_select()
   }
 
@@ -36,6 +38,20 @@ export class MoviesComponent extends BaseListComponent{
         }
       }
       return false
+  }
+  add_star(add_star:any){
+    let stan=false
+    for (let tag of this.stars_form){
+      if (tag==add_star){
+        stan= true
+      }
+    }
+    
+    if (stan){
+      this.stars_form.splice(add_star)
+    }else{
+      this.stars_form.push(add_star)
+    }
   }
 
   add_tag(add_tag:any){
@@ -94,6 +110,11 @@ export class MoviesComponent extends BaseListComponent{
         this.filter_url+=string+'&'
       }
       
+    }
+
+    for (let star of this.stars_form){
+      let string ='stars='+star
+      this.filter_url+=string+'&'
     }
 
     for (let tag of this.tags_form){

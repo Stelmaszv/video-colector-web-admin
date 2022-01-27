@@ -48,7 +48,7 @@
         
         <p class="h6">Stars</p>
         <select class="form-select" multiple aria-label="multiple select example">
-          <option   *ngFor="let star of stars" value="{{star.id}}">{{star.name}}</option>
+          <option   *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}">{{star.name}}</option>
         </select>
       </div>
       <div class="modal-footer">
