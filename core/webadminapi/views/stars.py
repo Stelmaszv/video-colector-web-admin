@@ -1,8 +1,9 @@
+from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
 from core.webadminapi.filters import StarFilter
-from core.webadminapi.serializers import StarsSerializer, StarsSerializerUpdate
+from core.webadminapi.serializers import StarsSerializer, StarsSerializerUpdate,StarSlectSerializer
 from core.wideocollectorseader.models import Star
 from django_filters import rest_framework as filters
 
@@ -22,6 +23,10 @@ class StarUpdateView(AbstractUpdateView):
     serializer_class = StarsSerializerUpdate
     queryset = Star.objects
     Model = Star
+
+class StarSelectOptionView(generics.ListAPIView):
+    serializer_class = StarSlectSerializer
+    queryset = Star.objects.all()
 
 #actions
 class StarAddToFavoriteView(AbstractDeteilsView):

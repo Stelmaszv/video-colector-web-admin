@@ -8,7 +8,7 @@ from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteil
     SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView, SerieAddToFavoriteView, SerieAddToRatingView, \
     SerieAddToLikeView, SerieAddToDisLikeView, SelectOptionView
 from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView, StarAddToFavoriteView, \
-    StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView
+    StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView, StarSelectOptionView
 from core.webadminapi.views.tags import TagView, TagDeteilsView
 
 app_name = 'webadminapi'
@@ -34,6 +34,7 @@ urlpatterns = [
     path('staraddrating/<int:pk>/',              StarAddToRatingView.as_view(), name='staraddrating'),
     path('staraddtolike/<int:pk>/',              StarAddToLikeView.as_view(), name='staraddtolike'),
     path('staraddtodislike/<int:pk>/',           StarAddToDisLikeView.as_view(), name='staraddtodislike'),
+    path('stars_form',                           StarSelectOptionView.as_view(), name='series_select'),
     #series
     path('series',                               SerieView.as_view(), name='series'),
     path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),
@@ -64,4 +65,5 @@ urlpatterns = [
     #tags
     path('tags',                                 TagView.as_view(), name='tas'),
     path('tag/<int:pk>/',                        TagDeteilsView.as_view(), name='tag'),
+    path('tag_form',                           SelectOptionView.as_view(), name='series_select'),
 ]
