@@ -10,6 +10,8 @@ from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteil
 from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView, StarAddToFavoriteView, \
     StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView, StarSelectOptionView
 from core.webadminapi.views.tags import TagView, TagDeteilsView
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'webadminapi'
 from django.urls import path
@@ -67,3 +69,5 @@ urlpatterns = [
     path('tag/<int:pk>/',                        TagDeteilsView.as_view(), name='tag'),
     path('tag_form',                           SelectOptionView.as_view(), name='series_select'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

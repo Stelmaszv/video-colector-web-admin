@@ -263,6 +263,7 @@ class Movie(models.Model):
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
+    producent = models.ForeignKey(Producents, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True)
     tags  = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Moviestags', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='MovieViews', blank=True)
@@ -270,6 +271,7 @@ class Movie(models.Model):
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='MovieDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='MovieFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',blank=True)
+
 
     def delete(self, *args, **kwargs):
         super(Movie, self).delete(*args, **kwargs)
