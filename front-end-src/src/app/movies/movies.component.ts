@@ -13,6 +13,7 @@ export class MoviesComponent extends BaseListComponent{
 
   search = new FormGroup({
     name: new FormControl(),
+    series: new FormControl(),
   });
 
   change_mode(){
@@ -22,13 +23,27 @@ export class MoviesComponent extends BaseListComponent{
       this.mode='cover'
     }
   }
+  
+  set_form(){
+    let form_elments = Object.keys(this.search.value);
+    let count=0
+    this.filter_url=''
+    console.log(this.search.value)
+    for (let item of form_elments){
+      if (this.search.value[item]!=null){
+        let string =item+'='+this.search.value[item]
+        console.log(string)
+        this.filter_url+=string
+      }
+    }
+
+  }
 
   serch(){
     this.page=1;
     this.data=[]
-    this.filter_url='name='+this.search.value.name
+    this.set_form()
     this.load_data()
-    console.log(this.url)
   }
 
   private set_more(movie:any){

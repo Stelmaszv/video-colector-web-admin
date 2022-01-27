@@ -26,6 +26,7 @@ export class BaseListComponent implements OnInit {
 
   protected load_data():void
   {
+    console.log(this.url+this.page+'&'+this.filter_url)
     this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
       (response) => {
         if (response.hasOwnProperty('results')){
