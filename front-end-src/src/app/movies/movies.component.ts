@@ -23,6 +23,10 @@ export class MoviesComponent extends BaseListComponent{
   search = new FormGroup({
     name: new FormControl(),
     series: new FormControl(),
+    likes_count: new FormControl(),
+    avg_rating:  new FormControl(),
+    ratings_count:new FormControl(),
+    disLikes_count:new FormControl()
   });
 
   override onInit(){
