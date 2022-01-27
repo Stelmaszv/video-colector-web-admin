@@ -13,11 +13,9 @@
       </select>
   </div>
   <div class="col">
-    <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="series">
+    <select class="series-search" (change)="serch()" aria-label="Default select example">
       <option selected>Select Series</option>
-      <option *ngFor="let option of series_select" value="{{option.id}}">
-          {{option.name}}
-      </option>
+      <option *ngFor="let serie of series_select" value="{{serie.id}}" >{{serie.name}}</option>
     </select>
   </div>
   <div class="col">

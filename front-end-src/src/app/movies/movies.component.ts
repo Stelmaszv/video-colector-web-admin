@@ -10,23 +10,40 @@ import { FormControl ,FormGroup} from '@angular/forms';
 export class MoviesComponent extends BaseListComponent{
   mode ='cover'
   series_select:any
+  tags:any
+  stars:any
   public override url='http://127.0.0.1:8000/movies?page='
   series_select_url = 'http://127.0.0.1:8000/series_select'
+  tag_select_url = 'http://127.0.0.1:8000/tags'
+  star_select_url = 'http://127.0.0.1:8000/stars_form'
 
   search = new FormGroup({
     name: new FormControl(),
     series: new FormControl(),
   });
 
-  public override onInit():void{
+  override onInit(){
       this.load_select()
   }
 
-  protected load_select():void
-  {
+  load_select(){
     this.httpService.get_url(this.series_select_url).subscribe(
       (response) => {
           this.series_select=response
+      }
+    );
+  }
+
+  load_items_for_form():void
+  {
+    this.httpService.get_url(this.tag_select_url).subscribe(
+      (response) => {
+          this.tags=response
+      }
+    );
+    this.httpService.get_url(this.star_select_url).subscribe(
+      (response) => {
+          this.stars=response
       }
     );
   }
