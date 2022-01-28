@@ -28,6 +28,11 @@ class BaseSeralizer(serializers.ModelSerializer):
         return self.base_is(instance, 'favourite')
 
 #Upadates
+class ProducetFormSeralizer(serializers.ModelSerializer):
+    class Meta:
+        model = Producents
+        fields = ['id','name']
+
 class StarsSerializerUpdate(serializers.ModelSerializer):
     class Meta:
         model = Star

@@ -8,10 +8,10 @@ import { FormControl ,FormGroup} from '@angular/forms';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent extends BaseListComponent{
-  public mode ='cover'
-  public override url='http://127.0.0.1:8000/movies?page='
+  public mode:string ='cover'
+  public override url:string='http://127.0.0.1:8000/movies?page='
 
-  override search = new FormGroup({
+  public override search = new FormGroup({
     name: new FormControl(),
     serie: new FormControl(),
     likes_count: new FormControl(),

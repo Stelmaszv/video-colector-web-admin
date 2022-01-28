@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpService } from '../http.service';
 import {
   trigger,
@@ -32,21 +32,21 @@ import {
 })
 export class BaseListComponent implements OnInit {
   public data:any;
-  public url=''
-  public filter_url=""
+  public url:string=''
+  public filter_url:string=""
   public tags_form:any
   public stars_form:any
-  public loading:any=true
+  public loading:boolean=true
   public search:any
   public tags:any
   public stars:any
   public series_select:any
-  private series_select_url = 'http://127.0.0.1:8000/series_select'
-  private tag_select_url = 'http://127.0.0.1:8000/tags'
-  private star_select_url = 'http://127.0.0.1:8000/stars_form'
+  private series_select_url:string = 'http://127.0.0.1:8000/series_select'
+  private tag_select_url:string = 'http://127.0.0.1:8000/tags'
+  private star_select_url:string = 'http://127.0.0.1:8000/stars_form'
   protected results : any;
   protected response : any;
-  protected page=1;
+  protected page:number=1 ;
   
 
   public constructor(protected httpService: HttpService) { }

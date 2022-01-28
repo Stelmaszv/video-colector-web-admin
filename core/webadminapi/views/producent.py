@@ -9,7 +9,7 @@ from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, Abstr
     LargeResultsSetPagination
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
-    MoviesSerializer, StarsSerializer
+    MoviesSerializer, StarsSerializer,ProducetFormSeralizer
 from core.wideocollectorseader.models import Producents, Serie
 
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
@@ -58,6 +58,11 @@ class ProducentsDeteilsView(AbstractDeteilsView):
 class ProducentsUpdataView(AbstractUpdateView):
     serializer_class = ProducentsSerializerUpdate
     queryset = Producents.objects
+    Model = Producents
+
+class ProducentsFormView(generics.ListAPIView):
+    serializer_class = ProducetFormSeralizer
+    queryset = Producents.objects.all()
     Model = Producents
 
 class ProducentsMoviesView(generics.ListAPIView):
