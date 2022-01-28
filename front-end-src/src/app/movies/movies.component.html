@@ -1,8 +1,9 @@
-<ng-template [ngIf]="!loading">
-<div class="loading">
-  Loading ...
+<div [@openClose]="loading ? 'open' : 'closed'" class="open-close-container loading">
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
 </div>
-</ng-template>
+
 <form class="fixed-top" [formGroup]="search" style="top:50px;">
   <div class="filter row-cols-1">
     <div class="row">

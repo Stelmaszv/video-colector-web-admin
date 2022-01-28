@@ -14,6 +14,7 @@ import { BaseListComponent } from './base-list/base-list.component';
 import { MoviesFilterComponent } from './movies-filter/movies-filter.component';
 import { BaseFilterComponent } from './base-filter/base-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [Title],
   bootstrap: [AppComponent]

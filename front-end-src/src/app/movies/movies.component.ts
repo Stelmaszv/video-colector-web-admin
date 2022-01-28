@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import {BaseListComponent} from '../base-list/base-list.component'
 import { FormControl ,FormGroup} from '@angular/forms';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
 @Component({
   selector: 'app-movies',
@@ -19,6 +18,7 @@ export class MoviesComponent extends BaseListComponent{
   series_select_url = 'http://127.0.0.1:8000/series_select'
   tag_select_url = 'http://127.0.0.1:8000/tags'
   star_select_url = 'http://127.0.0.1:8000/stars_form'
+
 
   search = new FormGroup({
     name: new FormControl(),
@@ -190,6 +190,6 @@ export class MoviesComponent extends BaseListComponent{
   {
     movie['js_stars']=this.set_stars(movie)
     movie['more']=this.set_more(movie)
-    movie['js_stars_poster']=this.set_star_for_poster(movie)
+    movie['js_stars_poster']=this.set_star_for_poster(movie)    
   }
 }

@@ -1,8 +1,32 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { HttpService } from '../http.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-base-list',
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        top: '90px'
+      })),
+      state('closed', style({
+        backgroundColor: 'black',
+        top: '110px'
+      })),
+      transition('open => closed', [
+        animate('1s')
+      ]),
+      transition('closed => open', [
+        animate('1s')
+      ]),
+    ]),
+  ],
   templateUrl: './base-list.component.html',
   styleUrls: ['./base-list.component.scss']
 })
@@ -16,6 +40,7 @@ export class BaseListComponent implements OnInit {
   loading:any=true
 
   constructor(protected httpService: HttpService) { }
+
 
   public ngOnInit(): void {
     this.data=[]
