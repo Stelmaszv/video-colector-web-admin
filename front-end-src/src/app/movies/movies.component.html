@@ -15,14 +15,14 @@
     </div>
 
   <div class="col">
-      <select class="producent-search" aria-label="Default select example">
-        <option selected>Select Producent</option>
+      <select class="producent-search" (change)="serch()" aria-label="Default select example" formControlName="producent">
+        <option></option>
+        <option *ngFor="let producent of producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
       </select>
   </div>
   <div class="col">
     <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="serie">
-      <option selected>Select Series</option>
-
+      <option></option>
       <option *ngFor="let serie of series_select"  value="{{serie.id}}" >{{serie.name}}</option>
     </select>
   </div>

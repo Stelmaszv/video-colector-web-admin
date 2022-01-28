@@ -15,6 +15,7 @@ export class MoviesComponent extends BaseListComponent{
     name: new FormControl(),
     serie: new FormControl(),
     likes_count: new FormControl(),
+    producent: new FormControl(),
     avg_rating:  new FormControl(),
     ratings_count:new FormControl(),
     disLikes_count:new FormControl()

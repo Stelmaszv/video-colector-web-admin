@@ -40,8 +40,10 @@ export class BaseListComponent implements OnInit {
   public search:any
   public tags:any
   public stars:any
+  public producents_select:any
   public series_select:any
   private series_select_url:string = 'http://127.0.0.1:8000/series_select'
+  private producents_select_url:string = 'http://127.0.0.1:8000/producentsformview'
   private tag_select_url:string = 'http://127.0.0.1:8000/tags'
   private star_select_url:string = 'http://127.0.0.1:8000/stars_form'
   protected results : any;
@@ -167,6 +169,12 @@ export class BaseListComponent implements OnInit {
     this.httpService.get_url(this.series_select_url).subscribe(
       (response) => {
           this.series_select=response
+      }
+    );
+
+    this.httpService.get_url(this.producents_select_url).subscribe(
+      (response) => {
+          this.producents_select=response
       }
     );
   }

@@ -68,7 +68,9 @@ urlpatterns = [
     #tags
     path('tags',                                 TagView.as_view(), name='tas'),
     path('tag/<int:pk>/',                        TagDeteilsView.as_view(), name='tag'),
-    path('tag_form',                           SelectOptionView.as_view(), name='series_select'),
+    path('tag_form',                             SelectOptionView.as_view(), name='series_select'),
 ]
+"""
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+"""
