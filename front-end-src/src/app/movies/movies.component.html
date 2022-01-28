@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<form class="fixed-top" [formGroup]="search" style="top:50px;">
+<form class="sticky-top" [formGroup]="search" style="top:50px;">
   <div class="filter row-cols-1">
     <div class="row">
     <div class="col">
@@ -20,9 +20,10 @@
       </select>
   </div>
   <div class="col">
-    <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="series">
+    <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="serie">
       <option selected>Select Series</option>
-      <option *ngFor="let serie of series_select" value="{{serie.id}}" >{{serie.name}}</option>
+
+      <option *ngFor="let serie of series_select"  value="{{serie.id}}" >{{serie.name}}</option>
     </select>
   </div>
   <div class="col">
@@ -68,12 +69,14 @@
         </form>
         <p class="h6">Tags</p>
         <select class="form-select" multiple aria-label="multiple select example">
-          <option   *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}">{{tag.name}}</option>
+          <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="!if_exist(tag.id,tags_form)" selected>{{tag.name}}</option>
+          <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="if_exist(tag.id,tags_form)" >{{tag.name}}</option>
         </select>
         
         <p class="h6">Stars</p>
         <select class="form-select" multiple aria-label="multiple select example">
-          <option   *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}">{{star.name}}</option>
+          <option *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="!if_exist(star.id,stars_form)" selected>{{star.name}}</option>
+          <option *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="if_exist(star.id,stars_form)" >{{star.name}}</option>
         </select>
       </div>
       <div class="modal-footer">
@@ -84,14 +87,14 @@
 </div>
 
 <ng-template [ngIf]="mode=='poster'">
-  <div class="container" style="margin-top:150px;">
+  <div class="container" style="margin-top:0px;">
     <div class="row row-cols-2">
       <div class="col" *ngFor="let movie of data">
         <div class="card cart_poster_item">
           <img src="{{movie.poster}}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{movie.show_name}}</h5>
-            <p class="card-text">{{movie.description | stringLenght  }}</p>
+            <p class="card-text entry">{{movie.description | stringLenght  }}</p>
           </div>
           <ng-template [ngIf]="movie.stars">
           <div class="card-body star_list">
@@ -105,11 +108,11 @@
 </ng-template>
 
 <ng-template [ngIf]="mode=='cover'">
-<div class="container movies" style="margin-top:150px;">
+<div class="container movies" style="margin-top:0px;">
   <div class="row">
     <div class="col" *ngFor="let movie of data">
       <div class="card cart-item">
-        <img src="{{movie.avatar}}" class="card-img-top cover" alt="...">
+        <img src="{{movie.avatar}}" class="card-img-top cover" alt="assets/icon/movie.jpg">
         <div class="card-body">
           <h5 class="card-title">{{movie.show_name}}</h5>
           <p class="card-text">{{movie.description | stringLenght  }}</p>
