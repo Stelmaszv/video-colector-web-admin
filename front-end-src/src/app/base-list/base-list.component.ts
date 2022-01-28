@@ -104,6 +104,20 @@ export class BaseListComponent implements OnInit {
     this.scroller()
   }
 
+  public reset_form():void
+  {
+    let form_elments = Object.keys(this.search.value);
+    for (let item of form_elments){
+      if (this.search.value[item]!=null){
+        this.search.value[item]=''
+      }
+    }
+    this.filter_url=''
+    this.load_data()
+    this.tags_form=[]
+    this.stars_form=[]
+  }
+
   public onInit():void
   {}
 

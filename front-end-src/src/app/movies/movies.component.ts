@@ -18,7 +18,8 @@ export class MoviesComponent extends BaseListComponent{
     producent: new FormControl(),
     avg_rating:  new FormControl(),
     ratings_count:new FormControl(),
-    disLikes_count:new FormControl()
+    disLikes_count:new FormControl(),
+    country:new FormControl()
   });
 
   public override onInit(){

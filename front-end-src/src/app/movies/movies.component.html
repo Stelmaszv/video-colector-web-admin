@@ -11,17 +11,17 @@
         <label for="name">Name: </label>
     </div>
     <div class="col">
-        <input id="name" type="text" (keyup)="serch()" formControlName="name" class="name-search">
+        <input id="name" type="text" (keyup)="serch()" formControlName="name" value="{{search.value.name}}"   class="name-search">
     </div>
 
   <div class="col">
-      <select class="producent-search" (change)="serch()" aria-label="Default select example" formControlName="producent">
+      <select class="producent-search" (change)="serch()" value="{{search.value.producent}}" aria-label="Default select example" formControlName="producent">
         <option></option>
         <option *ngFor="let producent of producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
       </select>
   </div>
   <div class="col">
-    <select class="series-search" (change)="serch()" aria-label="Default select example" formControlName="serie">
+    <select class="series-search" (change)="serch()" value="{{search.value.serie}}" aria-label="Default select example" formControlName="serie">
       <option></option>
       <option *ngFor="let serie of series_select"  value="{{serie.id}}" >{{serie.name}}</option>
     </select>
@@ -37,6 +37,11 @@
       Filtr
     </button>
   </div>
+  <div class="col">
+    <button type="button" class="btn btn-secondary" (click)="reset_form()">
+      Reset
+    </button>
+  </div>
   </div>
   </div>
 </form>
@@ -49,22 +54,26 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="search">
+        <form [formGroup]="search" class="form-filter">
+          <p class="h6">Country</p>
+          <div class="col">
+              <input id="likes_count" type="text" value="{{search.value.country}}" formControlName="country" class="country">
+          </div>
         <p class="h6">Liks</p>
         <div class="col">
-            <input id="likes_count" type="number" (change)="serch()" formControlName="likes_count" class="likes-count">
+            <input id="likes_count" type="number" (change)="serch()" value="{{search.value.likes_count}}" formControlName="likes_count" class="likes-count">
         </div>
         <p class="h6">Avg rating</p>
         <div class="col">
-            <input id="avg_rating" type="number" step="0.01" (change)="serch()" formControlName="avg_rating" class="avg-rating">
+            <input id="avg_rating" type="number" step="0.01" (change)="serch()" value="{{search.value.avg_rating}}" formControlName="avg_rating" class="avg-rating">
         </div>
         <p class="h6">Ratings count</p>
         <div class="col">
-            <input id="ratings_count" type="number" (change)="serch()" formControlName="ratings_count" class="ratings-count">
+            <input id="ratings_count" type="number" (change)="serch()" formControlName="ratings_count" value="{{search.value.ratings_count}}" class="ratings-count">
         </div>
         <p class="h6">DisLikes count</p>
         <div class="col">
-            <input id="disLikes_count" type="number" (change)="serch()" formControlName="disLikes_count" class="disLikes-count">
+            <input id="disLikes_count" type="number" (change)="serch()" formControlName="disLikes_count" value="{{search.value.ratings_count}}" class="disLikes-count">
         </div>
         </form>
         <p class="h6">Tags</p>
