@@ -33,5 +33,44 @@
                 </a>
             </div>
         </div>
+        <h1 class="d-flex justify-content-center">Movie Informaton</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <img class="avatar_js movie_avatar" src="{{data.avatar}}">
+                </div>
+                <div class="col">
+                    <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
+                    <p class="description_js movie_description">{{data.description}}</p>
+                    <table class="table table-borderless table_information">
+                        <tr>
+                            <td class="table_row">Producent</td>
+                            <td class="table_row producent_item">
+                                <a href="'+this.data.producent.dir+'/producent_id.html">
+                                    Producent
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_row">Serie</td>
+                            <td class="table_row series_item">
+                                <a href="'+this.data.producent.dir+'/producent_id.html">
+                                    {{data.serie.show_name}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_row">Stars</td><td class="stars_strig_js"></td>
+                        </tr>
+                        <tr>
+                            <td class="table_row">Tags</td><td class="tags_js"></td>
+                        </tr>
+                        <tr>
+                            <td class="table_row">Country</td><td>{{data.country}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
