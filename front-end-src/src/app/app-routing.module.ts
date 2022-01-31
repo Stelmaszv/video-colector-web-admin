@@ -6,6 +6,7 @@ import { MoviesComponent } from './movies/movies.component'
 import { StarsComponent } from './stars/stars.component'
 import { SeriesComponent } from './series/series.component'
 import { ProducentComponent } from './producent/producent.component'
+import {MovieidComponent}     from './movieid/movieid.component'
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'movies',
     component: MoviesComponent
+  },
+  {
+    path: 'movie/:id',
+    component: MovieidComponent
   },
   {
     path: 'stars',
