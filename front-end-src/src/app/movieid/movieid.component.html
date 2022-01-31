@@ -10,12 +10,8 @@
                 <div class="controls d-flex align-items-stretch">
                     <button id="play"><i id="playbtm" class="fas fa-play"></i></button>
                     <button id="mute"><i id="mutebtm" class="fas fa-volume-up"></i></button>
-                    <!--
-                    <button id="next_star"><span class="get_star"></span></button>
-                    <button id="next_series"><span class="get_series"></span></button>
-                    -->
-                    <input type="range" id="range" value="0"/>
-                    <span id="time"><span id="wideoTime"></span> / <span id="wideoDuration"></span></span>
+                    <input id="range" type="range" min="0" max="100" value="0" step="1">
+                    <span id="time"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
                     <button id="fullScreen"><i id="fullScreenbtm" class="fas fa-expand"></i></button>
                 </div>
             </div>
