@@ -3,21 +3,20 @@ let interval = setInterval(function () {
     let wideo = document.querySelector('#bgvid')
     let play = document.querySelector('#play')
     let mute = document.querySelector('#mute')
-    let seekslider = document.getElementById("range");
+    let range = document.querySelector('#range')
     let curtimetext = document.getElementById("curtimetext");
 	let durtimetext = document.getElementById("durtimetext");
 
-    if (wideo && play && mute && fullScreen && seekslider){
+    if (wideo && play && mute && fullScreen && range){
         
         clearInterval(interval)
-        seekslider.addEventListener("change",function(){
-            var seekto = wideo.duration * (seekslider.value / 100);
-	        wideo.currentTime=seekto
-        },true);
+        range.addEventListener("input", function(){
+            wideo.currentTime=range.value
+            range.max=Math.floor(wideo.duration)
+        });
 
         wideo.addEventListener("timeupdate",function(){
-            var nt = wideo.currentTime * (100 / wideo.duration);
-            seekslider.value = nt;
+            range.value = wideo.currentTime
             var curmins = Math.floor(wideo.currentTime / 60);
             var cursecs = Math.floor(wideo.currentTime - curmins * 60);
             var durmins = Math.floor(wideo.duration / 60);
@@ -53,6 +52,21 @@ let interval = setInterval(function () {
         fullScreen.addEventListener("click", function(){
             wideo.requestFullscreen();
         });
-    }
 
+        let timeinterval = setInterval(function () {
+            if (!isNaN(wideo.duration)){
+                clearInterval(timeinterval)
+                var curmins = Math.floor(wideo.currentTime / 60);
+                var cursecs = Math.floor(wideo.currentTime - curmins * 60);
+                var durmins = Math.floor(wideo.duration / 60);
+                var dursecs = Math.floor(wideo.duration - durmins * 60);
+                if(cursecs < 10){ cursecs = "0"+cursecs; }
+                if(dursecs < 10){ dursecs = "0"+dursecs; }
+                if(curmins < 10){ curmins = "0"+curmins; }
+                if(durmins < 10){ durmins = "0"+durmins; }
+                curtimetext.innerHTML = curmins+":"+cursecs;
+                durtimetext.innerHTML = durmins+":"+dursecs;
+            }
+        }, 1);
+    }
   }, 1);
