@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { HttpService } from '../http.service';
 
@@ -7,15 +7,17 @@ import { HttpService } from '../http.service';
   templateUrl: './movieid.component.html',
   styleUrls: ['./movieid.component.scss']
 })
-export class MovieidComponent implements OnInit {
+export class MovieidComponent implements OnInit{
 
   protected id:any;
   protected url='http://127.0.0.1:8000/movie/';
   public data:any
+  public mode='poster'
+  ngAfterViewInit:any
 
   constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService) { }
 
-  ngOnInit(): void 
+  public ngOnInit(): void 
   {
     this.set_id()
     this.get_url(this.id)
