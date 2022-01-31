@@ -79,3 +79,9 @@ $starsBGColor:black;
     }
 
 }
+
+video#bgvid {
+    height: 100vh;
+    width: 100vw;
+    object-fit:cover;
+} 

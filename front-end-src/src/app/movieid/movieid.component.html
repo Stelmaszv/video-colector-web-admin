@@ -1,34 +1,37 @@
-<div class="video-section">
-    <div class="movie" style="background-color: black;">
-        <h1 class="d-flex justify-content-center name">{{data.show_name}}</h1>
-        <ng-template [ngIf]="mode=='poster'">
-            <div class="if_poster">
-                <video style="min-height:100%" src="{{data.src}}"
-                    class="wideo_src" id="bgvid" poster="{{data.poster}}">
-                    <source type="video/mp4">
-                </video>
-                <div class="controls d-flex align-items-stretch">
-                    <button id="play"><i id="playbtm" class="fas fa-play"></i></button>
-                    <button id="mute"><i id="mutebtm" class="fas fa-volume-up"></i></button>
-                    <input type="range" id="range" value="0" min="0" max="100" value="0" step="1"/>
-                    <span id="time"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
-                    <button id="fullScreen"><i id="fullScreenbtm" class="fas fa-expand"></i></button>
+<main class="content">
+    <div class="video-section">
+        <div class="movie" style="background-color: black;">
+            <h1 class="d-flex justify-content-center name">{{data.show_name}}</h1>
+            <ng-template [ngIf]="mode=='poster'">
+                <div class="if_poster">
+                    <video style="min-height:100%" src="{{data.src}}"
+                        class="wideo_src" id="bgvid" poster="{{data.poster}}">
+                        <source type="video/mp4">
+                    </video>
+                    <div class="controls d-flex align-items-stretch">
+                        <button id="play"><i id="playbtm" class="fas fa-play"></i></button>
+                        <button id="mute"><i id="mutebtm" class="fas fa-volume-up"></i></button>
+                        <input type="range" id="range" value="0" min="0" max="100" value="0" step="1"/>
+                        <span id="time"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
+                        <button id="fullScreen"><i id="fullScreenbtm" class="fas fa-expand"></i></button>
+                    </div>
                 </div>
-            </div>
-        </ng-template>
-        <ng-template [ngIf]="mode=='cover'">
-            <div class="wideo-section d-flex justify-content-center cover_show">
-                <img class="cover_js" src="{{data.avatar}}">
-            </div>
-        </ng-template>
+            </ng-template>
+            <ng-template [ngIf]="mode=='cover'">
+                <div class="wideo-section d-flex justify-content-center cover_show">
+                    <img class="cover_js" src="{{data.avatar}}">
+                </div>
+            </ng-template>
+        </div>
     </div>
-</div>
-<style>
-
-    video#bgvid {
-        height: 100vh;
-        width: 100vw;
-        object-fit:cover;
-    }                
-
-</style>
+    <div class="ditels-section">
+        <div class="stars">
+            <h1 class="d-flex justify-content-center star-name">Stars</h1>
+            <div class="d-flex justify-content-center stars_js">
+                <a *ngFor="let star of data.stars" href="#" class="card-link star_item">
+                    <img src="{{star.avatar}}" class="img-thubnail star_src">
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
