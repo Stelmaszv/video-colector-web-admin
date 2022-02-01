@@ -125,6 +125,11 @@ class StarsSerializer(BaseSeralizer):
         fields = '__all__'
 
 #Movies
+class ProducentSeralizerForMovie(serializers.ModelSerializer):
+    class Meta:
+        model = Producents
+        fields = '__all__'
+
 class StarsForMovies(serializers.ModelSerializer):
     class Meta:
         model = Star
@@ -137,6 +142,7 @@ class MoviesSerializer(BaseSeralizer):
     stars = StarsForMovies(many=True)
     tags  = TagsSerializer(many=True)
     serie = SeriesSerlizerForMovies(many=False)
+    producent =  ProducentSeralizerForMovie(many=False)
 
     class Meta:
         model = Movie
