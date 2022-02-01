@@ -1,32 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { HttpService } from '../http.service';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
 
 @Component({
   selector: 'app-base-list',
-  animations: [
-    trigger('openClose', [
-      state('open', style({
-        top: '90px'
-      })),
-      state('closed', style({
-        backgroundColor: 'black',
-        top: '110px'
-      })),
-      transition('open => closed', [
-        animate('1s')
-      ]),
-      transition('closed => open', [
-        animate('1s')
-      ]),
-    ]),
-  ],
   templateUrl: './base-list.component.html',
   styleUrls: ['./base-list.component.scss']
 })
@@ -132,12 +108,12 @@ export class BaseListComponent implements OnInit {
     }
   }
 
-  private bad_procent(movie:any){
+  protected bad_procent(movie:any){
     let all_liks=movie.likes_count+movie.disLikes_count
     return String(movie.disLikes_count*100/all_liks)+'%'
   }
 
-  private good_procent(movie:any){
+  protected good_procent(movie:any){
     let all_liks=movie.likes_count+movie.disLikes_count
     return String(movie.likes_count*100/all_liks)+'%'
   }

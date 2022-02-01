@@ -146,6 +146,7 @@ class AbstractGenericsAPIView(generics.ListAPIView):
     Model =None
     pagination_class = LargeResultsSetPagination
 
+    """
     def get_object(self, pk):
         try:
             return self.Model.objects.get(pk=pk)
@@ -153,6 +154,7 @@ class AbstractGenericsAPIView(generics.ListAPIView):
             raise Http404
 
     def list(self, request):
+
         queryset=self.filter_queryset(self.queryset)
         serializer = self.serializer_class(queryset, many=True,context={'request': request.user})
         page = self.paginate_queryset(serializer.data)
@@ -161,7 +163,8 @@ class AbstractGenericsAPIView(generics.ListAPIView):
     def filter_queryset(self, queryset):
 
         for backend in list(self.filter_backends):
-            queryset = backend().filter_queryset(self.request, self.queryset, view=self).order_by(self.order_by)
+            queryset = backend().filter_queryset(self.request, self.get_queryset(), view=self).order_by(self.order_by)
 
         return queryset
+    """
 

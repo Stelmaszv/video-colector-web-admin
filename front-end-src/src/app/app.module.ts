@@ -20,6 +20,7 @@ import { BigIntPipe } from './big-int.pipe';
 import { ProducentIdComponent } from './producent-id/producent-id.component';
 import { SerieIdComponent } from './serie-id/serie-id.component';
 import { StarComponent } from './star/star.component';
+import { SerieMoviesComponent } from './serie-movies/serie-movies.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { StarComponent } from './star/star.component';
     BigIntPipe,
     ProducentIdComponent,
     SerieIdComponent,
-    StarComponent
+    StarComponent,
+    SerieMoviesComponent
   ],
   imports: [
     AppRoutingModule,

@@ -70,6 +70,7 @@ export class MovieidComponent implements OnInit{
     this.httpService.get_url(this.url+''+id+'').subscribe(
       (response) => {
           this.data=response
+          console.log(this.data)
           this.set_procent(response)
       }
     );

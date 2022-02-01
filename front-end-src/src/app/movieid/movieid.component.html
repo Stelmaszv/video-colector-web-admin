@@ -1,4 +1,5 @@
 <main class="content">
+
     <div class="video-section">
         <div class="movie" style="background-color: black;">
             <h1 class="d-flex justify-content-center name">{{data.show_name}}</h1>
@@ -24,6 +25,7 @@
             </ng-template>
         </div>
     </div>
+
     <div class="ditels-section">
         <div class="stars">
             <h1 class="d-flex justify-content-center star-name">Stars</h1>
@@ -37,6 +39,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
+                    
                     <img class="avatar_js movie_avatar" [ngClass]="{'rating_color_good' : if_good_rating(data),'movie_rating_mid' : if_mid_rating(data),'movie_rating_low' : if_low_rating(data)}" src="{{data.avatar}}">
                     <div class="procent_likes">
                         <div class="like-procent">
@@ -49,57 +52,70 @@
                         <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-star"></i></button>
                         <button (click)="add_dislike()" class="action-item" [ngClass]="{'click' : if_disliked}" [disabled]="if_disliked"><i class="fas fa-thumbs-down" ></i></button>
                     </div>
+                    
                 </div>
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
                     <p class="description_js movie_description">{{data.description}}</p>
+                    
                     <div class="table_information">
-                        <div class="row">
-                            <div class="col">
-                                Producent
+                        <ng-template [ngIf]="data.producent">
+                            <div class="row">
+                                <div class="col">
+                                    Producent
+                                </div>
+                                <div class="col table_row producent_item">
+                                    <a [routerLink]="['/producent/',data.producent.id]">
+                                        {{data.producent.show_name}}
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col table_row producent_item">
-                                <a [routerLink]="['/producent/',data.producent.id]">
-                                    {{data.producent.show_name}}
-                                </a>
+                        </ng-template>
+
+                        <ng-template [ngIf]="data.serie">
+                            <div class="row ">
+                                <div class="col">
+                                    Serie
+                                </div>
+                                <div class="col table_row series_item">
+                                    <a [routerLink]="['/serie/',data.serie.id]">
+                                        {{data.serie.show_name}}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col">
-                                Serie
+                        </ng-template>
+                        
+                        <ng-template [ngIf]="data.stars.length>0">
+                            <div class="row">
+                                <div class="col">
+                                    Stars
+                                </div>
+                                <div class="col stars_strig_js table_row">
+                                    <span *ngFor="let star of data.stars; let i=index">
+                                        <span class='star-string'><a [routerLink]="['/star/',star.id]" >{{star.name}}</a></span>
+                                        <ng-template [ngIf]="i<data.stars.length-1">
+                                            ,
+                                        </ng-template>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="col table_row series_item">
-                                <a [routerLink]="['/serie/',data.serie.id]">
-                                    {{data.serie.show_name}}
-                                </a>
+                        </ng-template>
+
+                        <ng-template [ngIf]="data.tags.length>0">
+                            <div class="row">
+                                <div class="col table_row">
+                                    Tags
+                                </div>
+                                <div class="col stars_strig_js">
+                                    <span *ngFor="let tag of data.tags; let i=index">
+                                        <span class='tag'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
+                                        <ng-template [ngIf]="i<data.tags.length-1">
+                                            ,
+                                        </ng-template>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                Stars
-                            </div>
-                            <div class="col stars_strig_js table_row">
-                                <span *ngFor="let star of data.stars; let i=index">
-                                    <span class='star-string'><a [routerLink]="['/star/',star.id]" >{{star.name}}</a></span>
-                                    <ng-template [ngIf]="i<data.stars.length-1">
-                                        ,
-                                    </ng-template>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col table_row">
-                                Tags
-                            </div>
-                            <div class="col stars_strig_js">
-                                <span *ngFor="let tag of data.tags; let i=index">
-                                    <span class='tag'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
-                                    <ng-template [ngIf]="i<data.tags.length-1">
-                                        ,
-                                    </ng-template>
-                                </span>
-                            </div>
-                        </div>
+                        </ng-template>
 
                         <div class="row">
                             <div class="col table_row">
@@ -109,7 +125,7 @@
                                 <i class="fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}
                             </div>
                         </div>
-
+                       
                         <div class="row">
                             <div class="col table_row">
                                 Ratings
@@ -118,7 +134,7 @@
                                 <i class="fas fa-star"></i> {{data.ratings_count | bigInt}} ({{data.avg_rating}})
                             </div>
                         </div>
-
+                        
                         <div class="row">
                             <div class="col table_row">
                                 Views
@@ -127,7 +143,7 @@
                                 <i class="fas fa-eye"></i> {{data.views_count | bigInt}}
                             </div>
                         </div>
-
+                        
                         <div class="row">
                             <div class="col table_row">
                                 Dis Likes
@@ -137,15 +153,17 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col table_row">
-                                Date relesed
+                        <ng-template [ngIf]="data.date_relesed>0">
+                            <div class="row">
+                                <div class="col table_row">
+                                    Date relesed
+                                </div>
+                                <div class="col table_row">
+                                    {{data.date_relesed}}
+                                </div>
                             </div>
-                            <div class="col table_row">
-                                {{data.date_relesed}}
-                            </div>
-                        </div>
-
+                        </ng-template>
+                    
                         <div class="row">
                             <div class="col table_row">
                                 Added
@@ -154,11 +172,14 @@
                                 {{data.added}}
                             </div>
                         </div>
-
+                        
                     </div>
+                    
                 </div>
             </div>
         </div>
+
+        
         <div class="tabs_nav sticky-top tabs_sticky">
             <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center" id="pills-tab" role="tablist">
                 <li class="nav-item galery_tab_js nav_tab" name="galery" role="presentation">
@@ -182,229 +203,28 @@
             </ul>
         </div>
         <div class="tab-content" id="pills-tabContent">
+
             <div class="tab-pane fade galery_tab_js tab_content" id="galery-tab" type="Galery" role="tabpanel" aria-labelledby="pills-galery-tab">
                 <div class="container">
                     <div class="row galery galery-run">
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
-                        test<br>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade movies_series_tab tab_content" id="pills-home" role="tabpanel"
+
+            <div class="tab-pane fade movies_series_tab tab_content serie-movies" id="pills-home" role="tabpanel"
                          type="movies_in_series"
                          aria-labelledby="pills-home-tab">
-                <div class="container">
-                    <div class="row galery galery-run">
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                        serie<br>
-                    </div>
-                </div>
+                        
             </div>
 
             <div class="tab-pane fade movies_with_stars_tab tab_content" id="pills-profile" role="tabpanel"
                          type="all_movies_with_star"
                          aria-labelledby="pills-profile-tab">
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
-            star<br>
+    
             </div>
+
         </div>
+        
     </div>
+    
 </main>

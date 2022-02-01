@@ -74,7 +74,7 @@ class SelectOptionView(generics.ListAPIView):
     serializer_class = SerieSlectSerializer
     queryset = Serie.objects.all()
 
-class SerieMoviesView(generics.ListAPIView):
+class SerieMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
     queryset = Serie.objects.all()
     filter_backends = [filters.DjangoFilterBackend]
