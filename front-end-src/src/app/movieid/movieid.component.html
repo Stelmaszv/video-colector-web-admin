@@ -38,6 +38,11 @@
             <div class="row">
                 <div class="col">
                     <img class="avatar_js movie_avatar" [ngClass]="{'rating_color_good' : if_good_rating(data),'movie_rating_mid' : if_mid_rating(data),'movie_rating_low' : if_low_rating(data)}" src="{{data.avatar}}">
+                    <div class="actions">
+                        <button (click)="add_like()" class="action-item" [ngClass]="{'click' : if_liked}" [disabled]="if_liked"><i class="fas fa-thumbs-up"></i></button>
+                        <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-star"></i></button>
+                        <button (click)="add_dislike()" class="action-item" [ngClass]="{'click' : if_disliked}" [disabled]="if_disliked"><i class="fas fa-thumbs-down" ></i></button>
+                    </div>
                 </div>
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
@@ -104,7 +109,7 @@
                                 Ratings
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-star"></i> {{data.ratings_count | bigInt}}
+                                <i class="fas fa-star"></i> {{data.ratings_count | bigInt}} ({{data.avg_rating}})
                             </div>
                         </div>
 
@@ -145,49 +150,6 @@
                         </div>
 
                     </div>
-
-                    <!--
-                    <table class="table table-borderless table_information">
-                        <tr>
-                            <td class="table_row">Producent</td>
-                            <td class="table_row producent_item">
-                                <a [routerLink]="['/producent/',data.producent.id]">
-                                    {{data.producent.show_name}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="table_row">Serie</td>
-                            <td class="table_row series_item">
-                                <a [routerLink]="['/serie/',data.serie.id]">
-                                    {{data.serie.show_name}}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="table_row">Stars</td><td class="stars_strig_js">
-                                <span *ngFor="let star of data.stars" class='star-string'><a [routerLink]="['/star/',star.id]" >{{star.name}}</a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="table_row">Stars</td><td class="stars_strig_js">
-                                <span *ngFor="let tag of data.tags" class='star-string'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="table_row">Country</td><td>{{data.country}}</td>
-                        </tr>
-                        <tr>
-                            <td class="table_row"> Likes</td><td> {{data.likes_count}}</td>
-                        </tr>
-                        <tr>
-                            <td class="table_row">Date relesed</td><td>{{data.date_relesed}}</td>
-                        </tr>
-                        <tr>
-                            <td class="table_row">Added</td><td>{{data.added}}</td>
-                        </tr>
-                    </table>
-                    -->
                 </div>
             </div>
         </div>
