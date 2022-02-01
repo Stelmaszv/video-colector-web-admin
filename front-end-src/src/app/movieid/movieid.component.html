@@ -37,7 +37,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <img class="avatar_js movie_avatar" src="{{data.avatar}}">
+                    <img class="avatar_js movie_avatar" [ngClass]="{'rating_color_good' : if_good_rating(data),'movie_rating_mid' : if_mid_rating(data),'movie_rating_low' : if_low_rating(data)}" src="{{data.avatar}}">
                 </div>
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>

@@ -1,4 +1,3 @@
-
 $active-section-link-color:rgba(233, 206, 55, 0.897);
 $active-section-link-colorHover:gold;
 $active-section-background-color:black;
@@ -6,6 +5,9 @@ $active-section-paddding:10px;
 $active-section-seperator_link-color:white;
 $active-section-seperator_link-padding:5;
 $starsBGColor:black;
+$rating_color_low:1px solid red;
+$rating_color_mid:1px solid rgb(216, 201, 1);
+$rating_color_good:1px solid rgb(0, 182, 61);
 .active-section{
     background-color: $active-section-background-color;
     padding: 10px;
@@ -68,6 +70,18 @@ $starsBGColor:black;
     .movie_avatar{
         width: 500px;
         height: 700px;
+
+        &.movie_rating_low{
+            border: $rating_color_low;
+        }
+    
+        &.movie_rating_mid{
+            border: $rating_color_mid;
+        }
+    
+        &.rating_color_good{
+            border: $rating_color_good;
+        }
     }
     .movie_description{
         text-align: justify;

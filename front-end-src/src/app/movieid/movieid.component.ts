@@ -39,4 +39,40 @@ export class MovieidComponent implements OnInit{
     );
   }
 
+  public if_good_rating(movie:any){
+    let rate = parseInt(movie.avg_rating)
+    if (0 < parseInt(movie.avg_rating)){
+      if (rate > 3){
+        return true
+      }
+      return false
+    }else{
+      return false
+    }
+  }
+
+  public if_mid_rating(movie:any){
+    let rate = parseInt(movie.avg_rating)
+    if (0 < parseInt(movie.avg_rating)){
+      if (rate == 3){
+        return true
+      }
+      return false
+    }else{
+      return false
+    }
+  }
+
+  public if_low_rating(movie:any){
+    let rate = parseInt(movie.avg_rating)
+    if (0 < parseInt(movie.avg_rating)){
+      if (rate > 3){
+        return true
+      }
+      return false
+    }else{
+      return false
+    }
+  }
+
 }
