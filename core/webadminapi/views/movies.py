@@ -20,6 +20,12 @@ class MoviesWithStarsView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
     Model = Movie
 
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
     def get_queryset(self):
         movies=[]
         Model = self.get_object(self.kwargs.get("pk"))
