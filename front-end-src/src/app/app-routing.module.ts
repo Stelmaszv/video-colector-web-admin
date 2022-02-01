@@ -7,6 +7,9 @@ import { StarsComponent } from './stars/stars.component'
 import { SeriesComponent } from './series/series.component'
 import { ProducentComponent } from './producent/producent.component'
 import {MovieidComponent}     from './movieid/movieid.component'
+import {ProducentIdComponent} from './producent-id/producent-id.component'
+import {SerieIdComponent} from './serie-id/serie-id.component'
+import {StarComponent} from './star/star.component'
 const routes: Routes = [
   {
     path: '',
@@ -24,6 +27,19 @@ const routes: Routes = [
     path: 'movie/:id',
     component: MovieidComponent
   },
+  {
+    path: 'producent/:id',
+    component: ProducentIdComponent
+  },
+  {
+    path: 'serie/:id',
+    component: SerieIdComponent
+  },
+
+  {
+    path: 'star/:id',
+    component: StarComponent
+  },  
   {
     path: 'stars',
     component: StarsComponent

@@ -28,7 +28,7 @@
         <div class="stars">
             <h1 class="d-flex justify-content-center star-name">Stars</h1>
             <div class="d-flex justify-content-center stars_js">
-                <a *ngFor="let star of data.stars" href="#" class="card-link star_item">
+                <a *ngFor="let star of data.stars" [routerLink]="['/star/',star.id]" class="card-link star_item">
                     <img src="{{star.avatar}}" class="img-thubnail star_src">
                 </a>
             </div>
@@ -46,15 +46,15 @@
                         <tr>
                             <td class="table_row">Producent</td>
                             <td class="table_row producent_item">
-                                <a href="'+this.data.producent.dir+'/producent_id.html">
-                                    Producent
+                                <a [routerLink]="['/producent/',data.producent.id]">
+                                    {{data.producent.show_name}}
                                 </a>
                             </td>
                         </tr>
                         <tr>
                             <td class="table_row">Serie</td>
                             <td class="table_row series_item">
-                                <a href="'+this.data.producent.dir+'/producent_id.html">
+                                <a [routerLink]="['/serie/',data.serie.id]">
                                     {{data.serie.show_name}}
                                 </a>
                             </td>

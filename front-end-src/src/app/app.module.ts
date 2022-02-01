@@ -17,6 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieidComponent } from './movieid/movieid.component';
 import { BigIntPipe } from './big-int.pipe';
+import { ProducentIdComponent } from './producent-id/producent-id.component';
+import { SerieIdComponent } from './serie-id/serie-id.component';
+import { StarComponent } from './star/star.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,10 @@ import { BigIntPipe } from './big-int.pipe';
     MoviesFilterComponent,
     BaseFilterComponent,
     MovieidComponent,
-    BigIntPipe
+    BigIntPipe,
+    ProducentIdComponent,
+    SerieIdComponent,
+    StarComponent
   ],
   imports: [
     AppRoutingModule,
