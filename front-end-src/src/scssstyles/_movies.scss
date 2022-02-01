@@ -92,4 +92,17 @@ $rating_color_good:1px solid rgb(0, 182, 61);
     .card-title{
         margin-bottom: 25px;
     }
+
+    .like-procent{
+        height: 5px;
+        background-color: black;
+        display: flex;
+        .good{
+            background-color: green;
+        }
+
+        .bad{
+            background-color: red;
+        }
+    }
 }

@@ -23,7 +23,6 @@ export class MoviesComponent extends BaseListComponent{
   });
 
   public if_good_rating(movie:any){
-    console.log(parseInt(movie.avg_rating))
     let rate = parseInt(movie.avg_rating)
     if (0 < parseInt(movie.avg_rating)){
       if (rate > 3){
@@ -48,10 +47,9 @@ export class MoviesComponent extends BaseListComponent{
   }
 
   public if_low_rating(movie:any){
-    console.log(parseInt(movie.avg_rating))
     let rate = parseInt(movie.avg_rating)
     if (0 < parseInt(movie.avg_rating)){
-      if (rate < 3){
+      if (rate > 3){
         return true
       }
       return false
@@ -133,10 +131,12 @@ export class MoviesComponent extends BaseListComponent{
     }
   }
 
+
+
   protected override on_set_results(movie:any):any
   {
     movie['js_stars']=this.set_stars(movie)
     movie['more']=this.set_more(movie)
-    movie['js_stars_poster']=this.set_star_for_poster(movie)    
+    movie['js_stars_poster']=this.set_star_for_poster(movie)
   }
 }

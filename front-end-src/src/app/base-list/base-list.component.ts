@@ -123,11 +123,23 @@ export class BaseListComponent implements OnInit {
 
   private set_results():void{
     for (let movie of this.response.results){
+      movie['good_procent'] = this.good_procent(movie)
+      movie['bad_procent']  = this.bad_procent(movie)
       this.on_set_results(movie)
       if (this.add_if_not_exist(movie)){
         this.data.push(movie)
       }
     }
+  }
+
+  private bad_procent(movie:any){
+    let all_liks=movie.likes_count+movie.disLikes_count
+    return String(movie.disLikes_count*100/all_liks)+'%'
+  }
+
+  private good_procent(movie:any){
+    let all_liks=movie.likes_count+movie.disLikes_count
+    return String(movie.likes_count*100/all_liks)+'%'
   }
 
   private set_next():number
