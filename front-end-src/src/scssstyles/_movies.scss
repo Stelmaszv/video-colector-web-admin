@@ -70,18 +70,6 @@ $rating_color_good:1px solid rgb(0, 182, 61);
         height: 20rem;
     }
 
-    .movie_rating_low{
-        border: $rating_color_low;
-    }
-
-    .movie_rating_mid{
-        border: $rating_color_mid;
-    }
-
-    .rating_color_good{
-        border: $rating_color_good;
-    }
-
     .card-text{
         .card-title{
             text-align: center;
@@ -92,17 +80,29 @@ $rating_color_good:1px solid rgb(0, 182, 61);
     .card-title{
         margin-bottom: 25px;
     }
+}
 
-    .like-procent{
-        height: 5px;
-        background-color: black;
-        display: flex;
-        .good{
-            background-color: green;
-        }
-
-        .bad{
-            background-color: red;
-        }
+.like-procent{
+    height: 5px;
+    background-color: black;
+    display: flex;
+    .good{
+        background-color: green;
     }
+
+    .bad{
+        background-color: red;
+    }
+}
+
+.movie_rating_low{
+    border: $rating_color_low;
+}
+
+.movie_rating_mid{
+    border: $rating_color_mid;
+}
+
+.rating_color_good{
+    border: $rating_color_good;
 }

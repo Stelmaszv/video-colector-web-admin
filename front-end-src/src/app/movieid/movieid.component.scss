@@ -83,18 +83,6 @@ $rating_color_good:1px solid rgb(0, 182, 61);
     .movie_avatar{
         width: 500px;
         height: 700px;
-
-        &.movie_rating_low{
-            border: $rating_color_low;
-        }
-    
-        &.movie_rating_mid{
-            border: $rating_color_mid;
-        }
-    
-        &.rating_color_good{
-            border: $rating_color_good;
-        }
     }
     .movie_description{
         text-align: justify;
@@ -102,6 +90,10 @@ $rating_color_good:1px solid rgb(0, 182, 61);
     }
     .tag{
         font-weight: bold;
+    }
+
+    .procent_likes{
+        width: 500px;
     }
 
 }

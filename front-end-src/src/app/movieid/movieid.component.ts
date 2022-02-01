@@ -16,6 +16,8 @@ export class MovieidComponent implements OnInit{
   public if_favorite=false
   public if_liked=false
   public if_disliked=false
+  public good_procent:any
+  public bad_procent:any
 
   constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService) { }
 
@@ -40,6 +42,22 @@ export class MovieidComponent implements OnInit{
     this.if_favorite=!this.if_favorite
   }
 
+  private bad_procent_def(movie:any){
+    let all_liks=movie.likes_count+movie.disLikes_count
+    return String(movie.disLikes_count*100/all_liks)+'%'
+  }
+
+  private good_procent_def(movie:any){
+    let all_liks=movie.likes_count+movie.disLikes_count
+    return String(movie.likes_count*100/all_liks)+'%'
+  }
+
+  private set_procent(data:any):void
+  {
+    this.good_procent = this.good_procent_def(data)
+    this.bad_procent  = this.bad_procent_def(data)
+  }
+
   private set_id(): void  
   {
     this.activatedRoute.params.subscribe(params => {
@@ -52,6 +70,7 @@ export class MovieidComponent implements OnInit{
     this.httpService.get_url(this.url+''+id+'').subscribe(
       (response) => {
           this.data=response
+          this.set_procent(response)
       }
     );
   }

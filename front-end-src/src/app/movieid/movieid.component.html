@@ -38,6 +38,12 @@
             <div class="row">
                 <div class="col">
                     <img class="avatar_js movie_avatar" [ngClass]="{'rating_color_good' : if_good_rating(data),'movie_rating_mid' : if_mid_rating(data),'movie_rating_low' : if_low_rating(data)}" src="{{data.avatar}}">
+                    <div class="procent_likes">
+                        <div class="like-procent">
+                            <div class="good" [ngStyle]="{'width': good_procent}"></div>
+                            <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
+                        </div>
+                    </div>
                     <div class="actions">
                         <button (click)="add_like()" class="action-item" [ngClass]="{'click' : if_liked}" [disabled]="if_liked"><i class="fas fa-thumbs-up"></i></button>
                         <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-star"></i></button>
