@@ -19,6 +19,7 @@ def set_model(Model):
     Model.likes_count = Model.likes.count()
     Model.disLikes_count = Model.disLikes.count()
     Model.ratings_count = Model.ratings.count()
+    Model.views_count = Model.views.count()
     return Model
 
 def UpdateJSON(Model):
@@ -126,6 +127,7 @@ class Producents(models.Model):
     likes_count = models.IntegerField(default=0)
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
+    views_count = models.IntegerField(default=0)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='ProducentsViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
@@ -167,6 +169,7 @@ class Serie(models.Model):
     likes_count = models.IntegerField(default=0)
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
+    views_count = models.IntegerField(default=0)
     Producent = models.ForeignKey(Producents, on_delete=models.CASCADE,blank=True,null=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='serietags', blank=True)
     movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='SerieMovie', blank=True)
@@ -221,6 +224,7 @@ class Star(models.Model):
     likes_count = models.IntegerField(default=0)
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
+    views_count = models.IntegerField(default=0)
     movies              = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='StarViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Starlikes', blank=True)
@@ -262,6 +266,7 @@ class Movie(models.Model):
     likes_count = models.IntegerField(default=0)
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
+    views_count = models.IntegerField(default=0)
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE, blank=True, null=True)
     producent = models.ForeignKey(Producents, on_delete=models.CASCADE, blank=True, null=True)
     stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='MovieStars', blank=True)
