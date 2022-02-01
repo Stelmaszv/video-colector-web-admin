@@ -21,6 +21,7 @@ import { ProducentIdComponent } from './producent-id/producent-id.component';
 import { SerieIdComponent } from './serie-id/serie-id.component';
 import { StarComponent } from './star/star.component';
 import { SerieMoviesComponent } from './serie-movies/serie-movies.component';
+import { MoviesWithStarsComponent } from './movies-with-stars/movies-with-stars.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { SerieMoviesComponent } from './serie-movies/serie-movies.component';
     ProducentIdComponent,
     SerieIdComponent,
     StarComponent,
-    SerieMoviesComponent
+    SerieMoviesComponent,
+    MoviesWithStarsComponent
   ],
   imports: [
     AppRoutingModule,
