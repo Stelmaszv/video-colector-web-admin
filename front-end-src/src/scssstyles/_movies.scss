@@ -15,6 +15,17 @@
     width:13rem; 
     margin:1rem;
     z-index: 0;
+    .stats{
+        display: inline;
+        padding: 1rem;
+        text-align: center;
+        .stats_font{
+            
+        }
+        .stats_rate{
+            font-style: italic;
+        }
+    }
     .card-body{
         a{
             color: black;
