@@ -74,20 +74,20 @@ $starsBGColor:black;
         
     }
     .tag{
-        margin-left: 5px;
         font-weight: bold;
     }
 
 }
 
 video#bgvid {
-    height: 100vh;
-    width: 100vw;
+    height: 87vh;
+    width: 99vw;
     object-fit:cover;
 } 
 
 
 .ditels-section{
+    font-size: 1rem;
     .star_avatar{
         width: 20rem; 
         height: 25rem;
@@ -96,7 +96,18 @@ video#bgvid {
         text-align: justify;
     }
     .table_row{
-        padding: 10px;
+        margin-bottom: 5px;
+        
+    }
+    .tag{
+        a{
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+        }
+        a:hover{
+            color: blue;
+        }
     }
 
     .star-string,.producent_item,.series_item{

@@ -42,6 +42,111 @@
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
                     <p class="description_js movie_description">{{data.description}}</p>
+                    <div class="table_information">
+                        <div class="row">
+                            <div class="col">
+                                Producent
+                            </div>
+                            <div class="col table_row producent_item">
+                                <a [routerLink]="['/producent/',data.producent.id]">
+                                    {{data.producent.show_name}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                Serie
+                            </div>
+                            <div class="col table_row series_item">
+                                <a [routerLink]="['/serie/',data.serie.id]">
+                                    {{data.serie.show_name}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                Stars
+                            </div>
+                            <div class="col stars_strig_js table_row">
+                                <span *ngFor="let star of data.stars; let i=index">
+                                    <span class='star-string'><a [routerLink]="['/star/',star.id]" >{{star.name}}</a></span>
+                                    <ng-template [ngIf]="i<data.stars.length-1">
+                                        ,
+                                    </ng-template>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col table_row">
+                                Tags
+                            </div>
+                            <div class="col stars_strig_js">
+                                <span *ngFor="let tag of data.tags; let i=index">
+                                    <span class='tag'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
+                                    <ng-template [ngIf]="i<data.tags.length-1">
+                                        ,
+                                    </ng-template>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Likes 
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Ratings
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-star"></i> {{data.ratings_count | bigInt}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Views
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-eye"></i> {{data.views_count | bigInt}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Dis Likes
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-thumbs-down"></i> {{data.disLikes_count | bigInt}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Date relesed
+                            </div>
+                            <div class="col table_row">
+                                {{data.date_relesed}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Added
+                            </div>
+                            <div class="col table_row">
+                                {{data.added}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--
                     <table class="table table-borderless table_information">
                         <tr>
                             <td class="table_row">Producent</td>
@@ -60,15 +165,29 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="table_row">Stars</td><td class="stars_strig_js"></td>
+                            <td class="table_row">Stars</td><td class="stars_strig_js">
+                                <span *ngFor="let star of data.stars" class='star-string'><a [routerLink]="['/star/',star.id]" >{{star.name}}</a></span>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="table_row">Tags</td><td class="tags_js"></td>
+                            <td class="table_row">Stars</td><td class="stars_strig_js">
+                                <span *ngFor="let tag of data.tags" class='star-string'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="table_row">Country</td><td>{{data.country}}</td>
                         </tr>
+                        <tr>
+                            <td class="table_row"> Likes</td><td> {{data.likes_count}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table_row">Date relesed</td><td>{{data.date_relesed}}</td>
+                        </tr>
+                        <tr>
+                            <td class="table_row">Added</td><td>{{data.added}}</td>
+                        </tr>
                     </table>
+                    -->
                 </div>
             </div>
         </div>
