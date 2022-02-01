@@ -1,3 +1,6 @@
+$rating_color_low:1px solid red;
+$rating_color_mid:1px solid rgb(216, 201, 1);
+$rating_color_good:1px solid rgb(0, 182, 61);
 .cart_poster_item{
     margin: 15px;
     .star_list{
@@ -7,8 +10,18 @@
                 text-decoration: none;
             }
         }
+    }
 
-
+    .stats{
+        display: inline;
+        padding: 1rem;
+        text-align: center;
+        .stats_font{
+            
+        }
+        .stats_rate{
+            font-style: italic;
+        }
     }
 }
 .cart-item{
@@ -56,6 +69,19 @@
         width: 13rem; 
         height: 20rem;
     }
+
+    .movie_rating_low{
+        border: $rating_color_low;
+    }
+
+    .movie_rating_mid{
+        border: $rating_color_mid;
+    }
+
+    .rating_color_good{
+        border: $rating_color_good;
+    }
+
     .card-text{
         .card-title{
             text-align: center;

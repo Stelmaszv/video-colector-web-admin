@@ -22,6 +22,44 @@ export class MoviesComponent extends BaseListComponent{
     country:new FormControl()
   });
 
+  public if_good_rating(movie:any){
+    console.log(parseInt(movie.avg_rating))
+    let rate = parseInt(movie.avg_rating)
+    if (0 < parseInt(movie.avg_rating)){
+      if (rate > 3){
+        return true
+      }
+      return false
+    }else{
+      return false
+    }
+  }
+
+  public if_mid_rating(movie:any){
+    let rate = parseInt(movie.avg_rating)
+    if (0 < parseInt(movie.avg_rating)){
+      if (rate == 3){
+        return true
+      }
+      return false
+    }else{
+      return false
+    }
+  }
+
+  public if_low_rating(movie:any){
+    console.log(parseInt(movie.avg_rating))
+    let rate = parseInt(movie.avg_rating)
+    if (0 < parseInt(movie.avg_rating)){
+      if (rate < 3){
+        return true
+      }
+      return false
+    }else{
+      return false
+    }
+  }
+
   public override onInit(){
       this.tags_form=[]
       this.stars_form=[]
