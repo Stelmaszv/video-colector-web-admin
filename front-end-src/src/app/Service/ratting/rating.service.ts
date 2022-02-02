@@ -7,7 +7,7 @@ export class RatingService {
 
   private rating(rate:any,ifs:boolean){
     if (0 < parseInt(rate)){
-      if (rate > 3){
+      if (ifs){
         return true
       }
       return false

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { HttpService } from '../../../Service/http/http.service';
+import {RatingService} from '../../../Service/ratting/rating.service'
 
 @Component({
   selector: 'app-base-id',
@@ -18,7 +19,7 @@ export class BaseIDComponent implements OnInit {
   public if_liked=false
   public if_disliked=false
 
-  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService) { }
+  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService) { }
 
   public ngOnInit(): void 
   {
@@ -39,42 +40,6 @@ export class BaseIDComponent implements OnInit {
   public add_to_if_favorite():void
   {
     this.if_favorite=!this.if_favorite
-  }
-
-  public if_good_rating(movie:any){
-    let rate = parseInt(movie.avg_rating)
-    if (0 < parseInt(movie.avg_rating)){
-      if (rate > 3){
-        return true
-      }
-      return false
-    }else{
-      return false
-    }
-  }
-
-  public if_mid_rating(movie:any){
-    let rate = parseInt(movie.avg_rating)
-    if (0 < parseInt(movie.avg_rating)){
-      if (rate == 3){
-        return true
-      }
-      return false
-    }else{
-      return false
-    }
-  }
-
-  public if_low_rating(movie:any){
-    let rate = parseInt(movie.avg_rating)
-    if (0 < parseInt(movie.avg_rating)){
-      if (rate > 3){
-        return true
-      }
-      return false
-    }else{
-      return false
-    }
   }
   
   private set_id(): void  

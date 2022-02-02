@@ -40,7 +40,12 @@
             <div class="row">
                 <div class="col">
                     
-                    <img class="avatar_js movie_avatar" [ngClass]="{'rating_color_good' : if_good_rating(data),'movie_rating_mid' : if_mid_rating(data),'movie_rating_low' : if_low_rating(data)}" src="{{data.avatar}}">
+                    <img class="avatar_js movie_avatar" 
+                        [ngClass]="{'rating_color_good': RatingService.if_good_rating(data),
+                                    'movie_rating_mid' : RatingService.if_mid_rating(data),
+                                    'movie_rating_low' : RatingService.if_low_rating(data)
+                                   }" 
+                        src="{{data.avatar}}">
                     <div class="procent_likes">
                         <div class="like-procent">
                             <div class="good" [ngStyle]="{'width': good_procent}"></div>
