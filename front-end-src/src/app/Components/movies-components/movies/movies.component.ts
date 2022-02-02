@@ -24,18 +24,6 @@ export class MoviesComponent extends BaseListComponent{
     country:new FormControl()
   });
 
-  public if_good_rating(movie:any){
-    return this.RatingService.if_good_rating(movie)
-  }
-
-  public if_mid_rating(movie:any){
-    return this.RatingService.if_mid_rating(movie)
-  }
-
-  public if_low_rating(movie:any){
-    return this.RatingService.if_low_rating(movie)
-  }
-
   public override onInit(){
       this.tags_form=[]
       this.stars_form=[]
