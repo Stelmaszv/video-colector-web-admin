@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { StartComponentComponent } from './start-component/start-component.component'
-import { MoviesComponent } from './movies/movies.component'
-import { StarsComponent } from './stars/stars.component'
-import { SeriesComponent } from './series/series.component'
-import { ProducentComponent } from './producent/producent.component'
-import {MovieidComponent}     from './movieid/movieid.component'
-import {ProducentIdComponent} from './producent-id/producent-id.component'
-import {SerieIdComponent} from './serie-id/serie-id.component'
-import {StarComponent} from './star/star.component'
+import { StartComponentComponent } from './Components/start-component/start-component.component'
+import { MoviesComponent } from './Components/movies-components/movies/movies/movies.component'
+import { StarsComponent } from './Components/list/stars/stars.component'
+import { SeriesComponent } from './Components/list/series/series.component'
+import { ProducentComponent } from './Components/list/producent/producent.component'
+import {MovieidComponent}     from './Components/id/movieid/movieid.component'
+import {ProducentIdComponent} from './Components/id/producent-id/producent-id.component'
+import {SerieIdComponent} from './Components/id/serie-id/serie-id.component'
+import {StarComponent} from './Components/id/star/star.component'
 const routes: Routes = [
   {
     path: '',

@@ -3,25 +3,22 @@ import { BrowserModule,Title } from '@angular/platform-browser';
 import { AppRoutingModule} from './/app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
-import { NavabrComponent } from './navabr/navabr.component';
-import { MoviesComponent } from './movies/movies.component';
-import { StartComponentComponent } from './start-component/start-component.component';
-import { SeriesComponent } from './series/series.component';
-import { StarsComponent } from './stars/stars.component';
-import { ProducentComponent } from './producent/producent.component';
-import { StringLenghtPipe } from './string-lenght.pipe';
-import { BaseListComponent } from './base-list/base-list.component';
-import { MoviesFilterComponent } from './movies-filter/movies-filter.component';
-import { BaseFilterComponent } from './base-filter/base-filter.component';
+import { NavabrComponent } from './Components/navabr/navabr.component';
+import { MoviesComponent } from './Components/movies-components/movies/movies/movies.component';
+import { StartComponentComponent } from './Components/start-component/start-component.component';
+import { SeriesComponent } from './Components/list/series/series.component';
+import { StarsComponent } from './Components/list/stars/stars.component';
+import { ProducentComponent } from './Components/list/producent/producent.component';
+import { StringLenghtPipe } from './Pipe/string-lenght/string-lenght.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MovieidComponent } from './movieid/movieid.component';
-import { BigIntPipe } from './big-int.pipe';
-import { ProducentIdComponent } from './producent-id/producent-id.component';
-import { SerieIdComponent } from './serie-id/serie-id.component';
-import { StarComponent } from './star/star.component';
-import { SerieMoviesComponent } from './serie-movies/serie-movies.component';
-import { MoviesWithStarsComponent } from './movies-with-stars/movies-with-stars.component';
+import { MovieidComponent } from './Components/id/movieid/movieid.component';
+import { BigIntPipe } from './Pipe/big-int/big-int.pipe';
+import { ProducentIdComponent } from './Components/id/producent-id/producent-id.component';
+import { SerieIdComponent } from './Components/id/serie-id/serie-id.component';
+import { StarComponent } from './Components/id/star/star.component';
+import { SerieMoviesComponent } from './Components/movies-components/serie-movies/serie-movies.component';
+import { MoviesWithStarsComponent } from './Components/movies-components/movies-with-stars/movies-with-stars.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +29,6 @@ import { MoviesWithStarsComponent } from './movies-with-stars/movies-with-stars.
     StarsComponent,
     ProducentComponent,
     StringLenghtPipe,
-    BaseListComponent,
-    MoviesFilterComponent,
-    BaseFilterComponent,
     MovieidComponent,
     BigIntPipe,
     ProducentIdComponent,
