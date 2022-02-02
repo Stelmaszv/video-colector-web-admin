@@ -58,7 +58,12 @@ export class MoviesComponent extends BaseListComponent{
     }
   }
 
+  public onInitID(){
+    
+  }
+
   public override onInit(){
+      this.onInitID()
       this.tags_form=[]
       this.stars_form=[]
       this.load_select()

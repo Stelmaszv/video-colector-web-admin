@@ -184,11 +184,16 @@ export class BaseListComponent implements OnInit {
   protected on_set_results(movie:any):void
   {}
 
+  protected on_set_url():void{
+    
+  }
+
   protected load_data():void
   {
     if (this.loading){
       this.loading=false
       console.log(this.url+this.page+'&'+this.filter_url)
+      this.on_set_url()
       this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
         (response) => {
           if (response.hasOwnProperty('results')){

@@ -1,5 +1,5 @@
 import {MoviesComponent} from '../movies/movies.component'
-import { Component} from '@angular/core';
+import { Component,Input} from '@angular/core';
 
 @Component({
   selector: 'app-stars-movies',
@@ -7,7 +7,15 @@ import { Component} from '@angular/core';
   styleUrls: ['../movies/movies.component.scss']
 })
 export class MoviesWithStarsComponent extends MoviesComponent {
-  public override url:string='http://127.0.0.1:8000/movieswithstars/9/?page='
+  @Input() ID:any=0
+  start=true
+
+  public override on_set_url():void
+  {
+    if (this.start){
+      this.url='http://127.0.0.1:8000/movieswithstars/'+this.ID+'?page='
+    }
+  }
 }
 
 
