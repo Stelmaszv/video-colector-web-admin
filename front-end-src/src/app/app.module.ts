@@ -4,7 +4,7 @@ import { AppRoutingModule} from './/app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { NavabrComponent } from './Components/navabr/navabr.component';
-import { MoviesComponent } from './Components/movies-components/movies/movies/movies.component';
+import { MoviesComponent } from './Components/movies-components/movies/movies.component';
 import { StartComponentComponent } from './Components/start-component/start-component.component';
 import { SeriesComponent } from './Components/list/series/series.component';
 import { StarsComponent } from './Components/list/stars/stars.component';
@@ -21,6 +21,7 @@ import { SerieMoviesComponent } from './Components/movies-components/serie-movie
 import { MoviesWithStarsComponent } from './Components/movies-components/movies-with-stars/movies-with-stars.component';
 import { BasePhotosComponent } from './Components/photos/base-photos/base-photos.component';
 import { MoviePhotosComponent } from './Components/photos/movie-photos/movie-photos.component';
+
 @NgModule({
   declarations: [
     AppComponent,

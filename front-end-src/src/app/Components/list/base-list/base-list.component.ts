@@ -26,6 +26,7 @@ export class BaseListComponent implements OnInit {
   protected results : any;
   protected response : any;
   protected page:number=1 ;
+  protected data_type=''
   
 
   public constructor(protected httpService: HttpService,public RatingService:RatingService) { }
@@ -209,13 +210,23 @@ export class BaseListComponent implements OnInit {
 
   protected add_if_not_exist(data:any):boolean
   {
-    let stan=true
-    for (let item of this.data){
-        if (item.id==data.id){
-          stan = false
-        }
+    if (this.data_type != "photo"){
+      let stan=true
+      for (let item of this.data){
+          if (item.id==data.id){
+            stan = false
+          }
+      }
+      return stan
+    }else{
+      let stan=true
+      for (let item of this.data){
+          if (item.url==data.url){
+            stan = false
+          }
+      }
+      return stan
     }
-    return stan
   }
 
   protected scroller():void

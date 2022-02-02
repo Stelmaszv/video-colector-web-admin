@@ -107,3 +107,12 @@ $rating_color_good:1px solid rgb(0, 182, 61);
     border: $rating_color_good;
 }
   
+
+.galery{
+    text-align: center;
+    .galery-item{
+        padding: 1rem;
+        width: 20rem;
+        height: 20rem;
+    }
+}

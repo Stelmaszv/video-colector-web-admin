@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StartComponentComponent } from './Components/start-component/start-component.component'
-import { MoviesComponent } from './Components/movies-components/movies/movies/movies.component'
+import { MoviesComponent } from './Components/movies-components/movies/movies.component'
 import { StarsComponent } from './Components/list/stars/stars.component'
 import { SeriesComponent } from './Components/list/series/series.component'
 import { ProducentComponent } from './Components/list/producent/producent.component'

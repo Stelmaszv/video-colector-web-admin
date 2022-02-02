@@ -20,6 +20,7 @@ class MoviesWithStarsView(AbstractGenericsAPIViewExtended):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = MovieFilter
     queryset = Movie.objects.all()
+    Model = Movie
     order_by ='-date_relesed'
 
     def filter_queryset(self):

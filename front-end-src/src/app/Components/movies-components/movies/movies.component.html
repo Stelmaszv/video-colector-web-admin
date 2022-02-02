@@ -147,7 +147,7 @@
   <div class="row">
     <div class="col" *ngFor="let movie of data">
       <div class="card cart-item">
-        <img src="{{movie.avatar}}" class="card-img-top cover" [ngClass]="{'rating_color_good' : RatingService.if_good_rating(movie),'movie_rating_mid' : RatingService.if_mid_rating(movie),'movie_rating_low' : RatingService.if_low_rating(movie)}" alt="assets/icon/movie.jpg">
+        <img src="{{movie.avatar}}" class="card-img-top cover" [ngClass]="{'rating_color_good' : if_good_rating(movie),'movie_rating_mid' : if_mid_rating(movie),'movie_rating_low' : if_low_rating(movie)}" alt="assets/icon/movie.jpg">
         <div class="card-body">
           <h5 class="card-title"><a [routerLink]="['/movie/',movie.id]" >{{movie.show_name}}</a></h5>
           <p class="card-text">{{movie.description | stringLenght  }}</p>
