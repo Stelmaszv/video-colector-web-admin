@@ -1,0 +1,16 @@
+<app-navabr></app-navabr>
+
+<div class="container">
+    <div class="row">
+        <div class="col" *ngFor="let star of data">
+            <div class="col col-star">
+            <a href="'+star.dir+'/stars_id.html">
+            <div class="card star-cart">
+            <img src="assets/icon/movie.jpg" class="card-img-top star-cart-img">
+            <div class="card-body">{{star.name}}</div>
+            </div>
+            </a>
+            </div>
+        </div>
+    </div>
+</div>
