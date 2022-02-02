@@ -219,3 +219,9 @@ $starsBGColor:black;
         }
     }
 }
+
+.tabs_sticky{
+    &.sticky-top{
+        top: 50px;
+    }
+}
