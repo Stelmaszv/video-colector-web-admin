@@ -18,21 +18,31 @@ class MoviesView(AbstractGenericsAPIView):
 
 class MoviesWithStarsView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
-    Model = Movie
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = MovieFilter
+    queryset = Movie.objects.all()
+    order_by ='-date_relesed'
+
+    def list(self, request, pk):
+
+        queryset = self.filter_queryset()
+        serializer = self.serializer_class(queryset, many=True, context={'request': request.user})
+        page = self.paginate_queryset(serializer.data)
+        return self.get_paginated_response(page)
 
     def get_object(self, pk):
         try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
+            return Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
             raise Http404
 
-    def get_queryset(self):
-        movies=[]
+    def filter_queryset(self):
+        Movies=[]
         Model = self.get_object(self.kwargs.get("pk"))
         for Star in Model.stars.all():
             for Movie in Star.movies.all():
-                movies.append(Movie)
-        return movies
+                Movies.append(Movie)
+        return Movies
 
 class MovieDeteilsView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
