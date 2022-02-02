@@ -7,6 +7,6 @@ import {BaseListComponent} from '../base-list/base-list.component'
 })
 export class SeriesComponent extends BaseListComponent {
 
-  override url='http://127.0.0.1:8000/series'
+  override url='http://127.0.0.1:8000/series?page='
 
 }

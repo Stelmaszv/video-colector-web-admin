@@ -1,11 +1,17 @@
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
 from core.webadminapi.filters import StarFilter
 from core.webadminapi.serializers import StarsSerializer, StarsSerializerUpdate,StarSlectSerializer
 from core.wideocollectorseader.models import Star
 from django_filters import rest_framework as filters
+
+class StarsPaginator(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = 'page_size'
+    max_page_size = 10
 
 class StarDeteilsView(AbstractDeteilsView):
     serializer_class = StarsSerializer
@@ -18,6 +24,7 @@ class StarView(AbstractGenericsAPIView):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = StarFilter
     order_by ='-added'
+    pagination_class = StarsPaginator
 
 class StarUpdateView(AbstractUpdateView):
     serializer_class = StarsSerializerUpdate
