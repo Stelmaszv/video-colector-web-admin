@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { HttpService } from '../../../Service/http/http.service';
+import {RatingService} from '../../../Service/ratting/rating.service'
 
 @Component({
   selector: 'app-base-list',
@@ -27,7 +28,7 @@ export class BaseListComponent implements OnInit {
   protected page:number=1 ;
   
 
-  public constructor(protected httpService: HttpService) { }
+  public constructor(protected httpService: HttpService,public RatingService:RatingService) { }
 
   public add_star(add_star:number):void
   {

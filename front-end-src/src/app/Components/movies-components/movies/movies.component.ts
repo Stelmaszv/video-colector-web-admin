@@ -2,6 +2,7 @@ import { Component,Input} from '@angular/core';
 import {BaseListComponent} from '../../list/base-list/base-list.component'
 import { FormControl ,FormGroup} from '@angular/forms';
 
+
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
@@ -24,47 +25,18 @@ export class MoviesComponent extends BaseListComponent{
   });
 
   public if_good_rating(movie:any){
-    let rate = parseInt(movie.avg_rating)
-    if (0 < parseInt(movie.avg_rating)){
-      if (rate > 3){
-        return true
-      }
-      return false
-    }else{
-      return false
-    }
+    return this.RatingService.if_good_rating(movie)
   }
 
   public if_mid_rating(movie:any){
-    let rate = parseInt(movie.avg_rating)
-    if (0 < parseInt(movie.avg_rating)){
-      if (rate == 3){
-        return true
-      }
-      return false
-    }else{
-      return false
-    }
+    return this.RatingService.if_mid_rating(movie)
   }
 
   public if_low_rating(movie:any){
-    let rate = parseInt(movie.avg_rating)
-    if (0 < parseInt(movie.avg_rating)){
-      if (rate > 3){
-        return true
-      }
-      return false
-    }else{
-      return false
-    }
-  }
-
-  public onInitID(){
-
+    return this.RatingService.if_low_rating(movie)
   }
 
   public override onInit(){
-      this.onInitID()
       this.tags_form=[]
       this.stars_form=[]
       this.load_select()
@@ -136,8 +108,6 @@ export class MoviesComponent extends BaseListComponent{
       return better_stars.concat(resst);
     }
   }
-
-
 
   protected override on_set_results(movie:any):any
   {
