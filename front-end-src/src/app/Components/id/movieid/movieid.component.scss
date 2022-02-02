@@ -55,48 +55,7 @@ $rating_color_good:1px solid rgb(0, 182, 61);
 .name{
     color:white;
 }
-.ditels-section{
 
-    .actions{
-        width: 500px;
-        background-color: rgb(182, 178, 178);
-        text-align: center;
-        .action-item{
-            width: 33%;
-            &.click{
-                color: rgb(246, 52, 52);
-            }
-        }
-    }
-
-    .stars{
-        padding-bottom: 10px;
-        .star-name{
-            background-color: $starsBGColor;
-            color:white; 
-        }
-        .star_src{
-            width: 300px;
-            height: 300px;
-        }
-    }
-    .movie_avatar{
-        width: 500px;
-        height: 700px;
-    }
-    .movie_description{
-        text-align: justify;
-        
-    }
-    .tag{
-        font-weight: bold;
-    }
-
-    .procent_likes{
-        width: 500px;
-    }
-
-}
 
 video#bgvid {
     height: 87vh;
@@ -104,42 +63,6 @@ video#bgvid {
     object-fit:cover;
 } 
 
-
-.ditels-section{
-    font-size: 1rem;
-    .star_avatar{
-        width: 20rem; 
-        height: 25rem;
-    }
-    .movie_description{
-        text-align: justify;
-    }
-    .table_row{
-        margin-bottom: 5px;
-        
-    }
-    .tag{
-        a{
-            text-decoration: none;
-            color: black;
-            font-weight: 500;
-        }
-        a:hover{
-            color: blue;
-        }
-    }
-
-    .star-string,.producent_item,.series_item{
-        a {
-            color: black;
-            text-decoration: none;
-            font-weight: bolder;
-        }
-        a:hover{
-            color: rgb(49, 49, 228);
-        }
-    }
-}
 
 .tabs_sticky{
     &.sticky-top{
@@ -149,23 +72,6 @@ video#bgvid {
 
 .serie-movies{
     margin-top: -20px;
-}
-
-.tabs_nav{
-    margin-top:30px;
-    background-color: rgba(190, 186, 186, 0.609);
-    ul{
-        li{
-            .nav-link{
-                color: white;
-                &.active{
-                    color: gold;
-                    background-color:black;
-                    font-weight: bold;
-                }
-            }
-        }
-    }
 }
 
 .custum-form{
