@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component,Input} from '@angular/core';
 import {BaseListComponent} from '../base-list/base-list.component'
 import { FormControl ,FormGroup} from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormControl ,FormGroup} from '@angular/forms';
 })
 export class MoviesComponent extends BaseListComponent{
   public mode:string ='cover'
+  @Input() top:any='50px'
   public override url:string='http://127.0.0.1:8000/movies?page='
 
   public override search = new FormGroup({
@@ -59,7 +60,7 @@ export class MoviesComponent extends BaseListComponent{
   }
 
   public onInitID(){
-    
+
   }
 
   public override onInit(){
