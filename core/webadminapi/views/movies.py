@@ -1,7 +1,7 @@
 import os
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
+from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication,AbstractGenericsAPIViewExtended
 from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie, MoviesSerializerUpdate
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
@@ -15,25 +15,12 @@ class MoviesView(AbstractGenericsAPIView):
     filterset_class  = MovieFilter
     order_by ='-date_relesed'
 
-class MoviesWithStarsView(AbstractGenericsAPIView):
+class MoviesWithStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = MoviesSerializer
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = MovieFilter
     queryset = Movie.objects.all()
     order_by ='-date_relesed'
-
-    def list(self, request, pk):
-
-        queryset = self.filter_queryset()
-        serializer = self.serializer_class(queryset, many=True, context={'request': request.user})
-        page = self.paginate_queryset(serializer.data)
-        return self.get_paginated_response(page)
-
-    def get_object(self, pk):
-        try:
-            return Movie.objects.get(pk=pk)
-        except Movie.DoesNotExist:
-            raise Http404
 
     def filter_queryset(self):
         Movies=[]
@@ -91,12 +78,12 @@ class MovieNextInSeriesView(AbstractDeteilsView):
                 return self.query.serie.movies[0]
             index=index+1
 
-class MoviePhotosView(AbstractGenericsAPIView):
+class MoviePhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerMovie
     queryset = Movie.objects.all()
     Model = Movie
 
-    def get_queryset(self):
+    def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         photo=[]
         for item in os.listdir(Model.dir):
