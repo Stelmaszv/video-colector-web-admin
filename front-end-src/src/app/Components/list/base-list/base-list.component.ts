@@ -1,6 +1,7 @@
-import { Component, OnInit} from '@angular/core';
-import { HttpService } from '../../../Service/http/http.service';
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
+import {ProcentService} from '../../../Service/procent/procent.service'
 
 @Component({
   selector: 'app-base-list',
@@ -29,7 +30,7 @@ export class BaseListComponent implements OnInit {
   protected data_type=''
   
 
-  public constructor(protected httpService: HttpService,public RatingService:RatingService) { }
+  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService) { }
 
   public add_star(add_star:number):void
   {
@@ -101,23 +102,13 @@ export class BaseListComponent implements OnInit {
 
   private set_results():void{
     for (let movie of this.response.results){
-      movie['good_procent'] = this.good_procent(movie)
-      movie['bad_procent']  = this.bad_procent(movie)
+      movie['good_procent'] = this.ProcentService.good_procent(movie)
+      movie['bad_procent']  = this.ProcentService.bad_procent(movie)
       this.on_set_results(movie)
       if (this.add_if_not_exist(movie)){
         this.data.push(movie)
       }
     }
-  }
-
-  protected bad_procent(movie:any){
-    let all_liks=movie.likes_count+movie.disLikes_count
-    return String(movie.disLikes_count*100/all_liks)+'%'
-  }
-
-  protected good_procent(movie:any){
-    let all_liks=movie.likes_count+movie.disLikes_count
-    return String(movie.likes_count*100/all_liks)+'%'
   }
 
   private set_next():number
