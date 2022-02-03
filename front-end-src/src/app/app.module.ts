@@ -25,6 +25,7 @@ import { BaseIDComponent } from './Components/id/base-id/base-id.component';
 import { SeriePhotosComponent } from './Components/photos/serie-photos/serie-photos.component';
 import { SeriesStarsComponent } from './Components/stars-components/series-stars/series-stars.component';
 import { StarMoviesComponent } from './Components/movies-components/star-movies/star-movies.component';
+import { StarPhotoComponent } from './Components/photos/star-photo/star-photo.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { StarMoviesComponent } from './Components/movies-components/star-movies/
     BaseIDComponent,
     SeriePhotosComponent,
     SeriesStarsComponent,
-    StarMoviesComponent
+    StarMoviesComponent,
+    StarPhotoComponent
   ],
   imports: [
     AppRoutingModule,
