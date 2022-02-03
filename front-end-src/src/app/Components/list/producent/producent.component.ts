@@ -6,5 +6,5 @@ import {BaseListComponent} from '../base-list/base-list.component'
   styleUrls: ['./producent.component.scss']
 })
 export class ProducentComponent extends BaseListComponent {
-  override url='http://127.0.0.1:8000/producents'
+  override url='http://127.0.0.1:8000/producents?page='
 }
