@@ -32,7 +32,7 @@ urlpatterns = [
     path('movieaddtodislike/<int:pk>',           MovieAddToDisLikeView.as_view(), name='movieaddtodislike'),
     #stars
     path('stars',                                StarView.as_view(), name='stars'),
-    path('Starsmovie/<int:pk>/',                 StarsMoviesView.as_view(), name='Starsmovie'),
+    path('starsmovie/<int:pk>/',                 StarsMoviesView.as_view(), name='Starsmovie'),
     path('star/<int:pk>/',                       StarDeteilsView.as_view(), name='star'),
     path('starupdate/<int:pk>/',                 StarUpdateView.as_view(), name='starupdate'),
     path('staraddtofavorite/<int:pk>/',          StarAddToFavoriteView.as_view(), name='staraddtofavorite'),
