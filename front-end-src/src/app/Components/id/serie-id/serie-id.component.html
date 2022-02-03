@@ -78,6 +78,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="procent_likes">
+                    <div class="like-procent">
+                        <div class="good" [ngStyle]="{'width': good_procent}"></div>
+                        <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
+                    </div>
+                </div>
                 <div class="actions">
                     <button (click)="add_like()" class="action-item" [ngClass]="{'click' : if_liked}" [disabled]="if_liked"><i class="fas fa-thumbs-up"></i></button>
                     <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-star"></i></button>

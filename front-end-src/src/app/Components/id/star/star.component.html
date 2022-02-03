@@ -1,1 +1,114 @@
-<p>star works!</p>
+<h1 class="d-flex justify-content-center name_js">{{data.name}}</h1>
+<div class="container ditels-section">
+    <div class="row tabel-info-js">
+        <div class="col">
+            <img class="star_avatar avatar_js" src="{{data.avatar}}">
+            <div class="procent_likes">
+                <div class="like-procent">
+                    <div class="good" [ngStyle]="{'width': good_procent}"></div>
+                    <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
+                </div>
+            </div>
+            <div class="actions">
+                <button (click)="add_like()" class="action-item" [ngClass]="{'click' : if_liked}" [disabled]="if_liked"><i class="fas fa-thumbs-up"></i></button>
+                <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-star"></i></button>
+                <button (click)="add_dislike()" class="action-item" [ngClass]="{'click' : if_disliked}" [disabled]="if_disliked"><i class="fas fa-thumbs-down" ></i></button>
+            </div>
+        </div>
+
+        <div class="col">
+            <h1 class="d-flex justify-content-center">Description</h1>
+            <p class="description_js movie_description">{{data.description}}</p>
+            <h1 class="d-flex justify-content-center">More Informaton</h1>
+                <div class="table_information">
+                    <ng-template [ngIf]="data.tags.length>0">
+                        <div class="row">
+                            <div class="col table_row">
+                                Tags
+                            </div>
+                            <div class="col stars_strig_js">
+                                <span *ngFor="let tag of data.tags; let i=index">
+                                    <span class='tag'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
+                                    <ng-template [ngIf]="i<data.tags.length-1">
+                                        ,
+                                    </ng-template>
+                                </span>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Ethnicity 
+                        </div>
+                        <div class="col table_row">
+                            {{data.ethnicity}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Hair color
+                        </div>
+                        <div class="col table_row">
+                            {{data.hair_color}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Nationality
+                        </div>
+                        <div class="col table_row">
+                            {{data.nationality}} (<i>{{data.birth_place}}</i>)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Date of birth
+                        </div>
+                        <div class="col table_row">
+                            {{data.date_of_birth}} (<i>21</i>)
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Likes 
+                        </div>
+                        <div class="col table_row">
+                            <i class="fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col table_row">
+                            Ratings
+                        </div>
+                        <div class="col table_row">
+                            <i class="fas fa-star"></i> {{data.ratings_count | bigInt}} ({{data.avg_rating}})
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col table_row">
+                            Views
+                        </div>
+                        <div class="col table_row">
+                            <i class="fas fa-eye"></i> {{data.views_count | bigInt}}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col table_row">
+                            Dis Likes
+                        </div>
+                        <div class="col table_row">
+                            <i class="fas fa-thumbs-down"></i> {{data.disLikes_count | bigInt}}
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
