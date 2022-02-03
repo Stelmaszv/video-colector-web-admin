@@ -1,12 +1,11 @@
 import os
-
 from django.http import Http404
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication, \
-    LargeResultsSetPagination
+    LargeResultsSetPagination, AbstractGenericsAPIViewExtended
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
     MoviesSerializer, StarsSerializer,ProducetFormSeralizer
@@ -21,12 +20,12 @@ class ProducentsView(AbstractGenericsAPIView):
     filterset_class  = ProducentsFilter
     order_by ='-added'
 
-class ProducentsPhotosView(AbstractGenericsAPIView):
+class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries
     queryset = Producents.objects.all()
     Model = Producents
 
-    def get_queryset(self):
+    def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         miandir=os.listdir(Model.dir+'\photo\DATA')
         photos=[]
