@@ -64,24 +64,18 @@ class ProducentsFormView(generics.ListAPIView):
     queryset = Producents.objects.all()
     Model = Producents
 
-class ProducentsMoviesView(generics.ListAPIView):
+class ProducentsMoviesView(AbstractGenericsAPIViewExtended):
     serializer_class = MoviesSerializer
     queryset = Producents.objects.all()
     Model = Producents
 
-    def get_queryset(self):
+    def filter_queryset(self):
         movies =[]
         Model = self.get_object(self.kwargs.get("pk"))
         for Serie in Model.series.all():
             for Movie in Serie.movies.all():
                 movies.append(Movie)
         return movies
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
 class ProducentStarsView(generics.ListAPIView):
     serializer_class = StarsSerializer
