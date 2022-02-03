@@ -1,5 +1,4 @@
 import os
-
 from django.http import Http404
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
@@ -93,12 +92,12 @@ class SerieMoviesView(AbstractGenericsAPIView):
         except self.Model.DoesNotExist:
             raise Http404
 
-class SeriesStarsView(generics.ListAPIView):
+class SeriesStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
     Model = Serie
 
-    def get_queryset(self):
+    def filter_queryset(self):
         def count(id):
             count = 0
             for el in star_counter:

@@ -23,6 +23,7 @@ import { BasePhotosComponent } from './Components/photos/base-photos/base-photos
 import { MoviePhotosComponent } from './Components/photos/movie-photos/movie-photos.component';
 import { BaseIDComponent } from './Components/id/base-id/base-id.component';
 import { SeriePhotosComponent } from './Components/photos/serie-photos/serie-photos.component';
+import { SeriesStarsComponent } from './Components/stars-components/series-stars/series-stars.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SeriePhotosComponent } from './Components/photos/serie-photos/serie-pho
     BasePhotosComponent,
     MoviePhotosComponent,
     BaseIDComponent,
-    SeriePhotosComponent
+    SeriePhotosComponent,
+    SeriesStarsComponent
   ],
   imports: [
     AppRoutingModule,

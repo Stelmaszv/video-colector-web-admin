@@ -10,7 +10,6 @@ export class SeriePhotosComponent extends BasePhotosComponent {
 
   @Input() ID:any=0
   start=true
-  protected override data_type='photo'
 
   public override on_set_url():void
   {

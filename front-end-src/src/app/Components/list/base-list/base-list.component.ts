@@ -27,8 +27,6 @@ export class BaseListComponent implements OnInit {
   protected results : any;
   protected response : any;
   protected page:number=1 ;
-  protected data_type=''
-  
 
   public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService) { }
 
@@ -105,9 +103,7 @@ export class BaseListComponent implements OnInit {
       movie['good_procent'] = this.ProcentService.good_procent(movie)
       movie['bad_procent']  = this.ProcentService.bad_procent(movie)
       this.on_set_results(movie)
-      if (this.add_if_not_exist(movie)){
-        this.data.push(movie)
-      }
+      this.data.push(movie)
     }
   }
 
@@ -201,23 +197,13 @@ export class BaseListComponent implements OnInit {
 
   protected add_if_not_exist(data:any):boolean
   {
-    if (this.data_type != "photo"){
       let stan=true
       for (let item of this.data){
-          if (item.id==data.id){
+          if (item==data){
             stan = false
           }
       }
       return stan
-    }else{
-      let stan=true
-      for (let item of this.data){
-          if (item.url==data.url){
-            stan = false
-          }
-      }
-      return stan
-    }
   }
 
   protected scroller():void
