@@ -8,7 +8,7 @@ from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, Abstr
     LargeResultsSetPagination, AbstractGenericsAPIViewExtended
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
-    MoviesSerializer, StarsSerializer,ProducetFormSeralizer
+    MoviesSerializer, StarsSerializer, ProducetFormSeralizer, SerieSerializer
 from core.wideocollectorseader.models import Producents, Serie
 
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
@@ -48,6 +48,26 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
                             },
                         )
         return photos
+
+
+class ProducentsSeriesView(AbstractGenericsAPIView):
+
+    serializer_class = SerieSerializer
+    order_by ='-added'
+    Model = Producents
+
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        return Model.series.all()
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
+
+
 
 class ProducentsDeteilsView(AbstractDeteilsView):
     serializer_class = ProducentsSerializer

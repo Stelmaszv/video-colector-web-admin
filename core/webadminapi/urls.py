@@ -1,11 +1,11 @@
-import mimetypes
-from django.http import HttpResponse
+
 from core.webadminapi.views.movies import MoviesView, MovieUpdataView, MovieDeteilsView, MoviePhotosView, \
     MoviesWithStarsView, MovieNextInSeriesView, MovieAddToFavoriteView, MovieAddToRatingView, MovieAddToLikeView, \
     MovieAddToDisLikeView
 from core.webadminapi.views.producent import ProducentsView, ProducentsDeteilsView, ProducentsUpdataView, \
     ProducentsMoviesView, ProducentStarsView, ProducentsPhotosView, ProducentAddToFavoriteView, \
-    ProducentAddToRatingView, ProducentAddToLikeView, ProducentAddToDisLikeView,ProducentsFormView
+    ProducentAddToRatingView, ProducentAddToLikeView, ProducentAddToDisLikeView, ProducentsFormView, \
+    ProducentsSeriesView
 from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteilsView, SerieUpdataView, SerieMoviesView, \
     SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView, SerieAddToFavoriteView, SerieAddToRatingView, \
     SerieAddToLikeView, SerieAddToDisLikeView, SelectOptionView
@@ -61,14 +61,15 @@ urlpatterns = [
     path('producents',                           ProducentsView.as_view(), name='producents'),
     path('producent/<int:pk>/',                  ProducentsDeteilsView.as_view(), name='producent'),
     path('producentupdata/<int:pk>/',            ProducentsUpdataView.as_view(), name='producentupdata'),
-    path('producentsmovies/<int:pk>/',       ProducentsMoviesView.as_view(), name='producentsmoviesview'),
-    path('producentsstar/<int:pk>/',        ProducentStarsView.as_view(), name='producentsstarsview'),
-    path('producentsphotos/<int:pk>/',       ProducentsPhotosView.as_view(), name='producentsphotosview'),
+    path('producentsmovies/<int:pk>/',           ProducentsMoviesView.as_view(), name='producentsmoviesview'),
+    path('producentsstar/<int:pk>/',             ProducentStarsView.as_view(), name='producentsstarsview'),
+    path('producentsphotos/<int:pk>/',           ProducentsPhotosView.as_view(), name='producentsphotosview'),
     path('producentaddtofavorite/<int:pk>/',     ProducentAddToFavoriteView.as_view(), name='producentaddtofavorite'),
     path('producentaddtorating/<int:pk>/',       ProducentAddToRatingView.as_view(), name='producentaddtorating'),
     path('producentaddtolike/<int:pk>/',         ProducentAddToLikeView.as_view(), name='producentaddtolike'),
     path('producentaddtodislike/<int:pk>/',      ProducentAddToDisLikeView.as_view(), name='producentaddtodislike'),
     path('producentsformview',                   ProducentsFormView.as_view(), name='producentsformview'),
+    path('producentsseries/<int:pk>/',           ProducentsSeriesView.as_view(), name='producentsseries'),
     #tags
     path('tags',                                 TagView.as_view(), name='tas'),
     path('tag/<int:pk>/',                        TagDeteilsView.as_view(), name='tag'),
