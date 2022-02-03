@@ -7,8 +7,15 @@ import {StarsComponent} from '../../list/stars/stars.component'
   styleUrls: ['../../list/stars/stars.component.scss']
 })
 export class ProducentStarsComponent extends StarsComponent  {
-
-  override url='http://127.0.0.1:8000/producentsstar/1/?page='
+  
   @Input() ID:any=0
+  start=true
+
+  public override on_set_url():void
+  {
+    if (this.start){
+      this.url='http://127.0.0.1:8000/producentsstar/'+this.ID+'?page='
+    }
+  }
 }
 

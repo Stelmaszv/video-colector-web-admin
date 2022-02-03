@@ -49,7 +49,6 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
                         )
         return photos
 
-
 class ProducentsSeriesView(AbstractGenericsAPIView):
 
     serializer_class = SerieSerializer
@@ -65,9 +64,6 @@ class ProducentsSeriesView(AbstractGenericsAPIView):
             return self.Model.objects.get(pk=pk)
         except self.Model.DoesNotExist:
             raise Http404
-
-
-
 
 class ProducentsDeteilsView(AbstractDeteilsView):
     serializer_class = ProducentsSerializer
