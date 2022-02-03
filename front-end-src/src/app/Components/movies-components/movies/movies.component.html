@@ -153,9 +153,9 @@
           <p class="card-text">{{movie.description | stringLenght  }}</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><a  class="card-link">{{movie.serie.show_name}}</a></li>
+          <li class="list-group-item"><a  [routerLink]="['/serie/',movie.serie.id]" class="card-link">{{movie.serie.show_name}}</a></li>
           <li class="list-group-item">
-            <a *ngFor="let star of movie.js_stars" class="card-link">{{star.name}}</a>
+            <a *ngFor="let star of movie.js_stars" class="card-link" [routerLink]="['/star/',star.id]">{{star.name}}</a>
             <ng-template [ngIf]="movie.more">
               + <i>{{movie.more}}</i>
             </ng-template>
