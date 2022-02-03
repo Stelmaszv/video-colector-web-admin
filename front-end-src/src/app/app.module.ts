@@ -28,6 +28,7 @@ import { StarMoviesComponent } from './Components/movies-components/star-movies/
 import { StarPhotoComponent } from './Components/photos/star-photo/star-photo.component';
 import { ProducentPhotsComponent } from './Components/photos/producent-phots/producent-phots.component';
 import { ProducentMoviesComponent } from './Components/movies-components/producent-movies/producent-movies.component';
+import { ProducentStarsComponent } from './Components/stars-components/producent-stars/producent-stars.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ProducentMoviesComponent } from './Components/movies-components/produce
     StarMoviesComponent,
     StarPhotoComponent,
     ProducentPhotsComponent,
-    ProducentMoviesComponent
+    ProducentMoviesComponent,
+    ProducentStarsComponent
   ],
   imports: [
     AppRoutingModule,

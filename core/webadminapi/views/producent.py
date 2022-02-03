@@ -77,13 +77,13 @@ class ProducentsMoviesView(AbstractGenericsAPIViewExtended):
                 movies.append(Movie)
         return movies
 
-class ProducentStarsView(generics.ListAPIView):
+class ProducentStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
     pagination_class = LargeResultsSetPagination
     Model = Producents
 
-    def get_queryset(self):
+    def filter_queryset(self):
         def count(id):
             count=0
             for el in star_counter:
@@ -101,12 +101,6 @@ class ProducentStarsView(generics.ListAPIView):
                         if Star not in stars:
                             stars.append(Star)
         return stars
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
 #actions
 class ProducentAddToFavoriteView(AbstractDeteilsView):
