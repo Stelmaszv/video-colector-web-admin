@@ -1,15 +1,20 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component,Input } from '@angular/core';
+import {BasePhotosComponent} from '../base-photos/base-photos.component'
 
 @Component({
   selector: 'app-star-photo',
-  templateUrl: './star-photo.component.html',
-  styleUrls: ['./star-photo.component.scss']
+  templateUrl: '../base-photos/base-photos.component.html',
+  styleUrls: ['../base-photos/base-photos.component.scss']
 })
-export class StarPhotoComponent implements OnInit {
+export class StarPhotoComponent extends BasePhotosComponent {
   @Input() ID:any=0
-  constructor() { }
+  start=true
 
-  ngOnInit(): void {
+  public override on_set_url():void
+  {
+    if (this.start){
+      this.url='http://127.0.0.1:8000/starsphoto/'+this.ID+'?page='
+    }
   }
 
 }
