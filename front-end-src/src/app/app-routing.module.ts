@@ -10,7 +10,10 @@ import {MovieidComponent}     from './Components/id/movieid/movieid.component'
 import {ProducentIdComponent} from './Components/id/producent-id/producent-id.component'
 import {SerieIdComponent} from './Components/id/serie-id/serie-id.component'
 import {StarComponent} from './Components/id/star/star.component'
-import {MianMoviesComponent} from '../app/Components/movies-components/mian-movies/mian-movies.component'
+import {MianMoviesComponent} from './Components/main-components/mian-movies/mian-movies.component'
+import {MianSeriesComponent} from './Components/main-components/mian-series/mian-series.component'
+import {MainStarsComponent} from './Components/main-components/main-stars/main-stars.component'
+import {MainProducentComponent} from './Components/main-components/main-producent/main-producent.component'
 const routes: Routes = [
   {
     path: '',
@@ -43,15 +46,15 @@ const routes: Routes = [
   },  
   {
     path: 'stars',
-    component: StarsComponent
+    component: MainStarsComponent
   },
   {
     path: 'series',
-    component: SeriesComponent
+    component: MianSeriesComponent
   },
   {
     path: 'producents',
-    component: ProducentComponent
+    component: MainProducentComponent
   }
 ];
 

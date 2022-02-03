@@ -30,7 +30,10 @@ import { ProducentPhotsComponent } from './Components/photos/producent-phots/pro
 import { ProducentMoviesComponent } from './Components/movies-components/producent-movies/producent-movies.component';
 import { ProducentStarsComponent } from './Components/stars-components/producent-stars/producent-stars.component';
 import { ProducentSeriesComponent } from './Components/list/producent-series/producent-series.component';
-import { MianMoviesComponent } from './Components/movies-components/mian-movies/mian-movies.component';
+import { MianMoviesComponent } from './Components/main-components/mian-movies/mian-movies.component';
+import { MianSeriesComponent } from './Components/main-components/mian-series/mian-series.component';
+import { MainStarsComponent } from './Components/main-components/main-stars/main-stars.component';
+import { MainProducentComponent } from './Components/main-components/main-producent/main-producent.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { MianMoviesComponent } from './Components/movies-components/mian-movies/
     ProducentMoviesComponent,
     ProducentStarsComponent,
     ProducentSeriesComponent,
-    MianMoviesComponent
+    MianMoviesComponent,
+    MianSeriesComponent,
+    MainStarsComponent,
+    MainProducentComponent
   ],
   imports: [
     AppRoutingModule,
