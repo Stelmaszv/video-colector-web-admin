@@ -10,6 +10,7 @@ import {MovieidComponent}     from './Components/id/movieid/movieid.component'
 import {ProducentIdComponent} from './Components/id/producent-id/producent-id.component'
 import {SerieIdComponent} from './Components/id/serie-id/serie-id.component'
 import {StarComponent} from './Components/id/star/star.component'
+import {MianMoviesComponent} from '../app/Components/movies-components/mian-movies/mian-movies.component'
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'movies',
-    component: MoviesComponent
+    component: MianMoviesComponent
   },
   {
     path: 'movie/:id',
