@@ -10,7 +10,7 @@ from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteil
     SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView, SerieAddToFavoriteView, SerieAddToRatingView, \
     SerieAddToLikeView, SerieAddToDisLikeView, SelectOptionView
 from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView, StarAddToFavoriteView, \
-    StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView, StarSelectOptionView, StarsMoviesView
+    StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView, StarSelectOptionView, StarsMoviesView, StarsPhotoView
 from core.webadminapi.views.tags import TagView, TagDeteilsView
 from django.conf import settings
 from django.conf.urls.static import static
@@ -40,6 +40,7 @@ urlpatterns = [
     path('staraddtolike/<int:pk>/',              StarAddToLikeView.as_view(), name='staraddtolike'),
     path('staraddtodislike/<int:pk>/',           StarAddToDisLikeView.as_view(), name='staraddtodislike'),
     path('stars_form',                           StarSelectOptionView.as_view(), name='series_select'),
+    path('starsphoto/<int:pk>/',                 StarsPhotoView.as_view(), name='starsphoto'),
     #series
     path('series',                               SerieView.as_view(), name='series'),
     path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),

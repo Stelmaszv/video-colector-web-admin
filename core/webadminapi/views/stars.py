@@ -1,12 +1,16 @@
+import os
+
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication,AbstractGenericsAPIViewExtended
 from core.webadminapi.filters import StarFilter
-from core.webadminapi.serializers import StarsSerializer, StarsSerializerUpdate, StarSlectSerializer, MoviesSerializer
+from core.webadminapi.serializers import StarsSerializer, StarsSerializerUpdate, StarSlectSerializer, MoviesSerializer, \
+    PhotoSerializerMovie
 from core.wideocollectorseader.models import Star
 from django_filters import rest_framework as filters
+from videocolectorwebadmin.global_setings import photo_ext
 
 class StarsPaginator(PageNumberPagination):
     page_size = 20
@@ -21,6 +25,31 @@ class StarsMoviesView(AbstractGenericsAPIViewExtended):
     def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.movies.all()
+
+class StarsPhotoView(AbstractGenericsAPIViewExtended):
+    serializer_class = PhotoSerializerMovie
+    queryset = Star.objects
+    Model = Star
+
+    def filter_queryset(self):
+        photo=[]
+        Model = self.get_object(self.kwargs.get("pk"))
+        star_dir = os.listdir(Model.dir+'/photo/DATA')
+        for photo_item in star_dir:
+            if photo_item.endswith(photo_ext):
+                photo.append(
+                    {"url"  :Model.dir+'\\photo\\DATA\\' + photo_item}
+                )
+
+        for Movie in Model.movies.all():
+            list=os.listdir(Movie.dir)
+            for item in list:
+                if item.endswith(photo_ext):
+                    photo.append(
+                        {"url": Movie.dir + '\\' + item}
+                    )
+
+        return photo
 
 class StarDeteilsView(AbstractDeteilsView):
     serializer_class = StarsSerializer
