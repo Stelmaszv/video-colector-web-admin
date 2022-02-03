@@ -6,7 +6,7 @@
                 <div class="card-body">
                 </div>
                 <h5 class="card-title">{{serie.show_name}}</h5>
-                <p class="card-text">{{serie.description}}</p>
+                <p class="card-text">{{serie.description | stringLenght }}</p>
                 <a [routerLink]="['/serie/',serie.id]" class="btn btn-primary">{{serie.show_name}}</a>
             </div>
         </div>

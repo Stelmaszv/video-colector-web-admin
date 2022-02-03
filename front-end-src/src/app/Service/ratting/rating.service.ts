@@ -28,6 +28,6 @@ export class RatingService {
 
   public if_low_rating(movie:any){
     let rate = parseInt(movie.avg_rating)
-    return this.rating(rate,rate > 3)
+    return this.rating(rate,rate < 3)
   }
 }
