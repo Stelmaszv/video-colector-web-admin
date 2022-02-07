@@ -141,11 +141,12 @@ class Producents(models.Model):
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
     def save(self, *args, **kwargs):
-        super(Producents, self).save(*args, **kwargs)
-        """
-        set_model(self)
-        super(Producents, self).save(*args, **kwargs)
-        """
+        save_mode = get_josn_file()['save_mode']
+        if save_mode:
+            set_model(self)
+            UpdateJSON(self)
+        else:
+            super(Producents, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         super(Producents, self).delete(*args, **kwargs)
@@ -194,13 +195,13 @@ class Serie(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        #set_model(self)
-        super(Serie, self).save(*args, **kwargs)
-        """
-        set_model(self)
-        super(Serie, self).save(*args, **kwargs)
-        UpdateJSON(self)
-        """
+        save_mode = get_josn_file()['save_mode']
+        if save_mode:
+            set_model(self)
+            UpdateJSON(self)
+        else:
+            super(Serie, self).save(*args, **kwargs)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
@@ -243,11 +244,6 @@ class Star(models.Model):
             UpdateJSON(self)
         else:
             super(Star, self).save(*args, **kwargs)
-        """
-        set_model(self)
-        super(Star, self).save(*args, **kwargs)
-        UpdateJSON(self)
-        """
 
     def delete(self, *args, **kwargs):
         super(Star, self).delete(*args, **kwargs)
@@ -287,12 +283,11 @@ class Movie(models.Model):
 
 
     def delete(self, *args, **kwargs):
-        super(Movie, self).delete(*args, **kwargs)
-        """"
-        ##shutil.rmtree(self.dir)
+        #shutil.rmtree(self.dir)
+        dirs=self.src.split('\\')
+        print(self.dir+dirs[len(dirs)-1])
         ##os.remove(self.src)
         ##super(Movie, self).delete(*args, **kwargs)
-        """
 
     def save(self, *args, **kwargs):
         save_mode=get_josn_file()['save_mode']
@@ -302,11 +297,7 @@ class Movie(models.Model):
             UpdateJSON(self)
         else:
             super(Movie, self).save(*args, **kwargs)
-        """
-        set_model(self)
-        super(Movie, self).save(*args, **kwargs)
-        UpdateJSON(self)
-        """
+
     def __str__(self):
         return self.name
 
