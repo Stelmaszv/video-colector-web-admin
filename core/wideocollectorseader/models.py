@@ -4,6 +4,8 @@ import shutil
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 
+from core.setings import get_josn_file
+
 
 def set_model(Model):
     def set_avg(Model):
@@ -287,7 +289,7 @@ class Movie(models.Model):
         """
 
     def save(self, *args, **kwargs):
-        #set_model(self)
+        print('save_mode',get_josn_file()['save_mode'])
         super(Movie, self).save(*args, **kwargs)
         """
         set_model(self)

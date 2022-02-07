@@ -5,8 +5,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import  APIView
 from django.views.generic.base import TemplateView
+
+from core.setings import update_setings, setings_set_defult, save_mode_defult
 from .models import Producents,Serie,Tag,Star,Movie
 from django.shortcuts import render,get_object_or_404,redirect
+
+
 
 class StartSeederView(APIView):
 
@@ -15,6 +19,8 @@ class StartSeederView(APIView):
             opserver.Seed()
 
     def api_get(self, request, *args, **kwargs):
+        save_mode_defult['save_mode']=False
+        update_setings(save_mode_defult)
         opservers=[
             TagSeader(),
             ProducentSeader(),
@@ -23,6 +29,7 @@ class StartSeederView(APIView):
             MoviesSeader()
         ]
         self.opserver(opservers)
+        setings_set_defult()
         return Response(data=[], status=status.HTTP_200_OK)
     def get(self, request, *args, **kwargs):
         return self.api_get(request)
