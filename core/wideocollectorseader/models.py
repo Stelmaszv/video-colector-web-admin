@@ -287,7 +287,7 @@ class Movie(models.Model):
         """
 
     def save(self, *args, **kwargs):
-        set_model(self)
+        #set_model(self)
         super(Movie, self).save(*args, **kwargs)
         """
         set_model(self)

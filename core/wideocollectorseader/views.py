@@ -89,7 +89,6 @@ class SeriesSeader(ApstractSeader):
         if len(item['producent']):
             Producent=self.add_one_many(item['producent'], Producents)
         print('Add Serie ' + item['name'])
-        print(Producent)
 
         self.Model(
             name=item['name'],
@@ -102,12 +101,12 @@ class SeriesSeader(ApstractSeader):
             years = item['years'],
             number_of_sezons = item['number_of_sezons']
         ).save()
-        print('HERE')
-        #SerieItem=Serie.objects.filter(name=item['name'])[0]
 
-        #if Producent is not None:
-            ##self.add_one_many_conection(SerieItem,Producent,'series')
-        ##self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
+        SerieItem=Serie.objects.filter(name=item['name'])[0]
+
+        if Producent is not None:
+            self.add_one_many_conection(SerieItem,Producent,'series')
+        self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
 
 
 class TagSeader(ApstractSeader):
@@ -189,9 +188,6 @@ class BaseListView(TemplateView):
         return self.addGet(request)
     def setContext(self,request):
         pass
-
-class StarView(BaseListView):
-    pass
 
 
 
