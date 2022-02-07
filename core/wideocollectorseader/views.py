@@ -4,13 +4,8 @@ from pathlib import Path
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import  APIView
-from django.views.generic.base import TemplateView
-
 from core.setings import update_setings, setings_set_defult, save_mode_defult
 from .models import Producents,Serie,Tag,Star,Movie
-from django.shortcuts import render,get_object_or_404,redirect
-
-
 
 class StartSeederView(APIView):
 
@@ -183,19 +178,5 @@ class MoviesSeader(ApstractSeader):
             StarObj=Star.objects.get(name=star)
             Model.stars.add(StarObj)
             StarObj.movies.add(Model)
-
-
-class BaseListView(TemplateView):
-    redirect=False
-    def addGet(self,request,*args,**kwargs):
-        self.setContext(request)
-        if self.redirect:
-            return redirect(self.success_url)
-        return render(request, self.template_name, self.context)
-    def get(self,request,*args,**kwargs):
-        return self.addGet(request)
-    def setContext(self,request):
-        pass
-
 
 

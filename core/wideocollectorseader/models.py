@@ -24,6 +24,24 @@ def set_model(Model):
     Model.views_count = Model.views.count()
     return Model
 
+def delete(Model,self):
+    save_mode = get_josn_file()['save_mode']
+    if save_mode is False:
+        shutil.rmtree(Model.dir)
+        if hasattr(Model,"web_src"):
+            os.remove(Model.web_src)
+        super(Model, self).delete()
+    super(Model, self).delete()
+
+def save(Model,self):
+    save_mode = get_josn_file()['save_mode']
+    if save_mode is False:
+        set_model(self)
+        UpdateJSON(self)
+        super(Model, self).save()
+    super(Model, self).save()
+
+
 def UpdateJSON(Model):
 
     def return_stars(Model):
@@ -141,19 +159,10 @@ class Producents(models.Model):
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
     def save(self, *args, **kwargs):
-        save_mode = get_josn_file()['save_mode']
-        if save_mode:
-            set_model(self)
-            UpdateJSON(self)
-        else:
-            super(Producents, self).save(*args, **kwargs)
+        save(Producents, self)
 
     def delete(self, *args, **kwargs):
-        super(Producents, self).delete(*args, **kwargs)
-        """
-        shutil.rmtree(self.dir)
-        super(Producents, self).delete(*args, **kwargs)
-        """
+        delete(Producents, self)
 
     def __str__(self):
         return self.name
@@ -185,23 +194,13 @@ class Serie(models.Model):
                                        blank=True)
 
     def delete(self, *args, **kwargs):
-        super(Serie, self).delete(*args, **kwargs)
-        """
-        shutil.rmtree(self.dir)
-        super(Serie, self).delete(*args, **kwargs)
-        """
+        delete(Serie, self)
+
+    def save(self, *args, **kwargs):
+        save(Serie, self)
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        save_mode = get_josn_file()['save_mode']
-        if save_mode:
-            set_model(self)
-            UpdateJSON(self)
-        else:
-            super(Serie, self).save(*args, **kwargs)
-
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
@@ -238,19 +237,10 @@ class Star(models.Model):
                                        blank=True)
 
     def save(self, *args, **kwargs):
-        save_mode = get_josn_file()['save_mode']
-        if save_mode:
-            set_model(self)
-            UpdateJSON(self)
-        else:
-            super(Star, self).save(*args, **kwargs)
+        save(Star, self)
 
     def delete(self, *args, **kwargs):
-        super(Star, self).delete(*args, **kwargs)
-        """
-        shutil.rmtree(self.dir)
-        super(Star, self).delete(*args, **kwargs)
-        """
+        delete(Star, self)
 
     def __str__(self):
         return self.name
@@ -284,23 +274,11 @@ class Movie(models.Model):
 
 
     def delete(self, *args, **kwargs):
-        ##dirs = self.src.split('\\')
-        ##src  = self.dir + '\\' + dirs[len(dirs) - 1]
-        print(self.src)
-        #print(self.serie.dir + '\\' + src)
-        # os.remove(self.dir+'\\'+dirs[len(dirs)-1])
-        #dirs = self.src.split('\\')
-        #shutil.rmtree(self.dir)
-        #os.remove(self.dir+'\\'+dirs[len(dirs)-1])
-        #super(Movie, self).delete(*args, **kwargs)
+        delete(Movie,self)
+
 
     def save(self, *args, **kwargs):
-        save_mode=get_josn_file()['save_mode']
-        if save_mode:
-            set_model(self)
-            UpdateJSON(self)
-        else:
-            super(Movie, self).save(*args, **kwargs)
+        save(Movie,self)
 
     def __str__(self):
         return self.name
