@@ -1,0 +1,227 @@
+$rating_color_low:1px solid red;
+$rating_color_mid:1px solid rgb(216, 201, 1);
+$rating_color_good:1px solid rgb(0, 182, 61);
+$starsBGColor:black;
+.cart_poster_item{
+    margin: 15px;
+    .star_list{
+        a{
+            &.star_item{
+                font-style: italic;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .stats{
+        display: inline;
+        padding: 1rem;
+        text-align: center;
+        .stats_font{
+            
+        }
+        .stats_rate{
+            font-style: italic;
+        }
+    }
+}
+.cart-item{
+    width:13rem; 
+    margin:1rem;
+    z-index: 0;
+    .stats{
+        display: inline;
+        padding: 1rem;
+        text-align: center;
+        .stats_font{
+            
+        }
+        .stats_rate{
+            font-style: italic;
+        }
+    }
+    .card-body{
+        a{
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-top: -25px;
+            margin-bottom: -30px;
+        }
+
+        a:hover{
+            color: blue;
+        }
+    }
+    .list-group-item{
+        a{
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover{
+            color: blue;
+        }
+    }
+    .cover{
+        width: 13rem; 
+        height: 20rem;
+    }
+
+    .card-text{
+        .card-title{
+            text-align: center;
+         }
+        height: 10rem;
+        text-align: justify;
+    }
+    .card-title{
+        margin-bottom: 25px;
+    }
+}
+
+.like-procent{
+    height: 5px;
+    background-color: black;
+    display: flex;
+    .good{
+        background-color: green;
+    }
+
+    .bad{
+        background-color: red;
+    }
+}
+
+.movie_rating_low{
+    border: $rating_color_low;
+}
+
+.movie_rating_mid{
+    border: $rating_color_mid;
+}
+
+.rating_color_good{
+    border: $rating_color_good;
+}
+  
+.galery{
+    text-align: center;
+    .galery-item{
+        padding: 1rem;
+        width: 20rem;
+        height: 20rem;
+    }
+}
+
+
+.baner{
+    img{
+        width: 100%;
+    }
+}
+
+.ditels-section{
+    font-size: 1rem;
+    .star_avatar{
+        width: 20rem; 
+        height: 25rem;
+    }
+    .movie_description{
+        text-align: justify;
+    }
+    .table_row{
+        margin-bottom: 5px;
+        
+    }
+    .tag{
+        a{
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+        }
+        a:hover{
+            color: blue;
+        }
+    }
+
+    .star-string,.producent_item,.series_item{
+        a {
+            color: black;
+            text-decoration: none;
+            font-weight: bolder;
+        }
+        a:hover{
+            color: rgb(49, 49, 228);
+        }
+    }
+}
+
+.ditels-section{
+
+    .actions{
+        width: 500px;
+        background-color: rgb(182, 178, 178);
+        text-align: center;
+        .action-item{
+            width: 33%;
+            &.click{
+                color: rgb(246, 52, 52);
+            }
+        }
+    }
+
+    .stars{
+        padding-bottom: 10px;
+        .star-name{
+            background-color: $starsBGColor;
+            color:white; 
+        }
+        .star_src{
+            width: 300px;
+            height: 300px;
+        }
+    }
+    .movie_avatar{
+        width: 500px;
+        height: 700px;
+    }
+    .movie_description{
+        text-align: justify;
+        
+    }
+    .tag{
+        font-weight: bold;
+    }
+
+    .procent_likes{
+        width: 500px;
+    }
+
+}
+
+.tabs_nav{
+    margin-top:30px;
+    background-color: rgba(190, 186, 186, 0.609);
+    ul{
+        li{
+            .nav-link{
+                color: white;
+                &.active{
+                    color: gold;
+                    background-color:black;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.tabs_sticky{
+    &.sticky-top{
+        top: 50px;
+    }
+}

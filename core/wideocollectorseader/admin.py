@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Producents,Serie,Tag,Star,Movie,Views,Likes,DisLikess,Favourite,Rating
+
+from .models import (DisLikess, Favourite, Likes, Movie, Producents, Rating,
+                     Serie, Star, Tag, Views)
+
 admin.site.register(Producents)
 admin.site.register(Serie)
 admin.site.register(Tag)

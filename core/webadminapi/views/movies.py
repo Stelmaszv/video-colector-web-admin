@@ -1,12 +1,20 @@
 import os
+
+from django_filters import rest_framework as filters
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication
-from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie, MoviesSerializerUpdate
+
+from core.webadminapi.core import (AbstractDeteilsView,
+                                   AbstractGenericsAPIView,
+                                   AbstractGenericsAPIViewExtended,
+                                   AbstractUpdateView, Authentication)
+from core.webadminapi.filters import MovieFilter
+from core.webadminapi.serializers import (MoviesSerializer,
+                                          MoviesSerializerUpdate,
+                                          PhotoSerializerMovie)
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
-from django_filters import rest_framework as filters
-from core.webadminapi.filters import MovieFilter
+
 
 class MoviesView(AbstractGenericsAPIView):
     queryset = Movie.objects.all()
@@ -15,17 +23,21 @@ class MoviesView(AbstractGenericsAPIView):
     filterset_class  = MovieFilter
     order_by ='-date_relesed'
 
-class MoviesWithStarsView(AbstractGenericsAPIView):
+class MoviesWithStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = MoviesSerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = MovieFilter
+    queryset = Movie.objects.all()
     Model = Movie
+    order_by ='-date_relesed'
 
-    def get_queryset(self):
-        movies=[]
+    def filter_queryset(self):
+        Movies=[]
         Model = self.get_object(self.kwargs.get("pk"))
         for Star in Model.stars.all():
             for Movie in Star.movies.all():
-                movies.append(Movie)
-        return movies
+                Movies.append(Movie)
+        return Movies
 
 class MovieDeteilsView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
@@ -75,12 +87,12 @@ class MovieNextInSeriesView(AbstractDeteilsView):
                 return self.query.serie.movies[0]
             index=index+1
 
-class MoviePhotosView(AbstractGenericsAPIView):
+class MoviePhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerMovie
     queryset = Movie.objects.all()
     Model = Movie
 
-    def get_queryset(self):
+    def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         photo=[]
         for item in os.listdir(Model.dir):

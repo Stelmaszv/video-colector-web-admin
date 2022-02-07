@@ -1,32 +1,40 @@
 import os
 
 from django.http import Http404
+from django_filters import rest_framework as filters
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django_filters import rest_framework as filters
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication, \
-    LargeResultsSetPagination
+
+from core.webadminapi.core import (AbstractDeteilsView,
+                                   AbstractGenericsAPIView,
+                                   AbstractGenericsAPIViewExtended,
+                                   AbstractUpdateView, Authentication,
+                                   LargeResultsSetPagination)
 from core.webadminapi.filters import ProducentsFilter
-from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
-    MoviesSerializer, StarsSerializer
+from core.webadminapi.serializers import (MoviesSerializer,
+                                          PhotoSerializerSeries,
+                                          ProducentsSerializer,
+                                          ProducentsSerializerUpdate,
+                                          ProducetFormSeralizer,
+                                          SerieSerializer, StarsSerializer)
 from core.wideocollectorseader.models import Producents, Serie
 
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
 
-class ProducentsView(generics.ListAPIView):
+class ProducentsView(AbstractGenericsAPIView):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects.all()
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = ProducentsFilter
     order_by ='-added'
 
-class ProducentsPhotosView(AbstractGenericsAPIView):
+class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries
     queryset = Producents.objects.all()
     Model = Producents
 
-    def get_queryset(self):
+    def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         miandir=os.listdir(Model.dir+'\photo\DATA')
         photos=[]
@@ -50,6 +58,22 @@ class ProducentsPhotosView(AbstractGenericsAPIView):
                         )
         return photos
 
+class ProducentsSeriesView(AbstractGenericsAPIView):
+
+    serializer_class = SerieSerializer
+    order_by ='-added'
+    Model = Producents
+
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        return Model.series.all()
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
 class ProducentsDeteilsView(AbstractDeteilsView):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects
@@ -60,12 +84,17 @@ class ProducentsUpdataView(AbstractUpdateView):
     queryset = Producents.objects
     Model = Producents
 
-class ProducentsMoviesView(generics.ListAPIView):
+class ProducentsFormView(generics.ListAPIView):
+    serializer_class = ProducetFormSeralizer
+    queryset = Producents.objects.all()
+    Model = Producents
+
+class ProducentsMoviesView(AbstractGenericsAPIViewExtended):
     serializer_class = MoviesSerializer
     queryset = Producents.objects.all()
     Model = Producents
 
-    def get_queryset(self):
+    def filter_queryset(self):
         movies =[]
         Model = self.get_object(self.kwargs.get("pk"))
         for Serie in Model.series.all():
@@ -73,19 +102,13 @@ class ProducentsMoviesView(generics.ListAPIView):
                 movies.append(Movie)
         return movies
 
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
-
-class ProducentStarsView(generics.ListAPIView):
+class ProducentStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = StarsSerializer
     queryset = Serie.objects.all()
     pagination_class = LargeResultsSetPagination
     Model = Producents
 
-    def get_queryset(self):
+    def filter_queryset(self):
         def count(id):
             count=0
             for el in star_counter:
@@ -103,12 +126,6 @@ class ProducentStarsView(generics.ListAPIView):
                         if Star not in stars:
                             stars.append(Star)
         return stars
-
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
 
 #actions
 class ProducentAddToFavoriteView(AbstractDeteilsView):

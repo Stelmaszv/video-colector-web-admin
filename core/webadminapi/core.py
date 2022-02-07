@@ -1,13 +1,48 @@
-from django.contrib.auth import get_user_model, authenticate
+
+import os
+
+from django.contrib.auth import authenticate, get_user_model
 from django.http import Http404
+from django.utils.deprecation import MiddlewareMixin
+from rest_framework import generics, status
+from rest_framework.authentication import (BasicAuthentication,
+                                           SessionAuthentication)
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status, generics
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
-from core.wideocollectorseader.models import Favourite, Rating, Likes, DisLikess, Movie
-import django_filters
+
+from core.wideocollectorseader.models import (DisLikess, Favourite, Likes,
+                                              Rating)
+
+
+class RangesMiddleware(MiddlewareMixin):
+
+    def process_response(self, request, response):
+        if response.status_code != 200 or not hasattr(response, 'file_to_stream'):
+            return response
+        http_range = request.META.get('HTTP_RANGE')
+        if not (http_range and http_range.startswith('bytes=') and http_range.count('-') == 1):
+            return response
+        if_range = request.META.get('HTTP_IF_RANGE')
+        if if_range and if_range != response.get('Last-Modified') and if_range != response.get('ETag'):
+            return response
+        f = response.file_to_stream
+        statobj = os.fstat(f.fileno())
+        start, end = http_range.split('=')[1].split('-')
+        if not start:  # requesting the last N bytes
+            start = max(0, statobj.st_size - int(end))
+            end = ''
+        start, end = int(start or 0), int(end or statobj.st_size - 1)
+        assert 0 <= start < statobj.st_size, (start, statobj.st_size)
+        end = min(end, statobj.st_size - 1)
+        f.seek(start)
+        old_read = f.read
+        f.read = lambda n: old_read(min(n, end + 1 - f.tell()))
+        response.status_code = 206
+        response['Content-Length'] = end + 1 - start
+        response['Content-Range'] = 'bytes %d-%d/%d' % (start, end, statobj.st_size)
+        return response
 
 class Authentication(BasicAuthentication):
 
@@ -108,7 +143,7 @@ class AbstractUpdateView(AbstractDeteilsView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class LargeResultsSetPagination(PageNumberPagination):
-    page_size = 5
+    page_size = 8
     page_size_query_param = 'page_size'
     max_page_size = 10
 
@@ -117,23 +152,19 @@ class AbstractGenericsAPIView(generics.ListAPIView):
     Model =None
     pagination_class = LargeResultsSetPagination
 
+class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
+
+    Model=None
+
+    def list(self, request, pk):
+
+        queryset = self.filter_queryset()
+        serializer = self.serializer_class(queryset, many=True, context={'request': request.user})
+        page = self.paginate_queryset(serializer.data)
+        return self.get_paginated_response(page)
+
     def get_object(self, pk):
         try:
             return self.Model.objects.get(pk=pk)
         except self.Model.DoesNotExist:
             raise Http404
-
-    def list(self, request):
-        queryset =self.get_queryset(self.kwargs.get("pk"))
-        queryset=self.filter_queryset(queryset)
-        serializer = self.serializer_class(queryset, many=True,context={'request': request.user})
-        page = self.paginate_queryset(serializer.data)
-        return self.get_paginated_response(page)
-
-    def filter_queryset(self, queryset):
-
-        for backend in list(self.filter_backends):
-            queryset = backend().filter_queryset(self.request, self.queryset, view=self).order_by(self.order_by)
-
-        return queryset
-

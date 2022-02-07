@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 
-from core.wideocollectorseader.models import Movie, Serie, Star,Tag,Producents
+from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
+                                              Tag)
+
 
 class BaseSeralizer(serializers.ModelSerializer):
     def to_representation(self, instance):
@@ -28,6 +30,11 @@ class BaseSeralizer(serializers.ModelSerializer):
         return self.base_is(instance, 'favourite')
 
 #Upadates
+class ProducetFormSeralizer(serializers.ModelSerializer):
+    class Meta:
+        model = Producents
+        fields = ['id','name']
+
 class StarsSerializerUpdate(serializers.ModelSerializer):
     class Meta:
         model = Star
@@ -53,6 +60,16 @@ class ShortProducent(serializers.ModelSerializer):
     class Meta:
         model=Serie
         fields = ['id','name','show_name','avatar']
+
+class SerieSlectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Serie
+        fields = ['id','name']
+
+class StarSlectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Star
+        fields = ['id','name']
 
 class ShortSeries(serializers.ModelSerializer):
     Producent = ShortProducent(many=False)
@@ -110,6 +127,11 @@ class StarsSerializer(BaseSeralizer):
         fields = '__all__'
 
 #Movies
+class ProducentSeralizerForMovie(serializers.ModelSerializer):
+    class Meta:
+        model = Producents
+        fields = '__all__'
+
 class StarsForMovies(serializers.ModelSerializer):
     class Meta:
         model = Star
@@ -122,6 +144,7 @@ class MoviesSerializer(BaseSeralizer):
     stars = StarsForMovies(many=True)
     tags  = TagsSerializer(many=True)
     serie = SeriesSerlizerForMovies(many=False)
+    producent =  ProducentSeralizerForMovie(many=False)
 
     class Meta:
         model = Movie

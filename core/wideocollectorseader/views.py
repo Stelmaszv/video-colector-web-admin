@@ -1,10 +1,15 @@
 import json
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 from pathlib import Path
+
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.views import  APIView
-from .models import Producents,Serie,Tag,Star,Movie
+from rest_framework.views import APIView
+
+from core.setings import save_mode_defult, setings_set_defult, update_setings
+
+from .models import Movie, Producents, Serie, Star, Tag
+
 
 class StartSeederView(APIView):
 
@@ -13,6 +18,8 @@ class StartSeederView(APIView):
             opserver.Seed()
 
     def api_get(self, request, *args, **kwargs):
+        save_mode_defult['save_mode']=False
+        update_setings(save_mode_defult)
         opservers=[
             TagSeader(),
             ProducentSeader(),
@@ -21,6 +28,7 @@ class StartSeederView(APIView):
             MoviesSeader()
         ]
         self.opserver(opservers)
+        setings_set_defult()
         return Response(data=[], status=status.HTTP_200_OK)
     def get(self, request, *args, **kwargs):
         return self.api_get(request)
@@ -87,6 +95,7 @@ class SeriesSeader(ApstractSeader):
         if len(item['producent']):
             Producent=self.add_one_many(item['producent'], Producents)
         print('Add Serie ' + item['name'])
+
         self.Model(
             name=item['name'],
             banner=item['banner'],
@@ -96,13 +105,15 @@ class SeriesSeader(ApstractSeader):
             country=item['country'],
             description=item['description'],
             years = item['years'],
-            number_of_sezons = item['number_of_sezons'],
-            Producent        = Producent,
+            number_of_sezons = item['number_of_sezons']
         ).save()
+
         SerieItem=Serie.objects.filter(name=item['name'])[0]
+
         if Producent is not None:
             self.add_one_many_conection(SerieItem,Producent,'series')
         self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
+
 
 class TagSeader(ApstractSeader):
 
@@ -157,6 +168,7 @@ class MoviesSeader(ApstractSeader):
             country=item['country'],
             dir=item['dir'],
             src=item['src'],
+            web_src=item['web_src'],
             date_relesed= self.add_data(item['date_relesed']),
             serie=serieel
         ).save()
@@ -170,8 +182,5 @@ class MoviesSeader(ApstractSeader):
             StarObj=Star.objects.get(name=star)
             Model.stars.add(StarObj)
             StarObj.movies.add(Model)
-
-
-
 
 

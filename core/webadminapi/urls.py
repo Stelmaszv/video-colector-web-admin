@@ -1,18 +1,50 @@
-from core.webadminapi.views.movies import MoviesView, MovieUpdataView, MovieDeteilsView, MoviePhotosView, \
-    MoviesWithStarsView, MovieNextInSeriesView, MovieAddToFavoriteView, MovieAddToRatingView, MovieAddToLikeView, \
-    MovieAddToDisLikeView
-from core.webadminapi.views.producent import ProducentsView, ProducentsDeteilsView, ProducentsUpdataView, \
-    ProducentsMoviesView, ProducentStarsView, ProducentsPhotosView, ProducentAddToFavoriteView, \
-    ProducentAddToRatingView, ProducentAddToLikeView, ProducentAddToDisLikeView
-from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteilsView, SerieUpdataView, SerieMoviesView, \
-    SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView, SerieAddToFavoriteView, SerieAddToRatingView, \
-    SerieAddToLikeView, SerieAddToDisLikeView
-from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView, StarAddToFavoriteView, \
-    StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView
-from core.webadminapi.views.tags import TagView, TagDeteilsView
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+from core.webadminapi.views.movies import (MovieAddToDisLikeView,
+                                           MovieAddToFavoriteView,
+                                           MovieAddToLikeView,
+                                           MovieAddToRatingView,
+                                           MovieDeteilsView,
+                                           MovieNextInSeriesView,
+                                           MoviePhotosView, MoviesView,
+                                           MoviesWithStarsView,
+                                           MovieUpdataView)
+from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
+                                              ProducentAddToFavoriteView,
+                                              ProducentAddToLikeView,
+                                              ProducentAddToRatingView,
+                                              ProducentsDeteilsView,
+                                              ProducentsFormView,
+                                              ProducentsMoviesView,
+                                              ProducentsPhotosView,
+                                              ProducentsSeriesView,
+                                              ProducentStarsView,
+                                              ProducentsUpdataView,
+                                              ProducentsView)
+from core.webadminapi.views.serie import (SelectOptionView,
+                                          SerieAddToDisLikeView,
+                                          SerieAddToFavoriteView,
+                                          SerieAddToLikeView,
+                                          SerieAddToRatingView,
+                                          SerieDeteilsView, SerieMoviesView,
+                                          SeriesBennersView, SeriesPhotosView,
+                                          SeriesRandomMovieView,
+                                          SeriesStarsView, SerieUpdataView,
+                                          SerieView)
+from core.webadminapi.views.stars import (StarAddToDisLikeView,
+                                          StarAddToFavoriteView,
+                                          StarAddToLikeView,
+                                          StarAddToRatingView, StarDeteilsView,
+                                          StarSelectOptionView,
+                                          StarsMoviesView, StarsPhotoView,
+                                          StarUpdateView, StarView)
+from core.webadminapi.views.tags import TagDeteilsView, TagView
 
 app_name = 'webadminapi'
 from django.urls import path
+
 urlpatterns = [
     #movies
     path('movies',                               MoviesView.as_view(), name='movies'),
@@ -28,12 +60,15 @@ urlpatterns = [
     path('movieaddtodislike/<int:pk>',           MovieAddToDisLikeView.as_view(), name='movieaddtodislike'),
     #stars
     path('stars',                                StarView.as_view(), name='stars'),
+    path('starsmovie/<int:pk>/',                 StarsMoviesView.as_view(), name='Starsmovie'),
     path('star/<int:pk>/',                       StarDeteilsView.as_view(), name='star'),
     path('starupdate/<int:pk>/',                 StarUpdateView.as_view(), name='starupdate'),
     path('staraddtofavorite/<int:pk>/',          StarAddToFavoriteView.as_view(), name='staraddtofavorite'),
     path('staraddrating/<int:pk>/',              StarAddToRatingView.as_view(), name='staraddrating'),
     path('staraddtolike/<int:pk>/',              StarAddToLikeView.as_view(), name='staraddtolike'),
     path('staraddtodislike/<int:pk>/',           StarAddToDisLikeView.as_view(), name='staraddtodislike'),
+    path('stars_form',                           StarSelectOptionView.as_view(), name='series_select'),
+    path('starsphoto/<int:pk>/',                 StarsPhotoView.as_view(), name='starsphoto'),
     #series
     path('series',                               SerieView.as_view(), name='series'),
     path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),
@@ -49,18 +84,27 @@ urlpatterns = [
     path('staraddtorating/<int:pk>/',            SerieAddToRatingView.as_view(), name='staraddtorating'),
     path('serieaddtolike/<int:pk>/',             SerieAddToLikeView.as_view(), name='serieaddtolike'),
     path('serieaddtosislike/<int:pk>/',          SerieAddToDisLikeView.as_view(), name='serieaddtosislike'),
+    path('series_select',                        SelectOptionView.as_view(), name='series_select'),
     #producent
     path('producents',                           ProducentsView.as_view(), name='producents'),
     path('producent/<int:pk>/',                  ProducentsDeteilsView.as_view(), name='producent'),
     path('producentupdata/<int:pk>/',            ProducentsUpdataView.as_view(), name='producentupdata'),
-    path('producentsmoviesview/<int:pk>/',       ProducentsMoviesView.as_view(), name='producentsmoviesview'),
-    path('producentsstarsview/<int:pk>/',        ProducentStarsView.as_view(), name='producentsstarsview'),
-    path('producentsphotosview/<int:pk>/',       ProducentsPhotosView.as_view(), name='producentsphotosview'),
+    path('producentsmovies/<int:pk>/',           ProducentsMoviesView.as_view(), name='producentsmoviesview'),
+    path('producentsstar/<int:pk>/',             ProducentStarsView.as_view(), name='producentsstarsview'),
+    path('producentsphotos/<int:pk>/',           ProducentsPhotosView.as_view(), name='producentsphotosview'),
     path('producentaddtofavorite/<int:pk>/',     ProducentAddToFavoriteView.as_view(), name='producentaddtofavorite'),
     path('producentaddtorating/<int:pk>/',       ProducentAddToRatingView.as_view(), name='producentaddtorating'),
     path('producentaddtolike/<int:pk>/',         ProducentAddToLikeView.as_view(), name='producentaddtolike'),
     path('producentaddtodislike/<int:pk>/',      ProducentAddToDisLikeView.as_view(), name='producentaddtodislike'),
+    path('producentsformview',                   ProducentsFormView.as_view(), name='producentsformview'),
+    path('producentsseries/<int:pk>/',           ProducentsSeriesView.as_view(), name='producentsseries'),
     #tags
     path('tags',                                 TagView.as_view(), name='tas'),
     path('tag/<int:pk>/',                        TagDeteilsView.as_view(), name='tag'),
+    path('tag_form',                             SelectOptionView.as_view(), name='series_select'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

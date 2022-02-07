@@ -1,0 +1,233 @@
+<app-navabr></app-navabr>
+<main class="content">
+    <div class="video-section">
+        <div class="movie" style="background-color: black;">
+            <h1 class="d-flex justify-content-center name">{{data.show_name}}</h1>
+            <ng-template [ngIf]="mode=='poster'">
+                <div class="if_poster">
+                    <video style="min-height:100%" src="{{data.src}}"
+                        class="wideo_src" id="bgvid" poster="{{data.poster}}">
+                        <source type="video/mp4">
+                    </video>
+                    <div class="controls d-flex align-items-stretch">
+                        <button id="play"><i id="playbtm" class="fas fa-play"></i></button>
+                        <button id="mute"><i id="mutebtm" class="fas fa-volume-up"></i></button>
+                        <input type="range" id="range" value="0" min="0" max="100" value="0" step="1"/>
+                        <span id="time"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
+                        <button id="fullScreen"><i id="fullScreenbtm" class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="mode=='cover'">
+                <div class="wideo-section d-flex justify-content-center cover_show">
+                    <img class="cover_js" src="{{data.avatar}}">
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+    <div class="ditels-section">
+        <div class="stars">
+            <h1 class="d-flex justify-content-center star-name">Stars</h1>
+            <div class="d-flex justify-content-center stars_js">
+                <a *ngFor="let star of data.stars" [routerLink]="['/star/',star.id]" class="card-link star_item">
+                    <img src="{{star.avatar}}" class="img-thubnail star_src">
+                </a>
+            </div>
+        </div>
+        <h1 class="d-flex justify-content-center">Movie Informaton</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    
+                    <img class="avatar_js movie_avatar" 
+                        [ngClass]="{'rating_color_good': RatingService.if_good_rating(data),
+                                    'movie_rating_mid' : RatingService.if_mid_rating(data),
+                                    'movie_rating_low' : RatingService.if_low_rating(data)
+                                   }" 
+                        src="{{data.avatar}}">
+                    <div class="procent_likes">
+                        <div class="like-procent">
+                            <div class="good" [ngStyle]="{'width': good_procent}"></div>
+                            <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button (click)="add_like()" class="action-item" [ngClass]="{'click' : if_liked}" [disabled]="if_liked"><i class="fas fa-thumbs-up"></i></button>
+                        <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-star"></i></button>
+                        <button (click)="add_dislike()" class="action-item" [ngClass]="{'click' : if_disliked}" [disabled]="if_disliked"><i class="fas fa-thumbs-down" ></i></button>
+                    </div>
+                    
+                </div>
+                <div class="col">
+                    <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
+                    <p class="description_js movie_description">{{data.description}}</p>
+                    
+                    <div class="table_information">
+                        <ng-template [ngIf]="data.producent">
+                            <div class="row">
+                                <div class="col">
+                                    Producent
+                                </div>
+                                <div class="col table_row producent_item">
+                                    <a [routerLink]="['/producent/',data.producent.id]">
+                                        {{data.producent.show_name}}
+                                    </a>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <ng-template [ngIf]="data.serie">
+                            <div class="row ">
+                                <div class="col">
+                                    Serie
+                                </div>
+                                <div class="col table_row series_item">
+                                    <a [routerLink]="['/serie/',data.serie.id]">
+                                        {{data.serie.show_name}}
+                                    </a>
+                                </div>
+                            </div>
+                        </ng-template>
+                        
+                        <ng-template [ngIf]="data.stars.length>0">
+                            <div class="row">
+                                <div class="col">
+                                    Stars
+                                </div>
+                                <div class="col stars_strig_js table_row">
+                                    <span *ngFor="let star of data.stars; let i=index">
+                                        <span class='star-string'><a [routerLink]="['/star/',star.id]" >{{star.name}}</a></span>
+                                        <ng-template [ngIf]="i<data.stars.length-1">
+                                            ,
+                                        </ng-template>
+                                    </span>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <ng-template [ngIf]="data.tags.length>0">
+                            <div class="row">
+                                <div class="col table_row">
+                                    Tags
+                                </div>
+                                <div class="col stars_strig_js">
+                                    <span *ngFor="let tag of data.tags; let i=index">
+                                        <span class='tag'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
+                                        <ng-template [ngIf]="i<data.tags.length-1">
+                                            ,
+                                        </ng-template>
+                                    </span>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Likes 
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}
+                            </div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col table_row">
+                                Ratings
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-star"></i> {{data.ratings_count | bigInt}} ({{data.avg_rating}})
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col table_row">
+                                Views
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-eye"></i> {{data.views_count | bigInt}}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col table_row">
+                                Dis Likes
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-thumbs-down"></i> {{data.disLikes_count | bigInt}}
+                            </div>
+                        </div>
+
+                        <ng-template [ngIf]="data.date_relesed>0">
+                            <div class="row">
+                                <div class="col table_row">
+                                    Date relesed
+                                </div>
+                                <div class="col table_row">
+                                    {{data.date_relesed}}
+                                </div>
+                            </div>
+                        </ng-template>
+                    
+                        <div class="row">
+                            <div class="col table_row">
+                                Added
+                            </div>
+                            <div class="col table_row">
+                                {{data.added}}
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="tabs_nav sticky-top tabs_sticky">
+            <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item galery_tab_js nav_tab" name="galery" role="presentation">
+                    <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
+                            data-bs-target="#galery-tab" type="button" role="tab" aria-controls="pills-contact"
+                            aria-selected="false">Galery
+                    </button>
+                </li>
+                <li class="nav-item movies_series_tab nav_tab" name="movies_series" role="presentation">
+                    <button class="nav-link all-series-name" id="pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="false">All movies in series
+                    </button>
+                </li>
+                <li class="nav-item movies_with_stars_tab nav_tab" name="movies_with_stars" role="presentation">
+                    <button class="nav-link all-with-star-name" id="pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                            aria-selected="false">All movies with star 
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade galery_tab_js tab_content" id="galery-tab" type="Galery" role="tabpanel" aria-labelledby="pills-galery-tab">
+                <div class="container">
+                    <div class="row galery galery-run">
+                        <app-movie-photos ID={{data.id}}></app-movie-photos>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade movies_series_tab tab_content serie-movies" id="pills-home" role="tabpanel"
+                         type="movies_in_series"
+                         aria-labelledby="pills-home-tab">
+                        <app-serie-movies ID={{data.serie.id}} top="100px"></app-serie-movies>
+            </div>
+
+            <div class="tab-pane fade movies_with_stars_tab tab_content" id="pills-profile" role="tabpanel"
+                         type="all_movies_with_star"
+                         aria-labelledby="pills-profile-tab">
+                         <app-stars-movies ID={{data.id}} top="100px"></app-stars-movies>       
+            </div>
+        </div>
+    </div>
+</main>
