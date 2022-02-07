@@ -1,9 +1,12 @@
 import json
 import os
 import shutil
+
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
+
 from core.setings import get_josn_file
+
 
 def set_model(Model):
     def set_avg(Model):

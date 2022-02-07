@@ -1,16 +1,23 @@
 import os
 
+from django_filters import rest_framework as filters
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication,AbstractGenericsAPIViewExtended
+
+from core.webadminapi.core import (AbstractDeteilsView,
+                                   AbstractGenericsAPIView,
+                                   AbstractGenericsAPIViewExtended,
+                                   AbstractUpdateView, Authentication)
 from core.webadminapi.filters import StarFilter
-from core.webadminapi.serializers import StarsSerializer, StarsSerializerUpdate, StarSlectSerializer, MoviesSerializer, \
-    PhotoSerializerMovie
+from core.webadminapi.serializers import (MoviesSerializer,
+                                          PhotoSerializerMovie,
+                                          StarSlectSerializer, StarsSerializer,
+                                          StarsSerializerUpdate)
 from core.wideocollectorseader.models import Star
-from django_filters import rest_framework as filters
 from videocolectorwebadmin.global_setings import photo_ext
+
 
 class StarsPaginator(PageNumberPagination):
     page_size = 20

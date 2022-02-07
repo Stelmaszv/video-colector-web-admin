@@ -1,11 +1,15 @@
 import json
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 from pathlib import Path
+
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.views import  APIView
-from core.setings import update_setings, setings_set_defult, save_mode_defult
-from .models import Producents,Serie,Tag,Star,Movie
+from rest_framework.views import APIView
+
+from core.setings import save_mode_defult, setings_set_defult, update_setings
+
+from .models import Movie, Producents, Serie, Star, Tag
+
 
 class StartSeederView(APIView):
 

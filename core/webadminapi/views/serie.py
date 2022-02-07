@@ -1,17 +1,26 @@
 import os
+import random
+
 from django.http import Http404
+from django_filters import rest_framework as filters
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
-from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication, \
-    AbstractGenericsAPIViewExtended
-from core.webadminapi.filters import SerieFilter, MovieFilter
-from core.webadminapi.serializers import SerieSerializer, MoviesSerializer, StarsSerializer, SerieSerializerUpdate, \
-    PhotoSerializerSeries, BannerSerializer,SerieSlectSerializer
+
+from core.webadminapi.core import (AbstractDeteilsView,
+                                   AbstractGenericsAPIView,
+                                   AbstractGenericsAPIViewExtended,
+                                   AbstractUpdateView, Authentication)
+from core.webadminapi.filters import MovieFilter, SerieFilter
+from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
+                                          PhotoSerializerSeries,
+                                          SerieSerializer,
+                                          SerieSerializerUpdate,
+                                          SerieSlectSerializer,
+                                          StarsSerializer)
 from core.wideocollectorseader.models import Serie
 from videocolectorwebadmin.global_setings import photo_ext
-import random
+
 
 class SeriesPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries
@@ -46,6 +55,8 @@ class SeriesBennersView(AbstractGenericsAPIView):
     queryset = Serie.objects.all()
     Model = Serie
 
+
+
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         dir= Model.dir+'\\banners'
@@ -62,7 +73,7 @@ class SeriesBennersView(AbstractGenericsAPIView):
         else:
             return banners
         return banners
-
+    
 class SerieView(AbstractGenericsAPIView):
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()

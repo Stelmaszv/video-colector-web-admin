@@ -1,22 +1,50 @@
 
-from core.webadminapi.views.movies import MoviesView, MovieUpdataView, MovieDeteilsView, MoviePhotosView, \
-    MoviesWithStarsView, MovieNextInSeriesView, MovieAddToFavoriteView, MovieAddToRatingView, MovieAddToLikeView, \
-    MovieAddToDisLikeView
-from core.webadminapi.views.producent import ProducentsView, ProducentsDeteilsView, ProducentsUpdataView, \
-    ProducentsMoviesView, ProducentStarsView, ProducentsPhotosView, ProducentAddToFavoriteView, \
-    ProducentAddToRatingView, ProducentAddToLikeView, ProducentAddToDisLikeView, ProducentsFormView, \
-    ProducentsSeriesView
-from core.webadminapi.views.serie import SerieView, SeriesStarsView, SerieDeteilsView, SerieUpdataView, SerieMoviesView, \
-    SeriesPhotosView, SeriesRandomMovieView, SeriesBennersView, SerieAddToFavoriteView, SerieAddToRatingView, \
-    SerieAddToLikeView, SerieAddToDisLikeView, SelectOptionView
-from core.webadminapi.views.stars import StarView, StarDeteilsView, StarUpdateView, StarAddToFavoriteView, \
-    StarAddToRatingView, StarAddToLikeView, StarAddToDisLikeView, StarSelectOptionView, StarsMoviesView, StarsPhotoView
-from core.webadminapi.views.tags import TagView, TagDeteilsView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from core.webadminapi.views.movies import (MovieAddToDisLikeView,
+                                           MovieAddToFavoriteView,
+                                           MovieAddToLikeView,
+                                           MovieAddToRatingView,
+                                           MovieDeteilsView,
+                                           MovieNextInSeriesView,
+                                           MoviePhotosView, MoviesView,
+                                           MoviesWithStarsView,
+                                           MovieUpdataView)
+from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
+                                              ProducentAddToFavoriteView,
+                                              ProducentAddToLikeView,
+                                              ProducentAddToRatingView,
+                                              ProducentsDeteilsView,
+                                              ProducentsFormView,
+                                              ProducentsMoviesView,
+                                              ProducentsPhotosView,
+                                              ProducentsSeriesView,
+                                              ProducentStarsView,
+                                              ProducentsUpdataView,
+                                              ProducentsView)
+from core.webadminapi.views.serie import (SelectOptionView,
+                                          SerieAddToDisLikeView,
+                                          SerieAddToFavoriteView,
+                                          SerieAddToLikeView,
+                                          SerieAddToRatingView,
+                                          SerieDeteilsView, SerieMoviesView,
+                                          SeriesBennersView, SeriesPhotosView,
+                                          SeriesRandomMovieView,
+                                          SeriesStarsView, SerieUpdataView,
+                                          SerieView)
+from core.webadminapi.views.stars import (StarAddToDisLikeView,
+                                          StarAddToFavoriteView,
+                                          StarAddToLikeView,
+                                          StarAddToRatingView, StarDeteilsView,
+                                          StarSelectOptionView,
+                                          StarsMoviesView, StarsPhotoView,
+                                          StarUpdateView, StarView)
+from core.webadminapi.views.tags import TagDeteilsView, TagView
+
 app_name = 'webadminapi'
 from django.urls import path
+
 urlpatterns = [
     #movies
     path('movies',                               MoviesView.as_view(), name='movies'),

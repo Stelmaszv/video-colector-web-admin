@@ -1,16 +1,23 @@
-from django.contrib.auth import get_user_model, authenticate
-from django.http import Http404
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status, generics
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
-from core.wideocollectorseader.models import Favourite, Rating, Likes, DisLikess
-from django.utils.deprecation import MiddlewareMixin
+
 import os
 
+from django.contrib.auth import authenticate, get_user_model
+from django.http import Http404
+from django.utils.deprecation import MiddlewareMixin
+from rest_framework import generics, status
+from rest_framework.authentication import (BasicAuthentication,
+                                           SessionAuthentication)
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from core.wideocollectorseader.models import (DisLikess, Favourite, Likes,
+                                              Rating)
+
+
 class RangesMiddleware(MiddlewareMixin):
+
     def process_response(self, request, response):
         if response.status_code != 200 or not hasattr(response, 'file_to_stream'):
             return response

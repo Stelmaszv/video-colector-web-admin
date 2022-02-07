@@ -1,14 +1,23 @@
 import os
+
 from django.http import Http404
+from django_filters import rest_framework as filters
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django_filters import rest_framework as filters
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication, \
-    LargeResultsSetPagination, AbstractGenericsAPIViewExtended
+
+from core.webadminapi.core import (AbstractDeteilsView,
+                                   AbstractGenericsAPIView,
+                                   AbstractGenericsAPIViewExtended,
+                                   AbstractUpdateView, Authentication,
+                                   LargeResultsSetPagination)
 from core.webadminapi.filters import ProducentsFilter
-from core.webadminapi.serializers import ProducentsSerializer, PhotoSerializerSeries, ProducentsSerializerUpdate, \
-    MoviesSerializer, StarsSerializer, ProducetFormSeralizer, SerieSerializer
+from core.webadminapi.serializers import (MoviesSerializer,
+                                          PhotoSerializerSeries,
+                                          ProducentsSerializer,
+                                          ProducentsSerializerUpdate,
+                                          ProducetFormSeralizer,
+                                          SerieSerializer, StarsSerializer)
 from core.wideocollectorseader.models import Producents, Serie
 
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")

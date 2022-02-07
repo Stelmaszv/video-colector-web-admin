@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 
-from core.wideocollectorseader.models import Movie, Serie, Star,Tag,Producents
+from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
+                                              Tag)
+
 
 class BaseSeralizer(serializers.ModelSerializer):
     def to_representation(self, instance):

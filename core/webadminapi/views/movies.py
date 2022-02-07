@@ -1,12 +1,20 @@
 import os
+
+from django_filters import rest_framework as filters
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-from core.webadminapi.core import AbstractDeteilsView, AbstractUpdateView, AbstractGenericsAPIView, Authentication,AbstractGenericsAPIViewExtended
-from core.webadminapi.serializers import MoviesSerializer, PhotoSerializerMovie, MoviesSerializerUpdate
+
+from core.webadminapi.core import (AbstractDeteilsView,
+                                   AbstractGenericsAPIView,
+                                   AbstractGenericsAPIViewExtended,
+                                   AbstractUpdateView, Authentication)
+from core.webadminapi.filters import MovieFilter
+from core.webadminapi.serializers import (MoviesSerializer,
+                                          MoviesSerializerUpdate,
+                                          PhotoSerializerMovie)
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
-from django_filters import rest_framework as filters
-from core.webadminapi.filters import MovieFilter
+
 
 class MoviesView(AbstractGenericsAPIView):
     queryset = Movie.objects.all()
