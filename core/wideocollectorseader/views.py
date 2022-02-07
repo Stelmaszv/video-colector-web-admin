@@ -18,7 +18,7 @@ class StartSeederView(APIView):
             opserver.Seed()
 
     def api_get(self, request, *args, **kwargs):
-        save_mode_defult['save_mode']=False
+        save_mode_defult['save_mode']=True
         update_setings(save_mode_defult)
         opservers=[
             TagSeader(),
