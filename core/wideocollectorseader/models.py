@@ -3,9 +3,7 @@ import os
 import shutil
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
-
 from core.setings import get_josn_file
-
 
 def set_model(Model):
     def set_avg(Model):
@@ -40,7 +38,6 @@ def save(Model,self):
         UpdateJSON(self)
         super(Model, self).save()
     super(Model, self).save()
-
 
 def UpdateJSON(Model):
 
@@ -154,8 +151,7 @@ class Producents(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='ProducentDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='ProducentFavourite', blank=True)
-    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',
-                                       blank=True)
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
     def save(self, *args, **kwargs):
@@ -233,8 +229,7 @@ class Star(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Starlikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='StarDisLike', blank=True)
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='StarFavourite', blank=True)
-    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='StarRating',
-                                       blank=True)
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='StarRating',blank=True)
 
     def save(self, *args, **kwargs):
         save(Star, self)
@@ -272,10 +267,8 @@ class Movie(models.Model):
     favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='MovieFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',blank=True)
 
-
     def delete(self, *args, **kwargs):
         delete(Movie,self)
-
 
     def save(self, *args, **kwargs):
         save(Movie,self)
