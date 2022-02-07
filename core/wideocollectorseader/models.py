@@ -55,21 +55,22 @@ def UpdateJSON(Model):
         fields = []
         for field in Model._meta.get_fields():
             if field.name in allow_fields:
-                if field.name != "date_relesed" and field.name !=  "date_of_birth":
-                    if hasattr(Model,field.name):
-                        fields.append({"db": field.name, "value" : str(getattr(Model,field.name))})
-                else:
-                    if hasattr(Model, "date_relesed"):
-                        fields.append(
-                            {"db": field.name, "value" : add_data_to_JSON(Model.date_relesed), "data": "True"}
-                        )
-            return fields
+                if field.name != "date_relesed" and field.name != "date_of_birth":
+                    if hasattr(Model, field.name):
+                        fields.append({"db": field.name, "value": str(getattr(Model, field.name))})
+                    else:
+                        if hasattr(Model, "date_relesed"):
+                            fields.append(
+                                {"db": field.name, "value": add_data_to_JSON(Model.date_relesed), "data": "True"}
+                            )
+        return fields
 
     def retrun_config_json(Model):
         data={}
         data['fields']=  return_fields(Model)
         data['tags']  =  return_tags(Model)
-        #data['stars'] =  return_stars(Model) #erorr in main collector
+        if hasattr(Model, "stars"):
+            data['stars'] =  return_stars(Model) #erorr in main collector
         return json.dumps(data)
 
     config=Model.dir + '/config.JSON'
@@ -236,7 +237,12 @@ class Star(models.Model):
                                        blank=True)
 
     def save(self, *args, **kwargs):
-        super(Star, self).save(*args, **kwargs)
+        save_mode = get_josn_file()['save_mode']
+        if save_mode:
+            set_model(self)
+            UpdateJSON(self)
+        else:
+            super(Star, self).save(*args, **kwargs)
         """
         set_model(self)
         super(Star, self).save(*args, **kwargs)
@@ -289,8 +295,13 @@ class Movie(models.Model):
         """
 
     def save(self, *args, **kwargs):
-        print('save_mode',get_josn_file()['save_mode'])
-        super(Movie, self).save(*args, **kwargs)
+        save_mode=get_josn_file()['save_mode']
+        print(save_mode)
+        if save_mode:
+            set_model(self)
+            UpdateJSON(self)
+        else:
+            super(Movie, self).save(*args, **kwargs)
         """
         set_model(self)
         super(Movie, self).save(*args, **kwargs)
