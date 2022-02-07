@@ -260,6 +260,7 @@ class Movie(models.Model):
     show_name = models.CharField(max_length=200, default='', null=True,blank=True)
     avatar = models.CharField(max_length=200, default='', null=True)
     src = models.CharField(max_length=200, default='', null=True)
+    web_src = models.CharField(max_length=200, default='', null=True)
     poster = models.CharField(max_length=200, default='', null=True,blank=True)
     description = models.TextField(default='', null=True,blank=True)
     country = models.CharField(max_length=200, default='', null=True,blank=True)
@@ -283,15 +284,18 @@ class Movie(models.Model):
 
 
     def delete(self, *args, **kwargs):
+        ##dirs = self.src.split('\\')
+        ##src  = self.dir + '\\' + dirs[len(dirs) - 1]
+        print(self.src)
+        #print(self.serie.dir + '\\' + src)
+        # os.remove(self.dir+'\\'+dirs[len(dirs)-1])
+        #dirs = self.src.split('\\')
         #shutil.rmtree(self.dir)
-        dirs=self.src.split('\\')
-        print(self.dir+dirs[len(dirs)-1])
-        ##os.remove(self.src)
-        ##super(Movie, self).delete(*args, **kwargs)
+        #os.remove(self.dir+'\\'+dirs[len(dirs)-1])
+        #super(Movie, self).delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         save_mode=get_josn_file()['save_mode']
-        print(save_mode)
         if save_mode:
             set_model(self)
             UpdateJSON(self)

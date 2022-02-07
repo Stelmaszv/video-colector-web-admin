@@ -169,6 +169,7 @@ class MoviesSeader(ApstractSeader):
             country=item['country'],
             dir=item['dir'],
             src=item['src'],
+            web_src=item['web_src'],
             date_relesed= self.add_data(item['date_relesed']),
             serie=serieel
         ).save()
