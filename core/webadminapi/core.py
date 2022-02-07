@@ -10,7 +10,6 @@ from core.wideocollectorseader.models import Favourite, Rating, Likes, DisLikess
 from django.utils.deprecation import MiddlewareMixin
 import os
 
-
 class RangesMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
         if response.status_code != 200 or not hasattr(response, 'file_to_stream'):
@@ -146,7 +145,6 @@ class AbstractGenericsAPIView(generics.ListAPIView):
     Model =None
     pagination_class = LargeResultsSetPagination
 
-
 class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
 
     Model=None
@@ -163,26 +161,3 @@ class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
             return self.Model.objects.get(pk=pk)
         except self.Model.DoesNotExist:
             raise Http404
-
-    """
-    def get_object(self, pk):
-        try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
-            raise Http404
-
-    def list(self, request):
-
-        queryset=self.filter_queryset(self.queryset)
-        serializer = self.serializer_class(queryset, many=True,context={'request': request.user})
-        page = self.paginate_queryset(serializer.data)
-        return self.get_paginated_response(page)
-
-    def filter_queryset(self, queryset):
-
-        for backend in list(self.filter_backends):
-            queryset = backend().filter_queryset(self.request, self.get_queryset(), view=self).order_by(self.order_by)
-
-        return queryset
-    """
-
