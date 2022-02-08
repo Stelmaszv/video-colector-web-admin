@@ -81,6 +81,7 @@ class ProducentSeader(ApstractSeader):
             show_name=item['show_name'],
             avatar=item['avatar'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             country=item['country'],
             description=item['description']
         ).save()
@@ -102,6 +103,7 @@ class SeriesSeader(ApstractSeader):
             show_name=item['show_name'],
             avatar=item['avatar'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             country=item['country'],
             description=item['description'],
             years = item['years'],
@@ -145,6 +147,7 @@ class StarSeader(ApstractSeader):
             birth_place=item['birth_place'],
             nationality=item['nationality'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             date_of_birth = self.add_data(item['date_of_birth'])
         ).save()
         StarItem = Star.objects.latest('id')
@@ -167,6 +170,7 @@ class MoviesSeader(ApstractSeader):
             description=item['description'],
             country=item['country'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             src=item['src'],
             web_src=item['web_src'],
             date_relesed= self.add_data(item['date_relesed']),
