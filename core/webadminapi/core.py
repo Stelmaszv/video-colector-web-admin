@@ -11,7 +11,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from core.wideocollectorseader.models import (DisLikess, Favourite, Likes,
                                               Rating)
 
@@ -125,7 +125,6 @@ class AbstractUpdateView(AbstractDeteilsView):
     queryset = []
     serializer_class=None
 
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def put(self, request, pk, format=None):
