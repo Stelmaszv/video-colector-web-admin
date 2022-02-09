@@ -212,9 +212,7 @@ export class BaseListComponent implements OnInit {
           (error) => {
             console.log(error.statusText)
             if (error.statusText == 'Unauthorized'){
-              localStorage.removeItem('tokkenAccess');
-              localStorage.removeItem('tokkenRefresh');
-              this.Router.navigate(['/login'])
+              this.Router.navigate(['/logout'])
             }
           }
         );

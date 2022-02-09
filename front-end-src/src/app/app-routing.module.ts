@@ -11,9 +11,12 @@ import {MianSeriesComponent} from './Components/main-components/mian-series/mian
 import {MainStarsComponent} from './Components/main-components/main-stars/main-stars.component'
 import {MainProducentComponent} from './Components/main-components/main-producent/main-producent.component'
 import { LoginComponent } from './Components/login/login.component';
+import { LogoutComponent } from './Components/logout/logout.component';
 import { AuthGuard } from './Components/gard/auth.guard';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -24,8 +27,12 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-  path: 'start',
-  component: StartComponentComponent
+    path: 'logout',
+    component: LogoutComponent
+  },
+  {
+    path: 'start',
+    component: StartComponentComponent
   },
   {
     path: 'admin/movies',

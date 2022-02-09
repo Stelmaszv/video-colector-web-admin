@@ -37,6 +37,7 @@ import { MainProducentComponent } from './Components/main-components/main-produc
 import { LoginComponent } from './Components/login/login.component';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
+import { LogoutComponent } from './Components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { MainAuthComponent } from './Components/admin/main-auth/main-auth.compon
     MainProducentComponent,
     LoginComponent,
     AdminMoviesComponent,
-    MainAuthComponent
+    MainAuthComponent,
+    LogoutComponent
   ],
   imports: [
     AppRoutingModule,

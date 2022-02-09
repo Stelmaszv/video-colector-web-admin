@@ -12,8 +12,24 @@
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/stars']" [routerLinkActive]="'active'">Stars</a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/producents']" [routerLinkActive]="'active'">Producent</a>
         </li>
+
+        <ng-template [ngIf]="auth">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/admin']" [routerLinkActive]="'active'">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/logout']" [routerLinkActive]="'active'">Logout</a>
+            </li>
+        </ng-template>
+
+        <ng-template [ngIf]="!auth">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="'active'">Login</a>
+            </li>
+        </ng-template>
     </ul>
 </nav>
