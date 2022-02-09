@@ -21,6 +21,7 @@ class MoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = MovieFilter
+    permission_classes = [IsAuthenticated]
     order_by ='-date_relesed'
 
 class MoviesWithStarsView(AbstractGenericsAPIViewExtended):
