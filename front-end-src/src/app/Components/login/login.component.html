@@ -1,2 +1,23 @@
 <app-navabr></app-navabr>
-<p>login works!</p>
+<form [formGroup]="login">
+    <div class="row">
+        <div class="col">
+            <label for="name">Name: </label>
+        </div>
+        <div class="col">
+            <input id="login" type="text" formControlName="login" value="{{login.value.login}}">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label for="name">Password: </label>
+        </div>
+        <div class="col">
+            <input id="password" type="text" formControlName="password" value="{{login.value.password}}">
+        </div>
+    </div>
+    <button type="button" (click)="start_login()">
+        Reset
+    </button>
+</form>

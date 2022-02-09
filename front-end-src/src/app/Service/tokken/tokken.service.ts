@@ -20,16 +20,10 @@ export class TokkenService {
   save_tokken(tokken:any){
     localStorage.setItem('tokkenAccess',tokken.access)
     localStorage.setItem('tokkenRefresh',tokken.refresh)
-    this.Router.navigate(['/movies'])
   }
 
   if_isset_tokken(){
-    if(localStorage['tokkenAccess']){
-      this.Router.navigate(['/movies'])
-      return false
-    }
-     this.Router.navigate(['/login'])
-     return false
+    return localStorage['tokkenAccess']
   }
 
   
