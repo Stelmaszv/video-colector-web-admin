@@ -29,7 +29,7 @@ export class BaseListComponent implements OnInit {
   protected response : any;
   protected page:number=1 ;
 
-  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService,public TokkenService:TokkenService) { }
+  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService) { }
 
   public add_star(add_star:number):void
   {
@@ -77,7 +77,6 @@ export class BaseListComponent implements OnInit {
   public ngOnInit(): void 
   {
     this.data=[]
-    //this.TokkenService.getTokken()
     this.load_data()
     this.onInit()
     this.scroller()

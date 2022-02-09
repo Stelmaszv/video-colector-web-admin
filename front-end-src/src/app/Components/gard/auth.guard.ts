@@ -10,13 +10,6 @@ export class AuthGuard implements CanActivate {
   constructor(private Tokken:TokkenService,private Router:Router){}
   canActivate():boolean {
     return  !!this.Tokken.if_isset_tokken()
-    if(this.Tokken.if_isset_tokken()){
-      this.Router.navigate(['/movies'])
-      return true
-    }else{
-      this.Router.navigate(['/login'])
-      return false
-    }
   }
   
 }

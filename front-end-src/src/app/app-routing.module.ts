@@ -12,6 +12,7 @@ import {MainStarsComponent} from './Components/main-components/main-stars/main-s
 import {MainProducentComponent} from './Components/main-components/main-producent/main-producent.component'
 import { LoginComponent } from './Components/login/login.component';
 import { AuthGuard } from './Components/gard/auth.guard';
+import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 const routes: Routes = [
   {
     path: '',
@@ -26,9 +27,13 @@ const routes: Routes = [
   component: StartComponentComponent
   },
   {
-    path: 'movies',
-    component: MianMoviesComponent,
+    path: 'admin/movies',
+    component: AdminMoviesComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path: 'movies',
+    component: MianMoviesComponent
   },
   {
     path: 'movie/:id',
