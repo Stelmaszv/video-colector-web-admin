@@ -36,6 +36,7 @@ import { MainStarsComponent } from './Components/main-components/main-stars/main
 import { MainProducentComponent } from './Components/main-components/main-producent/main-producent.component';
 import { LoginComponent } from './Components/login/login.component';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
+import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movi
     MainStarsComponent,
     MainProducentComponent,
     LoginComponent,
-    AdminMoviesComponent
+    AdminMoviesComponent,
+    MainAuthComponent
   ],
   imports: [
     AppRoutingModule,

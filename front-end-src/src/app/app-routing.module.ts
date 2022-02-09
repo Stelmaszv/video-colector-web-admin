@@ -13,6 +13,7 @@ import {MainProducentComponent} from './Components/main-components/main-producen
 import { LoginComponent } from './Components/login/login.component';
 import { AuthGuard } from './Components/gard/auth.guard';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
+import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
 const routes: Routes = [
   {
     path: '',
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'admin/movies',
     component: AdminMoviesComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin',
+    component: MainAuthComponent,
     canActivate:[AuthGuard]
   },
   {

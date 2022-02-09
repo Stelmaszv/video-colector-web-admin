@@ -3,7 +3,7 @@ import {HttpService} from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import {ProcentService} from '../../../Service/procent/procent.service'
 import {TokkenService}  from '../../../Service/tokken/tokken.service'
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-base-list',
   templateUrl: './base-list.component.html',
@@ -28,8 +28,9 @@ export class BaseListComponent implements OnInit {
   protected results : any;
   protected response : any;
   protected page:number=1 ;
+  protected auth:any=false
 
-  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService) { }
+  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService,private Router:Router) { }
 
   public add_star(add_star:number):void
   {
@@ -180,19 +181,44 @@ export class BaseListComponent implements OnInit {
 
   protected load_data():void
   {
-    if (this.loading){
-      this.loading=false
-      console.log(this.url+this.page+'&'+this.filter_url)
-      this.on_set_url()
-      this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
-        (response) => {
-          if (response.hasOwnProperty('results')){
-            this.response=response
-            this.set_results()
-            this.loading=true
+    if (this.auth==false){
+      if (this.loading){
+        this.loading=false
+        console.log(this.url+this.page+'&'+this.filter_url)
+        this.on_set_url()
+        this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
+          (response) => {
+            if (response.hasOwnProperty('results')){
+              this.response=response
+              this.set_results()
+              this.loading=true
+            }
           }
-        }
-      );
+        );
+      }
+    }else{
+      if (this.loading){
+        this.loading=false
+        console.log(this.url+this.page+'&'+this.filter_url)
+        this.on_set_url()
+        this.httpService.get_url_auth(this.url+this.page+'&'+this.filter_url).subscribe(
+          (response) => {
+            if (response.hasOwnProperty('results')){
+              this.response=response
+              this.set_results()
+              this.loading=true
+            }
+          },
+          (error) => {
+            console.log(error.statusText)
+            if (error.statusText == 'Unauthorized'){
+              localStorage.removeItem('tokkenAccess');
+              localStorage.removeItem('tokkenRefresh');
+              this.Router.navigate(['/login'])
+            }
+          }
+        );
+      }
     }
   }
 

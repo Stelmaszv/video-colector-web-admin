@@ -21,12 +21,11 @@ export class LoginComponent implements OnInit {
       "username" :this.login.value.login,
       "password" :this.login.value.password
     })
-    this.Router.navigate(['/login'])
   }
 
   ngOnInit(): void {
     if (this.TokkenService.if_isset_tokken()){
-      this.Router.navigate(['/movies'])
+      this.Router.navigate(['admin'])
     }
   }
 
