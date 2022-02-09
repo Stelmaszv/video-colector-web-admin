@@ -14,6 +14,7 @@ import {MianMoviesComponent} from './Components/main-components/mian-movies/mian
 import {MianSeriesComponent} from './Components/main-components/mian-series/mian-series.component'
 import {MainStarsComponent} from './Components/main-components/main-stars/main-stars.component'
 import {MainProducentComponent} from './Components/main-components/main-producent/main-producent.component'
+import { AuthGuard } from './Components/gard/auth.guard';
 const routes: Routes = [
   {
     path: '',
@@ -25,7 +26,8 @@ const routes: Routes = [
   },
   {
     path: 'movies',
-    component: MianMoviesComponent
+    component: MianMoviesComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'movie/:id',

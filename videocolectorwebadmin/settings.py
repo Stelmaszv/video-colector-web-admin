@@ -27,8 +27,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -42,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'core.wideocollectorseader',
-    'core.webadminapi'
+    'core.webadminapi',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -55,11 +55,13 @@ MIDDLEWARE = [
     'core.webadminapi.core.RangesMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'videocolectorwebadmin.urls'
@@ -144,3 +146,5 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ]
 }
+
+CORS_ORIGIN_WHITELIST = 'http://localhost:4200',

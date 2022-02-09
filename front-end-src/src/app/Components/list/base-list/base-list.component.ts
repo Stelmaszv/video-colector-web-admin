@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import {ProcentService} from '../../../Service/procent/procent.service'
+import {TokkenService}  from '../../../Service/tokken/tokken.service'
 
 @Component({
   selector: 'app-base-list',
@@ -28,7 +29,7 @@ export class BaseListComponent implements OnInit {
   protected response : any;
   protected page:number=1 ;
 
-  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService) { }
+  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService,public TokkenService:TokkenService) { }
 
   public add_star(add_star:number):void
   {
@@ -76,6 +77,7 @@ export class BaseListComponent implements OnInit {
   public ngOnInit(): void 
   {
     this.data=[]
+    //this.TokkenService.getTokken()
     this.load_data()
     this.onInit()
     this.scroller()

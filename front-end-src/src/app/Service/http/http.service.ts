@@ -10,7 +10,11 @@ import { Injectable } from  '@angular/core';
 export class HttpService {
 
   constructor(private http:HttpClient) { }
-  get_url(url :string) {
+  public get_url(url :string) {
     return this.http.get(url);
+  }
+
+  public post_url(url :string,data:any) {
+    return this.http.post(url,data);
   }
 }
