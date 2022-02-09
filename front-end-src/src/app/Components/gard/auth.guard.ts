@@ -9,7 +9,7 @@ import { TokkenService } from 'src/app/Service/tokken/tokken.service';
 export class AuthGuard implements CanActivate {
   constructor(private Router:Router,private Tokken:TokkenService){}
   canActivate():boolean {
-    return !!this.Tokken.ifIssetTokken()
+    return !!this.Tokken.if_isset_tokken()
   }
   
 }

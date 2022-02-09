@@ -11,22 +11,24 @@ export class TokkenService {
   private url='http://127.0.0.1:8000/api/token/'
   constructor(private http:HttpService,private Router:Router) { }
 
-  public getTokken(user:any){
+  public get_tokken(user:any){
     this.http.post_url(this.url,user).subscribe(tokken => {
-      this.saveTokken(tokken)
+      this.save_tokken(tokken)
     });
   }
 
-  saveTokken(tokken:any){
+  save_tokken(tokken:any){
     localStorage.setItem('tokkenAccess',tokken.access)
     localStorage.setItem('tokkenRefresh',tokken.refresh)
     this.Router.navigate(['/movies'])
   }
 
-  ifIssetTokken(){
+  if_isset_tokken(){
     if(localStorage['tokkenAccess']){
-      return true;
+      this.Router.navigate(['/movies'])
+      return false
     }
+     this.Router.navigate(['/login'])
      return false
   }
 

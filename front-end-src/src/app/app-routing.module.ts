@@ -2,10 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StartComponentComponent } from './Components/start-component/start-component.component'
-import { MoviesComponent } from './Components/movies-components/movies/movies.component'
-import { StarsComponent } from './Components/list/stars/stars.component'
-import { SeriesComponent } from './Components/list/series/series.component'
-import { ProducentComponent } from './Components/list/producent/producent.component'
 import {MovieidComponent}     from './Components/id/movieid/movieid.component'
 import {ProducentIdComponent} from './Components/id/producent-id/producent-id.component'
 import {SerieIdComponent} from './Components/id/serie-id/serie-id.component'
@@ -14,11 +10,16 @@ import {MianMoviesComponent} from './Components/main-components/mian-movies/mian
 import {MianSeriesComponent} from './Components/main-components/mian-series/mian-series.component'
 import {MainStarsComponent} from './Components/main-components/main-stars/main-stars.component'
 import {MainProducentComponent} from './Components/main-components/main-producent/main-producent.component'
+import { LoginComponent } from './Components/login/login.component';
 import { AuthGuard } from './Components/gard/auth.guard';
 const routes: Routes = [
   {
     path: '',
     component: StartComponentComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
   path: 'start',

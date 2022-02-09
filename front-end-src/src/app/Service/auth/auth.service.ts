@@ -7,7 +7,4 @@ import { TokkenService } from '../tokken/tokken.service';
 export class AuthService {
 
   constructor(private Tokken:TokkenService) { }
-  ifAuth(){
-    return !!this.Tokken.ifIssetTokken()
-  }
 }

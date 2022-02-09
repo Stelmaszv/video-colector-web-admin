@@ -34,6 +34,7 @@ import { MianMoviesComponent } from './Components/main-components/mian-movies/mi
 import { MianSeriesComponent } from './Components/main-components/mian-series/mian-series.component';
 import { MainStarsComponent } from './Components/main-components/main-stars/main-stars.component';
 import { MainProducentComponent } from './Components/main-components/main-producent/main-producent.component';
+import { LoginComponent } from './Components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { MainProducentComponent } from './Components/main-components/main-produc
     MianMoviesComponent,
     MianSeriesComponent,
     MainStarsComponent,
-    MainProducentComponent
+    MainProducentComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
