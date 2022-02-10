@@ -19,6 +19,13 @@ export class BaseIDComponent implements OnInit {
   public good_procent:any
   public bad_procent:any
   public if_favorite=false
+  protected server:string='http://127.0.0.1:8000/'
+  protected add_to_like_url:string=''
+  protected add_to_rating_url:string=''
+  protected add_to_dislike_url:string=''
+  protected update_views_url:string=''
+  protected fovorits_url:string=''
+
 
   public addrate = new FormGroup({
     rate: new FormControl(1)
@@ -36,12 +43,12 @@ export class BaseIDComponent implements OnInit {
   {
     this.data.likes_count=this.data.likes_count+1
     this.set_procent(this.data)
-    this.add_action('http://127.0.0.1:8000/movieaddtolike/'+this.id+'/')
+    this.add_action(this.server+this.add_to_like_url+this.id+'/')
   }
 
   public add_to_rating():void
   {
-    this.add_action('http://127.0.0.1:8000/movieaddtorating/'+this.id+'/?rate='+this.addrate.value.rate)
+    this.add_action(this.server+this.add_to_rating_url+this.id+'/?rate='+this.addrate.value.rate)
     window.location.reload();
   }
 
@@ -49,19 +56,19 @@ export class BaseIDComponent implements OnInit {
   {
     this.data.disLikes_count=this.data.disLikes_count+1
     this.set_procent(this.data)
-    this.add_action('http://127.0.0.1:8000/movieaddtodislike/'+this.id+'/')
+    this.add_action(this.server+this.add_to_dislike_url+this.id+'/')
   }
 
   private update_views(id:any):void
   {
     this.data.views_count=this.data.views_count+1
-    this.add_action('http://127.0.0.1:8000/movieaupdateviews/'+id+'/')
+    this.add_action(this.server+this.update_views_url+this.id+'/')
   }
 
   public add_to_if_favorite():void
   {
     this.if_favorite=!this.if_favorite
-    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
+    this.add_action(this.server+this.fovorits_url+this.id+'/')
   }
 
   private add_action(url:string){
