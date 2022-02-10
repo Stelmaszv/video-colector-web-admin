@@ -15,11 +15,9 @@ $starsBGColor:black;
 
     .stats{
         display: inline;
-        padding: 1rem;
         text-align: center;
-        .stats_font{
-            
-        }
+        font-size: 1rem;
+        color: red;
         .stats_rate{
             font-style: italic;
         }
@@ -33,8 +31,9 @@ $starsBGColor:black;
         display: inline;
         padding: 1rem;
         text-align: center;
+        font-size: 15px;
         .stats_font{
-            
+            margin-left: 4px;
         }
         .stats_rate{
             font-style: italic;
