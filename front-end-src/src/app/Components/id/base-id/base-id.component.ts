@@ -4,6 +4,7 @@ import { HttpService } from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import { Router } from '@angular/router';
 import { TokkenService } from 'src/app/Service/tokken/tokken.service'; 
+import { FormControl ,FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-base-id',
@@ -18,9 +19,10 @@ export class BaseIDComponent implements OnInit {
   public good_procent:any
   public bad_procent:any
   public if_favorite=false
-  public if_liked=false
-  public if_disliked=false
-  public if_rating=false
+
+  public addrate = new FormGroup({
+    rate: new FormControl(1)
+  });
 
   constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,private Router:Router,public TokkenService:TokkenService) { }
 
@@ -32,7 +34,6 @@ export class BaseIDComponent implements OnInit {
 
   public add_like():void
   {
-    this.if_liked=!this.if_liked
     this.data.likes_count=this.data.likes_count+1
     this.set_procent(this.data)
     this.add_action('http://127.0.0.1:8000/movieaddtolike/'+this.id+'/')
@@ -40,8 +41,8 @@ export class BaseIDComponent implements OnInit {
 
   public add_to_rating():void
   {
-    this.if_rating=!this.if_rating
-    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
+    this.add_action('http://127.0.0.1:8000/movieaddtorating/'+this.id+'/?rate='+this.addrate.value.rate)
+    window.location.reload();
   }
 
   public add_dislike():void
@@ -71,7 +72,9 @@ export class BaseIDComponent implements OnInit {
         },
         (error) => {
           if (error.statusText == 'Unauthorized'){
-            this.Router.navigate(['/logout'])
+            localStorage.removeItem('tokkenAccess');
+            localStorage.removeItem('tokkenRefresh');
+            window.location.reload();
           }
         }
       );

@@ -1,7 +1,7 @@
 import json
 import os
 import shutil
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 
@@ -128,7 +128,7 @@ class Favourite(models.Model):
 
 class Rating(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    rate = models.IntegerField(default=0)
+    rate = models.IntegerField(default=0,validators=[MinValueValidator(1),MaxValueValidator(5)])
     added = models.DateTimeField(auto_now=True)
 
     def __str__(self):

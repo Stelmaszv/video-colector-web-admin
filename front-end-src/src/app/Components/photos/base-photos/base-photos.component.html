@@ -1,6 +1,6 @@
-<img *ngFor="let photo of data ; let i=index" class="galery-item" (click)="show_big_photo(photo,i)" src="http://127.0.0.1:8000/{{photo.url}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<img *ngFor="let photo of data ; let i=index" class="galery-item" (click)="show_big_photo(photo,i)" src="http://127.0.0.1:8000/{{photo.url}}" data-bs-toggle="modal" data-bs-target="#photo">
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="photo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

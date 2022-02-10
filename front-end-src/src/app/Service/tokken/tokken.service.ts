@@ -14,6 +14,7 @@ export class TokkenService {
   public get_tokken(user:any){
     this.http.post_url(this.url,user).subscribe(tokken => {
       this.save_tokken(tokken)
+      window.location.reload();
     });
   }
 
