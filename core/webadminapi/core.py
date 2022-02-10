@@ -92,6 +92,8 @@ class AbstractDeteilsView(APIView):
         self.query=self.get_queryset()
         self.exc_action_before_serializer()
         serializer = self.serializer_class(self.query,context={'request': request.user})
+        if hasattr(serializer,'set_data'):
+            serializer.set_data(self.request.GET)
         return Response(serializer.data)
 
     def get_queryset(self):
@@ -117,6 +119,7 @@ class AbstractDeteilsView(APIView):
             Rat = Rating(User=self.request.user,rate=self.request.GET.get('rate'))
             Rat.save()
             self.query.ratings.add(Rat)
+            self.query.save()
 
     def add_like(self):
         Lik = Likes(User=self.request.user)
@@ -137,6 +140,10 @@ class AbstractDeteilsView(APIView):
                 return True
         return False
 
+class SqlAction(AbstractDeteilsView):
+    pass
+
+
 class AbstractUpdateView(AbstractDeteilsView):
 
     Model=None
@@ -151,7 +158,6 @@ class AbstractUpdateView(AbstractDeteilsView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):

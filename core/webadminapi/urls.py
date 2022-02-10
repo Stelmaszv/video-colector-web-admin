@@ -3,7 +3,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from core.webadminapi.views.movies import (MovieAddToDisLikeView,
-                                           MovieAddToFavoriteView,
                                            MovieAddToLikeView,
                                            MovieAddToRatingView,
                                            MovieDeteilsView,
@@ -54,10 +53,10 @@ urlpatterns = [
     path('moviephotosview/<int:pk>/',            MoviePhotosView.as_view(), name='moviephotosview'),
     path('movieswithstars/<int:pk>/',            MoviesWithStarsView.as_view(), name='moviessithstars'),
     path('movienextinseries/<int:pk>/',          MovieNextInSeriesView.as_view(), name='movienextinseries'),
-    path('movieaddtofavorite/<int:pk>/',         MovieAddToFavoriteView.as_view(), name='movieaddtofavorite'),
-    path('movieaddtorating/<int:pk>',            MovieAddToRatingView.as_view(), name='movieaddtorating'),
-    path('movieaddtolike/<int:pk>',              MovieAddToLikeView.as_view(), name='movieaddtolike'),
-    path('movieaddtodislike/<int:pk>',           MovieAddToDisLikeView.as_view(), name='movieaddtodislike'),
+    #errors
+    path('movieaddtorating/<int:pk>/',            MovieAddToRatingView.as_view(), name='movieaddtorating'),
+    path('movieaddtolike/<int:pk>/',              MovieAddToLikeView.as_view(), name='movieaddtolike'),
+    path('movieaddtodislike/<int:pk>/',           MovieAddToDisLikeView.as_view(), name='movieaddtodislike'),
     #stars
     path('stars',                                StarView.as_view(), name='stars'),
     path('starsmovie/<int:pk>/',                 StarsMoviesView.as_view(), name='Starsmovie'),

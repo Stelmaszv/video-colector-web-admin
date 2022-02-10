@@ -11,9 +11,11 @@ from core.webadminapi.core import (AbstractDeteilsView,
 from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
-                                          PhotoSerializerMovie)
+                                          PhotoSerializerMovie,
+                                          MoviesRatingView)
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
+from core.webadminapi.core import SqlAction
 
 
 class MoviesView(AbstractGenericsAPIView):
@@ -44,27 +46,23 @@ class MovieDeteilsView(AbstractDeteilsView):
     queryset = Movie.objects
     Model = Movie
 
-class MovieAddToFavoriteView(AbstractDeteilsView):
-    serializer_class = MoviesSerializer
+class MovieAddToRatingView(SqlAction):
+
+    serializer_class = MoviesRatingView
     queryset = Movie.objects
     Model = Movie
     authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):
-        self.add_favorits()
-
-class MovieAddToRatingView(MovieAddToFavoriteView):
-
-    def exc_action_before_query(self):
         self.add_raiting()
 
-class MovieAddToLikeView(MovieAddToFavoriteView):
+class MovieAddToLikeView(SqlAction):
 
     def exc_action_before_query(self):
         self.add_like()
 
-class MovieAddToDisLikeView(MovieAddToFavoriteView):
+class MovieAddToDisLikeView(SqlAction):
 
     def exc_action_before_query(self):
         self.add_disLikes()

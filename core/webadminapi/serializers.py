@@ -29,6 +29,23 @@ class BaseSeralizer(serializers.ModelSerializer):
     def is_favourite(self,instance):
         return self.base_is(instance, 'favourite')
 
+#action
+class MoviesRatingView(serializers.ModelSerializer):
+    data_put=[]
+    class Meta:
+        model = Movie
+        fields = ['name']
+
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['message'] = 'Rate '+str(self.data_put.get('rate'))+' has added to '+representation['name']
+        return representation
+
+
+
 #Upadates
 class ProducetFormSeralizer(serializers.ModelSerializer):
     class Meta:
