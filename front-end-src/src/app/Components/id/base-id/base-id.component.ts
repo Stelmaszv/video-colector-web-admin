@@ -18,6 +18,7 @@ export class BaseIDComponent implements OnInit {
   public if_favorite=false
   public if_liked=false
   public if_disliked=false
+  public if_rating=false
 
   constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService) { }
 
@@ -30,16 +31,29 @@ export class BaseIDComponent implements OnInit {
   public add_like():void
   {
     this.if_liked=!this.if_liked
+    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
+  }
+
+  public add_to_rating():void
+  {
+    this.if_rating=!this.if_rating
+    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
   }
 
   public add_dislike():void
   {
     this.if_disliked=!this.if_disliked
+    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
   }
 
   public add_to_if_favorite():void
   {
     this.if_favorite=!this.if_favorite
+    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
+  }
+
+  private add_action(url:string){
+    console.log(url)
   }
   
   private set_id(): void  
