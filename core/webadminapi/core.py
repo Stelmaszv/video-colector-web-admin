@@ -125,11 +125,13 @@ class AbstractDeteilsView(APIView):
         Lik = Likes(User=self.request.user)
         Lik.save()
         self.query.likes.add(Lik)
+        self.query.save()
 
     def add_disLikes(self):
         DisLik =DisLikess(User=self.request.user)
         DisLik.save()
         self.query.disLikes.add(DisLik)
+        self.query.save()
 
     def exc_action_before_serializer(self):
         pass

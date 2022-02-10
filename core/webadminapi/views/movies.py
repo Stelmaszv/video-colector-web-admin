@@ -12,7 +12,9 @@ from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
                                           PhotoSerializerMovie,
-                                          MoviesRatingView)
+                                          MoviesRatingView,
+                                          MoviesLiksView,
+                                          MoviesDisLiksView)
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
@@ -57,12 +59,15 @@ class MovieAddToRatingView(SqlAction):
     def exc_action_before_query(self):
         self.add_raiting()
 
-class MovieAddToLikeView(SqlAction):
+class MovieAddToLikeView(MovieAddToRatingView):
+    serializer_class = MoviesLiksView
 
     def exc_action_before_query(self):
         self.add_like()
 
-class MovieAddToDisLikeView(SqlAction):
+class MovieAddToDisLikeView(MovieAddToRatingView):
+
+    serializer_class = MoviesDisLiksView
 
     def exc_action_before_query(self):
         self.add_disLikes()

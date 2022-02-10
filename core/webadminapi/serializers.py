@@ -8,9 +8,9 @@ from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
 class BaseSeralizer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['is_favourite'] = self.is_favourite(instance)
-        representation['is_like'] = self.is_like(instance)
-        representation['is_disLikes'] = self.is_disLikes(instance)
+        #representation['is_favourite'] = self.is_favourite(instance)
+        #representation['is_like'] = self.is_like(instance)
+        #representation['is_disLikes'] = self.is_disLikes(instance)
         return representation
 
     def base_is(self,instance,attr):
@@ -42,6 +42,34 @@ class MoviesRatingView(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['message'] = 'Rate '+str(self.data_put.get('rate'))+' has added to '+representation['name']
+        return representation
+
+class MoviesLiksView(serializers.ModelSerializer):
+    data_put=[]
+    class Meta:
+        model = Movie
+        fields = ['name']
+
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['message'] = 'Like has added to '+representation['name']
+        return representation
+
+class MoviesDisLiksView(serializers.ModelSerializer):
+    data_put=[]
+    class Meta:
+        model = Movie
+        fields = ['name']
+
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['message'] = 'Dis Like  has added to '+representation['name']
         return representation
 
 
