@@ -26,6 +26,7 @@ export class ActionsComponent implements OnInit{
   });
 
   public ngOnInit(){
+
     this.update_view()
   }
 
@@ -57,6 +58,7 @@ export class ActionsComponent implements OnInit{
     if(this.TokkenService.if_isset_tokken()){
       this.httpService.get_url_auth(url).subscribe(
         (response) => {
+          console.log(selector)
           console.log(response)
           if (selector){
             this.update_elemnt(selector)

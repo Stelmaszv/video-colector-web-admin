@@ -85,7 +85,6 @@ class StarAddToFavoriteView(SqlAction):
     serializer_class = StarsSerializer
     queryset = Star.objects
     Model = Star
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):

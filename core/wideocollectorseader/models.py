@@ -38,7 +38,7 @@ def save(Model,self):
     save_mode = get_josn_file()['save_mode']
     if save_mode is False:
         set_model(self)
-        UpdateJSON(self)
+        #UpdateJSON(self)
         super(Model, self).save()
     super(Model, self).save()
 

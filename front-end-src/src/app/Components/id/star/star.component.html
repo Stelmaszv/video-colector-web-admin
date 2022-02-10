@@ -78,7 +78,7 @@
                                 Likes 
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}
+                                <i class="fas fa-thumbs-up"></i><span class="stats_item like_js">{{data.likes_count | bigInt}}</span>
                             </div>
                         </div>
                     
@@ -87,7 +87,7 @@
                                 Ratings
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-star"></i> {{data.ratings_count | bigInt}} ({{data.avg_rating}})
+                                <i class="fas fa-star"></i> <span class="stats_item ratting_js">{{data.ratings_count | bigInt}}</span> ({{data.avg_rating}})
                             </div>
                         </div>
                         
@@ -96,7 +96,7 @@
                                 Views
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-eye"></i> {{data.views_count | bigInt}}
+                                <i class="fas fa-eye"></i> <span class="stats_item views_js">{{data.views_count | bigInt}}</span>
                             </div>
                         </div>
                         
@@ -105,7 +105,7 @@
                                 Dis Likes
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-thumbs-down"></i> {{data.disLikes_count | bigInt}}
+                                <i class="fas fa-thumbs-down"></i> <span class="stats_item dislike_js">{{data.disLikes_count | bigInt}}</span>
                             </div>
                         </div>
                     </div>
