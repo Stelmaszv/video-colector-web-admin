@@ -39,19 +39,6 @@ export class BaseIDComponent implements OnInit {
     this.get_url(this.id)
   }
 
-  public add_like():void
-  {
-    this.data.likes_count=this.data.likes_count+1
-    this.set_procent(this.data)
-    this.add_action(this.server+this.add_to_like_url+this.id+'/')
-  }
-
-  public add_to_rating():void
-  {
-    this.add_action(this.server+this.add_to_rating_url+this.id+'/?rate='+this.addrate.value.rate)
-    window.location.reload();
-  }
-
   public return_add_to_ratng_url(){
     return this.server+this.add_to_rating_url+this.id+'/?rate='+this.addrate.value.rate
   }
@@ -71,44 +58,6 @@ export class BaseIDComponent implements OnInit {
   public return_update_views_url(){
     return this.server+this.update_views_url+this.id+'/'
   }
-
-  public add_dislike():void
-  {
-    this.data.disLikes_count=this.data.disLikes_count+1
-    this.set_procent(this.data)
-    this.add_action(this.server+this.add_to_dislike_url+this.id+'/')
-  }
-
-  private update_views(id:any):void
-  {
-    this.data.views_count=this.data.views_count+1
-    this.add_action(this.server+this.update_views_url+this.id+'/')
-  }
-
-
-
-  public add_to_if_favorite():void
-  {
-    this.if_favorite=!this.if_favorite
-    this.add_action(this.server+this.fovorits_url+this.id+'/')
-  }
-
-  private add_action(url:string){
-    if(this.TokkenService.if_isset_tokken()){
-      this.httpService.get_url_auth(url).subscribe(
-        (response) => {
-          console.log(response)
-        },
-        (error) => {
-          if (error.statusText == 'Unauthorized'){
-            localStorage.removeItem('tokkenAccess');
-            localStorage.removeItem('tokkenRefresh');
-            window.location.reload();
-          }
-        }
-      );
-    }
-  }
   
   private set_id(): void  
   {
@@ -122,7 +71,6 @@ export class BaseIDComponent implements OnInit {
     this.httpService.get_url(this.url+''+id+'').subscribe(
       (response) => {
           this.data=response
-          //this.update_views(id)
           this.set_procent(response)
       }
     );
