@@ -52,6 +52,10 @@ export class BaseIDComponent implements OnInit {
     window.location.reload();
   }
 
+  public return_add_to_ratng_url(){
+    return this.server+this.add_to_rating_url+this.id+'/?rate='+this.addrate.value.rate
+  }
+
   public add_dislike():void
   {
     this.data.disLikes_count=this.data.disLikes_count+1

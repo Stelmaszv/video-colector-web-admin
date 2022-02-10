@@ -38,6 +38,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { ModelRateComponent } from './Components/id/model-rate/model-rate.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { LogoutComponent } from './Components/logout/logout.component';
     LoginComponent,
     AdminMoviesComponent,
     MainAuthComponent,
-    LogoutComponent
+    LogoutComponent,
+    ModelRateComponent
   ],
   imports: [
     AppRoutingModule,

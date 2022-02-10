@@ -169,10 +169,8 @@
                                     {{data.date_relesed}}
                                 </div>
                             </div>
-                        </ng-template>
-                                            
+                        </ng-template>                        
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -224,30 +222,4 @@
         </div>
     </div>
 </main>
-
-
-<div class="modal fade" id="rate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Rate</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="addrate">
-                    <div class="row">
-                        <div class="col">
-                            <label for="name">Rate: </label>
-                        </div>
-                        <div class="col">
-                            <input id="rate" type="number" value=1 formControlName="rate" min=1 max=5 value="{{addrate.value.rate}}">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="add_to_rating()" data-bs-dismiss="modal">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
+<app-model-rate list="{{return_add_to_ratng_url()}}"></app-model-rate>
