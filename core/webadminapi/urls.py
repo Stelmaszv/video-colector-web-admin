@@ -22,7 +22,7 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentsSeriesView,
                                               ProducentStarsView,
                                               ProducentsUpdataView,
-                                              ProducentsView)
+                                              ProducentsView, ProducentUpdateViewsView)
 from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
@@ -32,14 +32,14 @@ from core.webadminapi.views.serie import (SelectOptionView,
                                           SeriesBennersView, SeriesPhotosView,
                                           SeriesRandomMovieView,
                                           SeriesStarsView, SerieUpdataView,
-                                          SerieView)
+                                          SerieView, SerieUpdateViewView)
 from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarAddToFavoriteView,
                                           StarAddToLikeView,
                                           StarAddToRatingView, StarDeteilsView,
                                           StarSelectOptionView,
                                           StarsMoviesView, StarsPhotoView,
-                                          StarUpdateView, StarView)
+                                          StarUpdateView, StarView,StarUpdateViewsView)
 from core.webadminapi.views.tags import TagDeteilsView, TagView
 
 app_name = 'webadminapi'
@@ -68,6 +68,7 @@ urlpatterns = [
     path('staraddrating/<int:pk>/',              StarAddToRatingView.as_view(), name='staraddrating'),
     path('staraddtolike/<int:pk>/',              StarAddToLikeView.as_view(), name='staraddtolike'),
     path('staraddtodislike/<int:pk>/',           StarAddToDisLikeView.as_view(), name='staraddtodislike'),
+    path('starupdateviews/<int:pk>/',            StarUpdateViewsView.as_view(), name='starupdatestar'),
     path('stars_form',                           StarSelectOptionView.as_view(), name='series_select'),
     path('starsphoto/<int:pk>/',                 StarsPhotoView.as_view(), name='starsphoto'),
     #series
@@ -85,6 +86,7 @@ urlpatterns = [
     path('staraddtorating/<int:pk>/',            SerieAddToRatingView.as_view(), name='staraddtorating'),
     path('serieaddtolike/<int:pk>/',             SerieAddToLikeView.as_view(), name='serieaddtolike'),
     path('serieaddtosislike/<int:pk>/',          SerieAddToDisLikeView.as_view(), name='serieaddtosislike'),
+    path('serieupdateview/<int:pk>/',            SerieUpdateViewView.as_view(), name='serieupdateview'),
     path('series_select',                        SelectOptionView.as_view(), name='series_select'),
     #producent
     path('producents',                           ProducentsView.as_view(), name='producents'),
@@ -97,6 +99,7 @@ urlpatterns = [
     path('producentaddtorating/<int:pk>/',       ProducentAddToRatingView.as_view(), name='producentaddtorating'),
     path('producentaddtolike/<int:pk>/',         ProducentAddToLikeView.as_view(), name='producentaddtolike'),
     path('producentaddtodislike/<int:pk>/',      ProducentAddToDisLikeView.as_view(), name='producentaddtodislike'),
+    path('producentupdateviews/<int:pk>/',       ProducentUpdateViewsView.as_view(), name='producentupdateviews'),
     path('producentsformview',                   ProducentsFormView.as_view(), name='producentsformview'),
     path('producentsseries/<int:pk>/',           ProducentsSeriesView.as_view(), name='producentsseries'),
     #tags

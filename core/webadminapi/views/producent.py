@@ -148,3 +148,7 @@ class ProducentAddToLikeView(ProducentAddToFavoriteView):
 class ProducentAddToDisLikeView(ProducentAddToFavoriteView):
     def exc_action_before_query(self):
         self.add_disLikes()
+
+class ProducentUpdateViewsView(ProducentAddToFavoriteView):
+    def exc_action_before_query(self):
+        self.update_views()

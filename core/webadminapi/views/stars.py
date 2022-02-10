@@ -105,3 +105,8 @@ class StarAddToDisLikeView(StarAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_disLikes()
+
+class StarUpdateViewsView(StarAddToFavoriteView):
+
+    def exc_action_before_query(self):
+        self.update_views()

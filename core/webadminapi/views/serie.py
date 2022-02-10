@@ -175,3 +175,8 @@ class SerieAddToDisLikeView(SerieAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_disLikes()
+
+class SerieUpdateViewView(SerieAddToFavoriteView):
+
+    def exc_action_before_query(self):
+        self.update_views()
