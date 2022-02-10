@@ -52,12 +52,14 @@
                             <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
                         </div>
                     </div>
-                    <div class="actions">
-                        <button (click)="add_like()" class="action-item"><i class="fas fa-thumbs-up"></i></button>
-                        <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-heart"></i></button>
-                        <button (click)="add_to_rating()" class="action-item"><i class="fas fa-star"></i></button>
-                        <button (click)="add_dislike()" class="action-item" ><i class="fas fa-thumbs-down" ></i></button>
-                    </div>
+                    <ng-template [ngIf]="TokkenService.if_isset_tokken()">
+                        <div class="actions">
+                            <button (click)="add_like()" class="action-item"><i class="fas fa-thumbs-up"></i></button>
+                            <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-heart"></i></button>
+                            <button (click)="add_to_rating()" class="action-item"><i class="fas fa-star"></i></button>
+                            <button (click)="add_dislike()" class="action-item" ><i class="fas fa-thumbs-down" ></i></button>
+                        </div>
+                    </ng-template>
                 </div>
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>

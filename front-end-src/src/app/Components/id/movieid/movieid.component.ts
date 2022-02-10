@@ -1,6 +1,4 @@
-import { Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import { HttpService } from '../../../Service/http/http.service';
+import { Component} from '@angular/core';
 import {BaseIDComponent} from '../base-id/base-id.component'
 
 @Component({

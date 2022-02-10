@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import { HttpService } from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import { Router } from '@angular/router';
+import { TokkenService } from 'src/app/Service/tokken/tokken.service'; 
 
 @Component({
   selector: 'app-base-id',
@@ -21,7 +22,7 @@ export class BaseIDComponent implements OnInit {
   public if_disliked=false
   public if_rating=false
 
-  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,private Router:Router) { }
+  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,private Router:Router,public TokkenService:TokkenService) { }
 
   public ngOnInit(): void 
   {
@@ -63,16 +64,18 @@ export class BaseIDComponent implements OnInit {
   }
 
   private add_action(url:string){
-    this.httpService.get_url_auth(url).subscribe(
-      (error) => {
-        console.log(error)
-        /*
-        if (error.statusText == 'Unauthorized'){
-          this.Router.navigate(['/logout'])
+    if(this.TokkenService.if_isset_tokken()){
+      this.httpService.get_url_auth(url).subscribe(
+        (response) => {
+          console.log(response)
+        },
+        (error) => {
+          if (error.statusText == 'Unauthorized'){
+            this.Router.navigate(['/logout'])
+          }
         }
-        */
-      }
-    );
+      );
+    }
   }
   
   private set_id(): void  
