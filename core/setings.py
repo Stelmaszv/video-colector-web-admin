@@ -2,7 +2,7 @@ import json
 import os
 
 save_mode_defult={
-   "save_mode": False
+   "save_mode": True
 }
 
 def get_josn_file():

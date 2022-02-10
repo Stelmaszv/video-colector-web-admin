@@ -51,7 +51,7 @@ class MovieDeteilsView(AbstractDeteilsView):
 
 class MovieAddToRatingView(SqlAction):
 
-    serializer_class = MoviesRatingView
+    serializer_class = MoviesSerializer
     queryset = Movie.objects
     Model = Movie
     permission_classes = [IsAuthenticated]
@@ -60,21 +60,21 @@ class MovieAddToRatingView(SqlAction):
         self.add_raiting()
 
 class MovieAddToLikeView(MovieAddToRatingView):
-    serializer_class = MoviesLiksView
+    serializer_class = MoviesSerializer
 
     def exc_action_before_query(self):
         self.add_like()
 
 class MovieAddToDisLikeView(MovieAddToRatingView):
 
-    serializer_class = MoviesDisLiksView
+    serializer_class = MoviesSerializer
 
     def exc_action_before_query(self):
         self.add_disLikes()
 
 class MovieUpdateViewsView(MovieAddToRatingView):
 
-    serializer_class = MoviesViewsView
+    serializer_class = MoviesSerializer
 
     def exc_action_before_query(self):
         self.update_views()

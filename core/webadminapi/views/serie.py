@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication)
+                                   AbstractUpdateView, Authentication, SqlAction)
 from core.webadminapi.filters import MovieFilter, SerieFilter
 from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           PhotoSerializerSeries,
@@ -152,11 +152,10 @@ class SerieUpdataView(AbstractUpdateView):
     Model = Serie
 
 #actions
-class SerieAddToFavoriteView(AbstractDeteilsView):
+class SerieAddToFavoriteView(SqlAction):
     serializer_class = SerieSerializer
     queryset = Serie.objects
     Model = Serie
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):

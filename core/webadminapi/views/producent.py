@@ -10,7 +10,7 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView, Authentication,
-                                   LargeResultsSetPagination)
+                                   LargeResultsSetPagination, SqlAction)
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerSeries,
@@ -128,11 +128,10 @@ class ProducentStarsView(AbstractGenericsAPIViewExtended):
         return stars
 
 #actions
-class ProducentAddToFavoriteView(AbstractDeteilsView):
+class ProducentAddToFavoriteView(SqlAction):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects
     Model = Producents
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):

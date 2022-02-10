@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication)
+                                   AbstractUpdateView, Authentication, SqlAction)
 from core.webadminapi.filters import StarFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
@@ -81,7 +81,7 @@ class StarSelectOptionView(generics.ListAPIView):
     queryset = Star.objects.all()
 
 #actions
-class StarAddToFavoriteView(AbstractDeteilsView):
+class StarAddToFavoriteView(SqlAction):
     serializer_class = StarsSerializer
     queryset = Star.objects
     Model = Star
@@ -96,12 +96,12 @@ class StarAddToRatingView(StarAddToFavoriteView):
     def exc_action_before_query(self):
         self.add_raiting()
 
-class StarAddToLikeView(AbstractDeteilsView):
+class StarAddToLikeView(StarAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_like()
 
-class StarAddToDisLikeView(AbstractDeteilsView):
+class StarAddToDisLikeView(StarAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_disLikes()
