@@ -14,7 +14,8 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
                                           MoviesRatingView,
                                           MoviesLiksView,
-                                          MoviesDisLiksView)
+                                          MoviesDisLiksView,
+                                          MoviesViewsView)
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
@@ -71,6 +72,13 @@ class MovieAddToDisLikeView(MovieAddToRatingView):
 
     def exc_action_before_query(self):
         self.add_disLikes()
+
+class MovieUpdateViewsView(MovieAddToRatingView):
+
+    serializer_class = MoviesViewsView
+
+    def exc_action_before_query(self):
+        self.update_views()
 
 class MovieNextInSeriesView(AbstractDeteilsView):
     serializer_class = MoviesSerializer

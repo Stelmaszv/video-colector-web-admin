@@ -9,7 +9,8 @@ from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MovieNextInSeriesView,
                                            MoviePhotosView, MoviesView,
                                            MoviesWithStarsView,
-                                           MovieUpdataView)
+                                           MovieUpdataView,
+                                           MovieUpdateViewsView)
 from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentAddToFavoriteView,
                                               ProducentAddToLikeView,
@@ -57,6 +58,7 @@ urlpatterns = [
     path('movieaddtorating/<int:pk>/',            MovieAddToRatingView.as_view(), name='movieaddtorating'),
     path('movieaddtolike/<int:pk>/',              MovieAddToLikeView.as_view(), name='movieaddtolike'),
     path('movieaddtodislike/<int:pk>/',           MovieAddToDisLikeView.as_view(), name='movieaddtodislike'),
+    path('movieaupdateviews/<int:pk>/',           MovieUpdateViewsView.as_view(), name='movieaddtodislike'),
     #stars
     path('stars',                                StarView.as_view(), name='stars'),
     path('starsmovie/<int:pk>/',                 StarsMoviesView.as_view(), name='Starsmovie'),

@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from core.wideocollectorseader.models import (DisLikess, Favourite, Likes,
-                                              Rating)
+                                              Rating,Views)
 
 
 class RangesMiddleware(MiddlewareMixin):
@@ -131,6 +131,12 @@ class AbstractDeteilsView(APIView):
         DisLik =DisLikess(User=self.request.user)
         DisLik.save()
         self.query.disLikes.add(DisLik)
+        self.query.save()
+
+    def update_views(self):
+        view=Views(User=self.request.user)
+        view.save()
+        self.query.views.add(view)
         self.query.save()
 
     def exc_action_before_serializer(self):

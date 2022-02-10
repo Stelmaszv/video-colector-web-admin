@@ -72,7 +72,19 @@ class MoviesDisLiksView(serializers.ModelSerializer):
         representation['message'] = 'Dis Like  has added to '+representation['name']
         return representation
 
+class MoviesViewsView(serializers.ModelSerializer):
+    data_put=[]
+    class Meta:
+        model = Movie
+        fields = ['name']
 
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['message'] = 'Views has added to '+representation['name']
+        return representation
 
 #Upadates
 class ProducetFormSeralizer(serializers.ModelSerializer):
