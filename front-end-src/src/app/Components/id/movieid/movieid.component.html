@@ -53,13 +53,16 @@
                         </div>
                     </div>
                     <ng-template [ngIf]="TokkenService.if_isset_tokken()">
+                        <!--
                         <div class="actions">
                             <button (click)="add_like()" class="action-item"><i class="fas fa-thumbs-up"></i></button>
                             <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-heart"></i></button>
                             <button class="action-item" data-bs-toggle="modal" data-bs-target="#rate"><i class="fas fa-star"></i></button>
                             <button (click)="add_dislike()" class="action-item" ><i class="fas fa-thumbs-down" ></i></button>
                         </div>
+                        -->
                     </ng-template>
+                    <app-actions add_to_favorite_url="{{return_add_to_favorite_url()}}" add_like_url="{{return_add_to_like_url()}}" add_to_dislike_url="{{return_add_to_dislike_url()}}" add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
                 </div>
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
@@ -129,7 +132,7 @@
                                 Likes 
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}
+                                <i class="fas fa-thumbs-up"></i><span class="stats_item like_js">{{data.likes_count | bigInt}}</span>
                             </div>
                         </div>
                        
@@ -138,7 +141,7 @@
                                 Ratings
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-star"></i> {{data.ratings_count | bigInt}} ({{data.avg_rating}})
+                                <i class="fas fa-star"></i> <span class="stats_item ratting_js">{{data.ratings_count | bigInt}}</span> ({{data.avg_rating}})
                             </div>
                         </div>
                         
@@ -156,7 +159,7 @@
                                 Dis Likes
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-thumbs-down"></i> {{data.disLikes_count | bigInt}}
+                                <i class="fas fa-thumbs-down"></i><span class="stats_item dislike_js">{{data.disLikes_count | bigInt}}</span>
                             </div>
                         </div>
 
@@ -222,4 +225,3 @@
         </div>
     </div>
 </main>
-<app-model-rate list="{{return_add_to_ratng_url()}}"></app-model-rate>

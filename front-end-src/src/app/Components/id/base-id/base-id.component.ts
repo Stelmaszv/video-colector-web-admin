@@ -56,6 +56,18 @@ export class BaseIDComponent implements OnInit {
     return this.server+this.add_to_rating_url+this.id+'/?rate='+this.addrate.value.rate
   }
 
+  public return_add_to_like_url(){
+    return this.server+this.add_to_like_url+this.id+'/'
+  }
+
+  public return_add_to_dislike_url(){
+    return this.server+this.add_to_dislike_url+this.id+'/'
+  }
+  
+  public return_add_to_favorite_url(){
+    return this.server+this.fovorits_url+this.id+'/'
+  }
+
   public add_dislike():void
   {
     this.data.disLikes_count=this.data.disLikes_count+1
