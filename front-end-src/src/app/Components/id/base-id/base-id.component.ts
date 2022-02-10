@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { HttpService } from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-base-id',
@@ -20,7 +21,7 @@ export class BaseIDComponent implements OnInit {
   public if_disliked=false
   public if_rating=false
 
-  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService) { }
+  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,private Router:Router) { }
 
   public ngOnInit(): void 
   {
@@ -49,6 +50,12 @@ export class BaseIDComponent implements OnInit {
     this.add_action('http://127.0.0.1:8000/movieaddtodislike/'+this.id+'/')
   }
 
+  private update_views(id:any):void
+  {
+    this.data.views_count=this.data.views_count+1
+    this.add_action('http://127.0.0.1:8000/movieaupdateviews/'+id+'/')
+  }
+
   public add_to_if_favorite():void
   {
     this.if_favorite=!this.if_favorite
@@ -57,8 +64,13 @@ export class BaseIDComponent implements OnInit {
 
   private add_action(url:string){
     this.httpService.get_url_auth(url).subscribe(
-      (response) => {
-        console.log(response)
+      (error) => {
+        console.log(error)
+        /*
+        if (error.statusText == 'Unauthorized'){
+          this.Router.navigate(['/logout'])
+        }
+        */
       }
     );
   }
@@ -75,7 +87,7 @@ export class BaseIDComponent implements OnInit {
     this.httpService.get_url(this.url+''+id+'').subscribe(
       (response) => {
           this.data=response
-          console.log(this.data)
+          this.update_views(id)
           this.set_procent(response)
       }
     );
