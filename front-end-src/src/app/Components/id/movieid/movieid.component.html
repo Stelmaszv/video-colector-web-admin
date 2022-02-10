@@ -62,7 +62,7 @@
                         </div>
                         -->
                     </ng-template>
-                    <app-actions add_to_favorite_url="{{return_add_to_favorite_url()}}" add_like_url="{{return_add_to_like_url()}}" add_to_dislike_url="{{return_add_to_dislike_url()}}" add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
+                    <app-actions update_views_url="{{return_update_views_url()}}" add_to_favorite_url="{{return_add_to_favorite_url()}}" add_like_url="{{return_add_to_like_url()}}" add_to_dislike_url="{{return_add_to_dislike_url()}}" add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
                 </div>
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
@@ -150,7 +150,7 @@
                                 Views
                             </div>
                             <div class="col table_row">
-                                <i class="fas fa-eye"></i> {{data.views_count | bigInt}}
+                                <i class="fas fa-eye"></i> <span class="stats_item views_js">{{data.views_count | bigInt}}</span>
                             </div>
                         </div>
                         

@@ -7,11 +7,12 @@ import { FormControl ,FormGroup} from '@angular/forms';
   templateUrl: './actions.component.html',
   styleUrls: ['./actions.component.scss']
 })
-export class ActionsComponent{
+export class ActionsComponent implements OnInit{
   @Input() add_like_url:any
   @Input() add_to_dislike_url:any
   @Input() add_to_rating_url:any
   @Input() add_to_favorite_url:any
+  @Input() update_views_url:any
   public if_favorite=false
   constructor(private httpService: HttpService,private TokkenService: TokkenService) { }
 
@@ -24,6 +25,10 @@ export class ActionsComponent{
     rate: new FormControl(1)
   });
 
+  public ngOnInit(){
+    this.update_view()
+  }
+
   public add_like(){
     this.add_action(this.add_like_url,'.like_js')
   }
@@ -34,6 +39,10 @@ export class ActionsComponent{
 
   public add_dislike(){
     this.add_action(this.add_to_dislike_url,'.dislike_js')
+  }
+
+  private update_view(){
+    this.add_action(this.update_views_url,'.views_js')
   }
 
   private update_elemnt(selector:string){

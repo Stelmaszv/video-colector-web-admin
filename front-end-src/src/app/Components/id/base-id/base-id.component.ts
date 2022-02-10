@@ -68,6 +68,10 @@ export class BaseIDComponent implements OnInit {
     return this.server+this.fovorits_url+this.id+'/'
   }
 
+  public return_update_views_url(){
+    return this.server+this.update_views_url+this.id+'/'
+  }
+
   public add_dislike():void
   {
     this.data.disLikes_count=this.data.disLikes_count+1
@@ -80,6 +84,8 @@ export class BaseIDComponent implements OnInit {
     this.data.views_count=this.data.views_count+1
     this.add_action(this.server+this.update_views_url+this.id+'/')
   }
+
+
 
   public add_to_if_favorite():void
   {
@@ -116,7 +122,7 @@ export class BaseIDComponent implements OnInit {
     this.httpService.get_url(this.url+''+id+'').subscribe(
       (response) => {
           this.data=response
-          this.update_views(id)
+          //this.update_views(id)
           this.set_procent(response)
       }
     );
