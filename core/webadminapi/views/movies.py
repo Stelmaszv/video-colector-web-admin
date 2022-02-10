@@ -54,7 +54,6 @@ class MovieAddToRatingView(SqlAction):
     serializer_class = MoviesRatingView
     queryset = Movie.objects
     Model = Movie
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):

@@ -31,7 +31,9 @@ export class BaseIDComponent implements OnInit {
   public add_like():void
   {
     this.if_liked=!this.if_liked
-    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
+    this.data.likes_count=this.data.likes_count+1
+    this.set_procent(this.data)
+    this.add_action('http://127.0.0.1:8000/movieaddtolike/'+this.id+'/')
   }
 
   public add_to_rating():void
@@ -42,8 +44,9 @@ export class BaseIDComponent implements OnInit {
 
   public add_dislike():void
   {
-    this.if_disliked=!this.if_disliked
-    this.add_action('dqwdqwdqwdqwdqwdqwdqwd')
+    this.data.disLikes_count=this.data.disLikes_count+1
+    this.set_procent(this.data)
+    this.add_action('http://127.0.0.1:8000/movieaddtodislike/'+this.id+'/')
   }
 
   public add_to_if_favorite():void
@@ -53,7 +56,11 @@ export class BaseIDComponent implements OnInit {
   }
 
   private add_action(url:string){
-    console.log(url)
+    this.httpService.get_url_auth(url).subscribe(
+      (response) => {
+        console.log(response)
+      }
+    );
   }
   
   private set_id(): void  
