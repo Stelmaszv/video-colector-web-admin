@@ -85,17 +85,18 @@ class MovieNextInSeriesView(AbstractDeteilsView):
     Model = Movie
 
     def get_queryset(self):
+        index = 0
+        found = 0
+        Model = self.get_object(self.kwargs.get("pk"))
+        for Movie in Model.serie.movies.all():
+            if Movie.id ==  Model.id:
+                found = index+1
+            index = index + 1
         index=0
-        found=0
-        for Movie in self.query.serie.movies.all():
-            if Movie.id == self.query.id:
-                found=index
-            if found+1 <= len(self.query.serie.movies.all()):
-                if index == found+1:
-                    return Movie
-            else:
-                return self.query.serie.movies[0]
-            index=index+1
+        for Movie in Model.serie.movies.all():
+            if index==found:
+                return Movie
+            index = index + 1
 
 class MoviePhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerMovie

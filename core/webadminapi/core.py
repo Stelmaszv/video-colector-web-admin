@@ -82,7 +82,6 @@ class AbstractDeteilsView(APIView):
 
     def get_object(self, pk):
         try:
-            print(self.Model)
             return self.Model.objects.get(pk=pk)
         except self.Model.DoesNotExist:
             raise Http404
