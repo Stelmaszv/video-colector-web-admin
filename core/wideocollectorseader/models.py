@@ -23,6 +23,8 @@ def set_model(Model):
     Model.disLikes_count = Model.disLikes.count()
     Model.ratings_count = Model.ratings.count()
     Model.views_count = Model.views.count()
+    if hasattr(Model, "movies_count"):
+        Model.movies_count = Model.movies.count()
     return Model
 
 def delete(Model,self):
@@ -230,6 +232,7 @@ class Star(models.Model):
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
     views_count = models.IntegerField(default=0)
+    movies_count = models.IntegerField(default=0)
     movies              = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='StarViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Starlikes', blank=True)

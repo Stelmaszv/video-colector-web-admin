@@ -70,6 +70,7 @@ export class BaseIDComponent implements OnInit {
   {
     this.httpService.get_url(this.url+''+id+'').subscribe(
       (response) => {
+          console.log(response)
           this.data=response
           this.set_procent(response)
       }
