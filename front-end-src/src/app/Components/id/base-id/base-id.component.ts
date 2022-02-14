@@ -74,7 +74,6 @@ export class BaseIDComponent implements OnInit {
       (response) => {
           this.data=response
           this.on_get_url()
-          console.log(this.data)
           this.set_procent(response)
       }
     );

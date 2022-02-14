@@ -20,8 +20,8 @@ export class MovieidComponent extends BaseIDComponent{
   private next_movie_with_star_url ='http://127.0.0.1:8000/moviemextwithstar/'
   private stars_under_movie=5
   private min_count=3
-  private min_count_player=3
-  private player_count_limit=3
+  private movie_count_player=3
+  private movie_count_player_limit=2
   
   public star_palyer = new FormGroup({
     star: new FormControl(1),
@@ -77,10 +77,10 @@ export class MovieidComponent extends BaseIDComponent{
     let stars=[]
     let count=0
     for (let star of this.data['stars']){
-      if (star.movies_count>this.min_count_player){
-        count++
-        if (this.player_count_limit<count){
+      if (count<this.movie_count_player_limit){
+        if (star.movies_count>this.movie_count_player){
           stars.push(star)
+          count++
         }
       }
     }
