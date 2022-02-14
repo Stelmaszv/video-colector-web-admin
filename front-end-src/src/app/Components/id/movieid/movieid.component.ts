@@ -15,12 +15,23 @@ export class MovieidComponent extends BaseIDComponent{
   protected override add_to_dislike_url:string='movieaddtodislike/'
   protected override update_views_url:string='movieaupdateviews/'
   protected override fovorits_url:string='movieaddfovorit/'
+  private stars_under_movie=5
+  private min_count=3
+  private min_count_player=3
   
   private data_stars(){
     let stars=[]
     for (let star of this.data['stars']){
-      console.log(star)
-      if ((star.likes_count || star.views_count || star.movies_count)>3){
+      if ((star.likes_count || star.views_count || star.movies_count)>this.min_count && stars.length<this.stars_under_movie){
+        stars.push(star)
+      }
+    }
+    return stars
+  }
+  protected data_stars_player(){
+    let stars=[]
+    for (let star of this.data['stars']){
+      if (star.movies_count>this.min_count_player){
         stars.push(star)
       }
     }
@@ -29,6 +40,7 @@ export class MovieidComponent extends BaseIDComponent{
 
   protected override on_get_url(){
     this.data['movie_stars']=this.data_stars()
+    this.data['movie_stars_player']=this.data_stars_player()
   }
 
 }
