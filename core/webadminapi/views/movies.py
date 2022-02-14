@@ -15,8 +15,9 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesRatingView,
                                           MoviesLiksView,
                                           MoviesDisLiksView,
-                                          MoviesViewsView)
-from core.wideocollectorseader.models import Movie
+                                          MoviesViewsView,
+                                          StarsSerializer)
+from core.wideocollectorseader.models import Star,Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
 
@@ -94,6 +95,31 @@ class MovieNextInSeriesView(AbstractDeteilsView):
             index = index + 1
         index=0
         for Movie in Model.serie.movies.all():
+            if index==found:
+                return Movie
+            index = index + 1
+
+class MovieNextWithStarView(AbstractDeteilsView):
+    serializer_class = MoviesSerializer
+    queryset = Movie.objects
+    Model = Movie
+
+    def get_queryset(self):
+        StarOBJ=None
+        index = 0
+        found = 0
+        Model = self.get_object(self.kwargs.get("pk"))
+        star=self.request.GET.get('star')
+        for Star in Model.stars.all():
+            if (Star.id==int(star)):
+                StarOBJ=Star
+
+        for Movie in StarOBJ.movies.all():
+            if Movie.id == int(self.kwargs.get("pk")):
+                found = index + 1
+            index = index + 1
+        index = 0
+        for Movie in StarOBJ.movies.all():
             if index==found:
                 return Movie
             index = index + 1
