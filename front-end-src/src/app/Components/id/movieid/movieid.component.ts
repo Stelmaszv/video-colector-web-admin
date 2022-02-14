@@ -18,12 +18,12 @@ export class MovieidComponent extends BaseIDComponent{
   private stars_under_movie=5
   private min_count=3
   private min_count_player=3
-  private player_count_limit=2
+  private player_count_limit=3
   
   private data_stars(){
     let stars=[]
     for (let star of this.data['stars']){
-      if ((star.likes_count || star.views_count || star.movies_count)>this.min_count && stars.length<this.stars_under_movie){
+      if (star.movies_count>this.min_count && stars.length<this.stars_under_movie){
         stars.push(star)
       }
     }
