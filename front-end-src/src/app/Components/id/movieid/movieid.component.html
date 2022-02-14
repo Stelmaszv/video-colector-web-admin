@@ -33,7 +33,7 @@
         <div class="stars">
             <h1 class="d-flex justify-content-center star-name">Stars</h1>
             <div class="d-flex justify-content-center stars_js">
-                <a *ngFor="let star of data.stars" [routerLink]="['/star/',star.id]" class="card-link star_item">
+                <a *ngFor="let star of data.movie_stars" [routerLink]="['/star/',star.id]" class="card-link star_item">
                     <img src="{{star.avatar}}" class="img-thubnail star_src">
                 </a>
             </div>

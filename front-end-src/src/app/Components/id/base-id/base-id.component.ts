@@ -58,6 +58,8 @@ export class BaseIDComponent implements OnInit {
   public return_update_views_url(){
     return this.server+this.update_views_url+this.id+'/'
   }
+
+  protected on_get_url(){}
   
   private set_id(): void  
   {
@@ -70,8 +72,9 @@ export class BaseIDComponent implements OnInit {
   {
     this.httpService.get_url(this.url+''+id+'').subscribe(
       (response) => {
-          console.log(response)
           this.data=response
+          this.on_get_url()
+          console.log(this.data)
           this.set_procent(response)
       }
     );
