@@ -88,6 +88,7 @@ class MovieNextInSeriesView(AbstractDeteilsView):
     def get_queryset(self):
         index = 0
         found = 0
+        ReturnMovie=None
         Model = self.get_object(self.kwargs.get("pk"))
         for Movie in Model.serie.movies.all():
             if Movie.id ==  Model.id:
@@ -96,8 +97,11 @@ class MovieNextInSeriesView(AbstractDeteilsView):
         index=0
         for Movie in Model.serie.movies.all():
             if index==found:
-                return Movie
+                ReturnMovie=Movie
             index = index + 1
+        if ReturnMovie is None:
+            return Model.serie.movies.all()[0]
+        return ReturnMovie
 
 class MovieNextWithStarView(AbstractDeteilsView):
     serializer_class = MoviesSerializer
@@ -106,6 +110,7 @@ class MovieNextWithStarView(AbstractDeteilsView):
 
     def get_queryset(self):
         StarOBJ=None
+        ReturnMovie = None
         index = 0
         found = 0
         Model = self.get_object(self.kwargs.get("pk"))
@@ -121,8 +126,11 @@ class MovieNextWithStarView(AbstractDeteilsView):
         index = 0
         for Movie in StarOBJ.movies.all():
             if index==found:
-                return Movie
+                ReturnMovie = Movie
             index = index + 1
+        if ReturnMovie is None:
+            return Model.serie.movies.all()[0]
+        return ReturnMovie
 
 class MoviePhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerMovie

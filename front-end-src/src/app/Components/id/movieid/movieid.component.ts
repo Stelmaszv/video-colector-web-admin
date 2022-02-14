@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import {BaseIDComponent} from '../base-id/base-id.component'
+import { FormControl ,FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-movieid',
@@ -15,11 +16,42 @@ export class MovieidComponent extends BaseIDComponent{
   protected override add_to_dislike_url:string='movieaddtodislike/'
   protected override update_views_url:string='movieaupdateviews/'
   protected override fovorits_url:string='movieaddfovorit/'
+  private next_movie_url ='http://127.0.0.1:8000/movienextinseries/'
+  private next_movie_with_star_url ='http://127.0.0.1:8000/moviemextwithstar/'
   private stars_under_movie=5
   private min_count=3
   private min_count_player=3
   private player_count_limit=3
   
+  public star_palyer = new FormGroup({
+    star: new FormControl(1),
+  });
+  
+
+  public next_movie_in_series(){
+    this.httpService.get_url(this.next_movie_url+''+this.data.id+'').subscribe(
+      (response) => {
+        this.set_mext(response)
+      }
+    );
+  }
+
+  public next_movie_with_star(id=0){
+    if (!id){
+      id=this.star_palyer.value.star
+    }
+    this.httpService.get_url(this.next_movie_with_star_url+''+this.data.id+'?star='+id).subscribe(
+      (response) => {
+        this.set_mext(response)
+      }
+    );
+
+  }
+
+  private set_mext(response:any){
+    window.location.href='/movie/'+response.id;
+  }
+
   private data_stars(){
     let stars=[]
     for (let star of this.data['stars']){

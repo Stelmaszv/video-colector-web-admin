@@ -31,7 +31,7 @@ export class BaseIDComponent implements OnInit {
     rate: new FormControl(1)
   });
 
-  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,private Router:Router,public TokkenService:TokkenService) { }
+  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,protected Router:Router,public TokkenService:TokkenService) { }
 
   public ngOnInit(): void 
   {
