@@ -28,6 +28,16 @@ export class MovieidComponent extends BaseIDComponent{
     }
     return stars
   }
+  private get_sort_order(prop:any) {    
+    return function(a:any, b:any) {    
+        if (a[prop] > b[prop]) {    
+            return 1;    
+        } else if (a[prop] < b[prop]) {    
+            return -1;    
+        }    
+        return 0;    
+    }    
+}
   protected data_stars_player(){
     let stars=[]
     for (let star of this.data['stars']){
@@ -39,8 +49,8 @@ export class MovieidComponent extends BaseIDComponent{
   }
 
   protected override on_get_url(){
-    this.data['movie_stars']=this.data_stars()
-    this.data['movie_stars_player']=this.data_stars_player()
+    this.data['movie_stars']=this.data_stars().sort(this.get_sort_order("movies_count")).reverse()
+    this.data['movie_stars_player']=this.data_stars_player().sort(this.get_sort_order("movies_count")).reverse()
   }
 
 }
