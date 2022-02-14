@@ -18,6 +18,7 @@ export class MovieidComponent extends BaseIDComponent{
   private stars_under_movie=5
   private min_count=3
   private min_count_player=3
+  private player_count_limit=2
   
   private data_stars(){
     let stars=[]
@@ -28,6 +29,7 @@ export class MovieidComponent extends BaseIDComponent{
     }
     return stars
   }
+
   private get_sort_order(prop:any) {    
     return function(a:any, b:any) {    
         if (a[prop] > b[prop]) {    
@@ -37,20 +39,34 @@ export class MovieidComponent extends BaseIDComponent{
         }    
         return 0;    
     }    
-}
-  protected data_stars_player(){
+  }
+
+  private data_stars_player(){
     let stars=[]
+    let count=0
     for (let star of this.data['stars']){
       if (star.movies_count>this.min_count_player){
-        stars.push(star)
+        count++
+        if (this.player_count_limit<count){
+          stars.push(star)
+        }
       }
     }
     return stars
   }
 
+  private if_more_stars_player(stars:any):boolean{
+    const more_stars_lenght=this.data['stars'].length-stars.length
+    if (more_stars_lenght>0){
+      return true
+    }
+    return false
+  }
+
   protected override on_get_url(){
     this.data['movie_stars']=this.data_stars().sort(this.get_sort_order("movies_count")).reverse()
     this.data['movie_stars_player']=this.data_stars_player().sort(this.get_sort_order("movies_count")).reverse()
+    this.data['more_player_stars']=this.if_more_stars_player(this.data['movie_stars_player'])
   }
 
 }

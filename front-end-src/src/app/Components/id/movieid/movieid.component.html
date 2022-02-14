@@ -15,6 +15,9 @@
                         <ng-template [ngIf]="data.serie">
                             <button id="mute" class="btm next">{{data.serie.show_name}}</button>
                         </ng-template>
+                        <ng-template [ngIf]="data.movie_stars">
+                            <button id="mute"  *ngFor="let star of data.movie_stars_player" class="btm next">{{star.name}}</button>
+                        </ng-template>
                         <input type="range" id="range" value="0" min="0" max="100" value="0" step="1"/>
                         <span id="time"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
                         <button id="fullScreen"><i id="fullScreenbtm" class="fas fa-expand"></i></button>
