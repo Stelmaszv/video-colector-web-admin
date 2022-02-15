@@ -91,6 +91,20 @@ class StarsFavorit(StarsFavoritBase):
         model = Star
         fields = ['name']
 
+class SeriesFavorit(StarsFavoritBase):
+    fovorite_item = 'series'
+
+    class Meta:
+        model = Star
+        fields = ['name']
+
+class ProducentFavorit(StarsFavoritBase):
+    fovorite_item = 'producents'
+
+    class Meta:
+        model = Star
+        fields = ['name']
+
 class MoviesLiksView(serializers.ModelSerializer):
     data_put=[]
     class Meta:
