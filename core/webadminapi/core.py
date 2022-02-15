@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from core.wideocollectorseader.models import (DisLikess, Likes,
-                                              Rating,Views,UserFavorits as UserFavoritsModel )
+                                              Rating, Views, UserFavorits as UserFavoritsModel, Movie)
 
 
 class RangesMiddleware(MiddlewareMixin):
@@ -203,7 +203,7 @@ class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
             raise Http404
 
 class FavoritsList(AbstractGenericsAPIViewExtended):
-
+    queryset = Movie.objects.all()
     fovorite_item=''
 
     def list(self, request):

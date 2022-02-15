@@ -109,8 +109,9 @@ urlpatterns = [
     path('tag/<int:pk>/',                        TagDeteilsView.as_view(), name='tag'),
     path('tag_form',                             SelectOptionView.as_view(), name='series_select'),
     #favorits
-    path('favorite/movies',                      FavoritsMovies.as_view(), name='favorits_list'),
-    path('favorite/stars',                       FavoritsStars.as_view(), name='Favorits_stars'),
+    path('favorite/movies',                      FavoritsMovies.as_view(),  name='favorits_list'),
+    path('favorite/stars',                       FavoritsStars.as_view(),   name='favorits_stars'),
+    path('favorite/series',                       FavoritsStars.as_view(),  name='favorits_series'),
 ]
 
 if settings.DEBUG:
