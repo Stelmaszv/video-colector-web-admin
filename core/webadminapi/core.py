@@ -142,7 +142,6 @@ class AbstractDeteilsView(APIView):
 class SqlAction(AbstractDeteilsView):
     pass
 
-
 class AbstractUpdateView(AbstractDeteilsView):
 
     Model=None

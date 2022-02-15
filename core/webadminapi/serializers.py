@@ -53,7 +53,7 @@ class MoviesRatingView(serializers.ModelSerializer):
         representation['message'] = 'Rate '+str(self.data_put.get('rate'))+' has added to '+representation['name']
         return representation
 
-class MoviesFavorit(serializers.ModelSerializer):
+class StarsFavoritBase(serializers.ModelSerializer):
     fovorite_item = 'movies'
 
     class Meta:
@@ -75,6 +75,21 @@ class MoviesFavorit(serializers.ModelSerializer):
         if query:
             return True
         return False
+
+class MoviesFavorit(StarsFavoritBase):
+    fovorite_item = 'movies'
+
+    class Meta:
+        model = Movie
+        fields = ['name']
+
+
+class StarsFavorit(StarsFavoritBase):
+    fovorite_item = 'stars'
+
+    class Meta:
+        model = Star
+        fields = ['name']
 
 class MoviesLiksView(serializers.ModelSerializer):
     data_put=[]

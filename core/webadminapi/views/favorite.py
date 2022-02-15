@@ -1,6 +1,7 @@
 from core.webadminapi.core import FavoritsList, FavoritsAdd, AbstractDeteilsView
 from core.webadminapi.filters import MovieFilter
-from core.webadminapi.serializers import MoviesSerializer, StarsSerializer,SerieSerializer,ProducentsSerializer,MoviesFavorit
+from core.webadminapi.serializers import MoviesSerializer, StarsSerializer, SerieSerializer, ProducentsSerializer, \
+    MoviesFavorit, StarsFavorit
 from django_filters import rest_framework as filters
 from core.wideocollectorseader.models import Movie,Star,Serie,Producents
 
@@ -53,3 +54,10 @@ class FavoritsIsMovies(AbstractDeteilsView):
     Model = Movie
     order_by ='-date_relesed'
     fovorite_item="movies"
+
+class FavoritsIsStars(AbstractDeteilsView):
+    serializer_class = StarsFavorit
+    Model = Star
+    order_by ='-date_relesed'
+    fovorite_item="stars"
+
