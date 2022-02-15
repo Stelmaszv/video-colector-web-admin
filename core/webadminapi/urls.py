@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 
-from core.webadminapi.views.favorite import FavoritsMovies
+from core.webadminapi.views.favorite import FavoritsMovies, FavoritsStars
 from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MovieAddToLikeView,
                                            MovieAddToRatingView,
@@ -110,6 +110,7 @@ urlpatterns = [
     path('tag_form',                             SelectOptionView.as_view(), name='series_select'),
     #favorits
     path('favorite/movies',                      FavoritsMovies.as_view(), name='favorits_list'),
+    path('favorite/stars',                       FavoritsStars.as_view(), name='Favorits_stars'),
 ]
 
 if settings.DEBUG:
