@@ -166,6 +166,7 @@ class ProducentForSerieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SerieSerializer(BaseSeralizer):
+    fovorite_item = 'series'
     tags   = TagsSerializer(many=True)
     Producent = ProducentForSerieSerializer(many=False)
     class Meta:
@@ -177,6 +178,7 @@ class SeriesSerlizerForProducent(ShortSeries):
     pass
 
 class ProducentsSerializer(BaseSeralizer):
+    fovorite_item = 'producents'
     tags   = TagsSerializer(many=True)
     series = SeriesSerlizerForProducent(many=True)
     class Meta:
@@ -188,6 +190,7 @@ class SeriesSerlizerForStars(ShortSeries):
     pass
 
 class StarsSerializer(BaseSeralizer):
+    fovorite_item = 'stars'
     series = SeriesSerlizerForStars(many=True)
     tags = TagsSerializer(many=True)
     class Meta:
