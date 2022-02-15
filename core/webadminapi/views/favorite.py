@@ -1,7 +1,12 @@
-from core.webadminapi.core import FavoritsList
+from rest_framework.permissions import IsAuthenticated
+
+from core.webadminapi.core import FavoritsList, SqlAction, FavoritsAdd
 from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import MoviesSerializer, StarsSerializer,SerieSerializer,ProducentsSerializer
 from django_filters import rest_framework as filters
+
+from core.wideocollectorseader.models import Movie
+
 
 class FavoritsMovies(FavoritsList):
     serializer_class = MoviesSerializer
@@ -9,6 +14,13 @@ class FavoritsMovies(FavoritsList):
     filterset_class  = MovieFilter
     order_by ='-date_relesed'
     fovorite_item="movies"
+
+
+class FavoritsAddMovie(FavoritsAdd):
+
+    serializer_class = MoviesSerializer
+    Model = Movie
+    fovorite_item = "movies"
 
 class FavoritsStars(FavoritsList):
     serializer_class = StarsSerializer

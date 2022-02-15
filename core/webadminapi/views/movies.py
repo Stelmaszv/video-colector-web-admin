@@ -1,23 +1,16 @@
 import os
-
 from django_filters import rest_framework as filters
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication)
+                                   AbstractUpdateView)
 from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
-                                          PhotoSerializerMovie,
-                                          MoviesRatingView,
-                                          MoviesLiksView,
-                                          MoviesDisLiksView,
-                                          MoviesViewsView,
-                                          StarsSerializer)
-from core.wideocollectorseader.models import Star,Movie
+                                          PhotoSerializerMovie)
+from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
 
@@ -57,27 +50,27 @@ class MovieAddToRatingView(SqlAction):
     Model = Movie
     permission_classes = [IsAuthenticated]
 
-    def exc_action_before_query(self):
+    def exc_action_before_query(self,user):
         self.add_raiting()
 
 class MovieAddToLikeView(MovieAddToRatingView):
     serializer_class = MoviesSerializer
 
-    def exc_action_before_query(self):
+    def exc_action_before_query(self,user):
         self.add_like()
 
 class MovieAddToDisLikeView(MovieAddToRatingView):
 
     serializer_class = MoviesSerializer
 
-    def exc_action_before_query(self):
+    def exc_action_before_query(self,user):
         self.add_disLikes()
 
 class MovieUpdateViewsView(MovieAddToRatingView):
 
     serializer_class = MoviesSerializer
 
-    def exc_action_before_query(self):
+    def exc_action_before_query(self,user):
         self.update_views()
 
 class MovieNextInSeriesView(AbstractDeteilsView):

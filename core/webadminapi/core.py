@@ -205,6 +205,7 @@ class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
 class FavoritsList(AbstractGenericsAPIViewExtended):
     queryset = Movie.objects.all()
     fovorite_item=''
+    permission_classes = [IsAuthenticated]
 
     def list(self, request):
         queryset = self.filter_queryset(request.user)
@@ -215,3 +216,17 @@ class FavoritsList(AbstractGenericsAPIViewExtended):
     def filter_queryset(self,user):
         UserFavorits = UserFavoritsModel.objects.filter(User=user).get()
         return getattr(UserFavorits,self.fovorite_item).all()
+
+class FavoritsAdd(SqlAction):
+
+    queryset = Movie.objects
+    permission_classes = [IsAuthenticated]
+    fovorite_item = ''
+
+    def exc_action_before_query(self):
+        self.add_to_favorits()
+
+    def add_to_favorits(self):
+        UserFavorits = UserFavoritsModel.objects.filter(User=self.request.user).get()
+        getattr(UserFavorits, self.fovorite_item).add(self.query)
+
