@@ -25,6 +25,7 @@ export class BaseIDComponent implements OnInit {
   protected add_to_dislike_url:string=''
   protected update_views_url:string=''
   protected fovorits_url:string=''
+  protected chceck_favorit_stan_url:string=''
 
 
   public addrate = new FormGroup({
@@ -54,6 +55,10 @@ export class BaseIDComponent implements OnInit {
   public return_add_to_favorite_url(){
     return this.server+this.fovorits_url+this.id+'/'
   }
+  public return_chceck_favorit_stan_url(){
+    return this.server+this.chceck_favorit_stan_url+this.id+'/'
+  }
+
 
   public return_update_views_url(){
     return this.server+this.update_views_url+this.id+'/'

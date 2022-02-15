@@ -18,6 +18,7 @@ export class MovieidComponent extends BaseIDComponent{
   protected override fovorits_url:string='favorite/movie/'
   private next_movie_url ='http://127.0.0.1:8000/movienextinseries/'
   private next_movie_with_star_url ='http://127.0.0.1:8000/moviemextwithstar/'
+  protected override chceck_favorit_stan_url='favoriteis/movies/'
   private stars_under_movie=5
   private min_count=3
   private movie_count_player=3

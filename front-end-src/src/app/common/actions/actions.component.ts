@@ -18,9 +18,11 @@ export class ActionsComponent implements OnInit{
   constructor(private httpService: HttpService,private TokkenService: TokkenService) { }
 
   public add_to_if_favorite(){
-    this.if_favorite=!this.if_favorite
-    this.add_action(this.add_to_favorite_url)
+    //this.if_favorite=!this.if_favorite
+    //this.add_action(this.add_to_favorite_url)
+    //this.set_favorite()
   }
+
 
   public addrate = new FormGroup({
     rate: new FormControl(1)
@@ -29,6 +31,7 @@ export class ActionsComponent implements OnInit{
   public ngOnInit(){
 
     this.update_view()
+    this.get_favorite()
   }
 
   public add_like(){
@@ -41,6 +44,27 @@ export class ActionsComponent implements OnInit{
 
   public add_dislike(){
     this.add_action(this.add_to_dislike_url,'.dislike_js')
+  }
+
+  private set_favorite(response:any){
+    this.if_favorite=response.is_favorite
+  }
+
+  private get_favorite(){
+    if(this.TokkenService.if_isset_tokken()){
+      this.httpService.get_url_auth(this.favorite_stan).subscribe(
+        (response) => {
+          this.set_favorite(response)
+        },
+        (error) => {
+          if (error.statusText == 'Unauthorized'){
+            localStorage.removeItem('tokkenAccess');
+            localStorage.removeItem('tokkenRefresh');
+            window.location.reload();
+          }
+        }
+      );
+    }
   }
 
   private update_view(){

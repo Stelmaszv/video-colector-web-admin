@@ -11,8 +11,6 @@ class BaseSeralizer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        if self.fovorite_item and self.data_put is not None:
-            representation['is_favourite'] = self.is_favourite(instance)
         #representation['is_like'] = self.is_like(instance)
         #representation['is_disLikes'] = self.is_disLikes(instance)
         return representation
@@ -54,6 +52,29 @@ class MoviesRatingView(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['message'] = 'Rate '+str(self.data_put.get('rate'))+' has added to '+representation['name']
         return representation
+
+class MoviesFavorit(serializers.ModelSerializer):
+    fovorite_item = 'movies'
+
+    class Meta:
+        model = Movie
+        fields = ['name']
+
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['is_favorite'] = self.is_favourite(instance)
+        return representation
+
+    def is_favourite(self,instance):
+        UserFavorits = UserFavoritsModel.objects.filter(User=self.data_put['request'].user).get()
+        query= getattr(UserFavorits, self.fovorite_item).filter(id=self.data_put['kwargs'].get("pk"))
+
+        if query:
+            return True
+        return False
 
 class MoviesLiksView(serializers.ModelSerializer):
     data_put=[]
