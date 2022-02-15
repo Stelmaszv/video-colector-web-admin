@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 
-from core.webadminapi.views.favorite import FavoritsMovies, FavoritsStars
+from core.webadminapi.views.favorite import FavoritsMovies, FavoritsStars, FavoritsSeries
 from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MovieAddToLikeView,
                                            MovieAddToRatingView,
@@ -111,7 +111,7 @@ urlpatterns = [
     #favorits
     path('favorite/movies',                      FavoritsMovies.as_view(),  name='favorits_list'),
     path('favorite/stars',                       FavoritsStars.as_view(),   name='favorits_stars'),
-    path('favorite/series',                       FavoritsStars.as_view(),  name='favorits_series'),
+    path('favorite/series',                      FavoritsSeries.as_view(),  name='favorits_series'),
 ]
 
 if settings.DEBUG:
