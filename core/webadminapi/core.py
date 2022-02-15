@@ -99,21 +99,6 @@ class AbstractDeteilsView(APIView):
     def get_queryset(self):
         return self.query
 
-    def add_favorits(self):
-        print('dqw')
-        """
-        is_favourite = self.is_favourite(self.query)
-        if is_favourite is False:
-            Fav = Favourite(User=self.request.user)
-            Fav.save()
-            self.query.favourite.add(Fav)
-        else:
-            list = self.query.favourite.all()
-            for Fav in list:
-                if Fav.User == self.request.user:
-                    self.query.favourite.remove(Fav)
-        """
-
     def exc_action_before_query(self):
         pass
 
@@ -228,5 +213,9 @@ class FavoritsAdd(SqlAction):
 
     def add_to_favorits(self):
         UserFavorits = UserFavoritsModel.objects.filter(User=self.request.user).get()
-        getattr(UserFavorits, self.fovorite_item).add(self.query)
+        query =getattr(UserFavorits, self.fovorite_item).filter(id=self.query.id)
+        if query:
+            getattr(UserFavorits, self.fovorite_item).remove(self.query)
+        else:
+            getattr(UserFavorits, self.fovorite_item).add(self.query)
 
