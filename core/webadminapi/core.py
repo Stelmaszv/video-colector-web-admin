@@ -93,7 +93,10 @@ class AbstractDeteilsView(APIView):
         self.exc_action_before_serializer()
         serializer = self.serializer_class(self.query,context={'request': request.user})
         if hasattr(serializer,'set_data'):
-            serializer.set_data(self.request.GET)
+            serializer.set_data({
+                "kwargs"  : self.kwargs,
+                "request"    : request
+            })
         return Response(serializer.data)
 
     def get_queryset(self):

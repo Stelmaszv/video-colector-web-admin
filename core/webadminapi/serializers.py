@@ -2,13 +2,15 @@ from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 
 from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
-                                              Tag)
+                                              Tag,UserFavorits as UserFavoritsModel)
 
 
 class BaseSeralizer(serializers.ModelSerializer):
+    fovorite_item=''
+
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        #representation['is_favourite'] = self.is_favourite(instance)
+        representation['is_favourite'] = self.is_favourite(instance)
         #representation['is_like'] = self.is_like(instance)
         #representation['is_disLikes'] = self.is_disLikes(instance)
         return representation
@@ -26,8 +28,17 @@ class BaseSeralizer(serializers.ModelSerializer):
     def is_like(self, instance):
         return self.base_is(instance, 'likes')
 
+    def set_data(self,data):
+        self.data_put=data
+
     def is_favourite(self,instance):
-        return self.base_is(instance, 'favourite')
+        if self.fovorite_item:
+            UserFavorits = UserFavoritsModel.objects.filter(User=self.data_put['request'].user).get()
+            query= getattr(UserFavorits, self.fovorite_item).filter(id=self.data_put['kwargs'].get("pk"))
+            if query:
+                return True
+            return False
+        return False
 
 #action
 class MoviesRatingView(serializers.ModelSerializer):
@@ -198,10 +209,14 @@ class SeriesSerlizerForMovies(ShortSeries):
     pass
 
 class MoviesSerializer(BaseSeralizer):
+    fovorite_item = 'movies'
     stars = StarsForMovies(many=True)
     tags  = TagsSerializer(many=True)
     serie = SeriesSerlizerForMovies(many=False)
     producent =  ProducentSeralizerForMovie(many=False)
+
+    def set_data(self,data):
+        self.data_put=data
 
     class Meta:
         model = Movie

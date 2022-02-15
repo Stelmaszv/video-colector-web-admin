@@ -13,6 +13,7 @@ export class ActionsComponent implements OnInit{
   @Input() add_to_rating_url:any
   @Input() add_to_favorite_url:any
   @Input() update_views_url:any
+  @Input() favorite_stan:any
   public if_favorite=false
   constructor(private httpService: HttpService,private TokkenService: TokkenService) { }
 

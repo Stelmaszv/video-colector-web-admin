@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <ng-template [ngIf]="TokkenService.if_isset_tokken()">
-                        <app-actions update_views_url="{{return_update_views_url()}}" add_to_favorite_url="{{return_add_to_favorite_url()}}" add_like_url="{{return_add_to_like_url()}}" add_to_dislike_url="{{return_add_to_dislike_url()}}" add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
+                        <app-actions update_views_url="{{return_update_views_url()}}" add_to_favorite_url="{{return_add_to_favorite_url()}}" favorite_stan="{{data.is_favourite}}" add_like_url="{{return_add_to_like_url()}}" add_to_dislike_url="{{return_add_to_dislike_url()}}" add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
                     </ng-template>
                 </div>
                 <div class="col">
