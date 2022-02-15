@@ -3,7 +3,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from core.webadminapi.views.favorite import FavoritsMovies, FavoritsStars, FavoritsSeries, FavoritsProducents, \
-    FavoritsAddMovie, FavoritsAddStar, FavoritsAddSerie, FavoritsAddProducent, FavoritsIsMovies, FavoritsIsStars
+    FavoritsAddMovie, FavoritsAddStar, FavoritsAddSerie, FavoritsAddProducent, FavoritsIsMovies, FavoritsIsStars, \
+    FavoritsIsSeries
 from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MovieAddToLikeView,
                                            MovieAddToRatingView,
@@ -118,7 +119,8 @@ urlpatterns = [
     path('favorite/serie/<int:pk>/',             FavoritsAddSerie.as_view(),  name='favorits_stars'),
     path('favorite/producent/<int:pk>/',         FavoritsAddProducent.as_view(),  name='favorits_stars'),
     path('favoriteis/movies/<int:pk>/',          FavoritsIsMovies.as_view(),  name='favorits_movie'),
-    path('favoriteis/stars/<int:pk>/',           FavoritsIsStars.as_view(),  name='favoritsis_stars')
+    path('favoriteis/stars/<int:pk>/',           FavoritsIsStars.as_view(),  name='favoritsis_stars'),
+    path('favoriteis/series/<int:pk>/',          FavoritsIsSeries.as_view(),  name='favoritsis_series')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
