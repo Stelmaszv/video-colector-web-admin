@@ -12,5 +12,7 @@ export class StarComponent extends BaseIDComponent {
   protected override add_to_rating_url:string='staraddrating/'
   protected override add_to_dislike_url:string='staraddtodislike/'
   protected override update_views_url:string='starupdateviews/'
-  protected override fovorits_url:string='staraddtofavorite/'
+  protected override fovorits_url:string='favorite/star/'
+  protected override chceck_favorit_stan_url='favoriteis/stars/'
+  
 }

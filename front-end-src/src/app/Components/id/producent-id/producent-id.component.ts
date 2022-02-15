@@ -12,7 +12,8 @@ export class ProducentIdComponent extends BaseIDComponent {
   protected override add_to_rating_url:string='producentaddtorating/'
   protected override add_to_dislike_url:string='producentaddtodislike/'
   protected override update_views_url:string='producentupdateviews/'
-  protected override fovorits_url:string='producentaddtofavorite/'
+  protected override fovorits_url:string='favorite/movie/'
+  protected override chceck_favorit_stan_url='favoriteis/movies/'
 }
 
 
