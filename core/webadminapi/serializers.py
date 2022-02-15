@@ -7,10 +7,12 @@ from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
 
 class BaseSeralizer(serializers.ModelSerializer):
     fovorite_item=''
+    data_put=None
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['is_favourite'] = self.is_favourite(instance)
+        if self.fovorite_item and self.data_put is not None:
+            representation['is_favourite'] = self.is_favourite(instance)
         #representation['is_like'] = self.is_like(instance)
         #representation['is_disLikes'] = self.is_disLikes(instance)
         return representation
@@ -32,12 +34,10 @@ class BaseSeralizer(serializers.ModelSerializer):
         self.data_put=data
 
     def is_favourite(self,instance):
-        if self.fovorite_item:
-            UserFavorits = UserFavoritsModel.objects.filter(User=self.data_put['request'].user).get()
-            query= getattr(UserFavorits, self.fovorite_item).filter(id=self.data_put['kwargs'].get("pk"))
-            if query:
-                return True
-            return False
+        UserFavorits = UserFavoritsModel.objects.filter(User=self.data_put['request'].user).get()
+        query= getattr(UserFavorits, self.fovorite_item).filter(id=self.data_put['kwargs'].get("pk"))
+        if query:
+            return True
         return False
 
 #action
