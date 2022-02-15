@@ -18,9 +18,8 @@ export class ActionsComponent implements OnInit{
   constructor(private httpService: HttpService,private TokkenService: TokkenService) { }
 
   public add_to_if_favorite(){
-    //this.if_favorite=!this.if_favorite
-    //this.add_action(this.add_to_favorite_url)
-    //this.set_favorite()
+    this.add_action(this.add_to_favorite_url)
+    this.if_favorite=!this.if_favorite
   }
 
 
@@ -29,7 +28,6 @@ export class ActionsComponent implements OnInit{
   });
 
   public ngOnInit(){
-
     this.update_view()
     this.get_favorite()
   }
@@ -83,8 +81,6 @@ export class ActionsComponent implements OnInit{
     if(this.TokkenService.if_isset_tokken()){
       this.httpService.get_url_auth(url).subscribe(
         (response) => {
-          console.log(selector)
-          console.log(response)
           if (selector){
             this.update_elemnt(selector)
           }
