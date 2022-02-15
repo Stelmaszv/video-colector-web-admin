@@ -147,6 +147,7 @@ class MoviePhotosView(AbstractGenericsAPIViewExtended):
                 )
         return photo
 
+
 class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate
     queryset = Movie.objects

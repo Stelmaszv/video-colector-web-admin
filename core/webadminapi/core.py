@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from core.wideocollectorseader.models import (DisLikess, Likes,
-                                              Rating,Views)
+                                              Rating,Views,UserFavorits as UserFavoritsModel )
 
 
 class RangesMiddleware(MiddlewareMixin):
@@ -191,7 +191,6 @@ class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
     Model=None
 
     def list(self, request, pk):
-
         queryset = self.filter_queryset()
         serializer = self.serializer_class(queryset, many=True, context={'request': request.user})
         page = self.paginate_queryset(serializer.data)
@@ -202,3 +201,17 @@ class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
             return self.Model.objects.get(pk=pk)
         except self.Model.DoesNotExist:
             raise Http404
+
+class FavoritsList(AbstractGenericsAPIViewExtended):
+
+    fovorite_item=''
+
+    def list(self, request):
+        queryset = self.filter_queryset(request.user)
+        serializer = self.serializer_class(queryset, many=True, context={'request': request.user})
+        page = self.paginate_queryset(serializer.data)
+        return self.get_paginated_response(page)
+
+    def filter_queryset(self,user):
+        UserFavorits = UserFavoritsModel.objects.filter(User=user).get()
+        return getattr(UserFavorits,self.fovorite_item).all()
