@@ -54,7 +54,7 @@ urlpatterns = [
     path('moviephotosview/<int:pk>/',            MoviePhotosView.as_view(), name='moviephotosview'),
     path('movieswithstars/<int:pk>/',            MoviesWithStarsView.as_view(), name='moviessithstars'),
     path('movienextinseries/<int:pk>/',          MovieNextInSeriesView.as_view(), name='movienextinseries'),
-    path('moviemextwithstar/<int:pk>',          MovieNextWithStarView.as_view(), name='moviemextwithstar'),
+    path('moviemextwithstar/<int:pk>',           MovieNextWithStarView.as_view(), name='moviemextwithstar'),
     #errors
     path('movieaddtorating/<int:pk>/',            MovieAddToRatingView.as_view(), name='movieaddtorating'),
     path('movieaddtolike/<int:pk>/',              MovieAddToLikeView.as_view(), name='movieaddtolike'),

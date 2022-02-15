@@ -4,6 +4,8 @@ import shutil
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
+from django.contrib.auth.models import  AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import UserManager
 
 from core.setings import get_josn_file
 
@@ -121,13 +123,6 @@ class DisLikess(models.Model):
     def __str__(self):
         return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
 
-class Favourite(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
 class Rating(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     rate = models.IntegerField(default=0,validators=[MinValueValidator(1),MaxValueValidator(5)])
@@ -156,7 +151,6 @@ class Producents(models.Model):
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='ProducentsViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='ProducentDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='ProducentFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
@@ -192,7 +186,6 @@ class Serie(models.Model):
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='SerieViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Serielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='SerieDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='SerieFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',
                                        blank=True)
 
@@ -237,7 +230,6 @@ class Star(models.Model):
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='StarViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Starlikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='StarDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='StarFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='StarRating',blank=True)
 
     def save(self, *args, **kwargs):
@@ -274,7 +266,6 @@ class Movie(models.Model):
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='MovieViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Movielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='MovieDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='MovieFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',blank=True)
 
     def delete(self, *args, **kwargs):
@@ -286,4 +277,13 @@ class Movie(models.Model):
     def __str__(self):
         return self.name
 
+class UserFavorits(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='Stars', blank=True)
+    movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='Movies', blank=True)
+    producents = models.ManyToManyField(to='wideocollectorseader.Producents', related_name='Producents', blank=True)
+    series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='Serie', blank=True)
+
+    def __str__(self):
+        return self.User.username
 

@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from core.wideocollectorseader.models import (DisLikess, Favourite, Likes,
+from core.wideocollectorseader.models import (DisLikess, Likes,
                                               Rating,Views)
 
 
@@ -100,6 +100,8 @@ class AbstractDeteilsView(APIView):
         return self.query
 
     def add_favorits(self):
+        print('dqw')
+        """
         is_favourite = self.is_favourite(self.query)
         if is_favourite is False:
             Fav = Favourite(User=self.request.user)
@@ -110,6 +112,7 @@ class AbstractDeteilsView(APIView):
             for Fav in list:
                 if Fav.User == self.request.user:
                     self.query.favourite.remove(Fav)
+        """
 
     def exc_action_before_query(self):
         pass
