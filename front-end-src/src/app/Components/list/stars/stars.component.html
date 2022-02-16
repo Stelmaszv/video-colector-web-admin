@@ -42,57 +42,63 @@
         </div>
         <div class="modal-body">
           <form [formGroup]="search" class="form-filter">
-            <p class="h6">Nationality</p>
-            <div class="col">
-                <input id="likes_count" type="text" value="{{search.value.nationality}}" formControlName="nationality" class="nationality">
+             <div class="row">
+              <div class="col">
+                  <p class="h6">Nationality</p>
+                  <input id="likes_count" type="text" value="{{search.value.nationality}}" formControlName="nationality" class="nationality" style="width: 200px;">
+              </div>
+              <div class="col">
+                  <p class="h6">Birth place</p>
+                  <input id="likes_count" type="text" value="{{search.value.birth_place}}" formControlName="birth_place" class="birth_place" style="width: 200px;">
+              </div>
+             </div>
+             <div class="row">
+              <div class="col">
+                  <p class="h6">Weight</p>
+                  <input id="likes_count" type="number" value="{{search.value.weight}}" formControlName="weight" class="weight" style="width: 200px;">
+              </div>
+              <div class="col">
+                <p class="h6">Height</p>
+                <div class="col">
+                    <input id="likes_count" type="number" value="{{search.value.height}}" formControlName="height" class="height" style="width: 200px;">
+                </div>
+              </div>
+             </div>
+             <div class="row">
+                <div class="col">
+                    <p class="h6">Ethnicity</p>
+                    <input id="likes_count" type="text" value="{{search.value.ethnicity}}" formControlName="ethnicity" class="ethnicity" style="width: 200px;">
+                </div>
+                <div class="col">
+                  <p class="h6">Hair color</p>
+                  <input id="likes_count" type="text" value="{{search.value.hair_color}}" formControlName="hair_color" class="hair_color" style="width: 200px;">
+                </div>
+             </div>
+             <div class="row">
+                <div class="col">
+                    <p class="h6">Liks</p>
+                    <input id="likes_count" type="number" (change)="serch()" value="{{search.value.likes_count}}" formControlName="likes_count" class="likes-count" style="width: 200px;">
+                </div>
+                <div class="col">
+                  <p class="h6">Dis Like</p>
+                  <input id="disLikes_count" type="number" (change)="serch()" formControlName="disLikes_count" value="{{search.value.ratings_count}}" class="disLikes-count" style="width: 200px;">
+                </div>
+             </div>
+             <div class="row">
+              <div class="col">
+                  <p class="h6">Ratings count</p>
+                  <input id="ratings_count" type="number" (change)="serch()" formControlName="ratings_count" value="{{search.value.ratings_count}}" class="ratings-count" style="width: 200px;">
+              </div>
+              <div class="col">
+                <p class="h6">Avg rating</p>
+                <input id="avg_rating" type="number" step="0.01" (change)="serch()" value="{{search.value.avg_rating}}" formControlName="avg_rating" class="avg-rating" style="width: 200px;">
             </div>
-            <p class="h6">Weight</p>
-            <div class="col">
-                <input id="likes_count" type="number" value="{{search.value.weight}}" formControlName="weight" class="weight">
-            </div>
-            <p class="h6">Height</p>
-            <div class="col">
-                <input id="likes_count" type="number" value="{{search.value.height}}" formControlName="height" class="height">
-            </div>
-            <p class="h6">Ethnicity</p>
-            <div class="col">
-                <input id="likes_count" type="text" value="{{search.value.ethnicity}}" formControlName="ethnicity" class="ethnicity">
-            </div>
-            <p class="h6">Hair color</p>
-            <div class="col">
-                <input id="likes_count" type="text" value="{{search.value.hair_color}}" formControlName="hair_color" class="hair_color">
-            </div>
-            <p class="h6">Birth place</p>
-            <div class="col">
-                <input id="likes_count" type="text" value="{{search.value.birth_place}}" formControlName="birth_place" class="birth_place">
-            </div>
-          <p class="h6">Liks</p>
-          <div class="col">
-              <input id="likes_count" type="number" (change)="serch()" value="{{search.value.likes_count}}" formControlName="likes_count" class="likes-count">
-          </div>
-          <p class="h6">Avg rating</p>
-          <div class="col">
-              <input id="avg_rating" type="number" step="0.01" (change)="serch()" value="{{search.value.avg_rating}}" formControlName="avg_rating" class="avg-rating">
-          </div>
-          <p class="h6">Ratings count</p>
-          <div class="col">
-              <input id="ratings_count" type="number" (change)="serch()" formControlName="ratings_count" value="{{search.value.ratings_count}}" class="ratings-count">
-          </div>
-          <p class="h6">DisLikes count</p>
-          <div class="col">
-              <input id="disLikes_count" type="number" (change)="serch()" formControlName="disLikes_count" value="{{search.value.ratings_count}}" class="disLikes-count">
-          </div>
+             </div>
           </form>
           <p class="h6">Tags</p>
           <select class="form-select" multiple aria-label="multiple select example">
             <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="!if_exist(tag.id,tags_form)" selected>{{tag.name}}</option>
             <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="if_exist(tag.id,tags_form)" >{{tag.name}}</option>
-          </select>
-          
-          <p class="h6">Stars</p>
-          <select class="form-select" multiple aria-label="multiple select example">
-            <option *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="!if_exist(star.id,stars_form)" selected>{{star.name}}</option>
-            <option *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="if_exist(star.id,stars_form)" >{{star.name}}</option>
           </select>
         </div>
         <div class="modal-footer">

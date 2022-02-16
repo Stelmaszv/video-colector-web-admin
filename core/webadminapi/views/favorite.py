@@ -1,5 +1,5 @@
 from core.webadminapi.core import FavoritsList, FavoritsAdd, AbstractDeteilsView
-from core.webadminapi.filters import MovieFilter
+from core.webadminapi.filters import MovieFilter, StarFilter
 from core.webadminapi.serializers import MoviesSerializer, StarsSerializer, SerieSerializer, ProducentsSerializer, \
     MoviesFavorit, StarsFavorit, SeriesFavorit, ProducentFavorit
 from django_filters import rest_framework as filters
