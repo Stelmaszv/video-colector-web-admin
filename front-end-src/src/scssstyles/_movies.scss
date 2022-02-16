@@ -238,3 +238,16 @@ $starsBGColor:black;
     }
 
 }
+.count-item{
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    &.good{
+        background-color: green;
+    }
+
+    &.bad{
+        background-color: red;
+    }
+}

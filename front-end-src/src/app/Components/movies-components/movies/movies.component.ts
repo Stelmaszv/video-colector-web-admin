@@ -9,6 +9,7 @@ import { FormControl ,FormGroup} from '@angular/forms';
 })
 export class MoviesComponent extends BaseListComponent{
   public mode:string ='cover'
+  found_top='150px'
   
   public override url:string='http://127.0.0.1:8000/movies?page='
   public override fav_url:string='http://127.0.0.1:8000/favorite/movies?page='

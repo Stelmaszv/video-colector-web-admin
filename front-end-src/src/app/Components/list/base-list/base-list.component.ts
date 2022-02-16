@@ -24,6 +24,7 @@ export class BaseListComponent implements OnInit {
   public stars:any
   public producents_select:any
   public series_select:any
+  public item_count:any
   private store_url:string=''
   private series_select_url:string = 'http://127.0.0.1:8000/series_select'
   private producents_select_url:string = 'http://127.0.0.1:8000/producentsformview'
@@ -35,7 +36,7 @@ export class BaseListComponent implements OnInit {
   protected auth:any=false
   @Input() top:any='50px'
 
-  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService,private Router:Router) { }
+  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
 
   public add_star(add_star:number):void
   {
@@ -178,6 +179,10 @@ export class BaseListComponent implements OnInit {
     }
   }
 
+  private set_count(response:any){
+    this.item_count=response.count
+  }
+
   protected load_select():void
   {
     this.httpService.get_url(this.series_select_url).subscribe(
@@ -200,6 +205,8 @@ export class BaseListComponent implements OnInit {
     
   }
 
+
+
   protected load_data():void
   {
     if (this.auth==false){
@@ -211,6 +218,7 @@ export class BaseListComponent implements OnInit {
           (response) => {
             if (response.hasOwnProperty('results')){
               this.response=response
+              this.set_count(response)
               this.set_results()
               this.loading=true
             }
@@ -227,6 +235,7 @@ export class BaseListComponent implements OnInit {
             if (response.hasOwnProperty('results')){
               this.response=response
               this.set_results()
+              this.set_count(response)
               this.loading=true
             }
           },
