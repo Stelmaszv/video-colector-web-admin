@@ -7,19 +7,6 @@
       <div class="col">
           <input id="name" type="text" (keyup)="serch()" formControlName="name" value="{{search.value.name}}"   class="name-search">
       </div>
-  
-    <div class="col">
-        <select class="producent-search" (change)="serch()" value="{{search.value.producent}}" aria-label="Default select example" formControlName="producent">
-          <option></option>
-          <option *ngFor="let producent of producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
-        </select>
-    </div>
-    <div class="col">
-      <select class="series-search" (change)="serch()" value="{{search.value.serie}}" aria-label="Default select example" formControlName="serie">
-        <option></option>
-        <option *ngFor="let serie of series_select"  value="{{serie.id}}" >{{serie.name}}</option>
-      </select>
-    </div>
     <div class="col">
       <div class="form-check form-switch">
         <label class="form-check-label" for="flexSwitchCheckDefault">Favorit</label>
@@ -55,9 +42,29 @@
         </div>
         <div class="modal-body">
           <form [formGroup]="search" class="form-filter">
-            <p class="h6">Country</p>
+            <p class="h6">Nationality</p>
             <div class="col">
-                <input id="likes_count" type="text" value="{{search.value.country}}" formControlName="country" class="country">
+                <input id="likes_count" type="text" value="{{search.value.nationality}}" formControlName="nationality" class="nationality">
+            </div>
+            <p class="h6">Weight</p>
+            <div class="col">
+                <input id="likes_count" type="number" value="{{search.value.weight}}" formControlName="weight" class="weight">
+            </div>
+            <p class="h6">Height</p>
+            <div class="col">
+                <input id="likes_count" type="number" value="{{search.value.height}}" formControlName="height" class="height">
+            </div>
+            <p class="h6">Ethnicity</p>
+            <div class="col">
+                <input id="likes_count" type="text" value="{{search.value.ethnicity}}" formControlName="ethnicity" class="ethnicity">
+            </div>
+            <p class="h6">Hair color</p>
+            <div class="col">
+                <input id="likes_count" type="text" value="{{search.value.hair_color}}" formControlName="hair_color" class="hair_color">
+            </div>
+            <p class="h6">Birth place</p>
+            <div class="col">
+                <input id="likes_count" type="text" value="{{search.value.birth_place}}" formControlName="birth_place" class="birth_place">
             </div>
           <p class="h6">Liks</p>
           <div class="col">

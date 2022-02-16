@@ -18,7 +18,12 @@ export class StarsComponent extends BaseListComponent{
     avg_rating:  new FormControl(),
     ratings_count:new FormControl(),
     disLikes_count:new FormControl(),
-    country:new FormControl()
+    nationality:new FormControl(),
+    weight:new FormControl(),
+    height:new FormControl(),
+    ethnicity:new FormControl(),
+    hair_color:new FormControl(),
+    birth_place:new FormControl()
   });
 
 }

@@ -15,8 +15,8 @@ export class BaseListComponent implements OnInit {
   public url:string=''
   public fav_url:string=''
   public filter_url:string=""
-  public tags_form:any
-  public stars_form:any
+  public tags_form:any=[]
+  public stars_form:any=[]
   public loading:boolean=true
   public search:any
   public tags:any
@@ -151,7 +151,7 @@ export class BaseListComponent implements OnInit {
       }
 
     }
-
+    
     for (let star of this.stars_form){
       let string ='stars='+star
       this.filter_url+=string+'&'
@@ -204,8 +204,6 @@ export class BaseListComponent implements OnInit {
   protected on_set_url():void{
     
   }
-
-
 
   protected load_data():void
   {
