@@ -3,6 +3,7 @@ import {HttpService} from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import {ProcentService} from '../../../Service/procent/procent.service'
 import {TokkenService}  from '../../../Service/tokken/tokken.service'
+
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-base-list',
@@ -12,15 +13,18 @@ import { Router } from '@angular/router';
 export class BaseListComponent implements OnInit {
   public data:any;
   public url:string=''
+  public fav_url:string=''
   public filter_url:string=""
   public tags_form:any
   public stars_form:any
   public loading:boolean=true
   public search:any
   public tags:any
+  public favorite:any=false
   public stars:any
   public producents_select:any
   public series_select:any
+  private store_url:string=''
   private series_select_url:string = 'http://127.0.0.1:8000/series_select'
   private producents_select_url:string = 'http://127.0.0.1:8000/producentsformview'
   private tag_select_url:string = 'http://127.0.0.1:8000/tags'
@@ -77,6 +81,7 @@ export class BaseListComponent implements OnInit {
 
   public ngOnInit(): void 
   {
+    this.store_url=this.url
     this.data=[]
     this.load_data()
     this.onInit()
@@ -99,6 +104,21 @@ export class BaseListComponent implements OnInit {
 
   public onInit():void
   {}
+
+  public get_favorits(){
+    this.page=1
+    if (!this.favorite){
+      this.data=[]
+      this.url=this.fav_url
+      this.auth=true
+      this.load_data()
+    }else{
+      this.data=[]
+      this.url=this.store_url
+      this.load_data()
+    }
+    this.favorite=!this.favorite
+  }
 
   private set_results():void{
     for (let movie of this.response.results){
