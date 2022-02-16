@@ -15,6 +15,7 @@ import { LogoutComponent } from './Components/logout/logout.component';
 import { AuthGuard } from './Components/gard/auth.guard';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
+import { MoviesFavoritsComponent } from './Components/favorits/movies-favorits/movies-favorits.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
+  },
+  {
+    path: 'favorit/movies',
+    component: MoviesFavoritsComponent
   },
   {
     path: 'start',

@@ -39,6 +39,8 @@ import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movi
 import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ActionsComponent } from './common/actions/actions.component';
+import { MoviesFavoritsComponent } from './Components/favorits/movies-favorits/movies-favorits.component';
+import { MoviesListFavoritComponent } from './Components/favorits/movies-list/movies-list.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { ActionsComponent } from './common/actions/actions.component';
     AdminMoviesComponent,
     MainAuthComponent,
     LogoutComponent,
-    ActionsComponent
+    ActionsComponent,
+    MoviesFavoritsComponent,
+    MoviesListFavoritComponent
   ],
   imports: [
     AppRoutingModule,
