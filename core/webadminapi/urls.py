@@ -114,6 +114,7 @@ urlpatterns = [
     path('favorite/movies',                      FavoritsMovies.as_view(),  name='favorits_list'),
     path('favorite/stars',                       FavoritsStars.as_view(),   name='favorits_stars'),
     path('favorite/producents',                  FavoritsProducents.as_view(),  name='favorits_producents'),
+    path('favorite/series',                       FavoritsSeries.as_view(),  name='favorits_series'),
     path('favorite/movie/<int:pk>/',             FavoritsAddMovie.as_view(),  name='favorits_producents'),
     path('favorite/star/<int:pk>/',              FavoritsAddStar.as_view(),  name='favorits_stars'),
     path('favorite/serie/<int:pk>/',             FavoritsAddSerie.as_view(),  name='favorits_stars'),

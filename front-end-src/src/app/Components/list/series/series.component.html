@@ -1,3 +1,49 @@
+<form class="sticky-top form-filter"  [formGroup]="search" [ngStyle]="{'top': top}">
+    <div class="filter row-cols-1">
+      <div class="row">
+      <div class="col">
+          <label for="name">Name: </label>
+      </div>
+      <div class="col">
+          <input id="name" type="text" (keyup)="serch()" formControlName="name" value="{{search.value.name}}"   class="name-search">
+      </div>
+  
+    <div class="col">
+        <select class="producent-search" (change)="serch()" value="{{search.value.producent}}" aria-label="Default select example" formControlName="producent">
+          <option></option>
+          <option *ngFor="let producent of producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
+        </select>
+    </div>
+    <div class="col">
+      <select class="series-search" (change)="serch()" value="{{search.value.serie}}" aria-label="Default select example" formControlName="serie">
+        <option></option>
+        <option *ngFor="let serie of series_select"  value="{{serie.id}}" >{{serie.name}}</option>
+      </select>
+    </div>
+    <div class="col">
+      <div class="form-check form-switch">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Favorit</label>
+        <input class="form-check-input" type="checkbox" (click)="get_favorits()" role="switch" id="flexSwitchCheckDefault">
+      </div>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#movieFilter" (click)="load_items_for_form()">
+        Filtr
+      </button>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-secondary" (click)="reset_form()">
+        Reset
+      </button>
+    </div>
+    </div>
+    </div>
+    <div class="open-close-container loading" [ngClass]="{'on' : !loading}">
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+</form>
 <div class="container">
     <div class="row">
         <div class="col" *ngFor="let serie of data">
