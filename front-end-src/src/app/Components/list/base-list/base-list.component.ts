@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit,Input} from '@angular/core';
 import {HttpService} from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import {ProcentService} from '../../../Service/procent/procent.service'
@@ -33,6 +33,7 @@ export class BaseListComponent implements OnInit {
   protected response : any;
   protected page:number=1 ;
   protected auth:any=false
+  @Input() top:any='50px'
 
   public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService,private Router:Router) { }
 
