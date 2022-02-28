@@ -23,6 +23,12 @@ class StarsPaginator(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 10
 
+class AdminStarsPaginator(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
+
 class StarsMoviesView(AbstractGenericsAPIViewExtended):
     serializer_class = MoviesSerializer
     queryset = Star.objects
@@ -69,6 +75,10 @@ class StarView(AbstractGenericsAPIView):
     filterset_class  = StarFilter
     order_by ='-added'
     pagination_class = StarsPaginator
+
+class AdminStarView(StarView):
+    pagination_class = AdminStarsPaginator
+    permission_classes = [IsAuthenticated]
 
 class StarUpdateView(AbstractUpdateView):
     serializer_class = StarsSerializerUpdate
