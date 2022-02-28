@@ -5,14 +5,16 @@
         <tbody>
         <tr *ngFor="let el of data">
             <td>
-                <a class="item" [routerLink]="el.item_url">{{el.name}} / {{el.show_name}}</a>
+                <a class="item" [routerLink]="el.item_url"><b>{{el.name}}</b>
+                    <ng-template [ngIf]="el.show_name"> - {{el.show_name}}</ng-template>
+                </a>
             </td>
             <td>  
                 <a class="item" [routerLink]="el.edit_url"><i class="fas fa-edit icon"></i></a>
                 <a class="item" [routerLink]="el.galery_url"><i class="fas fa-photo-video icon"></i></a>
                 <a class="item" [routerLink]="el.tag_url"><i class="fas fa-tag icon"></i></a>
                 <a class="item" [routerLink]="el.stats_url"><i class="fas fa-chart-pie icon"></i></a>
-                <a class="item" [routerLink]="el.stats_url"><i class="fas fa-trash icon"></i></a>
+                <a class="item"><i class="fas fa-trash icon"></i></a>
             </td>
         </tr>
         </tbody>
