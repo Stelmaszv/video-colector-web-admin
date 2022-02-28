@@ -1,16 +1,15 @@
 import os
-
 from django.http import Http404
 from django_filters import rest_framework as filters
 from rest_framework import generics
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication,
-                                   LargeResultsSetPagination, SqlAction)
+                                   AbstractUpdateView,
+                                   LargeResultsSetPagination,
+                                   SqlAction)
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerSeries,
@@ -19,8 +18,14 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           ProducetFormSeralizer,
                                           SerieSerializer, StarsSerializer)
 from core.wideocollectorseader.models import Producents, Serie
+from rest_framework.pagination import PageNumberPagination
 
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
+
+class ProducentAdminPaginator(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 50
 
 class ProducentsView(AbstractGenericsAPIView):
     serializer_class = ProducentsSerializer
@@ -28,6 +33,10 @@ class ProducentsView(AbstractGenericsAPIView):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = ProducentsFilter
     order_by ='-added'
+
+class AdminProducentsView(AbstractGenericsAPIView):
+    permission_classes = [IsAuthenticated]
+    pagination_class = ProducentAdminPaginator
 
 class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries

@@ -25,7 +25,7 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentsSeriesView,
                                               ProducentStarsView,
                                               ProducentsUpdataView,
-                                              ProducentsView, ProducentUpdateViewsView)
+                                              ProducentsView, ProducentUpdateViewsView, AdminProducentsView)
 from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
@@ -51,6 +51,7 @@ from django.urls import path
 urlpatterns = [
     #admin
     path('admin/movies',                         AdminMoviesView.as_view(), name='moviemextwithstar'),
+    path('admin/producent',                         AdminProducentsView.as_view(), name='moviemextwithstar'),
     #movies
     path('movies',                               MoviesView.as_view(), name='movies'),
     path('movieupdata/<int:pk>/',                MovieUpdataView.as_view(), name='movieupdate'),
