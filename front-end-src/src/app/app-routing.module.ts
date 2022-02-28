@@ -14,6 +14,10 @@ import { LoginComponent } from './Components/login/login.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { AuthGuard } from './Components/gard/auth.guard';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
+import { AdminProducentComponent } from './Components/admin/admin-producent/admin-producent.component';
+import { AdminStarsComponent } from './Components/admin/admin-stars/admin-stars.component';
+import { AdminSeriesComponent } from './Components/admin/admin-series/admin-series.component';
+import { AdminTagsComponent } from './Components/admin/admin-tags/admin-tags.component';
 
 const routes: Routes = [
   {
@@ -39,6 +43,26 @@ const routes: Routes = [
   {
     path: 'admin/movies',
     component: AdminMoviesComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/producents',
+    component: AdminProducentComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/stars',
+    component: AdminStarsComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/series',
+    component: AdminSeriesComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/tags',
+    component: AdminTagsComponent,
     canActivate:[AuthGuard]
   },
   {

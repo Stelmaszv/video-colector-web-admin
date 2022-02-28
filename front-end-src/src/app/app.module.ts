@@ -40,6 +40,10 @@ import { ActionsComponent } from './common/actions/actions.component';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 import { ApstractAdminComponent } from './Components/admin/apstract-admin/apstract-admin.component';
 import { AdminNavbarComponent } from './Components/admin/admin-navbar/admin-navbar.component';
+import { AdminProducentComponent } from './Components/admin/admin-producent/admin-producent.component';
+import { AdminStarsComponent } from './Components/admin/admin-stars/admin-stars.component';
+import { AdminSeriesComponent } from './Components/admin/admin-series/admin-series.component';
+import { AdminTagsComponent } from './Components/admin/admin-tags/admin-tags.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +82,11 @@ import { AdminNavbarComponent } from './Components/admin/admin-navbar/admin-navb
     ActionsComponent,
     AdminMoviesComponent,
     ApstractAdminComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    AdminProducentComponent,
+    AdminStarsComponent,
+    AdminSeriesComponent,
+    AdminTagsComponent
   ],
   imports: [
     AppRoutingModule,
