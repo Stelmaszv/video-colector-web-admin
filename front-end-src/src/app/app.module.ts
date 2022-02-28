@@ -44,6 +44,7 @@ import { AdminProducentComponent } from './Components/admin/admin-producent/admi
 import { AdminStarsComponent } from './Components/admin/admin-stars/admin-stars.component';
 import { AdminSeriesComponent } from './Components/admin/admin-series/admin-series.component';
 import { AdminTagsComponent } from './Components/admin/admin-tags/admin-tags.component';
+import { AdminComponent } from './Components/admin/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { AdminTagsComponent } from './Components/admin/admin-tags/admin-tags.com
     AdminProducentComponent,
     AdminStarsComponent,
     AdminSeriesComponent,
-    AdminTagsComponent
+    AdminTagsComponent,
+    AdminComponent
   ],
   imports: [
     AppRoutingModule,

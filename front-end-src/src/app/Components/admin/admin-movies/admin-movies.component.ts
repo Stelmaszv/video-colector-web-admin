@@ -10,10 +10,5 @@ export class AdminMoviesComponent extends ApstractAdminComponent {
 
   public override url:string='http://127.0.0.1:8000/admin/movies?page='
   protected override auth=true;
-  protected override item_url='/movie'
-  protected override edit_url='/admin/movie/edit'
-  protected override galery_url='/admin/movie/galery'
-  protected override tag_url='/admin/movie/tag'
-  protected override stats_url='/admin/movie/stats'
-
+  protected override item_url='movie'
 }
