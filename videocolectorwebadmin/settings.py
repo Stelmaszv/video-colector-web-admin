@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from secret import DEBUG, SECRET_KEY
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'core.wideocollectorseader',
     'core.webadminapi',
     'corsheaders',
+    'drf_expiring_token'
 ]
 
 REST_FRAMEWORK = {
@@ -87,6 +89,7 @@ WSGI_APPLICATION = 'videocolectorwebadmin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+EXPIRING_TOKEN_DURATION=timedelta(hours=1)
 
 DATABASES = {
     'default': {
@@ -142,7 +145,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'drf_expiring_token.authentication.ExpiringTokenAuthentication'
     ]
 }
 

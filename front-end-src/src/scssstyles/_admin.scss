@@ -1,0 +1,15 @@
+$item_hover:rgb(107, 191, 214);
+$item_string:black;
+
+.admin{
+    .item{
+        color:$item_string;
+        text-decoration: none;
+        &:hover{
+            color: $item_hover;
+        }
+    }
+    .icon{
+        margin-left: 1rem;
+    }
+}

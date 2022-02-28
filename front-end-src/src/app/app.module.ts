@@ -39,6 +39,7 @@ import { LogoutComponent } from './Components/logout/logout.component';
 import { ActionsComponent } from './common/actions/actions.component';
 import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 import { ApstractAdminComponent } from './Components/admin/apstract-admin/apstract-admin.component';
+import { AdminNavbarComponent } from './Components/admin/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ApstractAdminComponent } from './Components/admin/apstract-admin/apstra
     LogoutComponent,
     ActionsComponent,
     AdminMoviesComponent,
-    ApstractAdminComponent
+    ApstractAdminComponent,
+    AdminNavbarComponent
   ],
   imports: [
     AppRoutingModule,
