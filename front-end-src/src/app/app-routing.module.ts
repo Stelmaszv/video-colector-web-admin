@@ -13,7 +13,7 @@ import {MainProducentComponent} from './Components/main-components/main-producen
 import { LoginComponent } from './Components/login/login.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { AuthGuard } from './Components/gard/auth.guard';
-import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
+import { ApstractAdminList } from './Components/admin/admin-movies/admin-movies.component';
 import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
 
 const routes: Routes = [
@@ -32,11 +32,6 @@ const routes: Routes = [
   {
     path: 'start',
     component: StartComponentComponent
-  },
-  {
-    path: 'admin/movies',
-    component: AdminMoviesComponent,
-    canActivate:[AuthGuard]
   },
   {
     path: 'admin',

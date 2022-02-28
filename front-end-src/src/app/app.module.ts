@@ -35,10 +35,11 @@ import { MianSeriesComponent } from './Components/main-components/mian-series/mi
 import { MainStarsComponent } from './Components/main-components/main-stars/main-stars.component';
 import { MainProducentComponent } from './Components/main-components/main-producent/main-producent.component';
 import { LoginComponent } from './Components/login/login.component';
-import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 import { MainAuthComponent } from './Components/admin/main-auth/main-auth.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ActionsComponent } from './common/actions/actions.component';
+import { ApstractAdminList } from './Components/admin/admin-movies/admin-movies.component';
+
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import { ActionsComponent } from './common/actions/actions.component';
     MainStarsComponent,
     MainProducentComponent,
     LoginComponent,
-    AdminMoviesComponent,
+    ApstractAdminList,
     MainAuthComponent,
     LogoutComponent,
     ActionsComponent
