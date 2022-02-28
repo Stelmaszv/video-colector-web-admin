@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private TokkenService:TokkenService,private Router:Router) { }
+  constructor(public TokkenService:TokkenService,private Router:Router) { }
 
   public login = new FormGroup({
     login: new FormControl(),
@@ -21,11 +21,15 @@ export class LoginComponent implements OnInit {
       "username" :this.login.value.login,
       "password" :this.login.value.password
     })
+    let obj=this
+    setTimeout(function(){ 
+      console.log(obj.TokkenService.tokken_error) 
+    }, 100);
   }
 
   ngOnInit(): void {
     if (this.TokkenService.if_isset_tokken()){
-      this.Router.navigate(['admin'])
+      this.Router.navigate(['/movies'])
     }
   }
 

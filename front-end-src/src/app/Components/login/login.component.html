@@ -1,5 +1,12 @@
 <app-navabr></app-navabr>
 <div class="container">
+
+    <ng-template [ngIf]="TokkenService.tokken_error">
+        <div class="alert alert-danger alert-error-login" role="alert">
+            Invalid <b>Login</b> or <b>password</b>!
+        </div>
+    </ng-template>
+
     <div class="row justify-content-md-center">
         <div class="col-6">
             <h2>Login</h2>
