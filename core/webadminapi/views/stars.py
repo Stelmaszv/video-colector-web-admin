@@ -2,14 +2,13 @@ import os
 
 from django_filters import rest_framework as filters
 from rest_framework import generics
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication, SqlAction)
+                                   AbstractUpdateView, SqlAction)
 from core.webadminapi.filters import StarFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,

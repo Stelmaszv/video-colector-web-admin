@@ -13,7 +13,7 @@ from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MoviePhotosView, MoviesView,
                                            MoviesWithStarsView,
                                            MovieUpdataView,
-                                           MovieUpdateViewsView, MovieNextWithStarView)
+                                           MovieUpdateViewsView, MovieNextWithStarView, AdminMoviesView)
 from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentAddToFavoriteView,
                                               ProducentAddToLikeView,
@@ -49,6 +49,8 @@ app_name = 'webadminapi'
 from django.urls import path
 
 urlpatterns = [
+    #admin
+    path('admin/movies',                         AdminMoviesView.as_view(), name='moviemextwithstar'),
     #movies
     path('movies',                               MoviesView.as_view(), name='movies'),
     path('movieupdata/<int:pk>/',                MovieUpdataView.as_view(), name='movieupdate'),

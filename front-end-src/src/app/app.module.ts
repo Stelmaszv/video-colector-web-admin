@@ -37,6 +37,8 @@ import { MainProducentComponent } from './Components/main-components/main-produc
 import { LoginComponent } from './Components/login/login.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ActionsComponent } from './common/actions/actions.component';
+import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
+import { ApstractAdminComponent } from './Components/admin/apstract-admin/apstract-admin.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { ActionsComponent } from './common/actions/actions.component';
     MainProducentComponent,
     LoginComponent,
     LogoutComponent,
-    ActionsComponent
+    ActionsComponent,
+    AdminMoviesComponent,
+    ApstractAdminComponent
   ],
   imports: [
     AppRoutingModule,

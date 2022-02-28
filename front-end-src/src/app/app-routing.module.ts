@@ -13,6 +13,7 @@ import {MainProducentComponent} from './Components/main-components/main-producen
 import { LoginComponent } from './Components/login/login.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { AuthGuard } from './Components/gard/auth.guard';
+import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'movies',
     component: MianMoviesComponent
+  },
+  {
+    path: 'admin/movies',
+    component: AdminMoviesComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'movie/:id',

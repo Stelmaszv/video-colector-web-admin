@@ -48,6 +48,11 @@
       Reset
     </button>
   </div>
+  <ng-template [ngIf]="TokkenService.if_isset_tokken()">
+    <div class="col">
+      <a class="btn btn-secondary" [routerLink]="['/admin/movies']">Admin</a> 
+    </div>
+  </ng-template>
   </div>
   </div>
   <div class="open-close-container loading" [ngClass]="{'on' : !loading}">

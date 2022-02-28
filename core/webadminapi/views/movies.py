@@ -13,6 +13,7 @@ from core.webadminapi.serializers import (MoviesSerializer,
 from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
+from rest_framework.pagination import PageNumberPagination
 
 
 class MoviesView(AbstractGenericsAPIView):
@@ -21,6 +22,15 @@ class MoviesView(AbstractGenericsAPIView):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = MovieFilter
     order_by ='-date_relesed'
+
+class MoviesAdminPaginator(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
+class AdminMoviesView(MoviesView):
+    permission_classes = [IsAuthenticated]
+    pagination_class = MoviesAdminPaginator
 
 class MoviesWithStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = MoviesSerializer
