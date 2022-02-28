@@ -20,6 +20,7 @@ from core.webadminapi.serializers import (MoviesSerializer,
 from core.wideocollectorseader.models import Producents, Serie
 from rest_framework.pagination import PageNumberPagination
 
+
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
 
 class ProducentAdminPaginator(PageNumberPagination):

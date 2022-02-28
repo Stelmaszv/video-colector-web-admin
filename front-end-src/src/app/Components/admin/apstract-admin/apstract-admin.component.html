@@ -4,12 +4,12 @@
     <table class="table">
         <tbody>
         <tr *ngFor="let el of data">
-            <td>
+            <td class="item">
                 <a class="item" [routerLink]="el.item_url"><b>{{el.name}}</b>
                     <ng-template [ngIf]="el.show_name"> - {{el.show_name}}</ng-template>
                 </a>
             </td>
-            <td>  
+            <td class="actions">  
                 <a class="item" [routerLink]="el.edit_url"><i class="fas fa-edit icon"></i></a>
                 <a class="item" [routerLink]="el.galery_url"><i class="fas fa-photo-video icon"></i></a>
                 <a class="item" [routerLink]="el.tag_url"><i class="fas fa-tag icon"></i></a>

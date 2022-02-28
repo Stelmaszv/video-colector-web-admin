@@ -57,17 +57,18 @@ from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarView,
                                           StarUpdateViewsView,
                                           AdminStarView)
-from core.webadminapi.views.tags import TagDeteilsView, TagView
+from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
 
 app_name = 'webadminapi'
 from django.urls import path
 
 urlpatterns = [
     #admin
-    path('admin/movies',                         AdminMoviesView.as_view(), name='moviemextwithstar'),
-    path('admin/producent',                      AdminProducentsView.as_view(), name='moviemextwithstar'),
-    path('admin/serie',                          AdminSerieView.as_view(), name='moviemextwithstar'),
-    path('admin/stars',                          AdminStarView.as_view(), name='moviemextwithstar'),
+    path('admin/movies',                         AdminMoviesView.as_view(), name='adminmoviees'),
+    path('admin/producent',                      AdminProducentsView.as_view(), name='adminprodicent'),
+    path('admin/serie',                          AdminSerieView.as_view(), name='adminseries'),
+    path('admin/stars',                          AdminStarView.as_view(), name='adminstars'),
+    path('admin/tags',                           AdminTagView.as_view(), name='admintags'),
     #movies
     path('movies',                               MoviesView.as_view(), name='movies'),
     path('movieupdata/<int:pk>/',                MovieUpdataView.as_view(), name='movieupdate'),

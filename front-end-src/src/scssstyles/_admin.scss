@@ -3,6 +3,12 @@ $item_string:black;
 
 .admin{
     .item{
+        width: 45rem;
+    }
+    .actions{
+        width: 10rem;
+    }
+    .item{
         color:$item_string;
         text-decoration: none;
         &:hover{
