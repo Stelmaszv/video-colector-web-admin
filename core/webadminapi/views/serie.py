@@ -20,6 +20,7 @@ from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           StarsSerializer)
 from core.wideocollectorseader.models import Serie
 from videocolectorwebadmin.global_setings import photo_ext
+from rest_framework.pagination import PageNumberPagination
 
 
 class SeriesPhotosView(AbstractGenericsAPIViewExtended):
@@ -73,13 +74,22 @@ class SeriesBennersView(AbstractGenericsAPIView):
         else:
             return banners
         return banners
-    
+
+class SerieAdminPaginator(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
 class SerieView(AbstractGenericsAPIView):
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = SerieFilter
     order_by ='-added'
+
+class AdminSerieView(SerieView):
+    permission_classes = [IsAuthenticated]
+    pagination_class = SerieAdminPaginator
 
 class SelectOptionView(generics.ListAPIView):
     serializer_class = SerieSlectSerializer

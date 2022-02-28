@@ -34,7 +34,7 @@ class ProducentsView(AbstractGenericsAPIView):
     filterset_class  = ProducentsFilter
     order_by ='-added'
 
-class AdminProducentsView(AbstractGenericsAPIView):
+class AdminProducentsView(ProducentsView):
     permission_classes = [IsAuthenticated]
     pagination_class = ProducentAdminPaginator
 

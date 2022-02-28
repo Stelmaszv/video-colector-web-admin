@@ -13,7 +13,9 @@ from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MoviePhotosView, MoviesView,
                                            MoviesWithStarsView,
                                            MovieUpdataView,
-                                           MovieUpdateViewsView, MovieNextWithStarView, AdminMoviesView)
+                                           MovieUpdateViewsView,
+                                           MovieNextWithStarView,
+                                           AdminMoviesView)
 from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentAddToFavoriteView,
                                               ProducentAddToLikeView,
@@ -25,24 +27,35 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentsSeriesView,
                                               ProducentStarsView,
                                               ProducentsUpdataView,
-                                              ProducentsView, ProducentUpdateViewsView, AdminProducentsView)
+                                              ProducentsView,
+                                              ProducentUpdateViewsView,
+                                              AdminProducentsView)
 from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
                                           SerieAddToLikeView,
                                           SerieAddToRatingView,
-                                          SerieDeteilsView, SerieMoviesView,
-                                          SeriesBennersView, SeriesPhotosView,
+                                          SerieDeteilsView,
+                                          SerieMoviesView,
+                                          SeriesBennersView,
+                                          SeriesPhotosView,
                                           SeriesRandomMovieView,
-                                          SeriesStarsView, SerieUpdataView,
-                                          SerieView, SerieUpdateViewView)
+                                          SeriesStarsView,
+                                          SerieUpdataView,
+                                          SerieView,
+                                          SerieUpdateViewView,
+                                          AdminSerieView)
 from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarAddToFavoriteView,
                                           StarAddToLikeView,
-                                          StarAddToRatingView, StarDeteilsView,
+                                          StarAddToRatingView,
+                                          StarDeteilsView,
                                           StarSelectOptionView,
-                                          StarsMoviesView, StarsPhotoView,
-                                          StarUpdateView, StarView,StarUpdateViewsView)
+                                          StarsMoviesView,
+                                          StarsPhotoView,
+                                          StarUpdateView,
+                                          StarView,
+                                          StarUpdateViewsView)
 from core.webadminapi.views.tags import TagDeteilsView, TagView
 
 app_name = 'webadminapi'
@@ -51,7 +64,8 @@ from django.urls import path
 urlpatterns = [
     #admin
     path('admin/movies',                         AdminMoviesView.as_view(), name='moviemextwithstar'),
-    path('admin/producent',                         AdminProducentsView.as_view(), name='moviemextwithstar'),
+    path('admin/producent',                      AdminProducentsView.as_view(), name='moviemextwithstar'),
+    path('admin/serie',                          AdminSerieView.as_view(), name='moviemextwithstar'),
     #movies
     path('movies',                               MoviesView.as_view(), name='movies'),
     path('movieupdata/<int:pk>/',                MovieUpdataView.as_view(), name='movieupdate'),
