@@ -34,13 +34,15 @@ export class MovieEditComponent extends AbstractEditComponent {
       country:new FormControl(data.country),
       description: new FormControl(data.description),
       date_relesed: new FormControl(data.date_relesed),
-      serie: new FormControl(data.serie),
-      producent: new FormControl(data.producent),
+      serie: new FormControl(data.serie)
     });
   }
 
+
   public save(){
-    console.log(this.Edit.value)
+    this.httpService.put_url(this.url+''+this.id+'/',this.Edit.value).subscribe(respanse=>{
+      console.log(respanse)
+    })
   }
 
 

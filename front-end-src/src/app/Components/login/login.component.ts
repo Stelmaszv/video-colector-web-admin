@@ -21,10 +21,6 @@ export class LoginComponent implements OnInit {
       "username" :this.login.value.login,
       "password" :this.login.value.password
     })
-    let obj=this
-    setTimeout(function(){ 
-      console.log(obj.TokkenService.tokken_error) 
-    }, 100);
   }
 
   ngOnInit(): void {

@@ -22,4 +22,10 @@ export class HttpService {
   public post_url(url :string,data:any) {
     return this.http.post(url,data);
   }
+
+  public put_url(url :string,data:any) {
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    return this.http.put(url,data,{headers});
+  }
 }
+

@@ -53,7 +53,8 @@
                 <div class="col">
                     
                     <img class="avatar_js movie_avatar" 
-                        [ngClass]="{'rating_color_good': RatingService.if_good_rating(data),
+                        [ngClass]="{
+                                    'rating_color_good': RatingService.if_good_rating(data),
                                     'movie_rating_mid' : RatingService.if_mid_rating(data),
                                     'movie_rating_low' : RatingService.if_low_rating(data)
                                    }" 
