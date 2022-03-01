@@ -39,7 +39,10 @@ export class BaseIDComponent implements OnInit {
   {
     this.set_id()
     this.get_url(this.id)
+    this.on_init()
   }
+
+  protected on_init():void {}
 
   public return_add_to_ratng_url(){
     return this.server+this.add_to_rating_url+this.id+'/?rate='+this.addrate.value.rate
