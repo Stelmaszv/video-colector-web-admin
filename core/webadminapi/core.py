@@ -1,19 +1,19 @@
-
 import os
-
 from django.contrib.auth import authenticate, get_user_model
 from django.http import Http404
 from django.utils.deprecation import MiddlewareMixin
 from rest_framework import generics, status
-from rest_framework.authentication import (BasicAuthentication,
-                                           SessionAuthentication)
+from rest_framework.authentication import (BasicAuthentication)
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from core.wideocollectorseader.models import (DisLikess, Likes,
-                                              Rating, Views, UserFavorits as UserFavoritsModel, Movie)
+from core.wideocollectorseader.models import (DisLikess,
+                                              Likes,
+                                              Rating,
+                                              Views,
+                                              UserFavorits as UserFavoritsModel,
+                                              Movie)
 
 
 class RangesMiddleware(MiddlewareMixin):

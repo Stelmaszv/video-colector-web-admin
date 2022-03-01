@@ -10,8 +10,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class MovieEditComponent extends AbstractEditComponent {
   override url='http://127.0.0.1:8000/movieupdata/'
   protected override auth:any=true
-  public tags_form:any=[]
-  public stars_form:any=[]
   Edit = new FormGroup({
     show_name: new FormControl(),
     country:new FormControl(),
@@ -37,7 +35,6 @@ export class MovieEditComponent extends AbstractEditComponent {
       serie: new FormControl(data.serie)
     });
   }
-
 
   public save(){
     this.httpService.put_url(this.url+''+this.id+'/',this.Edit.value).subscribe(respanse=>{
