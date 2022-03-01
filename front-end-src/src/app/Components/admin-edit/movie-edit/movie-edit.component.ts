@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { AbstractEditComponent } from '../abstract-edit/abstract-edit.component';
-import { FormControl} from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-movie-edit',
@@ -10,8 +10,32 @@ import { FormControl} from '@angular/forms';
 export class MovieEditComponent extends AbstractEditComponent {
   override url='http://127.0.0.1:8000/movieupdata/'
   protected override auth:any=true
-  show_name     =  new FormControl()
-  description   =  new FormControl()
-  date_relesed  =  new FormControl()
+  public tags_form:any=[]
+  public stars_form:any=[]
+  Edit = new FormGroup({
+    show_name: new FormControl(),
+    description: new FormControl(''),
+    date_relesed: new FormControl(''),
+  });
+
+  protected override on_init():void {
+    this.RelationSelectService.get_series()
+    this.RelationSelectService.get_producent()
+    this.RelationSelectService.get_tags()
+    this.RelationSelectService.get_stars()
+  }
+
+  protected override on_get_result(data:any){
+    this.Edit = new FormGroup({
+      show_name: new FormControl(data.show_name),
+      description: new FormControl(data.description),
+      date_relesed: new FormControl(data.date_relesed),
+    });
+  }
+
+  public save(){
+    console.log(this.Edit.value)
+  }
+
 
 }

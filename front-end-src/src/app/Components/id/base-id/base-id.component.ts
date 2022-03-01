@@ -4,7 +4,8 @@ import { HttpService } from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import { Router } from '@angular/router';
 import { TokkenService } from 'src/app/Service/tokken/tokken.service'; 
-import { FormControl ,FormGroup} from '@angular/forms';
+import { FormBuilder, FormControl ,FormGroup} from '@angular/forms';
+import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
 
 @Component({
   selector: 'app-base-id',
@@ -33,7 +34,7 @@ export class BaseIDComponent implements OnInit {
     rate: new FormControl(1)
   });
 
-  constructor(private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,protected Router:Router,public TokkenService:TokkenService) { }
+  constructor(protected fb: FormBuilder,public RelationSelectService:RelationSelectService,private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,protected Router:Router,public TokkenService:TokkenService) { }
 
   public ngOnInit(): void 
   {
@@ -43,6 +44,8 @@ export class BaseIDComponent implements OnInit {
   }
 
   protected on_init():void {}
+
+  protected on_get_result(response:any):void {}
 
   public return_add_to_ratng_url(){
     return this.server+this.add_to_rating_url+this.id+'/?rate='+this.addrate.value.rate
@@ -76,7 +79,7 @@ export class BaseIDComponent implements OnInit {
     });
   }
 
-  private get_url(id:number): void 
+  protected get_url(id:number): void 
   {
     if (this.auth==false){
       this.httpService.get_url(this.url+''+id+'').subscribe(
@@ -84,6 +87,7 @@ export class BaseIDComponent implements OnInit {
             this.data=response
             this.on_get_url()
             this.set_procent(response)
+            this.on_get_result(response)
         }
       );
     }else{
@@ -93,6 +97,7 @@ export class BaseIDComponent implements OnInit {
             this.data=response
             this.on_get_url()
             this.set_procent(response)
+            this.on_get_result(response)
         },
         (error) => {
           console.log(error.statusText)

@@ -26,7 +26,7 @@
     <div class="row justify-content-md-center">
         <div class="col-6">
             <h2>Edit  - {{data.name}}</h2>
-            <form class="login-form">
+            <form class="login-form" [formGroup]="Edit">
                 <div class="form-group">
                 <label for="show_name">Show name</label>
                 <input type="text" class="form-control" value="{{data.show_name}}" id="show_name" aria-describedby="emailHelp" placeholder="Enter Show name" formControlName="show_name">
@@ -36,9 +36,9 @@
                 <textarea class="form-control" value="{{data.description}}" formControlName="description" placeholder="Enter Description"></textarea>
                 </div>
                 <label for="exampleInputPassword1">Date Relesed</label>
-                <input type="date" class="form-control" value="{{data.date_relesed}}" id="show_name" aria-describedby="emailHelp" placeholder="Enter Date Relesed" formControlName="show_name">
+                <input type="date" class="form-control" value="{{data.date_relesed}}" formControlName="date_relesed" id="show_name" aria-describedby="emailHelp" placeholder="Enter Date Relesed">
                 <div class="row justify-content-md-center">
-                    <button type="submit" class="btn btn-secondary login-btn" >Save</button>
+                    <button type="submit" class="btn btn-secondary login-btn" (click)="save()" >Save</button>
                 </div>
             </form>
         </div>
