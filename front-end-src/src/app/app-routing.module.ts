@@ -19,6 +19,7 @@ import { AdminStarsComponent } from './Components/admin/admin-stars/admin-stars.
 import { AdminSeriesComponent } from './Components/admin/admin-series/admin-series.component';
 import { AdminTagsComponent } from './Components/admin/admin-tags/admin-tags.component';
 import { AdminComponent } from './Components/admin/admin/admin.component';
+import { MovieEditComponent } from './Components/admin-edit/movie-edit/movie-edit.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: 'admin/movies',
     component: AdminMoviesComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/movie/edit/:id',
+    component: MovieEditComponent,
     canActivate:[AuthGuard]
   },
   {

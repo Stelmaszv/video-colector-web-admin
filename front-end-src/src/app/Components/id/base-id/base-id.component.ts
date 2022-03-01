@@ -26,6 +26,7 @@ export class BaseIDComponent implements OnInit {
   protected update_views_url:string=''
   protected fovorits_url:string=''
   protected chceck_favorit_stan_url:string=''
+  protected auth:any=false
 
 
   public addrate = new FormGroup({
@@ -75,13 +76,30 @@ export class BaseIDComponent implements OnInit {
 
   private get_url(id:number): void 
   {
-    this.httpService.get_url(this.url+''+id+'').subscribe(
-      (response) => {
-          this.data=response
-          this.on_get_url()
-          this.set_procent(response)
-      }
-    );
+    if (this.auth==false){
+      this.httpService.get_url(this.url+''+id+'').subscribe(
+        (response) => {
+            this.data=response
+            this.on_get_url()
+            this.set_procent(response)
+        }
+      );
+    }else{
+      this.httpService.get_url_auth(this.url+''+id+'').subscribe(
+        (response) => {
+            console.log(response)
+            this.data=response
+            this.on_get_url()
+            this.set_procent(response)
+        },
+        (error) => {
+          console.log(error.statusText)
+          if (error.statusText == 'Unauthorized'){
+            this.Router.navigate(['/logout'])
+          }
+        }
+      );
+    }
   }
 
   private set_procent(data:any):void
