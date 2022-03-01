@@ -14,8 +14,11 @@ export class MovieEditComponent extends AbstractEditComponent {
   public stars_form:any=[]
   Edit = new FormGroup({
     show_name: new FormControl(),
+    country:new FormControl(),
     description: new FormControl(''),
     date_relesed: new FormControl(''),
+    serie     :new FormControl(''),
+    producent     :new FormControl(''),
   });
 
   protected override on_init():void {
@@ -28,8 +31,11 @@ export class MovieEditComponent extends AbstractEditComponent {
   protected override on_get_result(data:any){
     this.Edit = new FormGroup({
       show_name: new FormControl(data.show_name),
+      country:new FormControl(data.country),
       description: new FormControl(data.description),
       date_relesed: new FormControl(data.date_relesed),
+      serie: new FormControl(data.serie),
+      producent: new FormControl(data.producent),
     });
   }
 

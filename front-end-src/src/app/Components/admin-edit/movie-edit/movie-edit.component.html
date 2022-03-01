@@ -32,11 +32,29 @@
                 <input type="text" class="form-control" value="{{data.show_name}}" id="show_name" aria-describedby="emailHelp" placeholder="Enter Show name" formControlName="show_name">
                 </div>
                 <div class="form-group">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" value="{{data.country}}" id="country" aria-describedby="emailHelp" placeholder="Enter Country" formControlName="country">
+                </div>
+                <div class="form-group">
                 <label for="exampleInputPassword1">Description</label>
                 <textarea class="form-control" value="{{data.description}}" formControlName="description" placeholder="Enter Description"></textarea>
                 </div>
                 <label for="exampleInputPassword1">Date Relesed</label>
                 <input type="date" class="form-control" value="{{data.date_relesed}}" formControlName="date_relesed" id="show_name" aria-describedby="emailHelp" placeholder="Enter Date Relesed">
+                <label for="serie">Serie</label>
+                <div class="form-group">
+                  <select class="form-control" aria-label="Default select example" formControlName="serie" id="serie">
+                    <option></option>
+                    <option *ngFor="let serie of RelationSelectService.series_select"  value="{{serie.id}}" >{{serie.name}}</option>
+                  </select>
+                </div>
+                <label for="producent">Producent</label>
+                <div class="form-group">
+                  <select class="form-control" aria-label="Default select example" formControlName="producent" id="producent">
+                    <option></option>
+                    <option *ngFor="let producent of RelationSelectService.producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
+                  </select>
+                </div>
                 <div class="row justify-content-md-center">
                     <button type="submit" class="btn btn-secondary login-btn" (click)="save()" >Save</button>
                 </div>
