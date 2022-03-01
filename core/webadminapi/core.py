@@ -148,7 +148,7 @@ class AbstractUpdateView(AbstractDeteilsView):
     queryset = []
     serializer_class=None
 
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def put(self, request, pk, format=None):
         snippet = self.get_object(pk)

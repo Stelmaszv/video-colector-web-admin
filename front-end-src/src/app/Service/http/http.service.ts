@@ -24,7 +24,7 @@ export class HttpService {
   }
 
   public put_url(url :string,data:any) {
-    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    let headers = new HttpHeaders({'Authorization' : 'Bearer '+localStorage['tokkenAccess']});
     return this.http.put(url,data,{headers});
   }
 }
