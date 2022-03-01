@@ -17,5 +17,4 @@ export class ProducentSeriesComponent extends SeriesComponent {
       this.url='http://127.0.0.1:8000/producentsseries/'+this.ID+'?page='
     }
   }
-
 }

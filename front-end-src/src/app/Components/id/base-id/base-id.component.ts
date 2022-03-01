@@ -63,7 +63,6 @@ export class BaseIDComponent implements OnInit {
     return this.server+this.chceck_favorit_stan_url+this.id+'/'
   }
 
-
   public return_update_views_url(){
     return this.server+this.update_views_url+this.id+'/'
   }

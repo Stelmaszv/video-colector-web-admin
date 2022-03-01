@@ -11,13 +11,13 @@
     <div class="col">
         <select class="producent-search" (change)="serch()" value="{{search.value.producent}}" aria-label="Default select example" formControlName="producent">
           <option></option>
-          <option *ngFor="let producent of producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
+          <option *ngFor="let producent of RelationSelectService.producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
         </select>
     </div>
     <div class="col">
       <select class="series-search" (change)="serch()" value="{{search.value.serie}}" aria-label="Default select example" formControlName="serie">
         <option></option>
-        <option *ngFor="let serie of series_select"  value="{{serie.id}}" >{{serie.name}}</option>
+        <option *ngFor="let serie of RelationSelectService.series_select"  value="{{serie.id}}" >{{serie.name}}</option>
       </select>
     </div>
     <div class="col">

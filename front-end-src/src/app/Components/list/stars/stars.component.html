@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#movieFilter" (click)="load_items_for_form()">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#movieFilter">
         Filtr
       </button>
     </div>
@@ -97,8 +97,8 @@
           </form>
           <p class="h6">Tags</p>
           <select class="form-select" multiple aria-label="multiple select example">
-            <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="!if_exist(tag.id,tags_form)" selected>{{tag.name}}</option>
-            <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="if_exist(tag.id,tags_form)" >{{tag.name}}</option>
+            <option *ngFor="let tag of RelationSelectService.tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="!if_exist(tag.id,tags_form)" selected>{{tag.name}}</option>
+            <option *ngFor="let tag of RelationSelectService.tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="if_exist(tag.id,tags_form)" >{{tag.name}}</option>
           </select>
         </div>
         <div class="modal-footer">

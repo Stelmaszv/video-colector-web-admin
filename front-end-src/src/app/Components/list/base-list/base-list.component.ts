@@ -5,6 +5,7 @@ import {ProcentService} from '../../../Service/procent/procent.service'
 import {TokkenService}  from '../../../Service/tokken/tokken.service'
 
 import { Router } from '@angular/router';
+import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
 @Component({
   selector: 'app-base-list',
   templateUrl: './base-list.component.html',
@@ -19,24 +20,17 @@ export class BaseListComponent implements OnInit {
   public stars_form:any=[]
   public loading:boolean=true
   public search:any
-  public tags:any
   public favorite:any=false
   public stars:any
-  public producents_select:any
-  public series_select:any
   public item_count:any
   private store_url:string=''
-  private series_select_url:string = 'http://127.0.0.1:8000/series_select'
-  private producents_select_url:string = 'http://127.0.0.1:8000/producentsformview'
-  private tag_select_url:string = 'http://127.0.0.1:8000/tags'
-  private star_select_url:string = 'http://127.0.0.1:8000/stars_form'
   protected results : any;
   protected response : any;
   protected page:number=1 ;
   protected auth:any=false
   @Input() top:any='50px'
 
-  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
+  public constructor(public RelationSelectService:RelationSelectService,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
 
   public add_star(add_star:number):void
   {
@@ -61,16 +55,8 @@ export class BaseListComponent implements OnInit {
 
   public load_items_for_form():void
   {
-    this.httpService.get_url(this.tag_select_url).subscribe(
-      (response) => {
-          this.tags=response
-      }
-    );
-    this.httpService.get_url(this.star_select_url).subscribe(
-      (response) => {
-          this.stars=response
-      }
-    );
+    this.RelationSelectService.get_stars()
+    this.RelationSelectService.get_tags()
   }
 
   public serch():void
@@ -185,17 +171,8 @@ export class BaseListComponent implements OnInit {
 
   protected load_select():void
   {
-    this.httpService.get_url(this.series_select_url).subscribe(
-      (response) => {
-          this.series_select=response
-      }
-    );
-
-    this.httpService.get_url(this.producents_select_url).subscribe(
-      (response) => {
-          this.producents_select=response
-      }
-    );
+    this.RelationSelectService.get_series()
+    this.RelationSelectService.get_producent()
   }
 
   protected on_set_results(movie:any):void

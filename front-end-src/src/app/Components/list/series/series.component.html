@@ -11,13 +11,13 @@
     <div class="col">
         <select class="producent-search" (change)="serch()" value="{{search.value.producent}}" aria-label="Default select example" formControlName="producent">
           <option></option>
-          <option *ngFor="let producent of producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
+          <option *ngFor="let producent of RelationSelectService.producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
         </select>
     </div>
     <div class="col">
       <select class="series-search" (change)="serch()" value="{{search.value.serie}}" aria-label="Default select example" formControlName="serie">
         <option></option>
-        <option *ngFor="let serie of series_select"  value="{{serie.id}}" >{{serie.name}}</option>
+        <option *ngFor="let serie of RelationSelectService.series_select"  value="{{serie.id}}" >{{serie.name}}</option>
       </select>
     </div>
     <div class="col">
@@ -78,14 +78,14 @@
 
         <p class="h6">Tags</p>
         <select class="form-select" multiple aria-label="multiple select example">
-          <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="!if_exist(tag.id,tags_form)" selected>{{tag.name}}</option>
-          <option *ngFor="let tag of tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="if_exist(tag.id,tags_form)" >{{tag.name}}</option>
+          <option *ngFor="let tag of RelationSelectService.tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="!if_exist(tag.id,tags_form)" selected>{{tag.name}}</option>
+          <option *ngFor="let tag of RelationSelectService.tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="if_exist(tag.id,tags_form)" >{{tag.name}}</option>
         </select>
         
         <p class="h6">Stars</p>
         <select class="form-select" multiple aria-label="multiple select example">
-          <option *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="!if_exist(star.id,stars_form)" selected>{{star.name}}</option>
-          <option *ngFor="let star of stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="if_exist(star.id,stars_form)" >{{star.name}}</option>
+          <option *ngFor="let star of RelationSelectService.stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="!if_exist(star.id,stars_form)" selected>{{star.name}}</option>
+          <option *ngFor="let star of RelationSelectService.stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="if_exist(star.id,stars_form)" >{{star.name}}</option>
         </select>
       </div>
       <div class="modal-footer">
