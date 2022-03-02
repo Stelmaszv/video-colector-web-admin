@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component,Input} from '@angular/core';
 import { BaseListComponent } from '../../list/base-list/base-list.component';
 
 @Component({
@@ -8,11 +8,28 @@ import { BaseListComponent } from '../../list/base-list/base-list.component';
 })
 export class BaseGaleryComponent extends BaseListComponent {
 
-  public override url='http://127.0.0.1:8000/moviephotosview/1/?page'
+  public override url='http://127.0.0.1:8000/moviephotosview/'
+  protected override debug:any=true
+  @Input() cover:any=''
+  @Input() poster:any=''
+  @Input() id:any=1
 
+  private is_cover(movie:any){
+    return (movie.url==this.cover)
+  }
+
+  private is_poster(movie:any){
+    return (movie.url==this.poster)
+  }
 
   protected override on_set_results(movie: any): void {
-    movie['stan']='cover'
+    movie['url']='http://127.0.0.1:8000/'+movie['url']
+    movie['is_cover'] = this.is_cover(movie)
+    movie['is_poster']= this.is_poster(movie)
+  }
+
+  protected override on_set_url():void{
+    this.url=this.url+this.id+'/?page'
   }
 
 }

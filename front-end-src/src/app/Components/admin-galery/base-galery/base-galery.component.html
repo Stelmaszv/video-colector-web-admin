@@ -10,8 +10,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let el of data">
-        <td><img src="http://127.0.0.1:8000/{{el.url}}" class="photo"></td>
-        <td>http://127.0.0.1:8000/{{el.url}}</td>
+        <td><img src="{{el.url}}" class="photo"></td>
+        <td>{{el.url}} {{el.is_cover}} {{el.is_poster}}</td>
         <td><button>Cover</button></td>
         <td><button>Poster</button></td>
         <td><button>Delete</button></td>

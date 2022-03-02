@@ -28,6 +28,7 @@ export class BaseListComponent implements OnInit {
   protected response : any;
   protected page:number=1 ;
   protected auth:any=false
+  protected debug:any=false
   @Input() top:any='50px'
 
   public constructor(public RelationSelectService:RelationSelectService,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
@@ -187,11 +188,15 @@ export class BaseListComponent implements OnInit {
     if (this.auth==false){
       if (this.loading){
         this.loading=false
-        console.log(this.url+this.page+'&'+this.filter_url)
+        if (this.debug){
+          console.log(this.url+this.page+'&'+this.filter_url)
+        }
         this.on_set_url()
         this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
           (response) => {
-            console.log(response)
+            if (this.debug){
+              console.log(response)
+            }
             if (response.hasOwnProperty('results')){
               this.response=response
               this.set_count(response)
