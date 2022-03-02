@@ -14,7 +14,7 @@ export class ProducentMoviesComponent extends MoviesComponent {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/producentsmovies/'+this.ID+'?page='
+      this.url='http://127.0.0.1:8000/producentsmovies/'+this.ID
     }
   }
 

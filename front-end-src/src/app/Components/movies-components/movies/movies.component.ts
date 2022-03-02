@@ -11,8 +11,8 @@ export class MoviesComponent extends BaseListComponent{
   public mode:string ='cover'
   found_top='150px'
   
-  public override url:string='http://127.0.0.1:8000/movies?page='
-  public override fav_url:string='http://127.0.0.1:8000/favorite/movies?page='
+  public override url:string='http://127.0.0.1:8000/movies'
+  public override fav_url:string='http://127.0.0.1:8000/favorite/movies'
 
   public override search = new FormGroup({
     name: new FormControl(),
@@ -102,8 +102,6 @@ export class MoviesComponent extends BaseListComponent{
       return better_stars.concat(resst);
     }
   }
-
-
 
   protected override on_set_results(movie:any):any
   {

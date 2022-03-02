@@ -8,4 +8,5 @@ import { BaseIDComponent } from '../../id/base-id/base-id.component';
 })
 export class AdminMoviesGaleryComponent extends BaseIDComponent {
   public override url = 'http://127.0.0.1:8000/movie/' 
+  public galery_url='http://127.0.0.1:8000/moviephotosview/'
 }

@@ -7,9 +7,7 @@ import { BaseListComponent } from '../../list/base-list/base-list.component';
   styleUrls: ['./base-galery.component.scss']
 })
 export class BaseGaleryComponent extends BaseListComponent {
-
-  public override url='http://127.0.0.1:8000/moviephotosview/'
-  protected override debug:any=true
+  @Input() public override url=''
   @Input() cover:any=''
   @Input() poster:any=''
   @Input() id:any=0

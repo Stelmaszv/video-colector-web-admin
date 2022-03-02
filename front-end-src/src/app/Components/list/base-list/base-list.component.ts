@@ -28,7 +28,7 @@ export class BaseListComponent implements OnInit {
   protected response : any;
   protected page:number=1 ;
   protected auth:any=false
-  protected debug:any=false
+  protected debug:any=true
   @Input() top:any='50px'
 
   public constructor(public RelationSelectService:RelationSelectService,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
@@ -102,7 +102,7 @@ export class BaseListComponent implements OnInit {
     this.page=1
     if (!this.favorite){
       this.data=[]
-      this.url=this.fav_url
+      this.url=this.fav_url+"?page="
       this.auth=true
       this.load_data()
     }else{

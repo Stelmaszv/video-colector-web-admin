@@ -7,8 +7,8 @@ import { FormControl ,FormGroup} from '@angular/forms';
   styleUrls: ['./series.component.scss']
 })
 export class SeriesComponent extends BaseListComponent {
-  override url='http://127.0.0.1:8000/series?page='
-  public override fav_url:string='http://127.0.0.1:8000/favorite/series?page='
+  override url='http://127.0.0.1:8000/series'
+  public override fav_url:string='http://127.0.0.1:8000/favorite/series'
 
   public override search = new FormGroup({
     name: new FormControl(),
