@@ -22,14 +22,16 @@ export class BaseGaleryComponent extends BaseListComponent {
     return (movie.url==this.poster)
   }
 
+  public override on_before_load_data():void
+  {
+    this.url=this.url+this.id
+  } 
+
   protected override on_set_results(movie: any): void {
     movie['url']='http://127.0.0.1:8000/'+movie['url']
     movie['is_cover'] = this.is_cover(movie)
     movie['is_poster']= this.is_poster(movie)
   }
 
-  protected override on_set_url():void{
-    this.url=this.url+this.id+'/?page'
-  }
 
 }

@@ -72,6 +72,7 @@ export class BaseListComponent implements OnInit {
   {
     this.store_url=this.url
     this.data=[]
+    this.on_before_load_data()
     this.load_data()
     this.onInit()
     this.scroller()
@@ -92,6 +93,9 @@ export class BaseListComponent implements OnInit {
   }
 
   public onInit():void
+  {}
+
+  public on_before_load_data():void
   {}
 
   public get_favorits(){
@@ -189,10 +193,10 @@ export class BaseListComponent implements OnInit {
       if (this.loading){
         this.loading=false
         if (this.debug){
-          console.log(this.url+this.page+'&'+this.filter_url)
+          console.log(this.url+'?page='+this.page+'&'+this.filter_url)
         }
         this.on_set_url()
-        this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
+        this.httpService.get_url(this.url+'?page='+this.page+'&'+this.filter_url).subscribe(
           (response) => {
             if (this.debug){
               console.log(response)
