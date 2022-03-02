@@ -191,6 +191,7 @@ export class BaseListComponent implements OnInit {
         this.on_set_url()
         this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
           (response) => {
+            console.log(response)
             if (response.hasOwnProperty('results')){
               this.response=response
               this.set_count(response)

@@ -47,6 +47,8 @@ import { AdminTagsComponent } from './Components/admin/admin-tags/admin-tags.com
 import { AdminComponent } from './Components/admin/admin/admin.component';
 import { MovieEditComponent } from './Components/admin-edit/movie-edit/movie-edit.component';
 import { AbstractEditComponent } from './Components/admin-edit/abstract-edit/abstract-edit.component';
+import { BaseGaleryComponent } from './Components/admin-galery/base-galery/base-galery.component';
+import { AdminMoviesGaleryComponent } from './Components/admin-galery/admin-movies-galery/admin-movies-galery.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,9 @@ import { AbstractEditComponent } from './Components/admin-edit/abstract-edit/abs
     AdminTagsComponent,
     AdminComponent,
     MovieEditComponent,
-    AbstractEditComponent
+    AbstractEditComponent,
+    BaseGaleryComponent,
+    AdminMoviesGaleryComponent
   ],
   imports: [
     AppRoutingModule,
