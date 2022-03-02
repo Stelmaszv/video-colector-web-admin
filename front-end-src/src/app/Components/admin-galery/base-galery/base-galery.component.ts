@@ -12,7 +12,7 @@ export class BaseGaleryComponent extends BaseListComponent {
   protected override debug:any=true
   @Input() cover:any=''
   @Input() poster:any=''
-  @Input() id:any=1
+  @Input() id:any=0
 
   private is_cover(movie:any){
     return (movie.url==this.cover)
