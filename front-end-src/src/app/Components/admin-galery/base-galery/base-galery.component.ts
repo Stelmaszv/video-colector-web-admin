@@ -8,13 +8,13 @@ import { BaseListComponent } from '../../list/base-list/base-list.component';
 })
 export class BaseGaleryComponent extends BaseListComponent {
   @Input() public override url=''
+  @Input() public edit_url=''
   @Input() movies:any=false
   @Input() cover:any=''
   @Input() poster:any=''
   @Input() id:any=0
 
   private is_cover(movie:any){
-    console.log(this.cover)
     return (movie.url==this.cover)
   }
 
@@ -33,5 +33,21 @@ export class BaseGaleryComponent extends BaseListComponent {
     movie['is_poster']= this.is_poster(movie)
   }
 
+  private update(url:any,index:any){
+    let json:any={}
+    json[index]=url
+    console.log()
+    this.httpService.put_url(this.edit_url+''+this.id+'/',json).subscribe(respanse=>{
+      console.log(respanse)
+    })
+    window.location.reload()
+  }
 
+  public update_poster(url:any){
+    this.update(url,'poster')
+  }
+
+  public update_cover(url:any){
+    this.update(url,'avatar')
+  }
 }

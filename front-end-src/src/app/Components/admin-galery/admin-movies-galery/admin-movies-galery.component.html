@@ -1,6 +1,6 @@
 <app-navabr></app-navabr>
 <app-movies-admin-navbar id="{{data.id}}" title="{{data.name}}" place="movie"></app-movies-admin-navbar>
-    <table class="table set_img">
+    <table class="table-borderless table set_img">
         <thead>
           <tr>
             <th scope="col">Cover</th>
@@ -18,7 +18,7 @@
           </tr>
         </tbody>
     </table>
-    <table class="table set_img">
+    <table class="table-borderless table set_img">
         <thead>
             <tr class="actions">
                 <td class="new_photo">Generete New Photos</td>
@@ -27,5 +27,5 @@
     </table>
 
 <div class="container">
-    <app-base-galery class="manage-galery" cover="{{data.avatar}}" poster="{{data.poster}}" id="{{data.id}}" url="{{galery_url}}"></app-base-galery>
+    <app-base-galery class="manage-galery" cover="{{data.avatar}}" poster="{{data.poster}}" id="{{data.id}}" url="{{galery_url}}" edit_url="{{edit_url}}"></app-base-galery>
 </div>

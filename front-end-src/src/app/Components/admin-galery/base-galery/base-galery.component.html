@@ -14,9 +14,9 @@
       <tr *ngFor="let el of data">
         <td><img src="{{el.url}}" class="photo"></td>
         <td>{{el.url}}</td>
-        <td><button [ngClass]="{'item_set': el.is_cover}">Cover</button></td>
+        <td><button [ngClass]="{'item_set': el.is_cover}" [disabled]="el.is_cover"  (click)="update_cover(el.url)">Cover</button></td>
         <ng-template [ngIf]="!movies">
-          <td><button [ngClass]="{'item_set': el.is_poster}">Poster</button></td>
+          <td><button [ngClass]="{'item_set': el.is_poster}" [disabled]="el.is_poster" (click)="update_poster(el.url)">Poster</button></td>
         </ng-template>
         <td><button>Delete</button></td>
       </tr>
