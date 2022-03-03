@@ -38,13 +38,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="login-form" [formGroup]="photos">
-          <label for="number_of_generation">New Photos How Many ? </label>
-          <input id="number_of_generation" class="form-control" type="number"  formControlName="number"  >
-        </form>
+        <ng-template [ngIf]="!generate_stan">
+            <form class="login-form" [formGroup]="photos">
+              <label for="number_of_generation">New Photos How Many ? </label>
+              <input id="number_of_generation" class="form-control" type="number"  formControlName="number"  >
+            </form>
+        </ng-template>
+        <ng-template [ngIf]="generate_stan">
+            Genereteing photos !!!
+        </ng-template>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="generate_photos()">Save</button>
+        <ng-template [ngIf]="!generate_stan">
+          <button type="button" class="btn btn-primary" (click)="generate_photos()">Save</button>
+       </ng-template>
       </div>
     </div>
   </div>
