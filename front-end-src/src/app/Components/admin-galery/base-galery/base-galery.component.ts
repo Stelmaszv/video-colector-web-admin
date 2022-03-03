@@ -53,10 +53,10 @@ export class BaseGaleryComponent extends BaseListComponent {
   }
 
   private is_cover(movie:any){
-    return (movie.url==this.cover)
+    return (movie.show_url==this.cover)
   }
 
   private is_poster(movie:any){
-    return (movie.url==this.poster)
+    return (movie.show_url==this.poster)
   }
 }

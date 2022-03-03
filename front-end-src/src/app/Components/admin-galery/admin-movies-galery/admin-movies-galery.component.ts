@@ -17,6 +17,8 @@ export class AdminMoviesGaleryComponent extends BaseIDComponent {
   });
 
   public generate_photos(){
-    console.log(this.photos.value.number)
+    if (this.photos.value.number){
+      console.log(this.photos.value.number)
+    }
   }
 }

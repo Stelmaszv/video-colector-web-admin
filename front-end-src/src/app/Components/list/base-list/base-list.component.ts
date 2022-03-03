@@ -3,7 +3,6 @@ import {HttpService} from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import {ProcentService} from '../../../Service/procent/procent.service'
 import {TokkenService}  from '../../../Service/tokken/tokken.service'
-
 import { Router } from '@angular/router';
 import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
 @Component({
