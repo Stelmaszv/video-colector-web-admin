@@ -4,11 +4,7 @@ import shutil
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
-from django.contrib.auth.models import  AbstractBaseUser,BaseUserManager
-from django.contrib.auth.models import UserManager
-
 from core.setings import get_josn_file
-
 
 def set_model(Model):
     def set_avg(Model):

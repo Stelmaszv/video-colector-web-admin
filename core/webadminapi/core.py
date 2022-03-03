@@ -15,7 +15,6 @@ from core.wideocollectorseader.models import (DisLikess,
                                               UserFavorits as UserFavoritsModel,
                                               Movie)
 
-
 class RangesMiddleware(MiddlewareMixin):
 
     def process_response(self, request, response):
@@ -177,7 +176,17 @@ class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
 
     Model=None
 
+    def delete_action(self,delete):
+        pass
+
+    def genrate(self,number_of_genarearion,id):
+        pass
+
     def list(self, request, pk):
+        if self.request.GET.get('delete'):
+            self.delete_action(self.request.GET.get('delete'))
+        if self.request.GET.get('genrate'):
+            self.genrate(self.request.GET.get('genrate'),pk)
         queryset = self.filter_queryset()
         serializer = self.serializer_class(queryset, many=True, context={'request': request.user})
         page = self.paginate_queryset(serializer.data)

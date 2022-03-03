@@ -1,4 +1,6 @@
 import os
+import string
+import random
 from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
 
@@ -14,6 +16,8 @@ from core.wideocollectorseader.models import Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
 from rest_framework.pagination import PageNumberPagination
+from moviepy.editor import VideoFileClip
+
 
 
 class MoviesView(AbstractGenericsAPIView):
@@ -150,6 +154,40 @@ class MoviePhotosView(AbstractGenericsAPIViewExtended):
                 )
         return photo
 
+
+class AdminGaleryDelete(MoviePhotosView):
+
+    permission_classes = [IsAuthenticated]
+
+    def delete_action(self, delete):
+        os.remove(delete)
+
+class AdminGaleryGenerateMoviecap(MoviePhotosView):
+
+    procent_limt = 96
+
+    def set_round_number(self, clip):
+        duration = int(clip.duration)
+        round_nomber = random.randint(0, int(clip.duration))
+        procent = int(round_nomber / duration * 100)
+        if procent <= self.procent_limt:
+            return round_nomber
+        else:
+            return self.set_round_number(clip)
+
+    def random(self,length) -> str:
+        letters = string.ascii_lowercase
+        result_str = ''.join(random.choice(letters) for i in range(length))
+        return result_str
+
+    def genrate(self,number_of_genarearion,id):
+        Obj=Movie.objects.get(id=id)
+        clip = VideoFileClip(Obj.web_src)
+        for frame in range(0, int(number_of_genarearion)):
+            clip.save_frame(Obj.web_dir + '\\' + str(self.random(20)) + '.png',
+                            t=self.set_round_number(clip))
+            mess = 'creating photos for ' + Obj.name + ' ' + str(frame + 1) + '/' + str(number_of_genarearion)
+            print(mess)
 
 class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate

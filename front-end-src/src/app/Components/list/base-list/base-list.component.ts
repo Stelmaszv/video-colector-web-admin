@@ -213,9 +213,9 @@ export class BaseListComponent implements OnInit {
     }else{
       if (this.loading){
         this.loading=false
-        console.log(this.url+this.page+'&'+this.filter_url)
+        console.log(this.url+'?page='+this.page+'&'+this.filter_url)
         this.on_set_url()
-        this.httpService.get_url_auth(this.url+this.page+'&'+this.filter_url).subscribe(
+        this.httpService.get_url_auth(this.url+'?page='+this.page+'&'+this.filter_url).subscribe(
           (response) => {
             if (response.hasOwnProperty('results')){
               this.response=response
