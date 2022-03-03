@@ -1,5 +1,31 @@
 <app-navabr></app-navabr>
 <app-movies-admin-navbar id="{{data.id}}" title="{{data.name}}" place="movie"></app-movies-admin-navbar>
+    <table class="table set_img">
+        <thead>
+          <tr>
+            <th scope="col">Cover</th>
+            <th scope="col">Poster</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="{{data.avatar}}" class="avatar"></td>
+            <td><img src="{{data.poster}}" class="poster"></td>
+          </tr>
+          <tr class="actions">
+            <td class="new_photo">Generete New Cover</td>
+            <td class="new_photo">Generete New Poster</td>
+          </tr>
+        </tbody>
+    </table>
+    <table class="table set_img">
+        <thead>
+            <tr class="actions">
+                <td class="new_photo">Generete New Photos</td>
+            </tr>
+        </thead>
+    </table>
+
 <div class="container">
     <app-base-galery class="manage-galery" cover="{{data.avatar}}" poster="{{data.poster}}" id="{{data.id}}" url="{{galery_url}}"></app-base-galery>
 </div>
