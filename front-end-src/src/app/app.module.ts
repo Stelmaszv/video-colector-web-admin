@@ -49,6 +49,8 @@ import { MovieEditComponent } from './Components/admin-edit/movie-edit/movie-edi
 import { AbstractEditComponent } from './Components/admin-edit/abstract-edit/abstract-edit.component';
 import { BaseGaleryComponent } from './Components/admin-galery/base-galery/base-galery.component';
 import { AdminMoviesGaleryComponent } from './Components/admin-galery/admin-movies-galery/admin-movies-galery.component';
+import { AbstractAdminNavbarComponent } from './Components/admin-navbar/abstract-admin-navbar/abstract-admin-navbar.component';
+import { MoviesAdminNavbarComponent } from './Components/admin-navbar/movies-admin-navbar/movies-admin-navbar.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { AdminMoviesGaleryComponent } from './Components/admin-galery/admin-movi
     MovieEditComponent,
     AbstractEditComponent,
     BaseGaleryComponent,
-    AdminMoviesGaleryComponent
+    AdminMoviesGaleryComponent,
+    AbstractAdminNavbarComponent,
+    MoviesAdminNavbarComponent
   ],
   imports: [
     AppRoutingModule,
