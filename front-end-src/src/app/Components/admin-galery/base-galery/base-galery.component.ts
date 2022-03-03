@@ -8,11 +8,13 @@ import { BaseListComponent } from '../../list/base-list/base-list.component';
 })
 export class BaseGaleryComponent extends BaseListComponent {
   @Input() public override url=''
+  @Input() movies:any=false
   @Input() cover:any=''
   @Input() poster:any=''
   @Input() id:any=0
 
   private is_cover(movie:any){
+    console.log(this.cover)
     return (movie.url==this.cover)
   }
 

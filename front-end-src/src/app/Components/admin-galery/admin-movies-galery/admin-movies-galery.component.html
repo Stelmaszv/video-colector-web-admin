@@ -1,3 +1,5 @@
 <app-navabr></app-navabr>
 <app-movies-admin-navbar id="{{data.id}}" title="{{data.name}}" place="movie"></app-movies-admin-navbar>
-<app-base-galery cover="{{data.cover}}" poster="{{data.poster}}" id="{{data.id}}" url="{{galery_url}}"></app-base-galery>
+<div class="container">
+    <app-base-galery class="manage-galery" cover="{{data.avatar}}" poster="{{data.poster}}" id="{{data.id}}" url="{{galery_url}}"></app-base-galery>
+</div>
