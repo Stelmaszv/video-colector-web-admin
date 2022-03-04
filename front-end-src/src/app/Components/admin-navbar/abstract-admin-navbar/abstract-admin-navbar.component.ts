@@ -24,7 +24,7 @@ export class AbstractAdminNavbarComponent implements OnInit{
     this.edit_url=['/admin/'+this.place+'/edit/',this.id]
     this.galery_url=['/admin/'+this.place+'/galery/',this.id]
     this.items_url=['/admin/'+this.place+'/items/',this.id]
-    this.stats_url=['/admin/'+this.place+'/stars/',this.id]
+    this.stats_url=['/admin/'+this.place+'/stats/',this.id]
   }
   
 }

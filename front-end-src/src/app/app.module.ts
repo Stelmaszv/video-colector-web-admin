@@ -51,6 +51,8 @@ import { BaseGaleryComponent } from './Components/admin-galery/base-galery/base-
 import { AdminMoviesGaleryComponent } from './Components/admin-galery/admin-movies-galery/admin-movies-galery.component';
 import { AbstractAdminNavbarComponent } from './Components/admin-navbar/abstract-admin-navbar/abstract-admin-navbar.component';
 import { MoviesAdminNavbarComponent } from './Components/admin-navbar/movies-admin-navbar/movies-admin-navbar.component';
+import { AdminItemsMoviesComponent } from './Components/admin-items/admin-items-movies/admin-items-movies.component';
+import { AdminMoviesStatsComponent } from './Components/admin-stats/admin-movies-stats/admin-movies-stats.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +102,9 @@ import { MoviesAdminNavbarComponent } from './Components/admin-navbar/movies-adm
     BaseGaleryComponent,
     AdminMoviesGaleryComponent,
     AbstractAdminNavbarComponent,
-    MoviesAdminNavbarComponent
+    MoviesAdminNavbarComponent,
+    AdminItemsMoviesComponent,
+    AdminMoviesStatsComponent
   ],
   imports: [
     AppRoutingModule,
