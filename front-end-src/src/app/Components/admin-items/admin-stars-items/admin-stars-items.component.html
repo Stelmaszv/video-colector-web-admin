@@ -1,8 +1,13 @@
 <div class="container">
     <div class="row justify-content-md-center">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addstar">
-            Add Star
-        </button>
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addstar">
+                Add Star
+            </button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
+        </div>
     </div>
 </div>
 
@@ -15,14 +20,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let el of data">
+        <tr *ngFor="let el of list ; let i = index">
           <th scope="row">{{el.id}}</th>
           <td>{{el.name}}</td>
           <td></td>
-          <td><a class="item"><i class="fas fa-trash icon"></i></a></td>
+          <td (click)="item_remove(i)"><a class="item"><i class="fas fa-trash icon"></i></a></td>
         </tr>
       </tbody>
 </table>
+<div class="container" [hidden]="list.length">
+    <div class="row justify-content-md-center">
+        List is Empty !!
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="addstar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -33,14 +43,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <select class="form-select" multiple aria-label="multiple select example">
-                <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star.id)" value="{{star.id}}" [hidden]="!if_exist(star.id,list)" selected>{{star.name}}</option>
-                <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star.id)" value="{{star.id}}" [hidden]="if_exist(star.id,list)" >{{star.name}}</option>
-              </select>
+        <select class="form-select" multiple aria-label="multiple select example">
+            <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star)" value="{{star.id}}" [hidden]="!if_exist_in_list(star.id)" selected>{{star.name}}</option>
+            <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star)" value="{{star.id}}" [hidden]="if_exist_in_list(star.id)" >{{star.name}}</option>
+        </select>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
-  </div>
+</div>
