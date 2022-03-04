@@ -1,3 +1,22 @@
-<div *ngFor="let el of data">
-    {{el.User.username}}
-</div>
+<table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Data</th>
+        <ng-template [ngIf]="rateing">
+          <th scope="col">Rate</th>
+        </ng-template>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let el of data">
+        <td>{{el.User.username}}</td>
+        <td>{{el.added}}</td>
+        <ng-template [ngIf]="rateing">
+          <td>{{el.rate}}</td>
+        </ng-template>
+        <td><a class="item"><i class="fas fa-trash icon"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
