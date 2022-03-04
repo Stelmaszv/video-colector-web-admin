@@ -1,2 +1,31 @@
 <app-navabr></app-navabr>
 <app-abstract-admin-navbar id="{{data.id}}"  title="{{data.name}}" place="movie"></app-abstract-admin-navbar>
+<div class="container procent-section">
+    <H2>{{data.name}}</H2>
+    <div class="row">
+        <div class="col">
+            <div class="likes"><i class="icon fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}</div>
+        </div>
+        <div class="col">
+            <div class="procent_likes">
+                <div class="like-procent">
+                    <div class="good" [ngStyle]="{'width': good_procent}"></div>
+                    <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="dislikes"><i class="icon fas fa-thumbs-down"></i> {{data.disLikes_count | bigInt}}</div>
+        </div>
+    </div>
+    <div class="avg-and-views">
+        <div class="row">
+            <div class="col">
+                <i class="fas fa-eye likes"></i> <span class="stats_item views_js">{{data.views_count | bigInt}}</span>
+            </div>
+            <div class="col">
+                <i class="fas fa-star dislikes"></i> <span class="stats_item ratting_js">{{data.ratings_count | bigInt}}</span> ({{data.avg_rating}})
+            </div>
+        </div>
+    </div>
+</div>
