@@ -37,7 +37,7 @@ export class ActionsComponent implements OnInit{
   }
 
   public add_to_rating(){
-    this.add_action(this.add_to_rating_url,'.ratting_js')
+    this.add_action(this.add_to_rating_url+'?rate='+this.addrate.value.rate,'.ratting_js')
   }
 
   public add_dislike(){

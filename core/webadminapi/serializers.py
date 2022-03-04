@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 
 from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
-                                              Tag, UserFavorits as UserFavoritsModel, Likes)
+                                              Tag, UserFavorits as UserFavoritsModel, Likes,Rating)
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -274,6 +274,12 @@ class StatsSerializer(serializers.ModelSerializer):
     User = ShortUser(many=False)
     class Meta:
         model = Likes
+        fields ='__all__'
+
+class RatingsSerializer(serializers.ModelSerializer):
+    User = ShortUser(many=False)
+    class Meta:
+        model = Rating
         fields ='__all__'
 
 class MoviesSerializer(BaseSeralizer):

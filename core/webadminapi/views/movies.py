@@ -12,7 +12,8 @@ from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
                                           PhotoSerializerMovie,
-                                          StatsSerializer)
+                                          StatsSerializer,
+                                          RatingsSerializer)
 from core.wideocollectorseader.models import Movie,Likes,DisLikess,Views
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
@@ -207,6 +208,12 @@ class AdminStatsMovieViews(AbstractStats):
     queryset = Views.objects.all()
     Model = Movie
     place = 'views'
+
+class AdminStatsMovieRatings(AbstractStats):
+    serializer_class = RatingsSerializer
+    queryset = Views.objects.all()
+    Model = Movie
+    place = 'ratings'
 
 class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate
