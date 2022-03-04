@@ -53,6 +53,7 @@ import { AbstractAdminNavbarComponent } from './Components/admin-navbar/abstract
 import { MoviesAdminNavbarComponent } from './Components/admin-navbar/movies-admin-navbar/movies-admin-navbar.component';
 import { AdminItemsMoviesComponent } from './Components/admin-items/admin-items-movies/admin-items-movies.component';
 import { AdminMoviesStatsComponent } from './Components/admin-stats/admin-movies-stats/admin-movies-stats.component';
+import { AdminStatsBaseComponent } from './Components/admin-stats/admin-stats-base/admin-stats-base.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { AdminMoviesStatsComponent } from './Components/admin-stats/admin-movies
     AbstractAdminNavbarComponent,
     MoviesAdminNavbarComponent,
     AdminItemsMoviesComponent,
-    AdminMoviesStatsComponent
+    AdminMoviesStatsComponent,
+    AdminStatsBaseComponent
   ],
   imports: [
     AppRoutingModule,

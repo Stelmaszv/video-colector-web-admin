@@ -1,9 +1,11 @@
+from django.conf.global_settings import AUTH_USER_MODEL
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 
 from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
-                                              Tag,UserFavorits as UserFavoritsModel)
-
+                                              Tag, UserFavorits as UserFavoritsModel, Likes)
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class BaseSeralizer(serializers.ModelSerializer):
     fovorite_item=''
@@ -105,6 +107,8 @@ class ProducentFavorit(StarsFavoritBase):
         model = Star
         fields = ['name']
 
+
+
 class MoviesLiksView(serializers.ModelSerializer):
     data_put=[]
     class Meta:
@@ -176,8 +180,13 @@ class ProducentsSerializerUpdate(serializers.ModelSerializer):
 #Bass
 class ShortProducent(serializers.ModelSerializer):
     class Meta:
-        model=Serie
+        model=Producents
         fields = ['id','name','show_name','avatar']
+
+class ShortUser(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields = ['id','username']
 
 class SerieSlectSerializer(serializers.ModelSerializer):
     class Meta:
@@ -260,6 +269,12 @@ class StarsForMovies(serializers.ModelSerializer):
 
 class SeriesSerlizerForMovies(ShortSeries):
     pass
+
+class LiksSerializer(serializers.ModelSerializer):
+    User = ShortUser(many=False)
+    class Meta:
+        model = Likes
+        fields ='__all__'
 
 class MoviesSerializer(BaseSeralizer):
     fovorite_item = 'movies'

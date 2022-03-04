@@ -29,3 +29,51 @@
         </div>
     </div>
 </div>
+
+<div class="tabs_nav sticky-top tabs_sticky">
+    <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item galery_tab_js nav_tab" name="galery" role="presentation">
+            <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
+                    data-bs-target="#likes" type="button" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">Likes
+            </button>
+        </li>
+        <li class="nav-item movies_series_tab nav_tab" name="movies_series" role="presentation">
+            <button class="nav-link all-series-name" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#dislikes" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="false">Dis Likes
+            </button>
+        </li>
+        <li class="nav-item movies_with_stars_tab nav_tab" name="movies_with_stars" role="presentation">
+            <button class="nav-link all-with-star-name" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#views" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">Views 
+            </button>
+        </li>
+        <li class="nav-item ratings nav_tab" name="ratings" role="presentation">
+            <button class="nav-link all-with-star-name" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#ratings" type="button" role="tab" aria-controls="ratings"
+                    aria-selected="false">Ratings 
+            </button>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content" id="pills-tabContent">
+
+    <div class="tab-pane fade galery_tab_js tab_content" id="likes" type="Galery" role="tabpanel" aria-labelledby="pills-galery-tab">
+        Likes<br> 
+    </div>
+
+    <div class="tab-pane fade movies_series_tab tab_content serie-movies" id="dislikes" role="tabpanel" type="movies_in_series" aria-labelledby="pills-home-tab">
+        Dis Likes
+    </div>
+
+    <div class="tab-pane fade movies_with_stars_tab tab_content" id="views" role="tabpanel" type="all_movies_with_star" aria-labelledby="pills-profile-tab">
+        Views       
+    </div>
+    <div class="tab-pane fade movies_with_stars_tab tab_content" id="ratings" role="tabpanel" type="ratings" aria-labelledby="pills-profile-tab">
+        Ratings     
+    </div>
+    
+</div>
