@@ -12,8 +12,8 @@ from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
                                           PhotoSerializerMovie,
-                                          LiksSerializer)
-from core.wideocollectorseader.models import Movie,Likes
+                                          StatsSerializer)
+from core.wideocollectorseader.models import Movie,Likes,DisLikess,Views
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
 from rest_framework.pagination import PageNumberPagination
@@ -191,13 +191,32 @@ class AdminGaleryGenerateMoviecap(MoviePhotosView):
             print(mess)
 
 class AdminStatsMovieLiks(AbstractGenericsAPIViewExtended):
-    serializer_class = LiksSerializer
+    serializer_class = StatsSerializer
     queryset = Likes.objects.all()
     Model = Movie
 
     def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.likes.all()
+
+class AdminStatsMovieDisLiks(AbstractGenericsAPIViewExtended):
+    serializer_class = StatsSerializer
+    queryset = DisLikess.objects.all()
+    Model = Movie
+
+    def filter_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        return Model.disLikes.all()
+
+class AdminStatsMovieViews(AbstractGenericsAPIViewExtended):
+    serializer_class = StatsSerializer
+    queryset = Views.objects.all()
+    Model = Movie
+
+    def filter_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        return Model.views.all()
+
 
 class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate

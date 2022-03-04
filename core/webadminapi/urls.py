@@ -18,7 +18,9 @@ from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            AdminMoviesView,
                                            AdminGaleryDelete,
                                            AdminGaleryGenerateMoviecap,
-                                           AdminStatsMovieLiks)
+                                           AdminStatsMovieLiks,
+                                           AdminStatsMovieDisLiks,
+                                           AdminStatsMovieViews)
 from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentAddToFavoriteView,
                                               ProducentAddToLikeView,
@@ -65,12 +67,10 @@ from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
 app_name = 'webadminapi'
 from django.urls import path
 
-
-
-
-
 urlpatterns = [
     #stats
+    path('admin/stats/movie/views/<int:pk>/',     AdminStatsMovieViews.as_view(), name='deletePhotos'),
+    path('admin/stats/movie/disliks/<int:pk>/',     AdminStatsMovieDisLiks.as_view(), name='deletePhotos'),
     path('admin/stats/movie/liks/<int:pk>/',        AdminStatsMovieLiks.as_view(), name='deletePhotos'),
     #galery
     path('admin/galery/movie/delete/<int:pk>/',        AdminGaleryDelete.as_view(), name='deletePhotos'),

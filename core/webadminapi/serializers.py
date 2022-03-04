@@ -270,7 +270,7 @@ class StarsForMovies(serializers.ModelSerializer):
 class SeriesSerlizerForMovies(ShortSeries):
     pass
 
-class LiksSerializer(serializers.ModelSerializer):
+class StatsSerializer(serializers.ModelSerializer):
     User = ShortUser(many=False)
     class Meta:
         model = Likes
