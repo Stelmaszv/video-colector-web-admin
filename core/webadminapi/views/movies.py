@@ -7,13 +7,14 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView,AbstractStats)
+                                   AbstractUpdateView,AbstractStats,AbstractItems)
 from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
                                           PhotoSerializerMovie,
                                           StatsSerializer,
-                                          RatingsSerializer)
+                                          RatingsSerializer,
+                                          StarsSerializer)
 from core.wideocollectorseader.models import Movie,Likes,DisLikess,Views
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
@@ -214,6 +215,12 @@ class AdminStatsMovieRatings(AbstractStats):
     queryset = Views.objects.all()
     Model = Movie
     place = 'ratings'
+
+class MovieStarsView(AbstractItems):
+    serializer_class = StarsSerializer
+    queryset = Movie.objects
+    Model = Movie
+    place = 'stars'
 
 class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate

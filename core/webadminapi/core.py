@@ -246,3 +246,6 @@ class AbstractStats(AbstractGenericsAPIViewExtended):
     def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return getattr(Model,self.place).all()
+
+class AbstractItems(AbstractStats):
+    pass
