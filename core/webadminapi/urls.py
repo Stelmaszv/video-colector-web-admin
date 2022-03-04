@@ -71,7 +71,7 @@ urlpatterns = [
     #stats
     path('admin/stats/movie/views/<int:pk>/',     AdminStatsMovieViews.as_view(), name='deletePhotos'),
     path('admin/stats/movie/disliks/<int:pk>/',     AdminStatsMovieDisLiks.as_view(), name='deletePhotos'),
-    path('admin/stats/movie/liks/<int:pk>/',        AdminStatsMovieLiks.as_view(), name='deletePhotos'),
+    path('admin/stats/movie/laiks/<int:pk>/',        AdminStatsMovieLiks.as_view(), name='deletePhotos'),
     #galery
     path('admin/galery/movie/delete/<int:pk>/',        AdminGaleryDelete.as_view(), name='deletePhotos'),
     path('admin/galery/generate/moviecap/<int:pk>/',   AdminGaleryGenerateMoviecap.as_view(), name='deletePhotos'),

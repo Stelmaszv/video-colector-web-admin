@@ -230,3 +230,13 @@ class FavoritsAdd(SqlAction):
         else:
             getattr(UserFavorits, self.fovorite_item).add(self.query)
 
+
+class AbstractStats(AbstractGenericsAPIViewExtended):
+    serializer_class = None
+    queryset = []
+    Model = None
+    place=''
+
+    def filter_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        return getattr(Model,self.place).all()

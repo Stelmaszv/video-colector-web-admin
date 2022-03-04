@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView)
+                                   AbstractUpdateView,AbstractStats)
 from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
@@ -190,33 +190,23 @@ class AdminGaleryGenerateMoviecap(MoviePhotosView):
             mess = 'creating photos for ' + Obj.name + ' ' + str(frame + 1) + '/' + str(number_of_genarearion)
             print(mess)
 
-class AdminStatsMovieLiks(AbstractGenericsAPIViewExtended):
+class AdminStatsMovieLiks(AbstractStats):
     serializer_class = StatsSerializer
     queryset = Likes.objects.all()
     Model = Movie
+    place = 'likes'
 
-    def filter_queryset(self):
-        Model = self.get_object(self.kwargs.get("pk"))
-        return Model.likes.all()
-
-class AdminStatsMovieDisLiks(AbstractGenericsAPIViewExtended):
+class AdminStatsMovieDisLiks(AbstractStats):
     serializer_class = StatsSerializer
     queryset = DisLikess.objects.all()
     Model = Movie
+    place = 'disLikes'
 
-    def filter_queryset(self):
-        Model = self.get_object(self.kwargs.get("pk"))
-        return Model.disLikes.all()
-
-class AdminStatsMovieViews(AbstractGenericsAPIViewExtended):
+class AdminStatsMovieViews(AbstractStats):
     serializer_class = StatsSerializer
     queryset = Views.objects.all()
     Model = Movie
-
-    def filter_queryset(self):
-        Model = self.get_object(self.kwargs.get("pk"))
-        return Model.views.all()
-
+    place = 'views'
 
 class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate
