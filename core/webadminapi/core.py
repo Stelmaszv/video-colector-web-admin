@@ -230,12 +230,18 @@ class FavoritsAdd(SqlAction):
         else:
             getattr(UserFavorits, self.fovorite_item).add(self.query)
 
+class StatsPaginator(PageNumberPagination):
+    page_size = 25
+    page_size_query_param = 'page_size'
+    max_page_size = 25
 
 class AbstractStats(AbstractGenericsAPIViewExtended):
     serializer_class = None
     queryset = []
     Model = None
     place=''
+    permission_classes = [IsAuthenticated]
+    pagination_class = StatsPaginator
 
     def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))

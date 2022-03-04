@@ -62,18 +62,18 @@
 <div class="tab-content" id="pills-tabContent">
 
     <div class="tab-pane fade galery_tab_js tab_content" id="likes" type="Galery" role="tabpanel" aria-labelledby="pills-galery-tab">
-        Likes<br> 
+        <app-admin-stats-base url="{{return_like_url()}}"></app-admin-stats-base> 
     </div>
 
     <div class="tab-pane fade movies_series_tab tab_content serie-movies" id="dislikes" role="tabpanel" type="movies_in_series" aria-labelledby="pills-home-tab">
-        Dis Likes
+        <app-admin-stats-base url="{{return_dislike_url()}}"></app-admin-stats-base>
     </div>
 
     <div class="tab-pane fade movies_with_stars_tab tab_content" id="views" role="tabpanel" type="all_movies_with_star" aria-labelledby="pills-profile-tab">
-        Views       
+        <app-admin-stats-base url="{{return_views_url()}}"></app-admin-stats-base>     
     </div>
     <div class="tab-pane fade movies_with_stars_tab tab_content" id="ratings" role="tabpanel" type="ratings" aria-labelledby="pills-profile-tab">
-        Ratings     
+        <app-admin-stats-base url="{{return_ratings_url()}}"></app-admin-stats-base>  
     </div>
     
 </div>
