@@ -182,6 +182,10 @@ export class BaseListComponent implements OnInit {
   protected on_set_results(movie:any):void
   {}
 
+  protected on_after_set_results(response:any){
+
+  }
+
   protected on_set_url():void{
     
   }
@@ -204,6 +208,7 @@ export class BaseListComponent implements OnInit {
               this.response=response
               this.set_count(response)
               this.set_results()
+              this.on_after_set_results(response)
               this.loading=true
             }
           }
@@ -220,6 +225,7 @@ export class BaseListComponent implements OnInit {
               this.response=response
               this.set_results()
               this.set_count(response)
+              this.on_after_set_results(response)
               this.loading=true
             }
           },
