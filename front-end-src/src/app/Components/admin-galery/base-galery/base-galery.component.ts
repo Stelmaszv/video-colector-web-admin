@@ -61,7 +61,6 @@ export class BaseGaleryComponent extends BaseListComponent {
     this.httpService.put_url(this.edit_url+''+this.id+'/',json).subscribe(respanse=>{
       console.log(respanse)
     })
-    //window.location.reload()
   }
 
   private is_cover(movie:any){

@@ -1,5 +1,6 @@
 <app-navabr></app-navabr>
 <app-movies-admin-navbar id="{{data.id}}" title="{{data.name}}" place="movie"></app-movies-admin-navbar>
+<div class="actual_photo">
     <table class="table-borderless table set_img">
         <thead>
           <tr>
@@ -25,6 +26,21 @@
             </tr>
         </thead>
     </table>
+</div>
+<div class="small_menu">
+    <div class="col">
+      Avatar
+    </div>
+    <div class="col">
+      <img src="{{data.avatar}}" class="avatar">
+    </div>
+    <div class="col">
+      Cover
+    </div>
+    <div class="col">
+      <img src="{{data.poster}}" class="poster">
+    </div>
+</div>
 
 <div class="container">
     <app-base-galery class="manage-galery" cover="{{data.avatar}}" poster="{{data.poster}}" id="{{data.id}}" url="{{galery_url}}" edit_url="{{edit_url}}"></app-base-galery>
