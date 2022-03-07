@@ -23,6 +23,7 @@ import { MovieEditComponent } from './Components/admin-edit/movie-edit/movie-edi
 import { AdminMoviesGaleryComponent } from './Components/admin-galery/admin-movies-galery/admin-movies-galery.component';
 import { AdminItemsMoviesComponent } from './Components/admin-items/admin-items-movies/admin-items-movies.component';
 import { AdminMoviesStatsComponent } from './Components/admin-stats/admin-movies-stats/admin-movies-stats.component';
+import { SerieEditComponent } from './Components/admin-edit/serie-edit/serie-edit.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,11 @@ const routes: Routes = [
   {
     path: 'admin/movie/edit/:id',
     component: MovieEditComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/serie/edit/:id',
+    component: SerieEditComponent,
     canActivate:[AuthGuard]
   },
   {
