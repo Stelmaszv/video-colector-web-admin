@@ -43,7 +43,14 @@
 </div>
 
 <div class="container">
-    <app-base-galery class="manage-galery" cover="{{data.avatar}}" poster="{{data.poster}}" id="{{data.id}}" url="{{galery_url}}" edit_url="{{edit_url}}"></app-base-galery>
+    <app-base-galery 
+      class="manage-galery" 
+      cover="{{data.avatar}}" 
+      poster="{{data.poster}}" 
+      id="{{data.id}}" 
+      url="{{galery_url}}" 
+      edit_url="{{edit_url}}">
+    </app-base-galery>
 </div>
 
 <div class="modal fade" id="generete-new-photos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
