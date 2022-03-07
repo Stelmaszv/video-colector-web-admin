@@ -60,6 +60,7 @@ import { StarsEditComponent } from './Components/admin-edit/stars-edit/stars-edi
 import { ProducentEditComponent } from './Components/admin-edit/producent-edit/producent-edit.component';
 import { AdminSeriesGaleryComponent } from './Components/admin-galery/admin-series-galery/admin-series-galery.component';
 import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin-galery/stars-admin-galery.component';
+import { ProducentAdminGaleryComponent } from './Components/admin-galery/producent-admin-galery/producent-admin-galery.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin
     StarsEditComponent,
     ProducentEditComponent,
     AdminSeriesGaleryComponent,
-    StarsAdminGaleryComponent
+    StarsAdminGaleryComponent,
+    ProducentAdminGaleryComponent
   ],
   imports: [
     AppRoutingModule,
