@@ -11,14 +11,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let el of data">
+      <tr *ngFor="let el of data; let i = index">
         <td><img src="{{el.show_url}}" class="photo"></td>
         <td>{{el.show_url}}</td>
-        <td><button [ngClass]="{'item_set': el.is_cover}" [disabled]="el.is_cover"  (click)="update_cover(el.show_url)">Cover</button></td>
+        <td><button [ngClass]="{'item_set': el.is_cover}" [disabled]="el.is_cover"  (click)="update_cover(el.show_url,i)">Cover</button></td>
         <ng-template [ngIf]="!movies">
-          <td><button [ngClass]="{'item_set': el.is_poster}" [disabled]="el.is_poster" (click)="update_poster(el.show_url)">Poster</button></td>
+          <td><button [ngClass]="{'item_set': el.is_poster}" [disabled]="el.is_poster" (click)="update_poster(el.show_url,i)">Poster</button></td>
         </ng-template>
-        <td><button (click)="delete_photo(el.url)">Delete</button></td>
+        <td><button (click)="delete_photo(el.url,i)">Delete</button></td>
       </tr>
     </tbody>
 </table>

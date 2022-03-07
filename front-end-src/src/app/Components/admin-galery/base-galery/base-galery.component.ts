@@ -22,19 +22,31 @@ export class BaseGaleryComponent extends BaseListComponent {
     this.url=this.url+this.id
   } 
 
-  public update_poster(url:any){
+  public update_poster(url:any,index:number){
     this.update(url,'poster')
+    this.update_data_stan('is_poster')
+    this.data[index]['is_poster']=true
   }
 
-  public update_cover(url:any){
+  private update_data_stan(key:string){
+    for (let el of this.data){
+      if(el[key]==true){
+        el[key]=false
+      }
+    }
+  }
+
+  public update_cover(url:any,index:number){
     this.update(url,'avatar')
+    this.update_data_stan('is_cover')
+    this.data[index]['is_cover']=true
   }
 
-  public delete_photo(url:any){
+  public delete_photo(url:any,index:number){
     this.httpService.get_url_auth(this.delete_url+''+this.id+'/?delete='+url).subscribe(respanse=>{
       console.log(respanse)
     })
-    window.location.reload()
+    this.data.splice(index,1)
   }
 
   protected override on_set_results(movie: any): void {
@@ -49,7 +61,7 @@ export class BaseGaleryComponent extends BaseListComponent {
     this.httpService.put_url(this.edit_url+''+this.id+'/',json).subscribe(respanse=>{
       console.log(respanse)
     })
-    window.location.reload()
+    //window.location.reload()
   }
 
   private is_cover(movie:any){
