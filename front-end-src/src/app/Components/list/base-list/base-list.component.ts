@@ -101,7 +101,8 @@ export class BaseListComponent implements OnInit {
     this.page=1
     if (!this.favorite){
       this.data=[]
-      this.url=this.fav_url+"?page="
+      this.url=this.fav_url
+      console.log(this.url)
       this.auth=true
       this.load_data()
     }else{
