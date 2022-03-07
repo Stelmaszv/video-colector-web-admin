@@ -24,6 +24,7 @@ import { AdminMoviesGaleryComponent } from './Components/admin-galery/admin-movi
 import { AdminItemsMoviesComponent } from './Components/admin-items/admin-items-movies/admin-items-movies.component';
 import { AdminMoviesStatsComponent } from './Components/admin-stats/admin-movies-stats/admin-movies-stats.component';
 import { SerieEditComponent } from './Components/admin-edit/serie-edit/serie-edit.component';
+import { StarsEditComponent } from './Components/admin-edit/stars-edit/stars-edit.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,11 @@ const routes: Routes = [
   {
     path: 'admin/serie/edit/:id',
     component: SerieEditComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/star/edit/:id',
+    component: StarsEditComponent,
     canActivate:[AuthGuard]
   },
   {

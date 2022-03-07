@@ -58,8 +58,6 @@ class SeriesBennersView(AbstractGenericsAPIView):
     queryset = Serie.objects.all()
     Model = Serie
 
-
-
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         dir= Model.dir+'\\banners'

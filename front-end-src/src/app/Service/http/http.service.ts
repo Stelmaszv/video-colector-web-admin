@@ -7,7 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 
 export class HttpService {
-  constructor(private http:HttpClient) { }
+  constructor(public http:HttpClient) { }
   
   public get_url(url :string) {
     return this.http.get(url);
@@ -24,7 +24,8 @@ export class HttpService {
   }
 
   public put_url(url :string,data:any) {
-    let headers = new HttpHeaders({'Authorization' : 'Bearer '+localStorage['tokkenAccess']});
+
+    let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
     return this.http.put(url,data,{headers});
   }
 }

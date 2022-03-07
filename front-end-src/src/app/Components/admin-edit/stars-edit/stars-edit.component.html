@@ -1,0 +1,47 @@
+<app-navabr></app-navabr>
+<app-movies-admin-navbar id="{{data.id}}" title="{{data.name}}" place="star"></app-movies-admin-navbar>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <h2>Edit  - {{data.name}}</h2>
+            <form class="login-form" [formGroup]="Edit">
+                <div class="form-group">
+                <label for="show_name">Show name</label>
+                <input type="text" class="form-control" value="{{data.show_name}}" id="show_name" aria-describedby="emailHelp" placeholder="Enter Show name" formControlName="show_name">
+                </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea class="form-control" value="{{data.description}}" formControlName="description" placeholder="Enter Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ethnicity">Ethnicity</label>
+                    <input type="text" class="form-control" id="ethnicity" aria-describedby="emailHelp" placeholder="Enter Ethnicity" formControlName="ethnicity">
+                </div>
+                <div class="form-group">
+                    <label for="hair_color">Hair Color</label>
+                    <input type="text" class="form-control" id="hair_color" aria-describedby="emailHelp" placeholder="Enter Hair color" formControlName="hair_color">
+                </div>
+                <div class="form-group">
+                    <label for="nationality">Nationality</label>
+                    <input type="text" class="form-control" id="nationality" aria-describedby="nationalityHelp" placeholder="Enter Nationality" formControlName="nationality">
+                </div>
+                <div class="form-group">
+                    <label for="nationality">Date of birth</label>
+                    <input type="date" class="form-control" id="nationality" aria-describedby="emailHelp" placeholder="Enter Date Of Birth" formControlName="date_of_birth">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight</label>
+                    <input type="number" class="form-control" id="weight" aria-describedby="emailHelp" placeholder="Enter Weight" formControlName="weight">
+                </div>
+                <div class="form-group">
+                    <label for="height">Height</label>
+                    <input type="number" class="form-control"  id="height" aria-describedby="emailHelp" placeholder="Enter Height" formControlName="height">
+                </div>
+                <div class="row justify-content-md-center">
+                    <button type="submit" class="btn btn-secondary login-btn" (click)="save()" >Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

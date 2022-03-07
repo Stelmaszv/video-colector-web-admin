@@ -128,7 +128,7 @@ class Rating(models.Model):
         return "Rate "+str(self.rate)+" - "+str(self.User)+" - "+str(self.added)
 
 class Producents(models.Model):
-    name      = models.CharField(max_length=200)
+    name      = models.CharField(max_length=200,null=True,blank=True)
     banner    = models.CharField(max_length=200, default='',null=True,blank=True)
     show_name = models.CharField(max_length=200,default='',null=True)
     avatar = models.CharField(max_length=200, default='',null=True)
@@ -160,7 +160,7 @@ class Producents(models.Model):
         return self.name
 
 class Serie(models.Model):
-    name                = models.CharField(max_length=200)
+    name                = models.CharField(max_length=200,null=True,blank=True)
     banner              = models.CharField(max_length=200, default='',null=True,blank=True)
     show_name           = models.CharField(max_length=200,default='',null=True)
     avatar              = models.CharField(max_length=200, default='',null=True)
@@ -200,7 +200,7 @@ class Tag(models.Model):
         return self.name
 
 class Star(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200,null=True,blank=True)
     avatar = models.CharField(max_length=200, default='', null=True)
     show_name = models.CharField(max_length=200, default='', null=True,blank=True)
     description = models.TextField(default='', null=True,blank=True)

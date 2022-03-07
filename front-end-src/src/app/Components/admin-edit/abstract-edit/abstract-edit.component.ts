@@ -1,6 +1,5 @@
 import { Component} from '@angular/core';
 import { BaseIDComponent } from '../../id/base-id/base-id.component';
-import { FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-abstract-edit',
   templateUrl: './abstract-edit.component.html',
@@ -17,9 +16,16 @@ export class AbstractEditComponent extends BaseIDComponent {
     this.RelationSelectService.get_stars()
   }
 
-  
   public save(){
+    /*
+    console.log(this.url+''+this.id+'/')
+    console.log(this.Edit.value)
     this.httpService.put_url(this.url+''+this.id+'/',this.Edit.value).subscribe(respanse=>{
+      alert(respanse)
+    })
+    */
+    //let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
+    return this.httpService.http.put(this.url+''+this.id+'/',this.Edit.value).subscribe(respanse=>{
       console.log(respanse)
     })
   }

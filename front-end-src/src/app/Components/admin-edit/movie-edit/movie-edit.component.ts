@@ -7,6 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './movie-edit.component.html',
   styleUrls: ['./movie-edit.component.scss']
 })
+
 export class MovieEditComponent extends AbstractEditComponent {
   override url='http://127.0.0.1:8000/movieupdata/'
   protected override auth:any=true
@@ -19,15 +20,14 @@ export class MovieEditComponent extends AbstractEditComponent {
     producent     :new FormControl(''),
   });
 
-
-
   protected override on_get_result(data:any){
     this.Edit = new FormGroup({
       show_name: new FormControl(data.show_name),
       country:new FormControl(data.country),
       description: new FormControl(data.description),
       date_relesed: new FormControl(data.date_relesed),
-      serie: new FormControl(data.serie)
+      serie: new FormControl(data.serie),
+      producent : new FormControl(data.producent )
     });
   }
 

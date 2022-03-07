@@ -104,7 +104,7 @@ urlpatterns = [
     path('stars',                                StarView.as_view(), name='stars'),
     path('starsmovie/<int:pk>/',                 StarsMoviesView.as_view(), name='Starsmovie'),
     path('star/<int:pk>/',                       StarDeteilsView.as_view(), name='star'),
-    path('starupdate/<int:pk>/',                 StarUpdateView.as_view(), name='starupdate'),
+    path('star/update/<int:pk>/',                StarUpdateView.as_view(), name='starupdate'),
     path('staraddtofavorite/<int:pk>/',          StarAddToFavoriteView.as_view(), name='staraddtofavorite'),
     path('staraddrating/<int:pk>/',              StarAddToRatingView.as_view(), name='staraddrating'),
     path('staraddtolike/<int:pk>/',              StarAddToLikeView.as_view(), name='staraddtolike'),
@@ -132,7 +132,7 @@ urlpatterns = [
     #producent
     path('producents',                           ProducentsView.as_view(), name='producents'),
     path('producent/<int:pk>/',                  ProducentsDeteilsView.as_view(), name='producent'),
-    path('producentupdata/<int:pk>/',            ProducentsUpdataView.as_view(), name='producentupdata'),
+    path('producent/updata/<int:pk>/',            ProducentsUpdataView.as_view(), name='producentupdata'),
     path('producentsmovies/<int:pk>/',           ProducentsMoviesView.as_view(), name='producentsmoviesview'),
     path('producentsstar/<int:pk>/',             ProducentStarsView.as_view(), name='producentsstarsview'),
     path('producentsphotos/<int:pk>/',           ProducentsPhotosView.as_view(), name='producentsphotosview'),
