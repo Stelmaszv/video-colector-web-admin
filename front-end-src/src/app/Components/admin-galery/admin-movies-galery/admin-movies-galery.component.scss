@@ -27,17 +27,18 @@ $new_photo_hover:red;
 .actual_photo{
     display:block;
 }
+
 .small_menu{
     position: fixed;
     left: 0px;
     top: 0;
-    margin-top: 150px;
+    margin-top: 110px;
     display: none;
-    .avatar{
+    .avatar_small{
         max-width: 100px;
 
     }
-    .poster{
+    .poster_small{
         max-width: 200px;
     }
 }

@@ -25,6 +25,8 @@ export class BaseGaleryComponent extends BaseListComponent {
   public update_poster(url:any,index:number){
     this.update(url,'poster')
     this.update_data_stan('is_poster')
+    this.update_elemnt_photo('.poster',url)
+    this.update_elemnt_photo('.poster_small',url)
     this.data[index]['is_poster']=true
   }
 
@@ -36,9 +38,16 @@ export class BaseGaleryComponent extends BaseListComponent {
     }
   }
 
+  private update_elemnt_photo(selector:string,url:string){
+    let domEl: HTMLElement | null = document.querySelector(selector);
+    domEl && (domEl.setAttribute('src',url));
+  }
+
   public update_cover(url:any,index:number){
     this.update(url,'avatar')
     this.update_data_stan('is_cover')
+    this.update_elemnt_photo('.avatar',url)
+    this.update_elemnt_photo('.avatar_small',url)
     this.data[index]['is_cover']=true
   }
 
