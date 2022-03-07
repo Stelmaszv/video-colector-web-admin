@@ -27,6 +27,7 @@ import { SerieEditComponent } from './Components/admin-edit/serie-edit/serie-edi
 import { StarsEditComponent } from './Components/admin-edit/stars-edit/stars-edit.component';
 import { ProducentEditComponent } from './Components/admin-edit/producent-edit/producent-edit.component';
 import { AdminSeriesGaleryComponent } from './Components/admin-galery/admin-series-galery/admin-series-galery.component';
+import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin-galery/stars-admin-galery.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,11 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path: 'admin/star/galery/:id',
+    component: StarsAdminGaleryComponent,
+    canActivate:[AuthGuard]
+  },
+  {
     path: 'admin/movie/items/:id',
     component: AdminItemsMoviesComponent,
     canActivate:[AuthGuard]
@@ -99,6 +105,7 @@ const routes: Routes = [
     component: AdminMoviesStatsComponent,
     canActivate:[AuthGuard]
   },
+
   {
     path: 'admin/producents',
     component: AdminProducentComponent,
