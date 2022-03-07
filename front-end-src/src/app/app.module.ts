@@ -57,6 +57,7 @@ import { AdminStatsBaseComponent } from './Components/admin-stats/admin-stats-ba
 import { AdminStarsItemsComponent } from './Components/admin-items/admin-stars-items/admin-stars-items.component';
 import { SerieEditComponent } from './Components/admin-edit/serie-edit/serie-edit.component';
 import { StarsEditComponent } from './Components/admin-edit/stars-edit/stars-edit.component';
+import { ProducentEditComponent } from './Components/admin-edit/producent-edit/producent-edit.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { StarsEditComponent } from './Components/admin-edit/stars-edit/stars-edi
     AdminStatsBaseComponent,
     AdminStarsItemsComponent,
     SerieEditComponent,
-    StarsEditComponent
+    StarsEditComponent,
+    ProducentEditComponent
   ],
   imports: [
     AppRoutingModule,

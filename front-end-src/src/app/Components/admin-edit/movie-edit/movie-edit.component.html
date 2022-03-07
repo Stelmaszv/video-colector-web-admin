@@ -18,8 +18,10 @@
                 <label for="exampleInputPassword1">Description</label>
                 <textarea class="form-control" value="{{data.description}}" formControlName="description" placeholder="Enter Description"></textarea>
                 </div>
-                <label for="exampleInputPassword1">Date Relesed</label>
-                <input type="date" class="form-control" value="{{data.date_relesed}}" formControlName="date_relesed" id="show_name" aria-describedby="emailHelp" placeholder="Enter Date Relesed">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Date Relesed</label>
+                  <input type="date" class="form-control" value="{{data.date_relesed}}" formControlName="date_relesed" id="show_name" aria-describedby="emailHelp" placeholder="Enter Date Relesed">
+                </div>
                 <label for="serie">Serie</label>
                 <div class="form-group">
                   <select class="form-control" aria-label="Default select example" formControlName="serie" id="serie">
