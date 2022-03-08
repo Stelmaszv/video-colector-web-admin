@@ -14,6 +14,9 @@ export class AdminMoviesStatsComponent extends BaseIDComponent {
   public views_url='http://127.0.0.1:8000/admin/stats/movie/views/'
   public ratings_url='http://127.0.0.1:8000/admin/stats/movie/ratings/'
   public delete_like='http://127.0.0.1:8000/delete/like/'
+  public delete_dislike='http://127.0.0.1:8000/delete/dislike/'
+  public delete_ratings='http://127.0.0.1:8000/delete/rating/'
+  public delete_views='http://127.0.0.1:8000/delete/views/'
   protected override  auth=true
 
   public return_like_url():string
@@ -38,6 +41,18 @@ export class AdminMoviesStatsComponent extends BaseIDComponent {
 
   public return_like_delete_url(){
     return this.delete_like;
+  }
+
+  public return_dislike_delete_url(){
+    return this.delete_dislike;
+  }
+
+  public return_ratings_delete_url(){
+    return this.delete_ratings;
+  }
+
+  public return_views_delete_url(){
+    return this.delete_views;
   }
 
 }

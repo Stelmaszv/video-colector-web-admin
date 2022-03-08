@@ -164,6 +164,15 @@ class AbstractUpdateView(AbstractDeteilsView):
 class DeleteLikeView(AbstractUpdateView):
     Model = Likes
 
+class DeleteDisLikessView(AbstractUpdateView):
+    Model = DisLikess
+
+class DeleteRattingView(AbstractUpdateView):
+    Model = Rating
+
+class DeleteViewsView(AbstractUpdateView):
+    Model = Views
+
 class LargeResultsSetPagination(PageNumberPagination):
     page_size = 8
     page_size_query_param = 'page_size'
