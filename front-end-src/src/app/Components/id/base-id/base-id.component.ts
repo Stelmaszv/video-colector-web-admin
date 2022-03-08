@@ -102,7 +102,7 @@ export class BaseIDComponent implements OnInit {
         (error) => {
           console.log(error.statusText)
           if (error.statusText == 'Unauthorized'){
-            this.Router.navigate(['/logout'])
+            console.log('Unauthorized')
           }
         }
       );

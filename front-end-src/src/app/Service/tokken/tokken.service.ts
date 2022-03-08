@@ -25,9 +25,19 @@ export class TokkenService {
 
   }
 
+  public tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+
+  update_tokken(tokken:any){
+    localStorage.setItem('tokkenAccess',tokken)
+  }
+
   save_tokken(tokken:any){
     localStorage.setItem('tokkenAccess',tokken.access)
     localStorage.setItem('tokkenRefresh',tokken.refresh)
+    console.log(tokken.refresh)
   }
 
   if_isset_tokken(){

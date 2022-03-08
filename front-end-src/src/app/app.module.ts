@@ -61,6 +61,8 @@ import { ProducentEditComponent } from './Components/admin-edit/producent-edit/p
 import { AdminSeriesGaleryComponent } from './Components/admin-galery/admin-series-galery/admin-series-galery.component';
 import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin-galery/stars-admin-galery.component';
 import { ProducentAdminGaleryComponent } from './Components/admin-galery/producent-admin-galery/producent-admin-galery.component';
+import { BaseStatsComponentIDComponent } from './Components/admin-stats/base-stats-component-id/base-stats-component-id.component';
+
 
 @NgModule({
   declarations: [
@@ -120,7 +122,8 @@ import { ProducentAdminGaleryComponent } from './Components/admin-galery/produce
     ProducentEditComponent,
     AdminSeriesGaleryComponent,
     StarsAdminGaleryComponent,
-    ProducentAdminGaleryComponent
+    ProducentAdminGaleryComponent,
+    BaseStatsComponentIDComponent
   ],
   imports: [
     AppRoutingModule,
