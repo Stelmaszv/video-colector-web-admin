@@ -30,6 +30,7 @@ import { AdminSeriesGaleryComponent } from './Components/admin-galery/admin-seri
 import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin-galery/stars-admin-galery.component';
 import { ProducentAdminGaleryComponent } from './Components/admin-galery/producent-admin-galery/producent-admin-galery.component';
 import { AdminSeriesStatasComponent } from './Components/admin-stats/admin-series-statas/admin-series-statas.component';
+import { AdminStarsStatasComponent } from './Components/admin-stats/admin-stars-statas/admin-stars-statas.component';
 
 const routes: Routes = [
   {
@@ -115,6 +116,11 @@ const routes: Routes = [
   {
     path: 'admin/serie/stats/:id',
     component: AdminSeriesStatasComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/star/stats/:id',
+    component: AdminStarsStatasComponent,
     canActivate:[AuthGuard]
   },
   {

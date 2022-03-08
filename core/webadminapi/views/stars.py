@@ -8,13 +8,13 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, SqlAction)
+                                   AbstractUpdateView, SqlAction, AbstractStats)
 from core.webadminapi.filters import StarFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
                                           StarSlectSerializer, StarsSerializer,
-                                          StarsSerializerUpdate)
-from core.wideocollectorseader.models import Star
+                                          StarsSerializerUpdate, StatsSerializer, RatingsSerializer)
+from core.wideocollectorseader.models import Star, DisLikess, Views, Likes
 from videocolectorwebadmin.global_setings import photo_ext
 
 
@@ -117,3 +117,27 @@ class StarUpdateViewsView(StarAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.update_views()
+
+class AdminStatsStarLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Likes.objects.all()
+    Model = Star
+    place = 'likes'
+
+class AdminStatsStarDisLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = DisLikess.objects.all()
+    Model = Star
+    place = 'disLikes'
+
+class AdminStatsStarViews(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Views.objects.all()
+    Model = Star
+    place = 'views'
+
+class AdminStatsStareRatings(AbstractStats):
+    serializer_class = RatingsSerializer
+    queryset = Views.objects.all()
+    Model = Star
+    place = 'ratings'

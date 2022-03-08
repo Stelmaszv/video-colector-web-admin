@@ -68,7 +68,11 @@ from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarUpdateView,
                                           StarView,
                                           StarUpdateViewsView,
-                                          AdminStarView)
+                                          AdminStarView,
+                                          AdminStatsStarViews,
+                                          AdminStatsStarDisLiks,
+                                          AdminStatsStarLiks,
+                                          AdminStatsStareRatings)
 from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
 
 app_name = 'webadminapi'
@@ -77,33 +81,39 @@ from django.urls import path
 urlpatterns = [
     #item
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='starsitems'),
+
+    # stats Star
+    path('admin/stats/star/views/<int:pk>/', AdminStatsStarViews.as_view(), name='star_stats_views'),
+    path('admin/stats/star/disliks/<int:pk>/', AdminStatsStarDisLiks.as_view(), name='star_stats_disliks'),
+    path('admin/stats/star/laiks/<int:pk>/', AdminStatsStarLiks.as_view(), name='star_stats_laiks'),
+    path('admin/stats/star/ratings/<int:pk>/', AdminStatsStareRatings.as_view(), name='star_stats_ratings'),
     # stats Series
     path('admin/stats/serie/views/<int:pk>/', AdminStatsSerieViews.as_view(), name='series_stats_views'),
     path('admin/stats/serie/disliks/<int:pk>/', AdminStatsSerieDisLiks.as_view(), name='series_stats_disliks'),
     path('admin/stats/serie/laiks/<int:pk>/', AdminStatsSerieLiks.as_view(), name='series_stats_laiks'),
     path('admin/stats/serie/ratings/<int:pk>/', AdminStatsSerieRatings.as_view(), name='series_stats_ratings'),
     #stats Movies
-    path('admin/stats/movie/views/<int:pk>/',        AdminStatsMovieViews.as_view(), name='deletePhotos'),
-    path('admin/stats/movie/disliks/<int:pk>/',      AdminStatsMovieDisLiks.as_view(), name='deletePhotos'),
-    path('admin/stats/movie/laiks/<int:pk>/',        AdminStatsMovieLiks.as_view(), name='deletePhotos'),
-    path('admin/stats/movie/ratings/<int:pk>/',        AdminStatsMovieRatings.as_view(), name='deletePhotos'),
+    path('admin/stats/movie/views/<int:pk>/',        AdminStatsMovieViews.as_view(), name='movie_stats_views'),
+    path('admin/stats/movie/disliks/<int:pk>/',      AdminStatsMovieDisLiks.as_view(), name='movie_disliks_views'),
+    path('admin/stats/movie/laiks/<int:pk>/',        AdminStatsMovieLiks.as_view(), name='movie_laiks_views'),
+    path('admin/stats/movie/ratings/<int:pk>/',        AdminStatsMovieRatings.as_view(), name='movie_ratings_views'),
     #galery
     path('admin/galery/movie/delete/<int:pk>/',        AdminGaleryDelete.as_view(), name='deletePhotos'),
     path('admin/galery/generate/moviecap/<int:pk>/',   AdminGaleryGenerateMoviecap.as_view(), name='deletePhotos'),
     #admin
-    path('admin/movies',                         AdminMoviesView.as_view(), name='adminmoviees'),
-    path('admin/producent',                      AdminProducentsView.as_view(), name='adminprodicent'),
-    path('admin/serie',                          AdminSerieView.as_view(), name='adminseries'),
-    path('admin/stars',                          AdminStarView.as_view(), name='adminstars'),
-    path('admin/tags',                           AdminTagView.as_view(), name='admintags'),
+    path('admin/movies',                          AdminMoviesView.as_view(), name='adminmoviees'),
+    path('admin/producent',                       AdminProducentsView.as_view(), name='adminprodicent'),
+    path('admin/serie',                           AdminSerieView.as_view(), name='adminseries'),
+    path('admin/stars',                           AdminStarView.as_view(), name='adminstars'),
+    path('admin/tags',                            AdminTagView.as_view(), name='admintags'),
     #movies
-    path('movies',                               MoviesView.as_view(), name='movies'),
-    path('movieupdata/<int:pk>/',                MovieUpdataView.as_view(), name='movieupdate'),
-    path('movies',                               MoviesView.as_view(), name='movies'),
-    path('movie/<int:pk>/',                      MovieDeteilsView.as_view(), name='movie'),
-    path('moviephotosview/<int:pk>/',            MoviePhotosView.as_view(), name='moviephotosview'),
-    path('movieswithstars/<int:pk>/',            MoviesWithStarsView.as_view(), name='moviessithstars'),
-    path('movienextinseries/<int:pk>/',          MovieNextInSeriesView.as_view(), name='movienextinseries'),
+    path('movies',                                MoviesView.as_view(), name='movies'),
+    path('movieupdata/<int:pk>/',                 MovieUpdataView.as_view(), name='movieupdate'),
+    path('movies',                                MoviesView.as_view(), name='movies'),
+    path('movie/<int:pk>/',                       MovieDeteilsView.as_view(), name='movie'),
+    path('moviephotosview/<int:pk>/',             MoviePhotosView.as_view(), name='moviephotosview'),
+    path('movieswithstars/<int:pk>/',             MoviesWithStarsView.as_view(), name='moviessithstars'),
+    path('movienextinseries/<int:pk>/',           MovieNextInSeriesView.as_view(), name='movienextinseries'),
     path('moviemextwithstar/<int:pk>/',           MovieNextWithStarView.as_view(), name='moviemextwithstar'),
     #errors
     path('movieaddtorating/<int:pk>/',            MovieAddToRatingView.as_view(), name='movieaddtorating'),
@@ -126,9 +136,9 @@ urlpatterns = [
     path('series',                               SerieView.as_view(), name='series'),
     path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),
     path('serie/<int:pk>/',                      SerieDeteilsView.as_view(), name='serie'),
-    path('serie/updata/<int:pk>/',                SerieUpdataView.as_view(), name='serieupdata'),
+    path('serie/updata/<int:pk>/',               SerieUpdataView.as_view(), name='serieupdata'),
     path('serie/<int:pk>/',                      SerieDeteilsView.as_view(), name='serie'),
-    path('series/photo/<int:pk>/',            SeriesPhotosView.as_view(), name='seriesphotoview'),
+    path('series/photo/<int:pk>/',               SeriesPhotosView.as_view(), name='seriesphotoview'),
     path('serieupdata/<int:pk>/',                SerieUpdataView.as_view(), name='serieupdata'),
     path('seriemoviesview/<int:pk>/',            SerieMoviesView.as_view(), name='seriemoviesview'),
     path('seriesrandommovie/<int:pk>/',          SeriesRandomMovieView.as_view(), name='seriesrandommovie'),
@@ -142,7 +152,7 @@ urlpatterns = [
     #producent
     path('producents',                           ProducentsView.as_view(), name='producents'),
     path('producent/<int:pk>/',                  ProducentsDeteilsView.as_view(), name='producent'),
-    path('producent/updata/<int:pk>/',            ProducentsUpdataView.as_view(), name='producentupdata'),
+    path('producent/updata/<int:pk>/',           ProducentsUpdataView.as_view(), name='producentupdata'),
     path('producentsmovies/<int:pk>/',           ProducentsMoviesView.as_view(), name='producentsmoviesview'),
     path('producentsstar/<int:pk>/',             ProducentStarsView.as_view(), name='producentsstarsview'),
     path('producent/photos/<int:pk>/',           ProducentsPhotosView.as_view(), name='producentsphotosview'),
