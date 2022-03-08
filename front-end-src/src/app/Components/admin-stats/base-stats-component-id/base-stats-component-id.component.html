@@ -1,1 +1,80 @@
-<p>base-stats-component-id works!</p>
+<app-navabr></app-navabr>
+<app-abstract-admin-navbar id="{{data.id}}"  title="{{data.name}}" place="movie"></app-abstract-admin-navbar>
+<div class="container procent-section">
+    <H2>{{data.name}}</H2>
+    <div class="row">
+        <div class="col">
+            <div class="likes"><i class="icon fas fa-thumbs-up"></i><span class="likesJS">{{data.likes.length | bigInt}}</span></div>
+        </div>
+        <div class="col">
+            <div class="procent_likes">
+                <div class="like-procent">
+                    <div class="good" [ngStyle]="{'width': good_procent}"></div>
+                    <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="dislikes"><i class="icon fas fa-thumbs-down"></i> <span class="dislikesJS">{{data.disLikes.length | bigInt}}</span></div>
+        </div>
+    </div>
+    <div class="avg-and-views">
+        <div class="row">
+            <div class="col">
+                <i class="fas fa-eye likes"></i> <span class="stats_item views_js"><span class="viewsJS">{{data.views.length | bigInt}}</span></span>
+            </div>
+            <div class="col">
+                <i class="fas fa-star dislikes"></i> <span class="stats_item ratting_js">{{data.ratings.length | bigInt}}</span> ({{data.avg_rating}})
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tabs_nav sticky-top tabs_sticky">
+    <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item galery_tab_js nav_tab" name="galery" role="presentation">
+            <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
+                    data-bs-target="#likes" type="button" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">Likes
+            </button>
+        </li>
+        <li class="nav-item movies_series_tab nav_tab" name="movies_series" role="presentation">
+            <button class="nav-link all-series-name" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#dislikes" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="false">Dis Likes
+            </button>
+        </li>
+        <li class="nav-item movies_with_stars_tab nav_tab" name="movies_with_stars" role="presentation">
+            <button class="nav-link all-with-star-name" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#views" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">Views 
+            </button>
+        </li>
+        <li class="nav-item ratings nav_tab" name="ratings" role="presentation">
+            <button class="nav-link all-with-star-name" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#ratings" type="button" role="tab" aria-controls="ratings"
+                    aria-selected="false">Ratings 
+            </button>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <div class="tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade galery_tab_js tab_content" id="likes" type="Galery" role="tabpanel" aria-labelledby="pills-galery-tab">
+            <app-admin-stats-base url="{{return_like_url()}}" delete_url="{{return_like_delete_url()}}" selector=".likesJS"></app-admin-stats-base> 
+        </div>
+
+        <div class="tab-pane fade movies_series_tab tab_content serie-movies" id="dislikes" role="tabpanel" type="movies_in_series" aria-labelledby="pills-home-tab">
+            <app-admin-stats-base url="{{return_dislike_url()}}" delete_url="{{return_dislike_delete_url()}}" selector=".dislikesJS"></app-admin-stats-base>
+        </div>
+
+        <div class="tab-pane fade movies_with_stars_tab tab_content" id="views" role="tabpanel" type="all_movies_with_star" aria-labelledby="pills-profile-tab">
+            <app-admin-stats-base url="{{return_views_url()}}" delete_url="{{return_views_delete_url()}}" selector=".viewsJS"></app-admin-stats-base>  
+        </div>
+        <div class="tab-pane fade movies_with_stars_tab tab_content" id="ratings" role="tabpanel" type="ratings" aria-labelledby="pills-profile-tab">
+            <app-admin-stats-base url="{{return_ratings_url()}}" rateing="1" delete_url="{{return_ratings_delete_url()}}" selector=".ratting_js"></app-admin-stats-base>  
+        </div>
+        
+    </div>
+</div>
