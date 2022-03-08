@@ -37,7 +37,11 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentsUpdataView,
                                               ProducentsView,
                                               ProducentUpdateViewsView,
-                                              AdminProducentsView)
+                                              AdminProducentsView,
+                                              AdminStatsProducentViews,
+                                              AdminStatsProducentDisLiks,
+                                              AdminStatsProducentLiks,
+                                              AdminStatsProducentRatings)
 from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
@@ -82,6 +86,11 @@ urlpatterns = [
     #item
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='starsitems'),
 
+    # stats Star
+    path('admin/stats/producent/views/<int:pk>/', AdminStatsProducentViews.as_view(), name='producent_stats_views'),
+    path('admin/stats/producent/disliks/<int:pk>/', AdminStatsProducentDisLiks.as_view(), name='producent_stats_disliks'),
+    path('admin/stats/producent/laiks/<int:pk>/', AdminStatsProducentLiks.as_view(), name='producent_stats_laiks'),
+    path('admin/stats/producent/ratings/<int:pk>/', AdminStatsProducentRatings.as_view(), name='producent_stats_ratings'),
     # stats Star
     path('admin/stats/star/views/<int:pk>/', AdminStatsStarViews.as_view(), name='star_stats_views'),
     path('admin/stats/star/disliks/<int:pk>/', AdminStatsStarDisLiks.as_view(), name='star_stats_disliks'),

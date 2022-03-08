@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseIDComponent } from '../../id/base-id/base-id.component';
+import { BaseGaleryAdminComponent } from '../base-galery-admin/base-galery-admin.component';
 
 @Component({
   selector: 'app-admin-series-galery',
-  templateUrl: './admin-series-galery.component.html',
+  templateUrl: '../base-galery-admin/base-galery-admin.component.html',
   styleUrls: ['./admin-series-galery.component.scss']
 })
-export class AdminSeriesGaleryComponent extends BaseIDComponent {
-  public generate_stan=false
+export class AdminSeriesGaleryComponent extends BaseGaleryAdminComponent {
+  public override generate_stan=false
   public override url = 'http://127.0.0.1:8000/serie/' 
-  public edit_url='http://127.0.0.1:8000/serie/updata/'
-  public galery_url='http://127.0.0.1:8000/series/photo/'
+  public override edit_url='http://127.0.0.1:8000/serie/updata/'
+  public override galery_url='http://127.0.0.1:8000/series/photo/'
 }

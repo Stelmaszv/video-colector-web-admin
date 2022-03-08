@@ -9,15 +9,15 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView,
                                    LargeResultsSetPagination,
-                                   SqlAction)
+                                   SqlAction, AbstractStats)
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerSeries,
                                           ProducentsSerializer,
                                           ProducentsSerializerUpdate,
                                           ProducetFormSeralizer,
-                                          SerieSerializer, StarsSerializer)
-from core.wideocollectorseader.models import Producents, Serie
+                                          SerieSerializer, StarsSerializer, StatsSerializer, RatingsSerializer)
+from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views
 from rest_framework.pagination import PageNumberPagination
 
 
@@ -162,3 +162,27 @@ class ProducentAddToDisLikeView(ProducentAddToFavoriteView):
 class ProducentUpdateViewsView(ProducentAddToFavoriteView):
     def exc_action_before_query(self):
         self.update_views()
+
+class AdminStatsProducentLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Likes.objects.all()
+    Model = Producents
+    place = 'likes'
+
+class AdminStatsProducentDisLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = DisLikess.objects.all()
+    Model = Producents
+    place = 'disLikes'
+
+class AdminStatsProducentViews(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Views.objects.all()
+    Model = Producents
+    place = 'views'
+
+class AdminStatsProducentRatings(AbstractStats):
+    serializer_class = RatingsSerializer
+    queryset = Views.objects.all()
+    Model = Producents
+    place = 'ratings'
