@@ -52,7 +52,11 @@ from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieUpdataView,
                                           SerieView,
                                           SerieUpdateViewView,
-                                          AdminSerieView)
+                                          AdminSerieView,
+                                          AdminStatsSerieViews,
+                                          AdminStatsSerieDisLiks,
+                                          AdminStatsSerieLiks,
+                                          AdminStatsSerieRatings)
 from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarAddToFavoriteView,
                                           StarAddToLikeView,
@@ -73,7 +77,12 @@ from django.urls import path
 urlpatterns = [
     #item
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='starsitems'),
-    #stats
+    # stats Series
+    path('admin/stats/serie/views/<int:pk>/', AdminStatsSerieViews.as_view(), name='series_stats_views'),
+    path('admin/stats/serie/disliks/<int:pk>/', AdminStatsSerieDisLiks.as_view(), name='series_stats_disliks'),
+    path('admin/stats/serie/laiks/<int:pk>/', AdminStatsSerieLiks.as_view(), name='series_stats_laiks'),
+    path('admin/stats/serie/ratings/<int:pk>/', AdminStatsSerieRatings.as_view(), name='series_stats_ratings'),
+    #stats Movies
     path('admin/stats/movie/views/<int:pk>/',        AdminStatsMovieViews.as_view(), name='deletePhotos'),
     path('admin/stats/movie/disliks/<int:pk>/',      AdminStatsMovieDisLiks.as_view(), name='deletePhotos'),
     path('admin/stats/movie/laiks/<int:pk>/',        AdminStatsMovieLiks.as_view(), name='deletePhotos'),

@@ -52,7 +52,6 @@ class StarsPhotoView(AbstractGenericsAPIViewExtended):
                 photo.append(
                     {"url"  :Model.dir+'\\photo\\DATA\\' + photo_item}
                 )
-        print(Model)
         for Movie in Model.movies.all():
             list=os.listdir(Movie.dir)
             for item in list:

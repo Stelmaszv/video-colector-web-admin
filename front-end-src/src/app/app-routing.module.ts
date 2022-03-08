@@ -29,6 +29,7 @@ import { ProducentEditComponent } from './Components/admin-edit/producent-edit/p
 import { AdminSeriesGaleryComponent } from './Components/admin-galery/admin-series-galery/admin-series-galery.component';
 import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin-galery/stars-admin-galery.component';
 import { ProducentAdminGaleryComponent } from './Components/admin-galery/producent-admin-galery/producent-admin-galery.component';
+import { AdminSeriesStatasComponent } from './Components/admin-stats/admin-series-statas/admin-series-statas.component';
 
 const routes: Routes = [
   {
@@ -111,7 +112,11 @@ const routes: Routes = [
     component: AdminMoviesStatsComponent,
     canActivate:[AuthGuard]
   },
-
+  {
+    path: 'admin/serie/stats/:id',
+    component: AdminSeriesStatasComponent,
+    canActivate:[AuthGuard]
+  },
   {
     path: 'admin/producents',
     component: AdminProducentComponent,

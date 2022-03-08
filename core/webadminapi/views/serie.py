@@ -12,15 +12,15 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView,
                                    Authentication,
-                                   SqlAction)
+                                   SqlAction, AbstractStats)
 from core.webadminapi.filters import MovieFilter, SerieFilter
 from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           PhotoSerializerSeries,
                                           SerieSerializer,
                                           SerieSerializerUpdate,
                                           SerieSlectSerializer,
-                                          StarsSerializer)
-from core.wideocollectorseader.models import Serie
+                                          StarsSerializer, StatsSerializer, RatingsSerializer)
+from core.wideocollectorseader.models import Serie, Likes, DisLikess, Views
 from videocolectorwebadmin.global_setings import photo_ext
 from rest_framework.pagination import PageNumberPagination
 
@@ -190,3 +190,27 @@ class SerieUpdateViewView(SerieAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.update_views()
+
+class AdminStatsSerieLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Likes.objects.all()
+    Model = Serie
+    place = 'likes'
+
+class AdminStatsSerieDisLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = DisLikess.objects.all()
+    Model = Serie
+    place = 'disLikes'
+
+class AdminStatsSerieViews(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Views.objects.all()
+    Model = Serie
+    place = 'views'
+
+class AdminStatsSerieRatings(AbstractStats):
+    serializer_class = RatingsSerializer
+    queryset = Views.objects.all()
+    Model = Serie
+    place = 'ratings'
