@@ -11,5 +11,14 @@ export class AdminStatsBaseComponent extends BaseListComponent {
   protected override  auth=true
   @Input() public override url='';
   @Input() public rateing='';
-  
+  @Input() public delete_url='';
+
+  public delete_el(index:number,id:number) {
+    this.data.splice(index,1)
+    this.httpService.delete(this.delete_url+id).subscribe(
+      respanse=>{
+        console.log(respanse)
+      }
+    )
+  }
 }

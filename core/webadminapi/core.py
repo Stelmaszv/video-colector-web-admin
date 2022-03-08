@@ -161,6 +161,9 @@ class AbstractUpdateView(AbstractDeteilsView):
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class DeleteLikeView(AbstractUpdateView):
+    Model = Likes
+
 class LargeResultsSetPagination(PageNumberPagination):
     page_size = 8
     page_size_query_param = 'page_size'
