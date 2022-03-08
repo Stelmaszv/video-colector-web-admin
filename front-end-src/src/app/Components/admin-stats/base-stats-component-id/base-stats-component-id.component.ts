@@ -18,6 +18,7 @@ export class BaseStatsComponentIDComponent extends BaseIDComponent {
   public delete_ratings='http://127.0.0.1:8000/delete/rating/'
   public delete_views='http://127.0.0.1:8000/delete/views/'
   protected override  auth=true
+  public section=''
 
   public return_like_url():string
   {

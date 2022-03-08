@@ -13,6 +13,6 @@ export class AdminSeriesStatasComponent extends BaseStatsComponentIDComponent {
   public override disliks_url='http://127.0.0.1:8000/admin/stats/serie/disliks/' 
   public override views_url='http://127.0.0.1:8000/admin/stats/serie/views/'
   public override ratings_url='http://127.0.0.1:8000/admin/stats/serie/ratings/'
-
+  public override section='serie'
 }
 
