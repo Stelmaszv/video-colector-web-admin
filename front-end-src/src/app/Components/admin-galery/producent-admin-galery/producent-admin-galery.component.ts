@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseIDComponent } from '../../id/base-id/base-id.component';
+import { BaseGaleryAdminComponent } from '../base-galery-admin/base-galery-admin.component';
 
 @Component({
   selector: 'app-producent-admin-galery',
-  templateUrl: './producent-admin-galery.component.html',
+  templateUrl: '../base-galery-admin/base-galery-admin.component.html',
   styleUrls: ['./producent-admin-galery.component.scss']
 })
-export class ProducentAdminGaleryComponent extends BaseIDComponent {
-  public generate_stan=false
+export class ProducentAdminGaleryComponent extends BaseGaleryAdminComponent {
+  public override generate_stan=false
   public override url = 'http://127.0.0.1:8000/producent/' 
-  public edit_url='http://127.0.0.1:8000/producent/updata/'
-  public galery_url='http://127.0.0.1:8000/producent/photos/'
+  public override edit_url='http://127.0.0.1:8000/producent/updata/'
+  public override galery_url='http://127.0.0.1:8000/producent/photo/'
+  public override section='producent'
 }

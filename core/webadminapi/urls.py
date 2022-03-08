@@ -140,7 +140,7 @@ urlpatterns = [
     path('staraddtodislike/<int:pk>/',           StarAddToDisLikeView.as_view(), name='staraddtodislike'),
     path('starupdateviews/<int:pk>/',            StarUpdateViewsView.as_view(), name='starupdatestar'),
     path('stars_form',                           StarSelectOptionView.as_view(), name='series_select'),
-    path('stars/photo/<int:pk>/',                 StarsPhotoView.as_view(), name='starsphoto'),
+    path('stars/photo/<int:pk>',                 StarsPhotoView.as_view(), name='starsphoto'),
     #series
     path('series',                               SerieView.as_view(), name='series'),
     path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),

@@ -11,4 +11,5 @@ export class BaseGaleryAdminComponent extends BaseIDComponent {
   public override url = '' 
   public edit_url=''
   public galery_url=''
+  public section=''
 }
