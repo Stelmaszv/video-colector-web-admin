@@ -44,7 +44,8 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               AdminStatsProducentViews,
                                               AdminStatsProducentDisLiks,
                                               AdminStatsProducentLiks,
-                                              AdminStatsProducentRatings, ProducentSeriesView, ProducentAddSerie)
+                                              AdminStatsProducentRatings, ProducentSeriesView, ProducentAddSerie,
+                                              ProducentTagsView, ProducentAddTag)
 from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
@@ -92,10 +93,12 @@ urlpatterns = [
     path('movie/tags/<int:pk>/',                  MovieTagsView.as_view(), name='items_movie_tags'),
     path('series/tags/<int:pk>/',                 SeriesTagsView.as_view(), name='items_series_tags'),
     path('star/tags/<int:pk>/',                   StarTagsView.as_view(), name='items_star_tags'),
+    path('producent/tags/<int:pk>/',              ProducentTagsView.as_view(), name='items_star_tags'),
     path('producent/series/<int:pk>/',            ProducentSeriesView.as_view(), name='items_producent_series'),
     path('add/serie/producent/<int:pk>/',         ProducentAddSerie.as_view(), name='add_star_movie'),
     path('add/star/movie/<int:pk>/',              MovieAddStar.as_view(), name='add_star_movie'),
     path('add/tag/movie/<int:pk>/',               MovieAddTag.as_view(), name='add_tag_movie'),
+    path('add/tag/producent/<int:pk>/',           ProducentAddTag.as_view(), name='add_tag_Producent'),
     path('add/tag/serie/<int:pk>/',               SerieAddTag.as_view(), name='add_tag_series'),
     path('add/tag/star/<int:pk>/',                AddStarTag.as_view(), name='add_tag_series'),
     # stats Star

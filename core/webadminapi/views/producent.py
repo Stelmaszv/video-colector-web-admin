@@ -16,7 +16,8 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           ProducentsSerializer,
                                           ProducentsSerializerUpdate,
                                           ProducetFormSeralizer,
-                                          SerieSerializer, StarsSerializer, StatsSerializer, RatingsSerializer)
+                                          SerieSerializer, StarsSerializer, StatsSerializer, RatingsSerializer,
+                                          TagsSerializer)
 from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views
 from rest_framework.pagination import PageNumberPagination
 
@@ -199,3 +200,16 @@ class ProducentAddSerie(AddRelation):
     queryset = []
     Model = Producents
     object_index = 'series'
+
+class ProducentTagsView(AbstractItems):
+    serializer_class = TagsSerializer
+    queryset = []
+    Model = Producents
+    place = 'tags'
+
+class ProducentAddTag(AddRelation):
+    serializer_class = ProducentsSerializer
+    queryset = []
+    Model = Producents
+    object_index='tags'
+
