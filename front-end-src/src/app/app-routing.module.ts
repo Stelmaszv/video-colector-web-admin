@@ -33,6 +33,7 @@ import { AdminSeriesStatasComponent } from './Components/admin-stats/admin-serie
 import { AdminStarsStatasComponent } from './Components/admin-stats/admin-stars-statas/admin-stars-statas.component';
 import { ProducentStarsComponent } from './Components/stars-components/producent-stars/producent-stars.component';
 import { AdminProducenrStatsComponent } from './Components/admin-stats/admin-producenr-stats/admin-producenr-stats.component';
+import { AdminItemsSeriesComponent } from './Components/admin-items/admin-items-series/admin-items-series.component';
 
 const routes: Routes = [
   {
@@ -108,6 +109,11 @@ const routes: Routes = [
   {
     path: 'admin/movie/items/:id',
     component: AdminItemsMoviesComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/serie/items/:id',
+    component: AdminItemsSeriesComponent,
     canActivate:[AuthGuard]
   },
   {

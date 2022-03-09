@@ -12,14 +12,14 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView,
                                    Authentication,
-                                   SqlAction, AbstractStats, AbstractItems)
+                                   SqlAction, AbstractStats, AbstractItems, AddRelation)
 from core.webadminapi.filters import MovieFilter, SerieFilter
 from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           PhotoSerializerSeries,
                                           SerieSerializer,
                                           SerieSerializerUpdate,
                                           SerieSlectSerializer,
-                                          StarsSerializer, StatsSerializer, RatingsSerializer)
+                                          StarsSerializer, StatsSerializer, RatingsSerializer, TagsSerializer)
 from core.wideocollectorseader.models import Serie, Likes, DisLikess, Views
 from videocolectorwebadmin.global_setings import photo_ext
 from rest_framework.pagination import PageNumberPagination
@@ -214,4 +214,16 @@ class AdminStatsSerieRatings(AbstractStats):
     queryset = Views.objects.all()
     Model = Serie
     place = 'ratings'
+
+class SeriesTagsView(AbstractItems):
+    serializer_class = TagsSerializer
+    queryset = []
+    Model = Serie
+    place = 'tags'
+
+class SerieAddTag(AddRelation):
+    serializer_class = MoviesSerializer
+    queryset = Serie.objects
+    Model = Serie
+    object_index='tags'
 
