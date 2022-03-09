@@ -5,9 +5,6 @@
                 Add Star
             </button>
         </div>
-        <div class="col">
-            <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
-        </div>
     </div>
 </div>
 
@@ -24,7 +21,7 @@
           <th scope="row">{{el.id}}</th>
           <td>{{el.name}}</td>
           <td></td>
-          <td (click)="item_remove(i)"><a class="item"><i class="fas fa-trash icon"></i></a></td>
+          <td (click)="item_remove(i,el.id)"><a class="item"><i class="fas fa-trash icon"></i></a></td>
         </tr>
       </tbody>
 </table>
@@ -44,8 +41,8 @@
         </div>
         <div class="modal-body">
         <select class="form-select" multiple aria-label="multiple select example">
-            <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star)" value="{{star.id}}" [hidden]="!if_exist_in_list(star.id)" selected>{{star.name}}</option>
-            <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star)" value="{{star.id}}" [hidden]="if_exist_in_list(star.id)" >{{star.name}}</option>
+            <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star,star.id)" value="{{star.id}}" [hidden]="!if_exist_in_list(star.id)" selected>{{star.name}}</option>
+            <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star,star.id)" value="{{star.id}}" [hidden]="if_exist_in_list(star.id)" >{{star.name}}</option>
         </select>
         </div>
         <div class="modal-footer">

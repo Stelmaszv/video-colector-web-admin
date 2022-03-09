@@ -7,7 +7,10 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView,AbstractStats,AbstractItems)
+                                   AbstractUpdateView,
+                                   AbstractStats,
+                                   AbstractItems,
+                                   AddRelation)
 from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
@@ -226,3 +229,15 @@ class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate
     queryset = Movie.objects
     Model = Movie
+
+class MovieAddStar(AddRelation):
+    serializer_class = MoviesSerializer
+    queryset = Movie.objects
+    Model = Movie
+    object_index='stars'
+
+class MovieAddTag(AddRelation):
+    serializer_class = MoviesSerializer
+    queryset = Movie.objects
+    Model = Movie
+    object_index='tags'

@@ -258,5 +258,24 @@ class AbstractStats(AbstractGenericsAPIViewExtended):
         Model = self.get_object(self.kwargs.get("pk"))
         return getattr(Model,self.place).all()
 
+class AddRelation(AbstractDeteilsView):
+    serializer_class = []
+    queryset = []
+    Model = None
+    object_index=''
+
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        star = self.request.GET.get('add')
+        delete=self.request.GET.get('delete')
+        if star is not None:
+            getattr(Model,self.object_index).add(star)
+        if delete is not None:
+            getattr(Model,self.object_index).remove(delete)
+        Model.save()
+        return Model
+
+
+
 class AbstractItems(AbstractStats):
     pass

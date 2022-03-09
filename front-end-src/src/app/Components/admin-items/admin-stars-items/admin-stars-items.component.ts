@@ -11,9 +11,10 @@ export class AdminStarsItemsComponent extends BaseListComponent {
   public override url: string="http://127.0.0.1:8000/movie/stars/";
   public add_url: string="http://127.0.0.1:8000/movie/stars/";
   public remowe_url: string="http://127.0.0.1:8000/movie/stars/";
+  private item_url = "http://127.0.0.1:8000/add/star/movie/"
   protected override auth: any=true;
   public list :any[]=[]
-  @Input() id=1
+  @Input() id:any=0
 
   public override on_before_load_data():void
   {
@@ -22,45 +23,28 @@ export class AdminStarsItemsComponent extends BaseListComponent {
     this.url=this.url+this.id
   }
 
-  protected override on_after_set_results(response:any){
+  protected override on_after_set_results(response:any)
+  {
     for (let el of response['results']){
       this.list.push(el)
     }
-    let json={
-      'stars':this.list
-    }
-    this.httpService.put_url('http://127.0.0.1:8000/movieupdata/1/',json).subscribe(
-      response=>{
-        console.log(response)
-      }
-    )
   }
 
-
-  public add_item(star:any){
+  public add_item(star:any,id:number)
+  {
     if (!this.if_exist(star,this.list)){
       this.list.push(star)
+        this.httpService.get_url_auth(this.item_url+this.id+'/?add='+star['id']).subscribe(response=>{
+          console.log(response)
+        }
+      )
     }
   }
 
-  public item_remove(index:number){
+  public item_remove(index:number,id:number)
+  {
     this.list.splice(index,1)
-  }
-
-  private set_data_to_send(){
-    let data=[]
-    for (let el of this.list){
-      data.push(el['id'])
-    }
-    return data
-  }
-  
-  public save(){
-    let json={
-      'stars':this.set_data_to_send()
-    }
-    this.httpService.put_url('http://127.0.0.1:8000/movieupdata/'+this.id+'/',json).subscribe(
-      response=>{
+    this.httpService.get_url_auth(this.item_url+this.id+'/?delete='+id).subscribe(response=>{
         console.log(response)
       }
     )
