@@ -68,6 +68,7 @@ import { BaseGaleryAdminComponent } from './Components/admin-galery/base-galery-
 import { AdminProducenrStatsComponent } from './Components/admin-stats/admin-producenr-stats/admin-producenr-stats.component';
 import { BaseItemListComponent } from './Components/admin-items/base-item-list/base-item-list.component';
 import { BaseItemsSectionsComponent } from './Components/admin-items/base-items-sections/base-items-sections.component';
+import { AdminTagsItemsComponent } from './Components/admin-items/admin-tags-items/admin-tags-items.component';
 
 
 @NgModule({
@@ -135,7 +136,8 @@ import { BaseItemsSectionsComponent } from './Components/admin-items/base-items-
     BaseGaleryAdminComponent,
     AdminProducenrStatsComponent,
     BaseItemListComponent,
-    BaseItemsSectionsComponent
+    BaseItemsSectionsComponent,
+    AdminTagsItemsComponent
   ],
   imports: [
     AppRoutingModule,

@@ -14,6 +14,7 @@ export class BaseItemListComponent extends BaseListComponent {
   protected item_url = ""
   protected override auth: any=true;
   public list :any[]=[]
+  public div_id=""
   public add_section=''
   @Input() id:any=0
 
@@ -26,6 +27,7 @@ export class BaseItemListComponent extends BaseListComponent {
 
   protected override on_after_set_results(response:any)
   {
+    console.log('Hereeee',response['results'].tags)
     for (let el of response['results']){
       this.list.push(el)
     }

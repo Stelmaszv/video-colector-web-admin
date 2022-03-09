@@ -23,7 +23,10 @@ from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            AdminStatsMovieDisLiks,
                                            AdminStatsMovieViews,
                                            AdminStatsMovieRatings,
-                                           MovieStarsView, MovieAddStar, MovieAddTag)
+                                           MovieStarsView,
+                                           MovieAddStar,
+                                           MovieAddTag,
+                                           MovieTagsView)
 from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentAddToFavoriteView,
                                               ProducentAddToLikeView,
@@ -85,6 +88,7 @@ from django.urls import path
 urlpatterns = [
     #item
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='items_movie_stars'),
+    path('movie/tags/<int:pk>/',                  MovieTagsView.as_view(), name='items_movie_tags'),
     path('add/star/movie/<int:pk>/',              MovieAddStar.as_view(), name='add_star_movie'),
     path('add/tag/movie/<int:pk>/',               MovieAddTag.as_view(), name='add_tag_movie'),
     # stats Star

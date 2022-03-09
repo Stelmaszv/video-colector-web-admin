@@ -3,7 +3,7 @@ import { BaseItemsSectionsComponent } from '../base-items-sections/base-items-se
 
 @Component({
   selector: 'app-admin-items-movies',
-  templateUrl: './admin-items-movies.component.html',
+  templateUrl: '../base-items-sections/base-items-sections.component.html',
   styleUrls: ['./admin-items-movies.component.scss']
 })
 export class AdminItemsMoviesComponent extends BaseItemsSectionsComponent {

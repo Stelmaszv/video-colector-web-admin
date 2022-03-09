@@ -11,7 +11,7 @@ export class BaseItemsSectionsComponent extends BaseIDComponent {
   public override url = 'http://127.0.0.1:8000/movie/' 
   protected override  auth=true
   protected sections={
-    'stars'  : true,
+    'stars'  : false,
     'tags'   : false,
     'series' : false,
   }

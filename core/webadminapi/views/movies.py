@@ -17,7 +17,8 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
                                           StatsSerializer,
                                           RatingsSerializer,
-                                          StarsSerializer)
+                                          StarsSerializer,
+                                          TagsSerializer)
 from core.wideocollectorseader.models import Movie,Likes,DisLikess,Views,Star
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
@@ -224,6 +225,12 @@ class MovieStarsView(AbstractItems):
     queryset = Movie.objects
     Model = Movie
     place = 'stars'
+
+class MovieTagsView(AbstractItems):
+    serializer_class = TagsSerializer
+    queryset = []
+    Model = Movie
+    place = 'tags'
 
 class MovieUpdataView(AbstractUpdateView):
     serializer_class = MoviesSerializerUpdate
