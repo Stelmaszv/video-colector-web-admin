@@ -35,6 +35,7 @@ import { ProducentStarsComponent } from './Components/stars-components/producent
 import { AdminProducenrStatsComponent } from './Components/admin-stats/admin-producenr-stats/admin-producenr-stats.component';
 import { AdminItemsSeriesComponent } from './Components/admin-items/admin-items-series/admin-items-series.component';
 import { AdminItemsStarsComponent } from './Components/admin-items/admin-items-stars/admin-items-stars.component';
+import { AdminItemsProducentComponent } from './Components/admin-items/admin-items-producent/admin-items-producent.component';
 
 const routes: Routes = [
   {
@@ -120,6 +121,11 @@ const routes: Routes = [
   {
     path: 'admin/star/items/:id',
     component: AdminItemsStarsComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/producent/items/:id',
+    component: AdminItemsProducentComponent,
     canActivate:[AuthGuard]
   },
   {
