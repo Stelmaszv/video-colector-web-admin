@@ -3,8 +3,8 @@ import { BaseStatsComponentIDComponent } from '../base-stats-component-id/base-s
 
 @Component({
   selector: 'app-admin-producenr-stats',
-  templateUrl: './admin-producenr-stats.component.html',
-  styleUrls: ['./admin-producenr-stats.component.scss']
+  templateUrl: '../base-stats-component-id/base-stats-component-id.component.html',
+  styleUrls: ['../base-stats-component-id/base-stats-component-id.component.scss']
 })
 export class AdminProducenrStatsComponent extends BaseStatsComponentIDComponent {
 

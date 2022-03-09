@@ -13,7 +13,7 @@
                 </h2>
                 <div id="stars" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <app-admin-stars-items id="{{data.id}}"></app-admin-stars-items>
+                        <app-base-item-list url="{{stars_url}}" id="{{data.id}}" item_url="{{stars_item_url}}" add_section="{{stars_add_section}}"></app-base-item-list>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             </h2>
             <div id="tag" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <app-admin-tags-items id="{{data.id}}"></app-admin-tags-items>
+                    <app-base-item-list url="{{tag_url}}" id="{{data.id}}" item_url="{{tag_item_url}}" add_section="{{tag_add_section}}"></app-base-item-list>
                 </div>
             </div>
             </div>
@@ -41,7 +41,7 @@
             </h2>
             <div id="series" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <app-admin-items-series id="{{data.id}}"></app-admin-items-series>
+                    <app-base-item-list url="{{series_url}}" id="{{data.id}}" item_url="{{series_item_url}}" add_section="{{series_add_section}}"></app-base-item-list>
                 </div>
             </div>
             </div>

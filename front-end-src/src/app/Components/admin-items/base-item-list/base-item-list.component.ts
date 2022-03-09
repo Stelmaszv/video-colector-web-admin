@@ -8,12 +8,12 @@ import { BaseListComponent } from '../../list/base-list/base-list.component';
 })
 export class BaseItemListComponent extends BaseListComponent {
 
-  public override url: string="";
-  protected item_url = ""
+  @Input() public override url: string="";
+  @Input() public item_url = ""
   protected override auth: any=true;
   public list :any[]=[]
   public div_id=""
-  public add_section=''
+  @Input() public add_section='' 
   @Input() id:any=0
 
   public override on_before_load_data():void

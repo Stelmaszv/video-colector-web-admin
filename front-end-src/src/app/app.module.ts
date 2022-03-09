@@ -54,7 +54,6 @@ import { MoviesAdminNavbarComponent } from './Components/admin-navbar/movies-adm
 import { AdminItemsMoviesComponent } from './Components/admin-items/admin-items-movies/admin-items-movies.component';
 import { AdminMoviesStatsComponent } from './Components/admin-stats/admin-movies-stats/admin-movies-stats.component';
 import { AdminStatsBaseComponent } from './Components/admin-stats/admin-stats-base/admin-stats-base.component';
-import { AdminStarsItemsComponent } from './Components/admin-items/admin-stars-items/admin-stars-items.component';
 import { SerieEditComponent } from './Components/admin-edit/serie-edit/serie-edit.component';
 import { StarsEditComponent } from './Components/admin-edit/stars-edit/stars-edit.component';
 import { ProducentEditComponent } from './Components/admin-edit/producent-edit/producent-edit.component';
@@ -68,9 +67,6 @@ import { BaseGaleryAdminComponent } from './Components/admin-galery/base-galery-
 import { AdminProducenrStatsComponent } from './Components/admin-stats/admin-producenr-stats/admin-producenr-stats.component';
 import { BaseItemListComponent } from './Components/admin-items/base-item-list/base-item-list.component';
 import { BaseItemsSectionsComponent } from './Components/admin-items/base-items-sections/base-items-sections.component';
-import { AdminTagsItemsComponent } from './Components/admin-items/admin-tags-items/admin-tags-items.component';
-import { AdminItemsSeriesComponent } from './Components/admin-items/admin-items-series/admin-items-series.component';
-
 
 @NgModule({
   declarations: [
@@ -124,7 +120,6 @@ import { AdminItemsSeriesComponent } from './Components/admin-items/admin-items-
     AdminItemsMoviesComponent,
     AdminMoviesStatsComponent,
     AdminStatsBaseComponent,
-    AdminStarsItemsComponent,
     SerieEditComponent,
     StarsEditComponent,
     ProducentEditComponent,
@@ -137,9 +132,7 @@ import { AdminItemsSeriesComponent } from './Components/admin-items/admin-items-
     BaseGaleryAdminComponent,
     AdminProducenrStatsComponent,
     BaseItemListComponent,
-    BaseItemsSectionsComponent,
-    AdminTagsItemsComponent,
-    AdminItemsSeriesComponent
+    BaseItemsSectionsComponent
   ],
   imports: [
     AppRoutingModule,

@@ -31,6 +31,8 @@ import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin
 import { ProducentAdminGaleryComponent } from './Components/admin-galery/producent-admin-galery/producent-admin-galery.component';
 import { AdminSeriesStatasComponent } from './Components/admin-stats/admin-series-statas/admin-series-statas.component';
 import { AdminStarsStatasComponent } from './Components/admin-stats/admin-stars-statas/admin-stars-statas.component';
+import { ProducentStarsComponent } from './Components/stars-components/producent-stars/producent-stars.component';
+import { AdminProducenrStatsComponent } from './Components/admin-stats/admin-producenr-stats/admin-producenr-stats.component';
 
 const routes: Routes = [
   {
@@ -79,7 +81,7 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
-    path: 'admin/star/producent/:id',
+    path: 'admin/producent/edit/:id',
     component: ProducentEditComponent,
     canActivate:[AuthGuard]
   },
@@ -121,6 +123,11 @@ const routes: Routes = [
   {
     path: 'admin/star/stats/:id',
     component: AdminStarsStatasComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'admin/producent/stats/:id',
+    component: AdminProducenrStatsComponent,
     canActivate:[AuthGuard]
   },
   {
