@@ -1,33 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseIDComponent } from '../../id/base-id/base-id.component';
+import { BaseItemsSectionsComponent } from '../base-items-sections/base-items-sections.component';
 
 @Component({
   selector: 'app-admin-items-movies',
   templateUrl: './admin-items-movies.component.html',
   styleUrls: ['./admin-items-movies.component.scss']
 })
-export class AdminItemsMoviesComponent extends BaseIDComponent {
-
+export class AdminItemsMoviesComponent extends BaseItemsSectionsComponent {
   public override url = 'http://127.0.0.1:8000/movie/' 
-  protected override  auth=true
-  protected sections={
+  protected override sections={
     'stars'  : true,
-    'tags'   : false,
+    'tags'   : true,
     'series' : false,
-  }
-
-  show_section_stars():boolean
-  {
-    return this.sections['stars']
-  }
-
-  show_section_tags():boolean
-  {
-    return this.sections['tags']
-  }
-
-  show_section_series():boolean
-  {
-    return this.sections['series']
   }
 }

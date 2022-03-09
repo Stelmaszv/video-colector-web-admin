@@ -1,66 +1,15 @@
 import { Component, Input} from '@angular/core';
-import { BaseListComponent } from '../../list/base-list/base-list.component';
+import { BaseItemListComponent } from '../base-item-list/base-item-list.component';
 
 @Component({
   selector: 'app-admin-stars-items',
-  templateUrl: './admin-stars-items.component.html',
+  templateUrl: '../base-item-list/base-item-list.component.html',
   styleUrls: ['./admin-stars-items.component.scss']
 })
-export class AdminStarsItemsComponent extends BaseListComponent {
-
+export class AdminStarsItemsComponent extends BaseItemListComponent {
   public override url: string="http://127.0.0.1:8000/movie/stars/";
-  public add_url: string="http://127.0.0.1:8000/movie/stars/";
-  public remowe_url: string="http://127.0.0.1:8000/movie/stars/";
-  private item_url = "http://127.0.0.1:8000/add/star/movie/"
-  protected override auth: any=true;
-  public list :any[]=[]
-  @Input() id:any=0
-
-  public override on_before_load_data():void
-  {
-    this.RelationSelectService.get_stars()
-    this.RelationSelectService.get_tags()
-    this.url=this.url+this.id
-  }
-
-  protected override on_after_set_results(response:any)
-  {
-    for (let el of response['results']){
-      this.list.push(el)
-    }
-  }
-
-  public add_item(star:any,id:number)
-  {
-    if (!this.if_exist(star,this.list)){
-      this.list.push(star)
-        this.httpService.get_url_auth(this.item_url+this.id+'/?add='+star['id']).subscribe(response=>{
-          console.log(response)
-        }
-      )
-    }
-  }
-
-  public item_remove(index:number,id:number)
-  {
-    this.list.splice(index,1)
-    this.httpService.get_url_auth(this.item_url+this.id+'/?delete='+id).subscribe(response=>{
-        console.log(response)
-      }
-    )
-  }
-
-  public if_exist_in_list(id:number):boolean
-  { 
-    let stan=false
-    for (let el of this.list){
-      if (el['id']==id){
-        stan= true
-      }
-    }
-    return stan
-  }
-
-
-
+  public override add_url: string="http://127.0.0.1:8000/movie/stars/";
+  public override remowe_url: string="http://127.0.0.1:8000/movie/stars/";
+  protected override item_url = "http://127.0.0.1:8000/add/star/movie/"
+  public override add_section='stars'
 }

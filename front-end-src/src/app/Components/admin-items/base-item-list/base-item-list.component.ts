@@ -14,6 +14,7 @@ export class BaseItemListComponent extends BaseListComponent {
   protected item_url = ""
   protected override auth: any=true;
   public list :any[]=[]
+  public add_section=''
   @Input() id:any=0
 
   public override on_before_load_data():void
@@ -30,7 +31,7 @@ export class BaseItemListComponent extends BaseListComponent {
     }
   }
 
-  public add_item(star:any,id:number)
+  public add_item(star:any)
   {
     if (!this.if_exist(star,this.list)){
       this.list.push(star)

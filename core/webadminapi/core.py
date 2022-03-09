@@ -271,13 +271,15 @@ class AddRelation(AbstractDeteilsView):
         add = self.request.GET.get('add')
         delete=self.request.GET.get('delete')
         if add is not None:
-            RelationModel = self.RelationModel.objects.filter(id=add).get()
-            getattr(RelationModel,self.relation_index).add(Model.id)
-            getattr(Model,self.object_index).add(add)
+            getattr(Model, self.object_index).add(add)
+            if self.relation_index:
+                RelationModel = self.RelationModel.objects.filter(id=add).get()
+                getattr(RelationModel, self.relation_index).add(Model.id)
         if delete is not None:
-            RelationModel = self.RelationModel.objects.filter(id=delete).get()
             getattr(Model,self.object_index).remove(delete)
-            getattr(RelationModel, self.relation_index).remove(Model.id)
+            if self.relation_index:
+                RelationModel = self.RelationModel.objects.filter(id=delete).get()
+                getattr(RelationModel, self.relation_index).remove(Model.id)
         Model.save()
         return Model
 
