@@ -18,7 +18,7 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           StatsSerializer,
                                           RatingsSerializer,
                                           StarsSerializer)
-from core.wideocollectorseader.models import Movie,Likes,DisLikess,Views
+from core.wideocollectorseader.models import Movie,Likes,DisLikess,Views,Star
 from videocolectorwebadmin.global_setings import photo_ext
 from core.webadminapi.core import SqlAction
 from rest_framework.pagination import PageNumberPagination
@@ -234,6 +234,8 @@ class MovieAddStar(AddRelation):
     serializer_class = MoviesSerializer
     queryset = Movie.objects
     Model = Movie
+    RelationModel = Star
+    relation_index = 'movies'
     object_index='stars'
 
 class MovieAddTag(AddRelation):

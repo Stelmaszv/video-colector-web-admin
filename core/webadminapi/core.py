@@ -263,19 +263,23 @@ class AddRelation(AbstractDeteilsView):
     queryset = []
     Model = None
     object_index=''
+    relation_index = ''
+    RelationModel=None
 
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
-        star = self.request.GET.get('add')
+        add = self.request.GET.get('add')
         delete=self.request.GET.get('delete')
-        if star is not None:
-            getattr(Model,self.object_index).add(star)
+        if add is not None:
+            RelationModel = self.RelationModel.objects.filter(id=add).get()
+            getattr(RelationModel,self.relation_index).add(Model.id)
+            getattr(Model,self.object_index).add(add)
         if delete is not None:
+            RelationModel = self.RelationModel.objects.filter(id=delete).get()
             getattr(Model,self.object_index).remove(delete)
+            getattr(RelationModel, self.relation_index).remove(Model.id)
         Model.save()
         return Model
-
-
 
 class AbstractItems(AbstractStats):
     pass
