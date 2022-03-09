@@ -9,7 +9,7 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView,
                                    LargeResultsSetPagination,
-                                   SqlAction, AbstractStats)
+                                   SqlAction, AbstractStats, AbstractItems, AddRelation)
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerSeries,
@@ -186,3 +186,16 @@ class AdminStatsProducentRatings(AbstractStats):
     queryset = Views.objects.all()
     Model = Producents
     place = 'ratings'
+
+class ProducentSeriesView(AbstractItems):
+    serializer_class = SerieSerializer
+    queryset = []
+    Model = Producents
+    RelationModel = Serie
+    place = 'series'
+
+class ProducentAddSerie(AddRelation):
+    serializer_class = MoviesSerializer
+    queryset = []
+    Model = Producents
+    object_index = 'series'

@@ -12,7 +12,7 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView,
                                    Authentication,
-                                   SqlAction, AbstractStats)
+                                   SqlAction, AbstractStats, AbstractItems)
 from core.webadminapi.filters import MovieFilter, SerieFilter
 from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           PhotoSerializerSeries,
@@ -214,3 +214,4 @@ class AdminStatsSerieRatings(AbstractStats):
     queryset = Views.objects.all()
     Model = Serie
     place = 'ratings'
+

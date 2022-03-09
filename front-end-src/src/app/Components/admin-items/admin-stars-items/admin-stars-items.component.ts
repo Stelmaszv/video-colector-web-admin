@@ -8,8 +8,6 @@ import { BaseItemListComponent } from '../base-item-list/base-item-list.componen
 })
 export class AdminStarsItemsComponent extends BaseItemListComponent {
   public override url: string="http://127.0.0.1:8000/movie/stars/";
-  public override add_url: string="http://127.0.0.1:8000/movie/stars/";
-  public override remowe_url: string="http://127.0.0.1:8000/movie/stars/";
   protected override item_url = "http://127.0.0.1:8000/add/star/movie/"
   public override add_section='stars'
 }

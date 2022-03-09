@@ -130,10 +130,10 @@ class Rating(models.Model):
 class Producents(models.Model):
     name      = models.CharField(max_length=200,null=True,blank=True)
     banner    = models.CharField(max_length=200, default='',null=True,blank=True)
-    show_name = models.CharField(max_length=200,default='',null=True)
-    avatar = models.CharField(max_length=200, default='',null=True)
-    dir = models.CharField(max_length=200, default='',null=True)
-    web_dir = models.CharField(max_length=200, default='', null=True)
+    show_name = models.CharField(max_length=200,default='',null=True,blank=True)
+    avatar = models.CharField(max_length=200, default='',null=True,blank=True)
+    dir = models.CharField(max_length=200, default='',null=True,blank=True)
+    web_dir = models.CharField(max_length=200, default='', null=True,blank=True)
     country = models.CharField(max_length=200, default='',null=True,blank=True)
     description = models.TextField(default='',null=True,blank=True)
     year        = models.DateField(null=True,blank=True)
@@ -149,12 +149,6 @@ class Producents(models.Model):
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='ProducentDisLike', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
-
-    def save(self, *args, **kwargs):
-        save(Producents, self)
-
-    def delete(self, *args, **kwargs):
-        delete(Producents, self)
 
     def __str__(self):
         return self.name

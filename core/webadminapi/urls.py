@@ -44,7 +44,7 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               AdminStatsProducentViews,
                                               AdminStatsProducentDisLiks,
                                               AdminStatsProducentLiks,
-                                              AdminStatsProducentRatings)
+                                              AdminStatsProducentRatings, ProducentSeriesView, ProducentAddSerie)
 from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
@@ -89,6 +89,8 @@ urlpatterns = [
     #item
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='items_movie_stars'),
     path('movie/tags/<int:pk>/',                  MovieTagsView.as_view(), name='items_movie_tags'),
+    path('producent/series/<int:pk>/',            ProducentSeriesView.as_view(), name='items_producent_series'),
+    path('add/serie/producent/<int:pk>/',        ProducentAddSerie.as_view(), name='add_star_movie'),
     path('add/star/movie/<int:pk>/',              MovieAddStar.as_view(), name='add_star_movie'),
     path('add/tag/movie/<int:pk>/',               MovieAddTag.as_view(), name='add_tag_movie'),
     # stats Star

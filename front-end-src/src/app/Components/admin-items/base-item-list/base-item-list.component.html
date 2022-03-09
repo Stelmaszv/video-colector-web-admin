@@ -31,6 +31,10 @@
           <option *ngFor="let tag of RelationSelectService.tags" (click)="add_item(tag)" value="{{tag.id}}" [hidden]="!if_exist_in_list(tag.id)" selected>{{tag.name}}</option>
           <option *ngFor="let tag of RelationSelectService.tags" (click)="add_item(tag)" value="{{tag.id}}" [hidden]="if_exist_in_list(tag.id)" >{{tag.name}}</option>
         </select>
+        <select *ngIf="add_section=='series'" class="form-select" multiple aria-label="multiple select example">
+          <option *ngFor="let serie of RelationSelectService.series_select" (click)="add_item(serie)" value="{{serie.id}}" [hidden]="!if_exist_in_list(serie.id)" selected>{{serie.name}}</option>
+          <option *ngFor="let serie of RelationSelectService.series_select" (click)="add_item(serie)" value="{{serie.id}}" [hidden]="if_exist_in_list(serie.id)" >{{serie.name}}</option>
+        </select>
     </div>
   </div>
 </div>

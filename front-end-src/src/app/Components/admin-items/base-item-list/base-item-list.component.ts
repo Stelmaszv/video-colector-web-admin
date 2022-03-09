@@ -9,8 +9,6 @@ import { BaseListComponent } from '../../list/base-list/base-list.component';
 export class BaseItemListComponent extends BaseListComponent {
 
   public override url: string="";
-  public add_url: string="";
-  public remowe_url: string="";
   protected item_url = ""
   protected override auth: any=true;
   public list :any[]=[]
@@ -22,12 +20,12 @@ export class BaseItemListComponent extends BaseListComponent {
   {
     this.RelationSelectService.get_stars()
     this.RelationSelectService.get_tags()
+    this.RelationSelectService.get_series()
     this.url=this.url+this.id
   }
 
   protected override on_after_set_results(response:any)
   {
-    console.log('Hereeee',response['results'].tags)
     for (let el of response['results']){
       this.list.push(el)
     }
