@@ -8,12 +8,12 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, SqlAction, AbstractStats)
+                                   AbstractUpdateView, SqlAction, AbstractStats, AbstractItems, AddRelation)
 from core.webadminapi.filters import StarFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
                                           StarSlectSerializer, StarsSerializer,
-                                          StarsSerializerUpdate, StatsSerializer, RatingsSerializer)
+                                          StarsSerializerUpdate, StatsSerializer, RatingsSerializer, TagsSerializer)
 from core.wideocollectorseader.models import Star, DisLikess, Views, Likes
 from videocolectorwebadmin.global_setings import photo_ext
 
@@ -141,3 +141,26 @@ class AdminStatsStareRatings(AbstractStats):
     queryset = Views.objects.all()
     Model = Star
     place = 'ratings'
+
+class StarTagsView(AbstractItems):
+    serializer_class = TagsSerializer
+    queryset = []
+    Model = Star
+    place = 'tags'
+
+class AddStarTag(AddRelation):
+    serializer_class = StarsSerializer
+    queryset = []
+    Model = Star
+    object_index='tags'
+
+
+
+
+
+
+
+
+
+
+

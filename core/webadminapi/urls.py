@@ -79,7 +79,8 @@ from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           AdminStatsStarViews,
                                           AdminStatsStarDisLiks,
                                           AdminStatsStarLiks,
-                                          AdminStatsStareRatings)
+                                          AdminStatsStareRatings,
+                                          StarTagsView, AddStarTag)
 from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
 
 app_name = 'webadminapi'
@@ -90,11 +91,13 @@ urlpatterns = [
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='items_movie_stars'),
     path('movie/tags/<int:pk>/',                  MovieTagsView.as_view(), name='items_movie_tags'),
     path('series/tags/<int:pk>/',                 SeriesTagsView.as_view(), name='items_series_tags'),
+    path('star/tags/<int:pk>/',                   StarTagsView.as_view(), name='items_star_tags'),
     path('producent/series/<int:pk>/',            ProducentSeriesView.as_view(), name='items_producent_series'),
     path('add/serie/producent/<int:pk>/',         ProducentAddSerie.as_view(), name='add_star_movie'),
     path('add/star/movie/<int:pk>/',              MovieAddStar.as_view(), name='add_star_movie'),
     path('add/tag/movie/<int:pk>/',               MovieAddTag.as_view(), name='add_tag_movie'),
     path('add/tag/serie/<int:pk>/',               SerieAddTag.as_view(), name='add_tag_series'),
+    path('add/tag/star/<int:pk>/',                AddStarTag.as_view(), name='add_tag_series'),
     # stats Star
     path('admin/stats/producent/views/<int:pk>/', AdminStatsProducentViews.as_view(), name='producent_stats_views'),
     path('admin/stats/producent/disliks/<int:pk>/', AdminStatsProducentDisLiks.as_view(), name='producent_stats_disliks'),
