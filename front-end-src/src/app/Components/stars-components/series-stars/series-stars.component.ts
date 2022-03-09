@@ -13,7 +13,7 @@ export class SeriesStarsComponent extends StarsComponent {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/seriesstarsview/'+this.ID
+      this.url='http://127.0.0.1:8000/series/stars/view/'+this.ID
     }
 
   }

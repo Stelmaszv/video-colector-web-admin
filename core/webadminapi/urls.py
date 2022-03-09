@@ -143,7 +143,7 @@ urlpatterns = [
     path('stars/photo/<int:pk>',                 StarsPhotoView.as_view(), name='starsphoto'),
     #series
     path('series',                               SerieView.as_view(), name='series'),
-    path('seriesstarsview/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),
+    path('series/stars/view/<int:pk>/',            SeriesStarsView.as_view(), name='seriesstarsview'),
     path('serie/<int:pk>/',                      SerieDeteilsView.as_view(), name='serie'),
     path('serie/updata/<int:pk>/',               SerieUpdataView.as_view(), name='serieupdata'),
     path('serie/<int:pk>/',                      SerieDeteilsView.as_view(), name='serie'),
