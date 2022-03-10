@@ -1,18 +1,28 @@
 let interval = setInterval(function () {
     
+    let movie_section = document.querySelector('.movie_section')
+    let movie_controls= document.querySelector('.movie_controls')
+    let section_movie_play = document.querySelector('.section_movie_play')
+    let wideo_src = document.querySelector('.wideo_src')
+    let start = document.querySelector('#startmovie')
     let wideo = document.querySelector('#bgvid')
     let play = document.querySelector('#play')
-    let mute = document.querySelector('#mute')
+    let mute = document.querySelector('#muteVideo')
     let range = document.querySelector('#range')
     let curtimetext = document.getElementById("curtimetext");
 	let durtimetext = document.getElementById("durtimetext");
-
-    if (wideo && play && mute && fullScreen && range){
+    if (wideo && play && mute && fullScreen && range && start){
         
         clearInterval(interval)
         range.addEventListener("input", function(){
             wideo.currentTime=range.value
             range.max=Math.floor(wideo.duration)
+        });
+
+        start.addEventListener("click", function(){
+            movie_section.style.display='none'
+            section_movie_play.style.display='block'
+            play.click()
         });
 
         wideo.addEventListener("timeupdate",function(){
@@ -33,11 +43,40 @@ let interval = setInterval(function () {
             if (wideo.paused){
                 wideo.play() 
                 document.querySelector('#playbtm').classList.replace('fa-play','fa-pause')
+                document.querySelector('#startmovieicon').classList.replace('fa-play','fa-pause')
+                movie_section.style.display='none'
+                section_movie_play.style.display='block'
             }else{
                 wideo.pause()
                 document.querySelector('#playbtm').classList.replace('fa-pause','fa-play',)
+                document.querySelector('#startmovieicon').classList.replace('fa-pause','fa-play')
+                movie_section.style.display='block'
+                section_movie_play.style.display='none'
             }
         });
+
+        wideo_src.addEventListener("click", function(){
+            if (wideo.paused){
+                wideo.play() 
+                document.querySelector('#playbtm').classList.replace('fa-play','fa-pause')
+                document.querySelector('#startmovieicon').classList.replace('fa-play','fa-pause')
+                movie_section.style.display='none'
+                section_movie_play.style.display='block'
+            }else{
+                wideo.pause()
+                document.querySelector('#playbtm').classList.replace('fa-pause','fa-play',)
+                document.querySelector('#startmovieicon').classList.replace('fa-pause','fa-play')
+                movie_section.style.display='block'
+                section_movie_play.style.display='none'
+            }
+        });
+        wideo_src.addEventListener("mouseover",function(){
+            movie_controls.style.opacity=.1
+        })
+
+        movie_controls.addEventListener("mouseover",function(){
+            movie_controls.style.opacity=1
+        })
 
         mute.addEventListener("click", function(){
             if (wideo.muted){

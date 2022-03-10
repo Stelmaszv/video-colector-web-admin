@@ -3,7 +3,14 @@ $rating_color_mid:1px solid rgb(216, 201, 1);
 $rating_color_good:1px solid rgb(0, 182, 61);
 $starsBGColor:black;
 .video-section{
+    .section_movie_play{
+        display: none;
+        .movie_controls{
+            opacity: .1;
+        }
+    }
     .movie_section{
+        display: black;
         background-color: black;
         position: relative;
         .movie_poster{
