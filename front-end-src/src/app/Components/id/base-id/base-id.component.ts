@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TokkenService } from 'src/app/Service/tokken/tokken.service'; 
 import { FormBuilder, FormControl ,FormGroup} from '@angular/forms';
 import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-base-id',
@@ -34,7 +35,7 @@ export class BaseIDComponent implements OnInit {
     rate: new FormControl(1)
   });
 
-  constructor(protected fb: FormBuilder,public RelationSelectService:RelationSelectService,private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,protected Router:Router,public TokkenService:TokkenService) { }
+  constructor(protected fb: FormBuilder,private TitleService: Title,public RelationSelectService:RelationSelectService,private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,protected Router:Router,public TokkenService:TokkenService) { }
 
   public ngOnInit(): void 
   {
@@ -83,6 +84,9 @@ export class BaseIDComponent implements OnInit {
     });
   }
 
+  protected set_title(response:any):string{
+    return response['name']
+  }
 
   protected get_url(id:number): void 
   {
@@ -93,6 +97,7 @@ export class BaseIDComponent implements OnInit {
             this.on_get_url()
             this.set_procent(response)
             this.on_get_result(response)
+            this.TitleService.setTitle(this.set_title(response));
         }
       );
     }else{
@@ -103,6 +108,7 @@ export class BaseIDComponent implements OnInit {
             this.on_get_url()
             this.set_procent(response)
             this.on_get_result(response)
+            this.TitleService.setTitle(this.set_title(response));
         },
         (error) => {
           console.log(error.statusText)

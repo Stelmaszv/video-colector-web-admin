@@ -13,6 +13,7 @@ export class MoviesComponent extends BaseListComponent{
   
   public override url:string='http://127.0.0.1:8000/movies'
   public override fav_url:string='http://127.0.0.1:8000/favorite/movies'
+  protected override title:string='Movies'
 
   public override search = new FormGroup({
     name: new FormControl(),

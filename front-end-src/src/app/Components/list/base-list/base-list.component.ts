@@ -5,6 +5,7 @@ import {ProcentService} from '../../../Service/procent/procent.service'
 import {TokkenService}  from '../../../Service/tokken/tokken.service'
 import { Router } from '@angular/router';
 import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-base-list',
   templateUrl: './base-list.component.html',
@@ -28,9 +29,10 @@ export class BaseListComponent implements OnInit {
   protected page:number=1 ;
   protected auth:any=false
   protected debug:any=true
+  protected title:string=''
   @Input() top:any='50px'
 
-  public constructor(public RelationSelectService:RelationSelectService,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
+  public constructor(public RelationSelectService:RelationSelectService,private TitleService: Title,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
 
   public add_star(add_star:number):void
   {
@@ -170,7 +172,8 @@ export class BaseListComponent implements OnInit {
     }
   }
 
-  private set_count(response:any){
+  private set_count(response:any)
+  {
     this.item_count=response.count
   }
 
@@ -183,12 +186,15 @@ export class BaseListComponent implements OnInit {
   protected on_set_results(movie:any):void
   {}
 
-  protected on_after_set_results(response:any){
+  protected on_after_set_results(response:any)
+  {}
 
-  }
+  protected on_set_url():void
+  {}
 
-  protected on_set_url():void{
-    
+  protected set_title(response:any):string
+  {
+    return this.title
   }
 
   protected load_data():void
@@ -210,6 +216,7 @@ export class BaseListComponent implements OnInit {
               this.set_count(response)
               this.set_results()
               this.on_after_set_results(response)
+              this.TitleService.setTitle(this.set_title(response));
               this.loading=true
             }
           }
@@ -227,6 +234,7 @@ export class BaseListComponent implements OnInit {
               this.set_results()
               this.set_count(response)
               this.on_after_set_results(response)
+              this.TitleService.setTitle(this.set_title(response));
               this.loading=true
             }
           },
