@@ -1,5 +1,4 @@
 let interval = setInterval(function () {
-    
     let movie_section = document.querySelector('.movie_section')
     let movie_controls= document.querySelector('.movie_controls')
     let section_movie_play = document.querySelector('.section_movie_play')
@@ -12,7 +11,6 @@ let interval = setInterval(function () {
     let curtimetext = document.getElementById("curtimetext");
 	let durtimetext = document.getElementById("durtimetext");
     if (wideo && play && mute && fullScreen && range && start){
-        
         clearInterval(interval)
         range.addEventListener("input", function(){
             wideo.currentTime=range.value
