@@ -14,5 +14,6 @@ export class StarComponent extends BaseIDComponent {
   protected override update_views_url:string='starupdateviews/'
   protected override fovorits_url:string='favorite/star/'
   protected override chceck_favorit_stan_url='favoriteis/stars/'
+  protected override edit_url_heder:string='/admin/star/edit/'
   
 }

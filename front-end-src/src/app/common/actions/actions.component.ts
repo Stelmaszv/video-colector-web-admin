@@ -53,6 +53,7 @@ export class ActionsComponent implements OnInit{
 
   public edit(){
     this.set_id()
+    console.log(this.edit_link)
     this.Router.navigate([this.edit_link])
   }
 
