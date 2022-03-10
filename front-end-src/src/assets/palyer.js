@@ -1,4 +1,6 @@
+let stan=false
 let interval = setInterval(function () {
+    let time=0
     let movie_section = document.querySelector('.movie_section')
     let movie_controls= document.querySelector('.movie_controls')
     let section_movie_play = document.querySelector('.section_movie_play')
@@ -12,6 +14,7 @@ let interval = setInterval(function () {
 	let durtimetext = document.getElementById("durtimetext");
     if (wideo && play && mute && fullScreen && range && start){
         clearInterval(interval)
+        stan=true
         range.addEventListener("input", function(){
             wideo.currentTime=range.value
             range.max=Math.floor(wideo.duration)

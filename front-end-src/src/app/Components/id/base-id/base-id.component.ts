@@ -28,7 +28,7 @@ export class BaseIDComponent implements OnInit {
   protected fovorits_url:string=''
   protected chceck_favorit_stan_url:string=''
   protected auth:any=false
-
+  protected edit_url_heder:string=''
 
   public addrate = new FormGroup({
     rate: new FormControl(1)
@@ -70,6 +70,10 @@ export class BaseIDComponent implements OnInit {
     return this.server+this.update_views_url+this.id+'/'
   }
 
+  public return_edit_url(){
+    return this.edit_url_heder+this.id
+  }
+
   protected on_get_url(){}
   
   private set_id(): void  
@@ -78,6 +82,7 @@ export class BaseIDComponent implements OnInit {
       this.id = params['id'];
     });
   }
+
 
   protected get_url(id:number): void 
   {
