@@ -1,9 +1,37 @@
 <app-navabr></app-navabr>
 <main class="content">
     <form [formGroup]="star_palyer">
-        <div class="video-section">
+        <section class="video-section">
+            <div class="jumbotron movie_section">
+                <img class="movie_poster" src="{{data.poster}}">
+                <div class="movie_info">
+                    <h1 class="display-4"><b>{{data.serie.show_name}}</b> - <i>{{data.show_name}}</i></h1>
+                    <hr class="my-4">
+                    <div class="controls d-flex align-items-stretch">
+                        <button id="play" class="btn btn-primary btn-lg"><i id="playbtm" class="fas fa-play"></i></button>
+                        <ng-template [ngIf]="data.serie">
+                            <button id="mute" (click)="next_movie_in_series()" class="btn bg-white">{{data.serie.show_name}}</button>
+                        </ng-template>
+                        <ng-template [ngIf]="data.more_player_stars">
+                            <div class="form-floating">
+                                <select class="form-select series-search btn bg-white form-select btn-lg"  (change)="next_movie_with_star()" id="floatingSelect" aria-label="Floating label select example" formControlName="star">
+                                    <option *ngFor="let star of data.stars" value="{{star.id}}" aria-label="Default select example">{{star.name}}</option>
+                                </select>
+                                <label for="floatingSelect">Select Star to show next Movie</label>
+                              </div>
+                        </ng-template>
+                    </div>
+                    <p class="lead description">{{data.description}}</p>
+                </div>
+            </div> 
+        </section>
+            <!--
             <div class="movie" style="background-color: black;">
                 <h1 class="d-flex justify-content-center name">{{data.show_name}}</h1>
+                <div clas="movie" style='background-image: url("http://127.0.0.1:8000/web\Movies\series\I-L\James Bond 007\1\1962 - Dr No\srcmkqltvkcqcpewxdil.png");'>
+
+                </div>
+                
                 <ng-template [ngIf]="mode=='poster'">
                     <div class="if_poster">
                         <video style="min-height:100%" src="{{data.src}}"
@@ -35,14 +63,16 @@
                         <img class="cover_js" src="{{data.avatar}}">
                     </div>
                 </ng-template>
+           
             </div>
-        </div>
+                -->
+     
     </form>
     <div class="ditels-section">
         <div class="stars">
             <h1 class="d-flex justify-content-center star-name">Stars</h1>
             <div class="d-flex justify-content-center stars_js">
-                <a *ngFor="let star of data.movie_stars" [routerLink]="['/star/',star.id]" class="card-link star_item">
+                <a *ngFor="let star of data.stars" [routerLink]="['/star/',star.id]" class="card-link star_item">
                     <img src="{{star.avatar}}" class="img-thubnail star_src">
                 </a>
             </div>
