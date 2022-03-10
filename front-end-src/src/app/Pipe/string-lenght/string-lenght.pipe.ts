@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StringLenghtPipe implements PipeTransform {
   limit=150
 
-  private short_string(string:string): string{
+  private short_string(string:string,limit:number): string{
     let str=''
     for (let i = 0; i < string.length; i++) {
-      if (i<this.limit){
+      if (i<limit){
         str=str+string[i]
       }
     }
@@ -18,9 +18,10 @@ export class StringLenghtPipe implements PipeTransform {
 
   }
 
-  public transform(string:string): string {
-    if (string.length>this.limit){
-      return this.short_string(string)
+  public transform(string:string,limit:number): string {
+    console.log(string,limit)
+    if (string.length>limit){
+      return this.short_string(string,limit)
     }
     return string;
   }

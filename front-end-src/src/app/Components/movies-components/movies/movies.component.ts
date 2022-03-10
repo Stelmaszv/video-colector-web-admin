@@ -1,7 +1,8 @@
 import { Component,Input} from '@angular/core';
 import {BaseListComponent} from '../../list/base-list/base-list.component'
 import { FormControl ,FormGroup} from '@angular/forms';
-
+import { StringLenghtPipe } from 'src/app/Pipe/string-lenght/string-lenght.pipe';
+import { NamePipe } from 'src/app/Pipe/name/name.pipe';
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
@@ -109,5 +110,6 @@ export class MoviesComponent extends BaseListComponent{
     movie['js_stars']=this.set_stars(movie)
     movie['more']=this.set_more(movie)
     movie['js_stars_poster']=this.set_star_for_poster(movie)
+    movie['name_pip'] =    new NamePipe().transform(movie)
   }
 }

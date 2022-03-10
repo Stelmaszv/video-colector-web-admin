@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import {BaseIDComponent} from '../base-id/base-id.component'
 import { FormControl ,FormGroup} from '@angular/forms';
 
+
 @Component({
   selector: 'app-movieid',
   templateUrl: './movieid.component.html',
@@ -30,7 +31,6 @@ export class MovieidComponent extends BaseIDComponent{
     star: new FormControl(1),
   });
   
-
   public next_movie_in_series(){
     this.httpService.get_url(this.next_movie_url+''+this.data.id+'').subscribe(
       (response) => {
@@ -48,7 +48,6 @@ export class MovieidComponent extends BaseIDComponent{
         this.set_mext(response)
       }
     );
-
   }
 
   private set_mext(response:any){
@@ -102,6 +101,7 @@ export class MovieidComponent extends BaseIDComponent{
     this.data['movie_stars']=this.data_stars().sort(this.get_sort_order("movies_count")).reverse()
     this.data['movie_stars_player']=this.data_stars_player().sort(this.get_sort_order("movies_count")).reverse()
     this.data['more_player_stars']=this.if_more_stars_player(this.data['movie_stars_player'])
+
   }
 
 }

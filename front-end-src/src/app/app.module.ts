@@ -70,6 +70,8 @@ import { BaseItemsSectionsComponent } from './Components/admin-items/base-items-
 import { AdminItemsSeriesComponent } from './Components/admin-items/admin-items-series/admin-items-series.component';
 import { AdminItemsStarsComponent } from './Components/admin-items/admin-items-stars/admin-items-stars.component';
 import { AdminItemsProducentComponent } from './Components/admin-items/admin-items-producent/admin-items-producent.component';
+import { ImgPipe } from './Pipe/img/img.pipe';
+import { NamePipe } from './Pipe/name/name.pipe';
 
 @NgModule({
   declarations: [
@@ -138,7 +140,9 @@ import { AdminItemsProducentComponent } from './Components/admin-items/admin-ite
     BaseItemsSectionsComponent,
     AdminItemsSeriesComponent,
     AdminItemsStarsComponent,
-    AdminItemsProducentComponent
+    AdminItemsProducentComponent,
+    ImgPipe,
+    NamePipe
   ],
   imports: [
     AppRoutingModule,

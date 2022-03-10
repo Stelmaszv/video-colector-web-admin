@@ -95,12 +95,6 @@
   </div>
 </div>
 
-
-
-
-
-
-
 <div class="container">
     <div class="row">
         <div class="col" *ngFor="let serie of data">
@@ -109,7 +103,7 @@
                 <div class="card-body">
                 </div>
                 <h5 class="card-title">{{serie.show_name}}</h5>
-                <p class="card-text">{{serie.description | stringLenght }}</p>
+                <p class="card-text">{{serie.description | stringLenght:20 }}</p>
                 <a [routerLink]="['/serie/',serie.id]" class="btn btn-primary">{{serie.show_name}}</a>
             </div>
         </div>
