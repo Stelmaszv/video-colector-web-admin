@@ -116,10 +116,20 @@
             <h5 class="card-title"><a [routerLink]="['/movie/',movie.id]" >{{movie.name_pip | stringLenght:50}}</a></h5>
             <p class="card-text entry">{{movie.description | stringLenght:300  }}</p>
           </div>
-          <ng-template [ngIf]="movie.stars">
-          <div class="card-body star_list">
-            <a *ngFor="let star of movie.js_stars_poster" href="#" class="card-link star_item">{{star | name}}</a>
-          </div>
+          <ng-template [ngIf]="movie.stars.length">
+            <div class="card-body star_list">
+              <a href="#" [routerLink]="['/star/',movie.stars[0].id]" class="card-link star_item">{{movie.stars[0]|name}}</a>
+              <ng-template [ngIf]="movie.stars.length>1">
+                <a href="#" [routerLink]="['/star/',movie.stars[1].id]" class="card-link star_item">{{movie.stars[1]|name}}</a>
+              </ng-template>
+              <ng-template  [ngIf]="movie.stars.length>2">
+                <a href="#" [routerLink]="['/star/',movie.stars[2].id]" class="card-link star_item">{{movie.stars[2]|name}}</a>
+              </ng-template>
+              <ng-template [ngIf]="movie.stars.length>3">
+                + <i>{{movie.stars.length-3}}</i>
+              </ng-template>
+            </div>
+            
           </ng-template>
           <div class="stats">
             <span class="stat_item">
@@ -173,9 +183,9 @@
           <li class="list-group-item"><a  [routerLink]="['/serie/',movie.serie.id]" class="card-link">{{movie.serie.show_name}}</a></li>
           <ng-template [ngIf]="movie.stars.length">
             <li class="list-group-item">
-                <a *ngFor="let star of movie.stars" class="card-link" [routerLink]="['/star/',star.id]">{{star | name}}</a>
-                <ng-template [ngIf]="movie.more">
-                  + <i>{{movie.more}}</i>
+                <a class="card-link" [routerLink]="['/star/',movie.stars[0].id]">{{movie.stars[0]|name}}</a>
+                <ng-template [ngIf]="movie.stars.length>1">
+                  + <i>{{movie.stars.length-1}}</i>
                 </ng-template>
             </li>
           </ng-template>
