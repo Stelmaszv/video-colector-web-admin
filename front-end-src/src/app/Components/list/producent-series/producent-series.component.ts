@@ -10,6 +10,7 @@ export class ProducentSeriesComponent extends SeriesComponent {
 
   @Input() ID:any=0
   start=true
+  @Input() override title:string=''
 
   public override on_set_url():void
   {

@@ -29,7 +29,7 @@ export class BaseListComponent implements OnInit {
   protected page:number=1 ;
   protected auth:any=false
   protected debug:any=true
-  protected title:string=''
+  public title:string=''
   @Input() top:any='50px'
 
   public constructor(public RelationSelectService:RelationSelectService,private TitleService: Title,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }

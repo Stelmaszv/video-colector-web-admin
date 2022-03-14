@@ -116,6 +116,7 @@
             <h5 class="card-title"><a [routerLink]="['/movie/',movie.id]" >{{movie.name_pip | stringLenght:50}}</a></h5>
             <p class="card-text entry">{{movie.description | stringLenght:300  }}</p>
           </div>
+          
           <ng-template [ngIf]="movie.stars.length">
             <div class="card-body star_list">
               <a href="#" [routerLink]="['/star/',movie.stars[0].id]" class="card-link star_item">{{movie.stars[0]|name}}</a>
@@ -129,8 +130,8 @@
                 + <i>{{movie.stars.length-3}}</i>
               </ng-template>
             </div>
-            
           </ng-template>
+
           <div class="stats">
             <span class="stat_item">
               <span class="stats_font">

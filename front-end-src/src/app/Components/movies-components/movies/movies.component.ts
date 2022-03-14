@@ -11,11 +11,11 @@ import { NamePipe } from 'src/app/Pipe/name/name.pipe';
 export class MoviesComponent extends BaseListComponent{
   public mode:string ='cover'
   found_top='150px'
+  public override title: string='Movies';
   
   public override url:string='http://127.0.0.1:8000/movies'
   public override fav_url:string='http://127.0.0.1:8000/favorite/movies'
-  protected override title:string=''
-
+  
   public override search = new FormGroup({
     name: new FormControl(),
     serie: new FormControl(),

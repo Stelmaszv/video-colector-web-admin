@@ -30,6 +30,7 @@ export class BaseIDComponent implements OnInit {
   protected chceck_favorit_stan_url:string=''
   protected auth:any=false
   protected edit_url_heder:string=''
+  public button_section:string=''
 
   public addrate = new FormGroup({
     rate: new FormControl(1)

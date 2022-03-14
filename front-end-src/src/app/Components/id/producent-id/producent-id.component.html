@@ -104,32 +104,69 @@
         </div>
     </div>
     <div class="tabs_nav">
-        <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center tabs_sticky sticky-top" id="pills-tab" role="tablist">
-            <li class="nav-item nav_tab galery_tab_js" name="galery" role="presentation">
-                <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
-                        data-bs-target="#galery-tab" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Galery
+        <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center tabs_sticky sticky-top" 
+            id="pills-tab" 
+            role="tablist">
+            <li class="nav-item nav_tab galery_tab_js" 
+                name="galery" 
+                role="presentation">
+                <button class="nav-link" 
+                        id="pills-galery-tab" 
+                        data-bs-toggle="pill"
+                        data-bs-target="#galery-tab" 
+                        type="button" role="tab" 
+                        aria-controls="pills-contact"
+                        aria-selected="false"
+                        (click)="button_section='galery'">
+                        Galery
                 </button>
             </li>
 
-            <li class="nav-item nav_tab movies_series_tab" name="movies" role="presentation">
-                <button class="nav-link movies" id="pills-movies" data-bs-toggle="pill"
-                        data-bs-target="#movis" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Movies
+            <li class="nav-item nav_tab movies_series_tab" 
+                name="movies" 
+                role="presentation">
+                <button class="nav-link movies" 
+                        id="pills-movies" 
+                        data-bs-toggle="pill"
+                        data-bs-target="#movis" 
+                        type="button" 
+                        role="tab" 
+                        aria-controls="pills-contact"
+                        aria-selected="false"
+                        (click)="button_section='producent-movies'">
+                        Movies
                 </button>
             </li>
 
-            <li class="nav-item nav_tab series_tab" name="series" role="presentation">
-                <button class="nav-link" id="pills-stars-movies" data-bs-toggle="pill"
-                        data-bs-target="#movis-stars" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Series
+            <li class="nav-item nav_tab series_tab" 
+                name="series" 
+                role="presentation">
+                <button class="nav-link" 
+                        id="pills-stars-movies" 
+                        data-bs-toggle="pill"
+                        data-bs-target="#movis-stars" 
+                        type="button" 
+                        role="tab" 
+                        aria-controls="pills-contact"
+                        aria-selected="false"
+                        (click)="button_section='producent-series'">
+                        Series
                 </button>
             </li>
 
-            <li class="nav-item nav_tab movies_series_stars_tab" name="movies_series_stars" role="presentation">
-                <button class="nav-link" id="pills-stars-tab" data-bs-toggle="pill"
-                        data-bs-target="#stars-tab" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Top Stars
+            <li class="nav-item nav_tab movies_series_stars_tab" 
+                name="movies_series_stars" 
+                role="presentation">
+                <button class="nav-link" 
+                        id="pills-stars-tab" 
+                        data-bs-toggle="pill"
+                        data-bs-target="#stars-tab" 
+                        type="button" 
+                        role="tab" 
+                        aria-controls="pills-contact"
+                        aria-selected="false"
+                        (click)="button_section='producent-top-stars'">
+                        Top Stars
                 </button>
             </li>
         </ul>
@@ -138,25 +175,33 @@
                  aria-labelledby="pills-galery-tab">
                 <div class="container">
                     <div class="row galery galery-run">
-                        <app-producent-phots ID={{data.id}}></app-producent-phots>
+                        <ng-template [ngIf]="button_section=='galery'">
+                            <app-producent-phots  title="Photos {{data | name}}" ID={{data.id}}></app-producent-phots>
+                        </ng-template>
                     </div>
                 </div>
             </div>
 
             <div class="tab-pane fade tab_content series_tab" id="movis-stars" type="SeriesOutput" role="tabpanel"
                  aria-labelledby="pills-stars-movies">
-                    <app-producent-series ID={{data.id}} top="100px"></app-producent-series>
+                    <ng-template [ngIf]="button_section=='producent-series'">
+                        <app-producent-series title="Series {{data | name}}" ID={{data.id}} top="100px"></app-producent-series>
+                    </ng-template>
                  </div>
 
             <div class="tab-pane fade tab_content movies_series_tab" id="movis" role="tabpanel" type="MoviesOutPut"
                  aria-labelledby="pills-movies">
-                 <app-producent-movies ID={{data.id}} top="100px"></app-producent-movies>
+                 <ng-template [ngIf]="button_section=='producent-movies'">
+                    <app-producent-movies title="Movies in  {{data | name}}" ID={{data.id}} top="100px"></app-producent-movies>
+                </ng-template>
             </div>
 
             <div class="tab-pane fade tab_content movies_series_stars_tab" id="stars-tab" type="StarsOtput"
                  role="tabpanel"
                  aria-labelledby="pills-stars-tab">
-                <app-producent-stars ID={{data.id}}></app-producent-stars>
+                 <ng-template [ngIf]="button_section=='producent-top-stars'">
+                    <app-producent-stars title="Top stars in  {{data | name}}" ID={{data.id}}></app-producent-stars>
+                </ng-template>
             </div>
         </div>
     </div>

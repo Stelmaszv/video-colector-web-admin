@@ -9,6 +9,7 @@ import {StarsComponent} from '../../list/stars/stars.component'
 export class SeriesStarsComponent extends StarsComponent {
   start=true
   @Input() ID:any=0
+  @Input() override title:string=''
 
   public override on_set_url():void
   {

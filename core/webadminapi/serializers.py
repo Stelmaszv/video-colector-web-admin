@@ -1,3 +1,5 @@
+import os
+
 from django.conf.global_settings import AUTH_USER_MODEL
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
@@ -228,9 +230,24 @@ class SerieSerializer(BaseSeralizer):
     fovorite_item = 'series'
     tags   = TagsSerializer(many=True)
     Producent = ProducentForSerieSerializer(many=False)
+
     class Meta:
         model = Serie
         fields = '__all__'
+
+class SerieSerializerID(SerieSerializer):
+
+    def set_banners(self,instance):
+        banners_array = []
+        banners= os.listdir(instance.dir+'\\banners')
+        for banner in banners:
+            banners_array.append({'url':instance.dir+'\\'+banner})
+        return banners_array
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["banners"] = self.set_banners(instance)
+        return representation
 
 #Producents
 class SeriesSerlizerForProducent(ShortSeries):

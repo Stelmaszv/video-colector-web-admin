@@ -8,6 +8,7 @@ import {Component,Input} from '@angular/core';
 })
 export class MoviesWithStarsComponent extends MoviesComponent {
   @Input() ID:any=0
+  @Input() override title:string=''
   start=true
 
   public override on_set_url():void

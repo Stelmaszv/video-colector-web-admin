@@ -223,47 +223,85 @@
 
         
         <div class="tabs_nav sticky-top tabs_sticky">
-            <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center" id="pills-tab" role="tablist">
-                <li class="nav-item galery_tab_js nav_tab" name="galery" role="presentation">
-                    <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
-                            data-bs-target="#galery-tab" type="button" role="tab" aria-controls="pills-contact"
-                            aria-selected="false">Galery
+            <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center" 
+                id="pills-tab" 
+                role="tablist">
+                <li class="nav-item galery_tab_js nav_tab" 
+                    name="galery" 
+                    role="presentation">
+                    <button class="nav-link" 
+                            id="pills-galery-tab" 
+                            data-bs-toggle="pill"
+                            data-bs-target="#galery-tab" 
+                            type="button" 
+                            role="tab" 
+                            aria-controls="pills-contact"
+                            aria-selected="false" 
+                            (click)="button_section='galery'">Galery
                     </button>
                 </li>
-                <li class="nav-item movies_series_tab nav_tab" name="movies_series" role="presentation">
-                    <button class="nav-link all-series-name" id="pills-home-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                            aria-selected="false">All movies in series
+                <li class="nav-item movies_series_tab nav_tab" 
+                    name="movies_series" 
+                    role="presentation">
+                    <button class="nav-link all-series-name" 
+                            id="pills-home-tab" 
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-home" 
+                            type="button" 
+                            role="tab" 
+                            aria-controls="pills-home"
+                            aria-selected="false" (click)="button_section='serie'">All movies in series {{data.serie | name}}
                     </button>
                 </li>
-                <li class="nav-item movies_with_stars_tab nav_tab" name="movies_with_stars" role="presentation">
-                    <button class="nav-link all-with-star-name" id="pills-profile-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                            aria-selected="false">All movies with star 
+                <li class="nav-item movies_with_stars_tab nav_tab" 
+                    name="movies_with_stars" 
+                    role="presentation">
+                    <button class="nav-link all-with-star-name" 
+                            id="pills-profile-tab" 
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-profile" 
+                            type="button" role="tab" 
+                            aria-controls="pills-profile"
+                            aria-selected="false" (click)="button_section='stars-movies'">All movies with star in {{data | name}}
                     </button>
                 </li>
             </ul>
         </div>
-        <div class="tab-content" id="pills-tabContent">
 
-            <div class="tab-pane fade galery_tab_js tab_content" id="galery-tab" type="Galery" role="tabpanel" aria-labelledby="pills-galery-tab">
-                <div class="container">
-                    <div class="row galery galery-run">
-                        <app-movie-photos ID={{data.id}}></app-movie-photos>
+        <div class="tab-content" id="pills-tabContent">
+         
+                <div class="tab-pane fade galery_tab_js tab_content" 
+                    id="galery-tab" 
+                    type="Galery" 
+                    role="tabpanel" 
+                    aria-labelledby="pills-galery-tab">
+                    <div class="container">
+                        <div class="row galery galery-run">
+                            <ng-template [ngIf]="button_section=='galery'">
+                                <app-movie-photos title="Photos {{data | name}}" ID={{data.id}}></app-movie-photos>
+                            </ng-template>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="tab-pane fade movies_series_tab tab_content serie-movies" id="pills-home" role="tabpanel"
-                         type="movies_in_series"
-                         aria-labelledby="pills-home-tab">
-                        <app-serie-movies ID={{data.serie.id}} top="100px"></app-serie-movies>
-            </div>
+                <div class="tab-pane fade movies_series_tab tab_content serie-movies" 
+                    id="pills-home" 
+                    role="tabpanel"
+                    type="movies_in_series"
+                    aria-labelledby="pills-home-tab">
+                    <ng-template [ngIf]="button_section=='serie'">
+                        <app-serie-movies title="Movies in Series {{data.serie | name}}" ID={{data.serie.id}} top="100px"></app-serie-movies>
+                    </ng-template>
+                </div>
 
-            <div class="tab-pane fade movies_with_stars_tab tab_content" id="pills-profile" role="tabpanel"
-                         type="all_movies_with_star"
-                         aria-labelledby="pills-profile-tab">
-                         <app-stars-movies ID={{data.id}} top="100px"></app-stars-movies>       
+            <div class="tab-pane fade movies_with_stars_tab tab_content" 
+                id="pills-profile" 
+                role="tabpanel"
+                type="all_movies_with_star"
+                aria-labelledby="pills-profile-tab">
+                <ng-template [ngIf]="button_section=='stars-movies'">
+                    <app-stars-movies title="All movies with star in {{data | name}}" ID={{data.id}} top="100px"></app-stars-movies>  
+                </ng-template>     
             </div>
         </div>
     </div>

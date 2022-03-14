@@ -8,6 +8,7 @@ import {MoviesComponent} from '../movies/movies.component'
 })
 export class SerieMoviesComponent extends MoviesComponent {
   @Input() ID:any=0
+  @Input() override title:string=''
   start=true
 
   public override on_set_url():void

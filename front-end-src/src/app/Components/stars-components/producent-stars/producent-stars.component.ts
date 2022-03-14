@@ -9,12 +9,13 @@ import {StarsComponent} from '../../list/stars/stars.component'
 export class ProducentStarsComponent extends StarsComponent  {
   
   @Input() ID:any=0
+  @Input() override title:string=''
   start=true
 
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/producentsstar/'+this.ID+'?page='
+      this.url='http://127.0.0.1:8000/producentsstar/'+this.ID
     }
   }
 }

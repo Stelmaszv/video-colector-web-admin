@@ -86,7 +86,15 @@
                     </div>
                 </div>
                 <ng-template [ngIf]="TokkenService.if_isset_tokken()">
-                    <app-actions add_to_favorite_url="{{return_add_to_favorite_url()}}" edit_link="{{return_edit_url()}}" favorite_stan="{{return_chceck_favorit_stan_url()}}" update_views_url="{{return_update_views_url()}}" add_to_favorite_url="{{return_add_to_favorite_url()}}" add_like_url="{{return_add_to_like_url()}}" add_to_dislike_url="{{return_add_to_dislike_url()}}" add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
+                    <app-actions add_to_favorite_url="{{return_add_to_favorite_url()}}" 
+                                edit_link="{{return_edit_url()}}" 
+                                favorite_stan="{{return_chceck_favorit_stan_url()}}" 
+                                update_views_url="{{return_update_views_url()}}" 
+                                add_to_favorite_url="{{return_add_to_favorite_url()}}" 
+                                add_like_url="{{return_add_to_like_url()}}" 
+                                add_to_dislike_url="{{return_add_to_dislike_url()}}" 
+                                add_to_rating_url="{{return_add_to_ratng_url()}}">
+                    </app-actions>
                 </ng-template>
             </div>
         </div>
@@ -98,14 +106,14 @@
             <li class="nav-item galery_tab_js nav_tab" name="galery" role="presentation nav_tab">
                 <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
                         data-bs-target="#galery-tab" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Galery
+                        aria-selected="false" (click)="button_section='galery'">Galery
                 </button>
             </li>
 
             <li class="nav-item nav_tab movies_series_tab" name="movies_series" role="presentation nav_tab">
                 <button class="nav-link name_js series_name_js" id="pills-stars-movies" data-bs-toggle="pill"
                         data-bs-target="#movis-stars" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">{{data.show_name}}
+                        aria-selected="false" (click)="button_section='serie'">Movies in Series {{data | name}}
                 </button>
             </li>
 
@@ -113,7 +121,7 @@
             <li class="nav-item nav_tab movies_series_stars_tab" name="movies_series_stars" role="presentation">
                 <button class="nav-link" id="pills-stars-tab" data-bs-toggle="pill"
                         data-bs-target="#stars-tab" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Top Stars
+                        aria-selected="false" (click)="button_section='top-stars'">Top Stars in {{data|name}}
                 </button>
             </li>
 
@@ -124,24 +132,27 @@
             aria-labelledby="pills-galery-tab">
            <div class="container">
                <div class="row galery galery-run">
-                <app-serie-photos ID={{data.id}}></app-serie-photos>
+                <ng-template [ngIf]="button_section=='galery'">
+                    <app-serie-photos title="Photos {{data | name}}" ID={{data.id}}></app-serie-photos>
+                </ng-template>
                </div>
            </div>
             </div>
 
             <div class="tab-pane fade tab_content movies_series_tab" id="movis-stars" role="tabpanel" type="movies_in_series"
                  aria-labelledby="pills-stars-movies">
-                 <app-serie-movies ID={{data.id}} top="100px"></app-serie-movies>
+                 <ng-template [ngIf]="button_section=='serie'">
+                    <app-serie-movies title="Movies in Series {{data | name}}" ID={{data.id}} top="100px"></app-serie-movies>
+                </ng-template>
             </div>
 
             <div class="tab-pane fade tab_content movies_series_stars_tab" id="stars-tab" role="tabpanel"
                  type="top-stars"
                  aria-labelledby="pills-stars-tab">
-                 <app-series-stars ID={{data.id}}></app-series-stars>
+                 <ng-template [ngIf]="button_section=='top-stars'">
+                    <app-series-stars title="Top Stars in {{data | name}}" ID={{data.id}}></app-series-stars>
+                </ng-template>
             </div>
-
         </div>
-        
     </div>
-
 </div>

@@ -19,7 +19,8 @@ from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           SerieSerializer,
                                           SerieSerializerUpdate,
                                           SerieSlectSerializer,
-                                          StarsSerializer, StatsSerializer, RatingsSerializer, TagsSerializer)
+                                          StarsSerializer, StatsSerializer, RatingsSerializer, TagsSerializer,
+                                          SerieSerializerID)
 from core.wideocollectorseader.models import Serie, Likes, DisLikess, Views
 from videocolectorwebadmin.global_setings import photo_ext
 from rest_framework.pagination import PageNumberPagination
@@ -144,7 +145,7 @@ class SeriesStarsView(AbstractGenericsAPIViewExtended):
             raise Http404
 
 class SerieDeteilsView(AbstractDeteilsView):
-    serializer_class = SerieSerializer
+    serializer_class = SerieSerializerID
     queryset = Serie.objects
     Model = Serie
 

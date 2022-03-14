@@ -118,13 +118,13 @@
             <li class="nav-item galery_tab nav_tab" name="galery" role="presentation">
                 <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
                         data-bs-target="#galery-tab" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Galery
+                        aria-selected="false" (click)="button_section='galery'">Galery
                 </button>
             </li>
             <li class="nav-item movies_tab nav_tab" name="movies" role="presentation">
                 <button class="nav-link name_js star_name" id="pills-stars-movies" data-bs-toggle="pill"
                         data-bs-target="#movis-stars" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">{{data.name}}
+                        aria-selected="false" (click)="button_section='movies'">Movies with {{data | name}}
                 </button>
             </li>
         </ul>
@@ -134,13 +134,17 @@
                  aria-labelledby="pills-galery-tab">
                 <div class="container">
                     <div class="row galery galery-run">
-                        <app-star-photo ID={{data.id}}></app-star-photo>
+                        <ng-template [ngIf]="button_section=='galery'">
+                            <app-star-photo title="Photos {{data | name}}" ID={{data.id}}></app-star-photo>
+                        </ng-template>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade movies_tab tab_content" id="movis-stars" role="tabpanel" type="stars_movies"
                  aria-labelledby="pills-stars-movies">
-                 <app-star-movies ID={{data.id}} top="100px"></app-star-movies>
+                 <ng-template [ngIf]="button_section=='movies'">
+                    <app-star-movies title="Movies with {{data | name}}" ID={{data.id}} top="100px"></app-star-movies>
+                 </ng-template> 
             </div>
         </div>
 
