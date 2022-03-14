@@ -29,7 +29,7 @@
                             class="wideo_src" id="bgvid" poster="{{data.poster}}" muted>
                             <source type="video/mp4" >
                         </video>
-                        <div class="controls movie_controls" style="text-align: center;left:0;">
+                        <div class="controls movie_controls" style="text-align: center;">
                             <div class="movie_Info">
                                 <div class="serie_name">
                                     <ng-template [ngIf]="data.producent">
@@ -46,14 +46,14 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <span id="play"  style="color:white"><i id="playbtm" class="fas fa-play"></i></span>
+                                    <span id="play"  class="control-item"><i id="playbtm" class="fas fa-play"></i></span>
                                 </div>
                                 <div class="col">
-                                    <span id="time" style="color:white;"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
+                                    <span id="time" class="control-item"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
                                 </div>
                                 <div class="col">
-                                    <span id="muteVideo"  style="color:white; margin-right: 10px;"><i id="mutebtm" class="fas fa-volume-up"></i></span>
-                                    <span id="fullScreen" style="color:white"><i id="fullScreenbtm" class="fas fa-expand"></i></span>
+                                    <span id="muteVideo" class="control-item"><i id="mutebtm" class="fas fa-volume-up"></i></span>
+                                    <span id="fullScreen" class="control-item"><i id="fullScreenbtm" class="fas fa-expand"></i></span>
                                 </div>
                             </div>
                         </div>
