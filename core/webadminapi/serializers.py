@@ -1,12 +1,15 @@
 import os
-
-from django.conf.global_settings import AUTH_USER_MODEL
 from rest_framework import serializers
-from rest_framework.fields import CurrentUserDefault
-
-from core.wideocollectorseader.models import (Movie, Producents, Serie, Star,
-                                              Tag, UserFavorits as UserFavoritsModel, Likes,Rating)
+from pathlib import Path
 from django.contrib.auth import get_user_model
+from core.wideocollectorseader.models import (Movie,
+                                              Producents,
+                                              Serie,
+                                              Star,
+                                              Tag,
+                                              UserFavorits as UserFavoritsModel,
+                                              Likes,
+                                              Rating)
 User = get_user_model()
 
 class BaseSeralizer(serializers.ModelSerializer):
@@ -87,7 +90,6 @@ class MoviesFavorit(StarsFavoritBase):
         model = Movie
         fields = ['name']
 
-
 class StarsFavorit(StarsFavoritBase):
     fovorite_item = 'stars'
 
@@ -108,8 +110,6 @@ class ProducentFavorit(StarsFavoritBase):
     class Meta:
         model = Star
         fields = ['name']
-
-
 
 class MoviesLiksView(serializers.ModelSerializer):
     data_put=[]
@@ -235,18 +235,26 @@ class SerieSerializer(BaseSeralizer):
         model = Serie
         fields = '__all__'
 
+def set_banners(instance):
+    banners_array = []
+    if_dir_exit=os.path.isdir(instance.dir+'\\banners')
+    if if_dir_exit:
+        banners= os.listdir(instance.dir+'\\banners')
+        if len(banners)>0 or if_dir_exit:
+            for banner in banners:
+                banners_array.append({'url':'http://127.0.0.1:8000/'+instance.dir+'/banners/'+banner})
+    miandir = os.listdir(instance.dir + '\photo\DATA')
+    for photo in miandir:
+        if 'banner' == Path(photo).stem:
+             banners_array.append({'url': 'http://127.0.0.1:8000/' + instance.dir + '/photo/DATA/' + photo})
+    return banners_array
+
 class SerieSerializerID(SerieSerializer):
 
-    def set_banners(self,instance):
-        banners_array = []
-        banners= os.listdir(instance.dir+'\\banners')
-        for banner in banners:
-            banners_array.append({'url':instance.dir+'\\'+banner})
-        return banners_array
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation["banners"] = self.set_banners(instance)
+        representation["banners"] = set_banners(instance)
         return representation
 
 #Producents
@@ -260,6 +268,13 @@ class ProducentsSerializer(BaseSeralizer):
     class Meta:
         model = Producents
         fields = '__all__'
+
+class ProducentsSerializerID(ProducentsSerializer):
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["banners"] = set_banners(instance)
+        return representation
 
 #Stars
 class SeriesSerlizerForStars(ShortSeries):

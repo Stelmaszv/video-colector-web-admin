@@ -17,7 +17,7 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           ProducentsSerializerUpdate,
                                           ProducetFormSeralizer,
                                           SerieSerializer, StarsSerializer, StatsSerializer, RatingsSerializer,
-                                          TagsSerializer)
+                                          TagsSerializer, ProducentsSerializerID)
 from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views
 from rest_framework.pagination import PageNumberPagination
 
@@ -86,7 +86,7 @@ class ProducentsSeriesView(AbstractGenericsAPIView):
             raise Http404
 
 class ProducentsDeteilsView(AbstractDeteilsView):
-    serializer_class = ProducentsSerializer
+    serializer_class = ProducentsSerializerID
     queryset = Producents.objects
     Model = Producents
 

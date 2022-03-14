@@ -36,13 +36,24 @@ export class BaseIDComponent implements OnInit {
     rate: new FormControl(1)
   });
 
-  constructor(protected fb: FormBuilder,private TitleService: Title,public RelationSelectService:RelationSelectService,private activatedRoute: ActivatedRoute,protected httpService: HttpService,public RatingService:RatingService,protected Router:Router,public TokkenService:TokkenService) { }
+  constructor(protected fb: FormBuilder,
+              private TitleService: Title,
+              public RelationSelectService:RelationSelectService,
+              private activatedRoute: ActivatedRoute,
+              protected httpService: HttpService,
+              public RatingService:RatingService,
+              protected Router:Router,
+              public TokkenService:TokkenService) { }
 
   public ngOnInit(): void 
   {
     this.set_id()
     this.get_url(this.id)
     this.on_init()
+  }
+
+  public random_banneer(){
+    return this.data.banners[Math.floor(Math.random()*this.data.banners.length)].url
   }
 
   protected on_init():void {}
