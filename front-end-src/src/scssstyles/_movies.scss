@@ -5,12 +5,24 @@ $starsBGColor:black;
 .video-section{
     .section_movie_play{
         display: none;
+        .movie_Info{
+            position: absolute;
+            color: white;
+            top: 85%;
+            left: 3%;
+            .serie_name{
+                font-style: italic;
+            }
+            .movie_name{
+                font-weight: bold;
+            }
+        }
         .movie_controls{
             opacity: .1;
         }
     }
     .movie_section{
-        display: black;
+        display: block;
         background-color: black;
         position: relative;
         .movie_poster{
@@ -31,8 +43,12 @@ $starsBGColor:black;
             }
         }
         .controls{
-            .btn{
-                margin-left: 5px;
+            .icon_control{
+                color:white;
+                margin-right: 10px;
+            }
+            #playbtm{
+                background-color: red;
             }
             .form-floating{
                 width: 32%;

@@ -19,7 +19,6 @@ export class StringLenghtPipe implements PipeTransform {
   }
 
   public transform(string:string,limit:number): string {
-    console.log(string,limit)
     if (string.length>limit){
       return this.short_string(string,limit)
     }

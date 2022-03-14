@@ -72,7 +72,7 @@ let interval = setInterval(function () {
             }
         });
         wideo_src.addEventListener("mouseover",function(){
-            movie_controls.style.opacity=.1
+            movie_controls.style.opacity=0
         })
 
         movie_controls.addEventListener("mouseover",function(){

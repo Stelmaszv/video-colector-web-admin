@@ -23,19 +23,39 @@
                 </div>
             </div> 
             <div class="movie section_movie_play" style="background-color: black;">
-                <h1 class="d-flex justify-content-center name">{{data.show_name}}</h1>
                 <ng-template [ngIf]="mode=='poster'">
                     <div class="if_poster">
                         <video style="min-height:100%" src="{{data.src}}"
-                            class="wideo_src" id="bgvid" poster="{{data.poster}}">
-                            <source type="video/mp4">
+                            class="wideo_src" id="bgvid" poster="{{data.poster}}" muted>
+                            <source type="video/mp4" >
                         </video>
-                        <div class="controls d-flex align-items-stretch movie_controls">
-                            <button id="play"><i id="playbtm" class="fas fa-play"></i></button>
-                            <button id="muteVideo"><i id="mutebtm" class="fas fa-volume-up"></i></button>
-                            <input type="range" id="range" value="0" min="0" max="100" value="0" step="1"/>
-                            <span id="time"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
-                            <button id="fullScreen"><i id="fullScreenbtm" class="fas fa-expand"></i></button>
+                        <div class="controls movie_controls" style="text-align: center;left:0;">
+                            <div class="movie_Info">
+                                <div class="serie_name">
+                                    <ng-template [ngIf]="data.producent">
+                                        {{data.producent | name }} -
+                                    </ng-template>
+                                    {{data.serie | name}}
+                                </div>
+                                <div class="movie_name">{{data | name}}</div>
+                            </div>
+                            <div class="row rage">
+                                <div class="col">
+                                    <input type="range" id="range" value="0" min="0" max="100" value="0" step="1"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <span id="play"  style="color:white"><i id="playbtm" class="fas fa-play"></i></span>
+                                </div>
+                                <div class="col">
+                                    <span id="time" style="color:white;"><span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span></span>
+                                </div>
+                                <div class="col">
+                                    <span id="muteVideo"  style="color:white; margin-right: 10px;"><i id="mutebtm" class="fas fa-volume-up"></i></span>
+                                    <span id="fullScreen" style="color:white"><i id="fullScreenbtm" class="fas fa-expand"></i></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </ng-template>
