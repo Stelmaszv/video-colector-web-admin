@@ -12,12 +12,20 @@
                         <ng-template [ngIf]="data.serie">
                             <button id="mute" (click)="next_movie_in_series()" class="btn bg-white input_poster">{{data.serie.show_name}}</button>
                         </ng-template>
-                        <div class="form-floating input_poster">
-                            <select class="form-select series-search btn bg-white form-select btn-lg"  (change)="next_movie_with_star()" id="floatingSelect" aria-label="Floating label select example" formControlName="star">
-                                <option *ngFor="let star of data.stars" value="{{star.id}}" aria-label="Default select example">{{star.name}}</option>
-                            </select>
-                            <label for="floatingSelect">Select Star to show next Movie</label>
-                        </div>
+                        <ng-template [ngIf]="data.stars.length>0">
+                            <button id="mute" (click)="next_movie_with_star(data.stars[0].id)" class="btn bg-white input_poster">{{data.stars[0]|name}}</button>
+                        </ng-template>
+                        <ng-template [ngIf]="data.stars.length>1">
+                            <button id="mute" (click)="next_movie_with_star(data.stars[1].id)" class="btn bg-white input_poster">{{data.stars[1]|name}}</button>
+                        </ng-template>
+                        <ng-template [ngIf]="data.stars.length>2">
+                            <div class="form-floating input_poster">
+                                <select class="form-select series-search btn bg-white form-select btn-lg"  (change)="next_movie_with_star()" id="floatingSelect" aria-label="Floating label select example" formControlName="star">
+                                    <option *ngFor="let star of data.stars" value="{{star.id}}" aria-label="Default select example">{{star.name}}</option>
+                                </select>
+                                <label for="floatingSelect">Select Star to show next Movie</label>
+                            </div>
+                        </ng-template>
                     </div>
                     <p class="lead description">{{data.description}}</p>
                 </div>

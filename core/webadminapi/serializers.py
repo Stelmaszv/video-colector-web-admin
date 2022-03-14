@@ -296,4 +296,9 @@ class MoviesSerializer(BaseSeralizer):
         model = Movie
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["stars"] = sorted(representation["stars"], key=lambda x: x["views_count"],reverse=True)
+        return representation
+
 
