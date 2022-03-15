@@ -31,6 +31,7 @@ export class BaseIDComponent implements OnInit {
   protected auth:any=false
   protected edit_url_heder:string=''
   public button_section:string=''
+  public banner:string=''
 
   public addrate = new FormGroup({
     rate: new FormControl(1)
@@ -50,10 +51,11 @@ export class BaseIDComponent implements OnInit {
     this.set_id()
     this.get_url(this.id)
     this.on_init()
+
   }
 
-  public random_banneer(){
-    return this.data.banners[Math.floor(Math.random()*this.data.banners.length)].url
+  public random_banneer(data:any){
+    return data.banners[Math.floor(Math.random()*data.banners.length)].url
   }
 
   protected on_init():void {}
@@ -100,6 +102,11 @@ export class BaseIDComponent implements OnInit {
     return response['name']
   }
 
+  protected set_banner(data:any){
+    this.banner=this.random_banneer(data)
+    console.log(this.banner)
+  }
+
   protected get_url(id:number): void 
   {
     if (this.auth==false){
@@ -108,6 +115,7 @@ export class BaseIDComponent implements OnInit {
             this.data=response
             this.on_get_url()
             this.set_procent(response)
+            this.set_banner(response)
             this.on_get_result(response)
             this.TitleService.setTitle(this.set_title(response));
         }
@@ -120,6 +128,7 @@ export class BaseIDComponent implements OnInit {
             this.on_get_url()
             this.set_procent(response)
             this.on_get_result(response)
+            this.set_banner(response)
             this.TitleService.setTitle(this.set_title(response));
         },
         (error) => {
