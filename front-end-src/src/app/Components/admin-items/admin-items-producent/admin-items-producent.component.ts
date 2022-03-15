@@ -13,6 +13,7 @@ export class AdminItemsProducentComponent extends BaseItemsSectionsComponent {
   public override tag_url: string="http://127.0.0.1:8000/series/tags/";
   public override tag_item_url = "http://127.0.0.1:8000/add/tag/serie/"
   public override tag_add_section='tags'
+  public override place:string="producent"
 
   public override series_url: string="http://127.0.0.1:8000/producent/tags/";
   public override series_item_url = "http://127.0.0.1:8000/add/tag/producent/"

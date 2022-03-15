@@ -8,9 +8,10 @@ import { BaseIDComponent } from '../../id/base-id/base-id.component';
 })
 export class BaseItemsSectionsComponent extends BaseIDComponent {
 
-  public override url = 'http://127.0.0.1:8000/movie/' 
+  public override url = '' 
   protected override  auth=true
 
+  public place:string=""
   public tag_url: string="";
   public tag_item_url = ""
   public tag_add_section='tags'

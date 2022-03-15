@@ -14,6 +14,6 @@ export class SerieIdComponent extends BaseIDComponent {
   protected override update_views_url:string='serieupdateview/'
   protected override fovorits_url:string='favorite/serie/'
   protected override chceck_favorit_stan_url='favoriteis/series/'
-  protected override edit_url_heder:string='/admin/movie/edit/'
+  protected override edit_url_heder:string='/admin/serie/edit/'
 
 }
