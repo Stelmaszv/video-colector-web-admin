@@ -114,8 +114,8 @@
             <div class="col col-star">
             <a [routerLink]="['/star/',star.id]">
             <div class="card star-cart">
-            <img src="{{star.avatar}}" class="card-img-top star-cart-img">
-            <div class="card-body">{{star.name}}</div>
+            <img src="{{star |img:'star_avatar'}}" class="card-img-top star-cart-img">
+            <div class="card-body">{{star|name}}</div>
             </div>
             </a>
             </div>

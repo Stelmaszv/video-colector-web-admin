@@ -204,7 +204,7 @@ class ShortSeries(serializers.ModelSerializer):
     Producent = ShortProducent(many=False)
     class Meta:
         model=Serie
-        fields = ['id','name','show_name','avatar','Producent']
+        fields = ['id','name','show_name','avatar','Producent','dir']
 
 #Serlisers
 class TagsSerializer(serializers.ModelSerializer):
@@ -249,6 +249,20 @@ def set_banners(instance):
              banners_array.append({'url': 'http://127.0.0.1:8000/' + instance.dir + '/photo/DATA/' + photo})
     return banners_array
 
+def set_avatar_for_top_stars(instance):
+    dir= instance.series.all()[0].dir+'\\stars'
+    if_dir_exit = os.path.isdir(dir)
+    if if_dir_exit:
+        stars = os.listdir(dir)
+        for star in stars:
+            if star == instance.name:
+                if os.path.isdir(dir+'\\'+star):
+                    star_dir = os.listdir(dir+'\\'+star)
+                    for avatar in star_dir:
+                        if 'avatar' == Path(avatar).stem:
+                            return 'http://127.0.0.1:8000/'+dir+'\\'+star+'\\'+avatar
+    return ''
+
 class SerieSerializerID(SerieSerializer):
 
 
@@ -287,6 +301,13 @@ class StarsSerializer(BaseSeralizer):
     class Meta:
         model = Star
         fields = '__all__'
+
+class StarsSerializerTop(StarsSerializer):
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["avatar"] = set_avatar_for_top_stars(instance)
+        return representation
 
 #Movies
 class ProducentSeralizerForMovie(serializers.ModelSerializer):

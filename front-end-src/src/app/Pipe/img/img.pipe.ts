@@ -11,6 +11,9 @@ export class ImgPipe implements PipeTransform {
       case 'poster':
         return this.valid_img(data['poster'],Varable.no_poster)
       break;
+      case 'star_avatar':
+        return this.valid_img(data['avatar'],Varable.no_avatar_star)
+      break;
     }
     return ''  
   }
