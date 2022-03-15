@@ -5,7 +5,7 @@
     <div class="col"></div>
     <div class="col">
       <h2>Cover</h2>
-      <img src="{{data.avatar}}" class="avatar">
+      <img src="{{data | img:'avatar'}}" class="avatar">
     </div>
     <div class="col"></div>
   </div>
@@ -15,7 +15,7 @@
       Avatar
     </div>
     <div class="col">
-      <img src="{{data.avatar}}" class="avatar_small">
+      <img src="{{data | img:'avatar'}}" class="avatar_small">
     </div>
 </div>
 <div class="container">

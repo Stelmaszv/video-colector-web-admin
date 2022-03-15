@@ -15,5 +15,6 @@ export class AdminStarsComponent extends ApstractAdminComponent {
   protected override galery_url='/admin/star/galery'
   protected override tag_url='/admin/star/tag'
   protected override stats_url='/admin/star/stats'
+  public override title: string="Admin Stars"
 
 }

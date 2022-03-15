@@ -12,4 +12,8 @@ export class BaseGaleryAdminComponent extends BaseIDComponent {
   public edit_url=''
   public galery_url=''
   public section=''
+
+  protected override set_title(response: any): string {
+    return 'Galery - '+response['name']
+  }
 }

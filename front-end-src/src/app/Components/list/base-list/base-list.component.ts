@@ -29,6 +29,7 @@ export class BaseListComponent implements OnInit {
   protected page:number=1 ;
   protected auth:any=false
   protected debug:any=true
+  protected no_title:boolean=false
   public title:string=''
   @Input() top:any='50px'
 
@@ -216,7 +217,9 @@ export class BaseListComponent implements OnInit {
               this.set_count(response)
               this.set_results()
               this.on_after_set_results(response)
-              this.TitleService.setTitle(this.set_title(response));
+              if (!this.no_title){
+                this.TitleService.setTitle(this.set_title(response));
+              }
               this.loading=true
             }
           }
@@ -225,7 +228,9 @@ export class BaseListComponent implements OnInit {
     }else{
       if (this.loading){
         this.loading=false
-        console.log(this.url+'?page='+this.page+'&'+this.filter_url)
+        if (this.debug){
+          console.log(this.url+'?page='+this.page+'&'+this.filter_url)
+        }
         this.on_set_url()
         this.httpService.get_url_auth(this.url+'?page='+this.page+'&'+this.filter_url).subscribe(
           (response) => {
@@ -234,7 +239,9 @@ export class BaseListComponent implements OnInit {
               this.set_results()
               this.set_count(response)
               this.on_after_set_results(response)
-              this.TitleService.setTitle(this.set_title(response));
+              if (!this.no_title){
+                this.TitleService.setTitle(this.set_title(response));
+              }
               this.loading=true
             }
           },

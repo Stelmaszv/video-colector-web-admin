@@ -22,4 +22,8 @@ export class AbstractEditComponent extends BaseIDComponent {
     })
   }
 
+  protected override set_title(response: any): string {
+    return 'Edit '+response['name']
+  }
+
 }

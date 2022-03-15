@@ -11,6 +11,7 @@ export class BaseItemListComponent extends BaseListComponent {
   @Input() public override url: string="";
   @Input() public item_url = ""
   protected override auth: any=true;
+  protected override no_title: boolean=true;
   public list :any[]=[]
   public div_id=""
   @Input() public add_section='' 

@@ -104,7 +104,6 @@ export class BaseIDComponent implements OnInit {
 
   protected set_banner(data:any){
     this.banner=this.random_banneer(data)
-    console.log(this.banner)
   }
 
   protected get_url(id:number): void 
@@ -115,9 +114,9 @@ export class BaseIDComponent implements OnInit {
             this.data=response
             this.on_get_url()
             this.set_procent(response)
+            this.TitleService.setTitle(this.set_title(response));
             this.set_banner(response)
             this.on_get_result(response)
-            this.TitleService.setTitle(this.set_title(response));
         }
       );
     }else{
@@ -128,8 +127,8 @@ export class BaseIDComponent implements OnInit {
             this.on_get_url()
             this.set_procent(response)
             this.on_get_result(response)
-            this.set_banner(response)
             this.TitleService.setTitle(this.set_title(response));
+            this.set_banner(response)
         },
         (error) => {
           console.log(error.statusText)

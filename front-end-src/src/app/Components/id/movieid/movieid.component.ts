@@ -101,7 +101,6 @@ export class MovieidComponent extends BaseIDComponent{
     this.data['movie_stars']=this.data_stars().sort(this.get_sort_order("movies_count")).reverse()
     this.data['movie_stars_player']=this.data_stars_player().sort(this.get_sort_order("movies_count")).reverse()
     this.data['more_player_stars']=this.if_more_stars_player(this.data['movie_stars_player'])
-
   }
 
 }

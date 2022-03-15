@@ -14,6 +14,8 @@ export class AdminStatsBaseComponent extends BaseListComponent {
   @Input() public delete_url='';
   @Input() public selector='';
 
+  protected override no_title: boolean=true;
+
   private update_elemnt(selector:string){
     function to_int(value:any):any{
       return value*1

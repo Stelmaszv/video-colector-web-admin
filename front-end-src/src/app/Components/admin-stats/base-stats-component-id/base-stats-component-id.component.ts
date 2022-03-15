@@ -20,6 +20,10 @@ export class BaseStatsComponentIDComponent extends BaseIDComponent {
   protected override  auth=true
   public section=''
 
+  protected override set_title(response: any): string {
+    return 'Stars '+response['name']
+  }
+
   public return_like_url():string
   {
     return this.liks_url+this.id;

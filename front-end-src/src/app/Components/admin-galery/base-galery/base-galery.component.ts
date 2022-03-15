@@ -16,6 +16,7 @@ export class BaseGaleryComponent extends BaseListComponent {
   @Input() id:any=0
   protected override debug: any=true;
   protected override auth: any=true;
+  protected override no_title:boolean=true
 
   public override on_before_load_data():void
   {

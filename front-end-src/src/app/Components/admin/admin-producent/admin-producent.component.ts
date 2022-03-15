@@ -11,5 +11,6 @@ export class AdminProducentComponent extends ApstractAdminComponent {
   public override url:string='http://127.0.0.1:8000/admin/producent'
   protected override auth=true;
   protected override item_url='producent'
+  public override title: string="Admin Producents"
 
 }
