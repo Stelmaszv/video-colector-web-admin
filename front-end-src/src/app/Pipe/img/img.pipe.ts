@@ -21,8 +21,8 @@ export class ImgPipe implements PipeTransform {
     return ''  
   }
 
-  private valid_img(poster:string,return_str:string) : string{
-    return(poster) ? poster :return_str;
+  private valid_img(img:string,return_str:string) : string{
+    return(img) ? img :return_str;
   }
 
 

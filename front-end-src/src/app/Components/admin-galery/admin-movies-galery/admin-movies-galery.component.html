@@ -11,7 +11,7 @@
         <tbody>
           <tr>
             <td><img src="{{data | img:'avatar' }}" class="avatar"></td>
-            <td><img src="{{data | img:'poster'}}" class="poster"></td>
+            <td><img src="{{data | img:'poster'}}"  class="poster"></td>
           </tr>
           <tr class="actions">
             <td class="new_photo">Generete New Cover</td>
@@ -32,13 +32,13 @@
       Avatar
     </div>
     <div class="col">
-      <img src="{{data.avatar}}" class="avatar_small">
+      <img src="{{data | img:'avatar' }}" class="avatar_small">
     </div>
     <div class="col">
       Cover
     </div>
     <div class="col">
-      <img src="{{data.poster}}" class="poster_small">
+      <img src="{{data | img:'poster'}}" class="poster_small">
     </div>
 </div>
 

@@ -234,7 +234,7 @@ class Star(models.Model):
 class Movie(models.Model):
     name = models.CharField(max_length=200,null=True)
     show_name = models.CharField(max_length=200, default='', null=True,blank=True)
-    avatar = models.CharField(max_length=200, default='', null=True)
+    avatar = models.CharField(max_length=200, default='', null=True,blank=True)
     src = models.CharField(max_length=200, default='', null=True)
     web_src = models.CharField(max_length=200, default='', null=True)
     poster = models.CharField(max_length=200, default='', null=True,blank=True)
