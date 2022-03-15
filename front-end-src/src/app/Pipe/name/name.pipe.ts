@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { StringLenghtPipe } from '../string-lenght/string-lenght.pipe';
 
 @Pipe({
   name: 'name'

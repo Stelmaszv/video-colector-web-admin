@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BaseListComponent} from '../base-list/base-list.component'
 import { FormControl ,FormGroup} from '@angular/forms';
+import { DescPipe } from 'src/app/Pipe/desc-pip/desc.pipe';
 @Component({
   selector: 'app-series',
   templateUrl: './series.component.html',
@@ -21,5 +22,10 @@ export class SeriesComponent extends BaseListComponent {
     disLikes_count:new FormControl(),
     country:new FormControl()
   });
+
+  protected override on_set_results(movie:any):void
+  {
+    movie['description'] =    new DescPipe().transform(movie)
+  }
 
 }
