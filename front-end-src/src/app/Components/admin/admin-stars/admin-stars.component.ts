@@ -9,6 +9,7 @@ import { ApstractAdminComponent } from '../apstract-admin/apstract-admin.compone
 export class AdminStarsComponent extends ApstractAdminComponent {
 
   public override url:string='http://127.0.0.1:8000/admin/stars'
+  public override delete_url:string='http://127.0.0.1:8000/star/update'
   protected override auth=true;
   protected override item_url='/star'
   protected override edit_url='/admin/star/edit'

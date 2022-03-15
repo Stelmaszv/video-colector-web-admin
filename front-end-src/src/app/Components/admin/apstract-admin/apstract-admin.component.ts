@@ -13,6 +13,25 @@ export class ApstractAdminComponent extends BaseListComponent  {
   protected galery_url=''
   protected tag_url=''
   protected stats_url=''
+  public delete_data:any
+  public delete_name:string=''
+  public delete_url:string= ''
+  public delete_index:number= 0
+
+  public set_delete(data:any,i:any){
+    this.delete_data=data
+    this.delete_name=data.name
+    this.delete_index=i
+  }
+
+  public delete(){
+    this.data.splice(this.delete_index,1)
+    this.httpService.delete(this.delete_url+'/'+this.delete_data.id).subscribe(
+      response=>{
+        console.log(response)
+      }
+    )
+  }
 
   protected override on_set_results(movie:any):void
   {

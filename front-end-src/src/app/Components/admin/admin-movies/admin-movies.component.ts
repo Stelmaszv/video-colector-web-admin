@@ -9,6 +9,7 @@ import { ApstractAdminComponent } from '../apstract-admin/apstract-admin.compone
 export class AdminMoviesComponent extends ApstractAdminComponent {
 
   public override url:string='http://127.0.0.1:8000/admin/movies'
+  public override delete_url:string='http://127.0.0.1:8000/movieupdata'
   protected override auth=true;
   protected override item_url='/movie'
   public override title: string="Admin Movies"
