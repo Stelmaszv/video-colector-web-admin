@@ -75,6 +75,7 @@ import { NamePipe } from './Pipe/name/name.pipe';
 import { DescPipe } from './Pipe/desc-pip/desc.pipe';
 import { TopSectionComponent } from './Components/top-section/top-section.component';
 import { StarLoopContetComponent } from './common/loop_content/star-loop-contet/star-loop-contet.component';
+import { ProducentLoopComponentComponent } from './common/loop_content/producent-loop-component/producent-loop-component.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { StarLoopContetComponent } from './common/loop_content/star-loop-contet/
     NamePipe,
     DescPipe,
     TopSectionComponent,
-    StarLoopContetComponent
+    StarLoopContetComponent,
+    ProducentLoopComponentComponent
   ],
   imports: [
     AppRoutingModule,

@@ -112,6 +112,7 @@
             <ng-template [ngIf]="section_title=='Producents'">
                 <div class="row">
                     <div class="col" *ngFor="let producent of data">
+                      <app-producent-loop-component [El]="producent"></app-producent-loop-component>
                         <div class="card series-cart">
                             <img src="{{producent.avatar}}" class="card-img-top">
                             <div class="card-body">
