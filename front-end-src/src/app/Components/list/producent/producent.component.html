@@ -44,17 +44,11 @@
       </div>
     </div>
   </form>
+  
 <div class="container">
     <div class="row">
         <div class="col" *ngFor="let producent of data">
-            <div class="card series-cart">
-                <img src="{{producent.avatar}}" class="card-img-top">
-                <div class="card-body">
-                </div>
-                <h5 class="card-title">{{producent.show_name}}</h5>
-                <p class="card-text">{{producent.description | stringLenght:20 }}</p>
-                <a [routerLink]="['/producent/',producent.id]" class="btn btn-primary">{{producent.show_name}}</a>
-            </div>
+          <app-producent-loop-component [El]="producent"></app-producent-loop-component>
         </div>
     </div>
 </div>
