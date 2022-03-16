@@ -25,6 +25,7 @@ export class ApstractAdminComponent extends BaseListComponent  {
   }
 
   public delete(){
+    this.AlertService.alert(this.delete_name+' has been Deleted')
     this.data.splice(this.delete_index,1)
     this.httpService.delete(this.delete_url+'/'+this.delete_data.id).subscribe(
       response=>{

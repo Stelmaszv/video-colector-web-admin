@@ -6,6 +6,7 @@ import {TokkenService}  from '../../../Service/tokken/tokken.service'
 import { Router } from '@angular/router';
 import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
 import { Title } from '@angular/platform-browser';
+import { AlertService } from 'src/app/Service/alert/alert.service';
 @Component({
   selector: 'app-base-list',
   templateUrl: './base-list.component.html',
@@ -34,7 +35,15 @@ export class BaseListComponent implements OnInit {
   protected paginate=true
   @Input() top:any='50px'
 
-  public constructor(public RelationSelectService:RelationSelectService,private TitleService: Title,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
+  public constructor(
+    public RelationSelectService:RelationSelectService,
+    private TitleService: Title,
+    protected httpService: HttpService,
+    public RatingService:RatingService ,
+    public TokkenService:TokkenService, 
+    public ProcentService:ProcentService,
+    public AlertService:AlertService,
+    private Router:Router) { }
 
   public add_star(add_star:number):void
   {
