@@ -2,45 +2,56 @@
     <section class="section-top">
         <div class="row">
             <div class="col title">
-                <h1>{{section_title}} order By 
-                    <select (change)="set_order()" [formControl]="order_form">
-                        <option value="-views_count">Views</option>
-                        <option value="-likes_count">Likes</option>
-                        <option value="-added">Added</option>
-                        <option value="-disLikes_count">Dis Likes count</option>
-                    </select>
-                </h1>
+                <h1>{{section_title}}</h1>
             </div>
             <div class="col counter" style="text-align:right;">
-                <h3><span class="badge bg-secondary">{{item_count}}</span></h3>
+                <select (change)="set_order()" [formControl]="order_form" class="form-select">
+                    <option value="-views_count">Views</option>
+                    <option value="-likes_count">Likes</option>
+                    <option value="-added">Added</option>
+                    <option value="-disLikes_count">Dis Likes count</option>
+                </select>
+            </div>
+            <div class="col counter" style="text-align:right;">
+                <h3>                 
+                    <span class="badge bg-secondary">{{item_count}}</span>
+                </h3>
             </div>
         </div>
         <section>
             <ng-template [ngIf]="section_title=='Movies'">
-                <div class="row">
-                <div class="col item" *ngFor="let movie of data">
-                  <app-movies-cover-loop-content [El]="movie"></app-movies-cover-loop-content>
-                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col item" *ngFor="let movie of data">
+                            <app-movies-cover-loop-content [El]="movie"></app-movies-cover-loop-content>
+                        </div>
+                    </div>
                 </div>
             </ng-template>
             <ng-template [ngIf]="section_title=='Series'">
-                <div class="row">
-                    <div class="col" *ngFor="let serie of data">
-                      <app-series-loop-content [El]="serie"></app-series-loop-content>
+                <div class="container">
+                    <div class="row">
+                        <div class="col" *ngFor="let serie of data">
+                        <app-series-loop-content [El]="serie"></app-series-loop-content>
+                        </div>
                     </div>
                 </div>
             </ng-template>
             <ng-template [ngIf]="section_title=='Stars'">
-                <div class="row">
-                    <div class="col" *ngFor="let star of data">
-                      <app-star-loop-contet [El]="star"></app-star-loop-contet>
+                <div class="container">
+                    <div class="row">
+                        <div class="col" *ngFor="let star of data">
+                        <app-star-loop-contet [El]="star"></app-star-loop-contet>
+                        </div>
                     </div>
                 </div>
             </ng-template>
             <ng-template [ngIf]="section_title=='Producents'">
-                <div class="row">
-                    <div class="col" *ngFor="let producent of data">
-                      <app-producent-loop-component [El]="producent"></app-producent-loop-component>
+                <div class="container">
+                    <div class="row">
+                        <div class="col" *ngFor="let producent of data">
+                        <app-producent-loop-component [El]="producent"></app-producent-loop-component>
+                        </div>
                     </div>
                 </div>
             </ng-template>
