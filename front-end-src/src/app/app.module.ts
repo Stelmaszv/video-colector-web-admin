@@ -77,6 +77,8 @@ import { TopSectionComponent } from './Components/top-section/top-section.compon
 import { StarLoopContetComponent } from './common/loop_content/star-loop-contet/star-loop-contet.component';
 import { ProducentLoopComponentComponent } from './common/loop_content/producent-loop-component/producent-loop-component.component';
 import { SeriesLoopContentComponent } from './common/loop_content/series-loop-content/series-loop-content.component';
+import { MoviesCoverLoopContentComponent } from './common/loop_content/movies-cover-loop-content/movies-cover-loop-content.component';
+import { MoviesPosterLoopContentComponent } from './common/loop_content/movies-poster-loop-content/movies-poster-loop-content.component';
 
 @NgModule({
   declarations: [
@@ -152,7 +154,9 @@ import { SeriesLoopContentComponent } from './common/loop_content/series-loop-co
     TopSectionComponent,
     StarLoopContetComponent,
     ProducentLoopComponentComponent,
-    SeriesLoopContentComponent
+    SeriesLoopContentComponent,
+    MoviesCoverLoopContentComponent,
+    MoviesPosterLoopContentComponent
   ],
   imports: [
     AppRoutingModule,

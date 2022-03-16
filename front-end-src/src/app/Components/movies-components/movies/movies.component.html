@@ -110,123 +110,18 @@
   <div class="container" style="margin-top:0px;">
     <div class="row row-cols-2">
       <div class="col" *ngFor="let movie of data">
-        <div class="card cart_poster_item">
-          <img src="{{movie | img:'poster'}}" class="card-img-top poster" style="width: 100%;height:200px;" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><a [routerLink]="['/movie/',movie.id]" >{{movie.name_pip | stringLenght:50}}</a></h5>
-            <p class="card-text entry">{{movie.description | stringLenght:300  }}</p>
-          </div>
-          
-          <ng-template [ngIf]="movie.stars.length">
-            <div class="card-body star_list">
-              <a href="#" [routerLink]="['/star/',movie.stars[0].id]" class="card-link star_item">{{movie.stars[0]|name}}</a>
-              <ng-template [ngIf]="movie.stars.length>1">
-                <a href="#" [routerLink]="['/star/',movie.stars[1].id]" class="card-link star_item">{{movie.stars[1]|name}}</a>
-              </ng-template>
-              <ng-template  [ngIf]="movie.stars.length>2">
-                <a href="#" [routerLink]="['/star/',movie.stars[2].id]" class="card-link star_item">{{movie.stars[2]|name}}</a>
-              </ng-template>
-              <ng-template [ngIf]="movie.stars.length>3">
-                + <i>{{movie.stars.length-3}}</i>
-              </ng-template>
-            </div>
-          </ng-template>
-
-          <div class="stats">
-            <span class="stat_item">
-              <span class="stats_font">
-                <i class="fas fa-thumbs-up"></i>
-              </span>
-              <span class="stats_rate">
-                {{ movie.likes_count | bigInt }}
-              </span>
-            </span>
-            <span class="stat_item">
-              <span class="stats_font">
-                <i class="fas fa-eye"></i>
-              </span>
-              <span class="stats_rate">
-                  {{ movie.views_count | bigInt }}
-              </span>
-            </span>
-            <span class="stat_item">
-              <span class="stats_font">
-                <i class="fas fa-thumbs-down"></i>
-              </span>
-              <span class="stats_rate">
-                  {{ movie.likes_count | bigInt }}
-              </span>
-            </span>
-          </div>
-        </div>
+        <app-movies-poster-loop-content [El]="movie"></app-movies-poster-loop-content>
       </div>
     </div>
   </div>
 </ng-template>
 
 <ng-template [ngIf]="mode=='cover'">
-<div class="container movies" style="margin-top:0px;">
-  <div class="row">
-    <div class="col" *ngFor="let movie of data">
-      <div class="card cart-item">
-        <img src="{{movie.avatar}}" class="card-img-top cover" [ngClass]="{'rating_color_good' : RatingService.if_good_rating(movie),'movie_rating_mid' : RatingService.if_mid_rating(movie),'movie_rating_low' : RatingService.if_low_rating(movie)}" alt="assets/icon/movie.jpg">
-        <div class="card-body">
-          <h5 class="card-title"><a [routerLink]="['/movie/',movie.id]" >{{movie.name_pip | stringLenght:30}}</a></h5>
-          <p class="card-text">{{movie.description | stringLenght:150 }}</p>
-        </div>
-        <ng-template [ngIf]="movie.likes_count>0">
-          <div class="like-procent">
-              <div class="good" [ngStyle]="{'width': movie.good_procent}"></div>
-              <div class="bad"  [ngStyle]="{'width': movie.bad_procent}"></div>
-          </div>
-        </ng-template>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><a  [routerLink]="['/serie/',movie.serie.id]" class="card-link">{{movie.serie.show_name}}</a></li>
-          <ng-template [ngIf]="movie.stars.length">
-            <li class="list-group-item">
-                <a class="card-link" [routerLink]="['/star/',movie.stars[0].id]">{{movie.stars[0]|name}}</a>
-                <ng-template [ngIf]="movie.stars.length>1">
-                  + <i>{{movie.stars.length-1}}</i>
-                </ng-template>
-            </li>
-          </ng-template>
-        </ul>
-        <div class="stats">
-          <span class="stat_item">
-            <span class="stats_font">
-              <i class="fas fa-thumbs-up"></i>
-            </span>
-            <span class="stats_rate">
-              {{ movie.likes_count | bigInt }}
-            </span>
-          </span>
-          <span class="stat_item">
-            <span class="stats_font">
-              <i class="fas fa-eye"></i>
-            </span>
-            <span class="stats_rate">
-                {{ movie.views_count | bigInt }}
-            </span>
-          </span>
-          <span class="stat_item">
-            <span class="stats_font">
-              <i class="fas fa-star"></i>
-            </span>
-            <span class="stats_rate">
-                {{ movie.ratings_count | bigInt }}
-            </span>
-          </span>
-                    <span class="stat_item">
-            <span class="stats_font">
-              <i class="fas fa-thumbs-down"></i>
-            </span>
-            <span class="stats_rate">
-                {{ movie.disLikes_count | bigInt }}
-            </span>
-          </span>
-        </div>
+  <div class="container movies" style="margin-top:0px;">
+    <div class="row">
+      <div class="col" *ngFor="let movie of data">
+        <app-movies-cover-loop-content [El]="movie"></app-movies-cover-loop-content>
       </div>
     </div>
   </div>
-</div>
 </ng-template>
