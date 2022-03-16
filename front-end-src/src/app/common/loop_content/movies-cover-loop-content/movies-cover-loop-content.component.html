@@ -1,5 +1,5 @@
 <div class="card cart-item">
-    <img src="{{El.avatar}}" 
+    <img src="{{El|img:'avatar'}}" 
         class="card-img-top cover" 
         [ngClass]="{
                         'rating_color_good' 
@@ -19,7 +19,7 @@
       </div>
     </ng-template>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a  [routerLink]="['/serie/',El.serie.id]" class="card-link">{{El.serie.show_name}}</a></li>
+      <li class="list-group-item"><a  [routerLink]="['/serie/',El.serie.id]" class="card-link">{{El.serie|name}}</a></li>
       <ng-template [ngIf]="El.stars.length">
         <li class="list-group-item">
             <a class="card-link" [routerLink]="['/star/',El.stars[0].id]">{{El.stars[0]|name}}</a>
@@ -54,7 +54,7 @@
             {{ El.ratings_count | bigInt }}
         </span>
       </span>
-                <span class="stat_item">
+            <span class="stat_item">
         <span class="stats_font">
           <i class="fas fa-thumbs-down"></i>
         </span>

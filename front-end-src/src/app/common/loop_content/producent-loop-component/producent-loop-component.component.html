@@ -2,7 +2,7 @@
     <img src="{{El.avatar}}" class="card-img-top">
     <div class="card-body">
     </div>
-    <h5 class="card-title">{{El.show_name}}</h5>
+    <h5 class="card-title">{{El|name}}</h5>
     <p class="card-text">{{El.description | stringLenght:20 }}</p>
-    <a [routerLink]="['/producent/',El.id]" class="btn btn-primary">{{El.show_name}}</a>
+    <a [routerLink]="['/producent/',El.id]" class="btn btn-primary">{{El|name}}</a>
 </div>

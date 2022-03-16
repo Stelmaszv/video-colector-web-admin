@@ -2,15 +2,17 @@
 <main class="content">
     <form [formGroup]="star_palyer">
         <section class="video-section">
-            <div class="jumbotron movie_section">
-                <img class="movie_poster" src="{{data.poster}}">
+            <div class="jumbotron movie_section" style="height:1250px">
+                <ng-template [ngIf]="data.poster">
+                    <img class="movie_poster" src="{{data.poster}}">
+                </ng-template>
                 <div class="movie_info">
-                    <h1 class="display-4"><b>{{data.serie.show_name}}</b> - <i>{{data.show_name}}</i></h1>
+                    <h1 class="display-4"><b>{{data.serie|name}}</b> - <i>{{data|name}}</i></h1>
                     <hr class="my-4">
                     <div class="controls d-flex align-items-stretch">
                         <button id="startmovie" class="btn btn-primary btn-lg"><i id="startmovieicon" class="fas fa-play"></i></button>
                         <ng-template [ngIf]="data.serie">
-                            <button id="mute" (click)="next_movie_in_series()" class="btn bg-white input_poster">{{data.serie.show_name}}</button>
+                            <button id="mute" (click)="next_movie_in_series()" class="btn bg-white input_poster">{{data.serie|name}}</button>
                         </ng-template>
                         <ng-template [ngIf]="data.stars.length>0">
                             <button id="mute" (click)="next_movie_with_star(data.stars[0].id)" class="btn bg-white input_poster">{{data.stars[0]|name}}</button>
@@ -27,10 +29,10 @@
                             </div>
                         </ng-template>
                     </div>
-                    <p class="lead description">{{data.description}}</p>
+                    <p class="lead description">{{data|desc}}</p>
                 </div>
             </div> 
-            <div class="movie section_movie_play" style="background-color: black;">
+            <div class="movie section_movie_play" style="background-color: black;" style="height:1250px">
                 <ng-template [ngIf]="mode=='poster'">
                     <div class="if_poster">
                         <video style="min-height:100%" src="{{data.src}}"
@@ -95,7 +97,7 @@
                                     'movie_rating_mid' : RatingService.if_mid_rating(data),
                                     'movie_rating_low' : RatingService.if_low_rating(data)
                                    }" 
-                        src="{{data.avatar}}">
+                        src="{{data|img:'avatar'}}">
                     <div class="procent_likes">
                         <div class="like-procent">
                             <div class="good" [ngStyle]="{'width': good_procent}"></div>
@@ -103,7 +105,14 @@
                         </div>
                     </div>
                     <ng-template [ngIf]="TokkenService.if_isset_tokken()">
-                        <app-actions update_views_url="{{return_update_views_url()}}" edit_link="{{return_edit_url()}}" add_to_favorite_url="{{return_add_to_favorite_url()}}" favorite_stan="{{return_chceck_favorit_stan_url()}}" add_like_url="{{return_add_to_like_url()}}" add_to_dislike_url="{{return_add_to_dislike_url()}}" add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
+                        <app-actions 
+                        update_views_url="{{return_update_views_url()}}" 
+                        edit_link="{{return_edit_url()}}" 
+                        add_to_favorite_url="{{return_add_to_favorite_url()}}" 
+                        favorite_stan="{{return_chceck_favorit_stan_url()}}" 
+                        add_like_url="{{return_add_to_like_url()}}" 
+                        add_to_dislike_url="{{return_add_to_dislike_url()}}" 
+                        add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
                     </ng-template>
                 </div>
                 <div class="col">
