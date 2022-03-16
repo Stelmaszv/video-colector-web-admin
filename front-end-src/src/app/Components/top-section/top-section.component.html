@@ -2,7 +2,14 @@
     <section class="section-top">
         <div class="row">
             <div class="col title">
-                <h1>{{section_title}}</h1>
+                <h1>{{section_title}} order By 
+                    <select (change)="set_order()" [formControl]="order_form">
+                        <option value="-views_count">Views</option>
+                        <option value="-likes_count">Likes</option>
+                        <option value="-added">Added</option>
+                        <option value="-disLikes_count">Dis Likes count</option>
+                    </select>
+                </h1>
             </div>
             <div class="col counter" style="text-align:right;">
                 <h3><span class="badge bg-secondary">{{item_count}}</span></h3>
@@ -12,7 +19,15 @@
             <div class="row">
                 <div class="col item" *ngFor="let movie of data">
                   <div class="card cart-item">
-                    <img src="{{movie.avatar}}" class="card-img-top cover" [ngClass]="{'rating_color_good' : RatingService.if_good_rating(movie),'movie_rating_mid' : RatingService.if_mid_rating(movie),'movie_rating_low' : RatingService.if_low_rating(movie)}" alt="assets/icon/movie.jpg">
+                    <img src="{{movie.avatar}}" 
+                        class="card-img-top cover" 
+                        [ngClass]="{
+                                        'rating_color_good' 
+                                        : RatingService.if_good_rating(movie),'movie_rating_mid' 
+                                        : RatingService.if_mid_rating(movie),'movie_rating_low' 
+                                        : RatingService.if_low_rating(movie)
+                                   }" 
+                        alt="assets/icon/movie.jpg">
                     <div class="card-body">
                       <h5 class="card-title"><a [routerLink]="['/movie/',movie.id]" >{{movie.name | stringLenght:30}}</a></h5>
                       <p class="card-text">{{movie.description | stringLenght:150 }}</p>
