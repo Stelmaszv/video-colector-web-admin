@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
 @Component({
   selector: 'app-start-component',
@@ -8,7 +7,7 @@ import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 })
 export class StartComponentComponent implements OnInit {
 
-  constructor() { }
+  public movies_url:string='http://127.0.0.1:8000/top/movies?order=-views_count'
 
   ngOnInit(): void {
     console.log('wqdd')

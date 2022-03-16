@@ -73,6 +73,7 @@ import { AdminItemsProducentComponent } from './Components/admin-items/admin-ite
 import { ImgPipe } from './Pipe/img/img.pipe';
 import { NamePipe } from './Pipe/name/name.pipe';
 import { DescPipe } from './Pipe/desc-pip/desc.pipe';
+import { TopSectionComponent } from './Components/top-section/top-section.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { DescPipe } from './Pipe/desc-pip/desc.pipe';
     AdminItemsProducentComponent,
     ImgPipe,
     NamePipe,
-    DescPipe
+    DescPipe,
+    TopSectionComponent
   ],
   imports: [
     AppRoutingModule,

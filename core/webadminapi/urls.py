@@ -26,7 +26,8 @@ from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MovieStarsView,
                                            MovieAddStar,
                                            MovieAddTag,
-                                           MovieTagsView)
+                                           MovieTagsView,
+                                           MoviesTopView)
 from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               ProducentAddToFavoriteView,
                                               ProducentAddToLikeView,
@@ -88,6 +89,8 @@ app_name = 'webadminapi'
 from django.urls import path
 
 urlpatterns = [
+    #top
+    path('top/movies',                   MoviesTopView.as_view(), name='items_movie_stars'),
     #item
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='items_movie_stars'),
     path('movie/tags/<int:pk>/',                  MovieTagsView.as_view(), name='items_movie_tags'),
@@ -101,7 +104,7 @@ urlpatterns = [
     path('add/tag/producent/<int:pk>/',           ProducentAddTag.as_view(), name='add_tag_Producent'),
     path('add/tag/serie/<int:pk>/',               SerieAddTag.as_view(), name='add_tag_series'),
     path('add/tag/star/<int:pk>/',                AddStarTag.as_view(), name='add_tag_series'),
-    # stats Star
+    # stats producent
     path('admin/stats/producent/views/<int:pk>/', AdminStatsProducentViews.as_view(), name='producent_stats_views'),
     path('admin/stats/producent/disliks/<int:pk>/', AdminStatsProducentDisLiks.as_view(), name='producent_stats_disliks'),
     path('admin/stats/producent/laiks/<int:pk>/', AdminStatsProducentLiks.as_view(), name='producent_stats_laiks'),

@@ -31,6 +31,7 @@ export class BaseListComponent implements OnInit {
   protected debug:any=true
   protected no_title:boolean=false
   public title:string=''
+  protected paginate=true
   @Input() top:any='50px'
 
   public constructor(public RelationSelectService:RelationSelectService,private TitleService: Title,protected httpService: HttpService,public RatingService:RatingService ,public TokkenService:TokkenService, public ProcentService:ProcentService,private Router:Router) { }
@@ -200,17 +201,26 @@ export class BaseListComponent implements OnInit {
 
   protected load_data():void
   {
+    let url =''
     if (this.auth==false){
       if (this.loading){
         this.loading=false
+        if (this.paginate){
+          url = this.url+'?page='+this.page+'&'+this.filter_url
+        }else{
+          url = this.url
+        }
         if (this.debug){
-          console.log(this.url+'?page='+this.page+'&'+this.filter_url)
+          console.log(url)
         }
         this.on_set_url()
-        this.httpService.get_url(this.url+'?page='+this.page+'&'+this.filter_url).subscribe(
+        this.httpService.get_url(url).subscribe(
           (response) => {
             if (this.debug){
               console.log(response)
+            }
+            if (response.hasOwnProperty('count')){
+              this.set_count(response)
             }
             if (response.hasOwnProperty('results')){
               this.response=response
@@ -234,6 +244,9 @@ export class BaseListComponent implements OnInit {
         this.on_set_url()
         this.httpService.get_url_auth(this.url+'?page='+this.page+'&'+this.filter_url).subscribe(
           (response) => {
+            if (response.hasOwnProperty('count')){
+              this.set_count(response)
+            }
             if (response.hasOwnProperty('results')){
               this.response=response
               this.set_results()
@@ -269,19 +282,21 @@ export class BaseListComponent implements OnInit {
 
   protected scroller():void
   {
-    let obj=this
-    window.addEventListener("scroll", (event) => {
-      if (obj.loading){
-        var limit = document.body.offsetHeight - window.innerHeight;
-        let scrol_pos=90/100*limit
-          if (window.scrollY>scrol_pos){
-            if (obj.data.length < obj.response.count){
-              obj.page = obj.set_next()
-              obj.load_data()
+    if (this.paginate){
+      let obj=this
+      window.addEventListener("scroll", (event) => {
+        if (obj.loading){
+          var limit = document.body.offsetHeight - window.innerHeight;
+          let scrol_pos=90/100*limit
+            if (window.scrollY>scrol_pos){
+              if (obj.data.length < obj.response.count){
+                obj.page = obj.set_next()
+                obj.load_data()
+              }
             }
-          }
-      }
-    })
+        }
+      })
+    }
   }
 
 }

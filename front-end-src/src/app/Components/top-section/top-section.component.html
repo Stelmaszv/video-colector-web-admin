@@ -1,0 +1,76 @@
+
+    <section class="section-top">
+        <div class="row">
+            <div class="col title">
+                <h1>{{section_title}}</h1>
+            </div>
+            <div class="col counter" style="text-align:right;">
+                <h3><span class="badge bg-secondary">{{item_count}}</span></h3>
+            </div>
+        </div>
+        <section>
+            <div class="row">
+                <div class="col item" *ngFor="let movie of data">
+                  <div class="card cart-item">
+                    <img src="{{movie.avatar}}" class="card-img-top cover" [ngClass]="{'rating_color_good' : RatingService.if_good_rating(movie),'movie_rating_mid' : RatingService.if_mid_rating(movie),'movie_rating_low' : RatingService.if_low_rating(movie)}" alt="assets/icon/movie.jpg">
+                    <div class="card-body">
+                      <h5 class="card-title"><a [routerLink]="['/movie/',movie.id]" >{{movie.name | stringLenght:30}}</a></h5>
+                      <p class="card-text">{{movie.description | stringLenght:150 }}</p>
+                    </div>
+                    <ng-template [ngIf]="movie.likes_count>0">
+                      <div class="like-procent">
+                          <div class="good" [ngStyle]="{'width': movie.good_procent}"></div>
+                          <div class="bad"  [ngStyle]="{'width': movie.bad_procent}"></div>
+                      </div>
+                    </ng-template>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><a  [routerLink]="['/serie/',movie.serie.id]" class="card-link">{{movie.serie.show_name}}</a></li>
+                      <ng-template [ngIf]="movie.stars.length">
+                        <li class="list-group-item">
+                            <a class="card-link" [routerLink]="['/star/',movie.stars[0].id]">{{movie.stars[0]|name}}</a>
+                            <ng-template [ngIf]="movie.stars.length>1">
+                              + <i>{{movie.stars.length-1}}</i>
+                            </ng-template>
+                        </li>
+                      </ng-template>
+                    </ul>
+                    <div class="stats">
+                      <span class="stat_item">
+                        <span class="stats_font">
+                          <i class="fas fa-thumbs-up"></i>
+                        </span>
+                        <span class="stats_rate">
+                          {{ movie.likes_count | bigInt }}
+                        </span>
+                      </span>
+                      <span class="stat_item">
+                        <span class="stats_font">
+                          <i class="fas fa-eye"></i>
+                        </span>
+                        <span class="stats_rate">
+                            {{ movie.views_count | bigInt }}
+                        </span>
+                      </span>
+                      <span class="stat_item">
+                        <span class="stats_font">
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="stats_rate">
+                            {{ movie.ratings_count | bigInt }}
+                        </span>
+                      </span>
+                                <span class="stat_item">
+                        <span class="stats_font">
+                          <i class="fas fa-thumbs-down"></i>
+                        </span>
+                        <span class="stats_rate">
+                            {{ movie.disLikes_count | bigInt }}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+    </section>
+
