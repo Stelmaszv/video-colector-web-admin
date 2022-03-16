@@ -74,6 +74,7 @@ import { ImgPipe } from './Pipe/img/img.pipe';
 import { NamePipe } from './Pipe/name/name.pipe';
 import { DescPipe } from './Pipe/desc-pip/desc.pipe';
 import { TopSectionComponent } from './Components/top-section/top-section.component';
+import { StarLoopContetComponent } from './common/loop_content/star-loop-contet/star-loop-contet.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +147,8 @@ import { TopSectionComponent } from './Components/top-section/top-section.compon
     ImgPipe,
     NamePipe,
     DescPipe,
-    TopSectionComponent
+    TopSectionComponent,
+    StarLoopContetComponent
   ],
   imports: [
     AppRoutingModule,

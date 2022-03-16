@@ -111,14 +111,7 @@
 <div class="container">
     <div class="row">
         <div class="col" *ngFor="let star of data">
-            <div class="col col-star">
-            <a [routerLink]="['/star/',star.id]">
-            <div class="card star-cart">
-            <img src="{{star |img:'star_avatar'}}" class="card-img-top star-cart-img">
-            <div class="card-body">{{star|name}}</div>
-            </div>
-            </a>
-            </div>
+          <app-star-loop-contet [El]="star"></app-star-loop-contet>
         </div>
     </div>
 </div>
