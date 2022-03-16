@@ -7,6 +7,7 @@ import { TokkenService } from 'src/app/Service/tokken/tokken.service';
 import { FormBuilder, FormControl ,FormGroup} from '@angular/forms';
 import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
 import { Title } from '@angular/platform-browser';
+import { AlertService } from 'src/app/Service/alert/alert.service';
 
 @Component({
   selector: 'app-base-id',
@@ -44,7 +45,8 @@ export class BaseIDComponent implements OnInit {
               protected httpService: HttpService,
               public RatingService:RatingService,
               protected Router:Router,
-              public TokkenService:TokkenService) { }
+              public TokkenService:TokkenService,
+              public AlertService:AlertService) { }
 
   public ngOnInit(): void 
   {
