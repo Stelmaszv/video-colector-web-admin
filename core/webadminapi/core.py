@@ -43,6 +43,12 @@ class RangesMiddleware(MiddlewareMixin):
         response['Content-Range'] = 'bytes %d-%d/%d' % (start, end, statobj.st_size)
         return response
 
+
+class TopPaginator(PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 5
+
 class CustomCorsMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -282,6 +288,17 @@ class AddRelation(AbstractDeteilsView):
                 getattr(RelationModel, self.relation_index).remove(Model.id)
         Model.save()
         return Model
+
+class Top(AbstractGenericsAPIView):
+    queryset = []
+    limit=5
+    serializer_class = None
+    pagination_class = TopPaginator
+
+    def get_queryset(self):
+        if self.request.GET.get('order'):
+            return self.queryset.order_by(self.request.GET.get('order'))
+        return []
 
 class AbstractItems(AbstractStats):
     pass

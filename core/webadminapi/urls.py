@@ -46,7 +46,7 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               AdminStatsProducentDisLiks,
                                               AdminStatsProducentLiks,
                                               AdminStatsProducentRatings, ProducentSeriesView, ProducentAddSerie,
-                                              ProducentTagsView, ProducentAddTag)
+                                              ProducentTagsView, ProducentAddTag, ProducentsTopView)
 from core.webadminapi.views.serie import (SelectOptionView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
@@ -65,7 +65,10 @@ from core.webadminapi.views.serie import (SelectOptionView,
                                           AdminStatsSerieViews,
                                           AdminStatsSerieDisLiks,
                                           AdminStatsSerieLiks,
-                                          AdminStatsSerieRatings, SeriesTagsView, SerieAddTag)
+                                          AdminStatsSerieRatings,
+                                          SeriesTagsView,
+                                          SeriesTopView,
+                                          SerieAddTag)
 from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarAddToFavoriteView,
                                           StarAddToLikeView,
@@ -82,15 +85,21 @@ from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           AdminStatsStarDisLiks,
                                           AdminStatsStarLiks,
                                           AdminStatsStareRatings,
-                                          StarTagsView, AddStarTag)
+                                          StarTagsView,
+                                          AddStarTag,
+                                          StarsTopView)
 from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
 
 app_name = 'webadminapi'
 from django.urls import path
 
+
 urlpatterns = [
     #top
-    path('top/movies',                   MoviesTopView.as_view(), name='items_movie_stars'),
+    path('top/producents',               ProducentsTopView.as_view(), name='top_producents'),
+    path('top/stars',                    StarsTopView.as_view(), name='top_stars'),
+    path('top/movies',                   MoviesTopView.as_view(), name='top_movie'),
+    path('top/series',                   SeriesTopView.as_view(), name='top_series'),
     #item
     path('movie/stars/<int:pk>/',                 MovieStarsView.as_view(), name='items_movie_stars'),
     path('movie/tags/<int:pk>/',                  MovieTagsView.as_view(), name='items_movie_tags'),

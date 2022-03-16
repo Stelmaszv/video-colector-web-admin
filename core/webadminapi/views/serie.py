@@ -12,7 +12,7 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView,
                                    Authentication,
-                                   SqlAction, AbstractStats, AbstractItems, AddRelation)
+                                   SqlAction, AbstractStats, AbstractItems, AddRelation,Top)
 from core.webadminapi.filters import MovieFilter, SerieFilter
 from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           PhotoSerializerSeries,
@@ -21,7 +21,7 @@ from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           SerieSlectSerializer,
                                           StarsSerializer, StatsSerializer, RatingsSerializer, TagsSerializer,
                                           SerieSerializerID, StarsSerializerTop)
-from core.wideocollectorseader.models import Serie, Likes, DisLikess, Views
+from core.wideocollectorseader.models import Serie, Likes, DisLikess, Views,Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from rest_framework.pagination import PageNumberPagination
 
@@ -87,6 +87,10 @@ class SerieView(AbstractGenericsAPIView):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = SerieFilter
     order_by ='-added'
+
+class SeriesTopView(Top):
+    queryset = Serie.objects
+    serializer_class = SerieSerializer
 
 class AdminSerieView(SerieView):
     permission_classes = [IsAuthenticated]

@@ -10,7 +10,8 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractUpdateView,
                                    AbstractStats,
                                    AbstractItems,
-                                   AddRelation)
+                                   AddRelation,
+                                   Top)
 from core.webadminapi.filters import MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           MoviesSerializerUpdate,
@@ -25,26 +26,15 @@ from core.webadminapi.core import SqlAction
 from rest_framework.pagination import PageNumberPagination
 from moviepy.editor import VideoFileClip
 
-
-class TopPaginator(PageNumberPagination):
-    page_size = 5
-    page_size_query_param = 'page_size'
-    max_page_size = 5
-
 class MoviesView(AbstractGenericsAPIView):
     queryset = Movie.objects.all()
     serializer_class = MoviesSerializer
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = MovieFilter
 
-class MoviesTopView(AbstractGenericsAPIView):
+class MoviesTopView(Top):
     queryset = Movie.objects
-    limit=5
     serializer_class = MoviesSerializer
-    pagination_class = TopPaginator
-
-    def get_queryset(self):
-        return self.queryset.order_by(self.request.GET.get('order'))
 
 class MoviesAdminPaginator(PageNumberPagination):
     page_size = 50

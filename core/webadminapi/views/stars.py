@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, SqlAction, AbstractStats, AbstractItems, AddRelation)
+                                   AbstractUpdateView, SqlAction, AbstractStats, AbstractItems, AddRelation,Top)
 from core.webadminapi.filters import StarFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
@@ -28,6 +28,10 @@ class AdminStarsPaginator(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 50
 
+
+class StarsTopView(Top):
+    queryset = Star.objects
+    serializer_class = StarsSerializer
 
 class StarsMoviesView(AbstractGenericsAPIViewExtended):
     serializer_class = MoviesSerializer

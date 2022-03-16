@@ -16,7 +16,8 @@
             </div>
         </div>
         <section>
-            <div class="row">
+            <ng-template [ngIf]="section_title=='Movies'">
+                <div class="row">
                 <div class="col item" *ngFor="let movie of data">
                   <div class="card cart-item">
                     <img src="{{movie.avatar}}" 
@@ -85,7 +86,50 @@
                     </div>
                   </div>
                 </div>
-              </div>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="section_title=='Series'">
+                <div class="row">
+                    <div class="col" *ngFor="let serie of data">
+                        <div class="card series-cart">
+                            <img src="{{serie.avatar}}" class="card-img-top">
+                            <div class="card-body">
+                            </div>
+                            <h5 class="card-title">{{serie.show_name}}</h5>
+                            <p class="card-text">{{serie.description | stringLenght:95 }}</p>
+                            <a [routerLink]="['/serie/',serie.id]" class="btn btn-primary">{{serie.show_name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="section_title=='Stars'">
+                <div class="row">
+                    <div class="col" *ngFor="let star of data">
+                        <div class="col col-star">
+                        <a [routerLink]="['/star/',star.id]">
+                        <div class="card star-cart">
+                        <img src="{{star |img:'star_avatar'}}" class="card-img-top star-cart-img">
+                        <div class="card-body">{{star|name}}</div>
+                        </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="section_title=='Producents'">
+                <div class="row">
+                    <div class="col" *ngFor="let producent of data">
+                        <div class="card series-cart">
+                            <img src="{{producent.avatar}}" class="card-img-top">
+                            <div class="card-body">
+                            </div>
+                            <h5 class="card-title">{{producent.show_name}}</h5>
+                            <p class="card-text">{{producent.description | stringLenght:20 }}</p>
+                            <a [routerLink]="['/producent/',producent.id]" class="btn btn-primary">{{producent.show_name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
         </section>
     </section>
 

@@ -11,7 +11,7 @@ import { BaseListComponent } from '../list/base-list/base-list.component';
 export class TopSectionComponent extends BaseListComponent {
   @Input() public section_title:String=''
   @Input() public override url:any
-  @Input() public order:any
+  @Input() public order:String='-views_count'
   public start_url:any
   protected override paginate=false
   override debug =true

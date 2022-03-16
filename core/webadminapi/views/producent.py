@@ -9,7 +9,11 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView,
                                    LargeResultsSetPagination,
-                                   SqlAction, AbstractStats, AbstractItems, AddRelation)
+                                   SqlAction,
+                                   AbstractStats,
+                                   AbstractItems,
+                                   AddRelation,
+                                   Top)
 from core.webadminapi.filters import ProducentsFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerSeries,
@@ -28,6 +32,10 @@ class ProducentAdminPaginator(PageNumberPagination):
     page_size = 50
     page_size_query_param = 'page_size'
     max_page_size = 50
+
+class ProducentsTopView(Top):
+    queryset = Producents.objects
+    serializer_class = ProducentsSerializer
 
 class ProducentsView(AbstractGenericsAPIView):
     serializer_class = ProducentsSerializer
