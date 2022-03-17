@@ -68,15 +68,16 @@
                                  {{data|nationality}} 
                             </div>
                         </div>
-            
-                        <div class="row">
-                            <div class="col table_row">
-                                Date of birth
+                        <ng-template [ngIf]="data.date_of_birth">
+                            <div class="row">
+                                <div class="col table_row">
+                                    Date of birth
+                                </div>
+                                <div class="col table_row">
+                                    {{data|age}}
+                                </div>
                             </div>
-                            <div class="col table_row">
-                                {{data.date_of_birth}} (<i>Age - 21</i>)
-                            </div>
-                        </div>
+                        </ng-template>
 
                         <div class="row">
                             <div class="col table_row">

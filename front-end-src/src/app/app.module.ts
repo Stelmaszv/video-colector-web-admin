@@ -83,6 +83,7 @@ import { MoviesSerchFormComponent } from './Components/search-form/movies-serch-
 import { FullDescPipe } from './Pipe/full-desc/full-desc.pipe';
 import { FullNamePipe } from './Pipe/full-name/full-name.pipe';
 import { NationalityPipe } from './Pipe/nationality/nationality.pipe';
+import { AgePipe } from './Pipe/age/age.pipe';
 
 @NgModule({
   declarations: [
@@ -164,7 +165,8 @@ import { NationalityPipe } from './Pipe/nationality/nationality.pipe';
     MoviesSerchFormComponent,
     FullDescPipe,
     FullNamePipe,
-    NationalityPipe
+    NationalityPipe,
+    AgePipe
   ],
   imports: [
     AppRoutingModule,
