@@ -29,7 +29,7 @@ class RangesMiddleware(MiddlewareMixin):
         f = response.file_to_stream
         statobj = os.fstat(f.fileno())
         start, end = http_range.split('=')[1].split('-')
-        if not start:  # requesting the last N bytes
+        if not start:
             start = max(0, statobj.st_size - int(end))
             end = ''
         start, end = int(start or 0), int(end or statobj.st_size - 1)
@@ -52,19 +52,11 @@ class TopPaginator(PageNumberPagination):
 class CustomCorsMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        # One-time configuration and initialization.
 
     def __call__(self, request):
-        # Code to be executed for each request before
-        # the view (and later middleware) are called.
-
         response = self.get_response(request)
         response["Access-Control-Allow-Origin"] = "*"
         response["Access-Control-Allow-Headers"] = "*"
-
-        # Code to be executed for each request/response after
-        # the view is called.
-
         return response
 
 class Authentication(BasicAuthentication):

@@ -27,7 +27,7 @@ export class BaseListComponent implements OnInit {
   private store_url:string=''
   protected results : any;
   protected response : any;
-  protected page:number=1 ;
+  protected page:number= 1;
   protected auth:any=false
   protected debug:any=true
   protected no_title:boolean=false
@@ -92,6 +92,7 @@ export class BaseListComponent implements OnInit {
 
   public reset_form():void
   {
+    
     let form_elments = Object.keys(this.search.value);
     for (let item of form_elments){
       if (this.search.value[item]!=null){
@@ -99,9 +100,10 @@ export class BaseListComponent implements OnInit {
       }
     }
     this.filter_url=''
-    this.load_data()
     this.tags_form=[]
     this.stars_form=[]
+    this.data=[]
+    this.load_data()
   }
 
   public onInit():void
@@ -114,15 +116,15 @@ export class BaseListComponent implements OnInit {
     this.page=1
     if (!this.favorite){
       this.data=[]
-      this.url=this.fav_url
-      console.log(this.url)
+      this.store_url=this.fav_url
       this.auth=true
       this.load_data()
     }else{
       this.data=[]
-      this.url=this.store_url
+      this.store_url=this.url
       this.load_data()
     }
+
     this.favorite=!this.favorite
   }
 
@@ -210,14 +212,13 @@ export class BaseListComponent implements OnInit {
 
   protected load_data():void
   {
-    let url =''
     if (this.auth==false){
       if (this.loading){
         this.loading=false
         if (this.paginate){
-          this.url = this.url+'?page='+this.page+'&'+this.filter_url
+          this.url = this.store_url+'?page='+this.page+'&'+this.filter_url
         }else{
-          this.url = this.url
+          this.url = this.store_url
         }
         if (this.debug){
           console.log(this.url)
@@ -247,11 +248,12 @@ export class BaseListComponent implements OnInit {
     }else{
       if (this.loading){
         this.loading=false
+        this.url=this.store_url+'?page='+this.page+'&'+this.filter_url
         if (this.debug){
-          console.log(this.url+'?page='+this.page+'&'+this.filter_url)
+          console.log(this.url)
         }
         this.on_set_url()
-        this.httpService.get_url_auth(this.url+'?page='+this.page+'&'+this.filter_url).subscribe(
+        this.httpService.get_url_auth(this.url).subscribe(
           (response) => {
             if (response.hasOwnProperty('count')){
               this.set_count(response)

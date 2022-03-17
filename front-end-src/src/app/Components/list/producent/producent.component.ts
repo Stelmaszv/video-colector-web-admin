@@ -13,7 +13,7 @@ export class ProducentComponent extends BaseListComponent {
 
   public override search = new FormGroup({
     name: new FormControl(),
-    serie: new FormControl(),
+    series: new FormControl(),
     likes_count: new FormControl(),
     producent: new FormControl(),
     avg_rating:  new FormControl(),
