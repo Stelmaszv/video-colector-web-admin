@@ -189,6 +189,12 @@ class AbstractGenericsAPIView(generics.ListAPIView):
     Model =None
     pagination_class = LargeResultsSetPagination
 
+    def get_object(self, id):
+        try:
+            return self.Model.objects.get(pk=id)
+        except self.Model.DoesNotExist:
+            raise Http404
+
 class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
 
     Model=None

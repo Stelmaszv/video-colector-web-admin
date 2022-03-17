@@ -1,4 +1,3 @@
-<!--
 <form class="sticky-top form-filter"  [formGroup]="search" [ngStyle]="{'top': top}">
     <div class="filter row-cols-1">
       <div class="row">
@@ -9,32 +8,11 @@
           <input id="name" type="text" (keyup)="serch()" formControlName="name" value="{{search.value.name}}"   class="name-search">
       </div>
   
-    <div class="col">
-        <select 
-        class="producent-search" 
-        (change)="serch()" 
-        value="{{search.value.producent}}" 
-        aria-label="Default select example" 
-        formControlName="producent">
+      <div class="col">
+        <select class="producent-search" (change)="serch()" value="{{search.value.producent}}" aria-label="Default select example" formControlName="Producent">
           <option></option>
-          <option 
-          *ngFor="let producent of RelationSelectService.producents_select"  
-          value="{{producent.id}}" >
-          {{producent|name}}</option>
+          <option *ngFor="let producent of RelationSelectService.producents_select"  value="{{producent.id}}" >{{producent|name}}</option>
         </select>
-    </div>
-    <div class="col">
-      <select 
-      class="series-search" 
-      (change)="serch()" 
-      value="{{search.value.serie}}" 
-      aria-label="Default select example" 
-      formControlName="serie">
-        <option 
-        *ngFor="let serie of RelationSelectService.series_select"  
-        value="{{serie.id}}" >{{serie|name}}
-      </option>
-      </select>
     </div>
     <div class="col">
       <div class="form-check form-switch">
@@ -60,7 +38,7 @@
       </div>
     </div>
 </form>
--->
+
 <div class="modal fade" id="movieFilter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -97,12 +75,7 @@
           <option *ngFor="let tag of RelationSelectService.tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="!if_exist(tag.id,tags_form)" selected>{{tag.name}}</option>
           <option *ngFor="let tag of RelationSelectService.tags" (click)="add_tag(tag.id)" value="{{tag.id}}" [hidden]="if_exist(tag.id,tags_form)" >{{tag.name}}</option>
         </select>
-        
-        <p class="h6">Stars</p>
-        <select class="form-select" multiple aria-label="multiple select example">
-          <option *ngFor="let star of RelationSelectService.stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="!if_exist(star.id,stars_form)" selected>{{star.name}}</option>
-          <option *ngFor="let star of RelationSelectService.stars" (click)="add_star(star.id)" value="{{star.id}}" [hidden]="if_exist(star.id,stars_form)" >{{star.name}}</option>
-        </select>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="serch()" data-bs-dismiss="modal">Save</button>

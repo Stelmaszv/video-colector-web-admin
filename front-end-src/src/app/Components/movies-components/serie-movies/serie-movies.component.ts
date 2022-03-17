@@ -14,8 +14,7 @@ export class SerieMoviesComponent extends MoviesComponent {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/seriemoviesview/'+this.ID
-      
+      this.url='http://127.0.0.1:8000/seriemoviesview/'+this.ID+'?page='+this.page+'&'+this.filter_url
     }
   }
 }

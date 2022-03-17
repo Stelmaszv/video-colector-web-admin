@@ -143,6 +143,7 @@ class Producents(models.Model):
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
     views_count = models.IntegerField(default=0)
+    movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='ProducentsMovie', blank=True)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='ProducentsViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
@@ -156,12 +157,12 @@ class Producents(models.Model):
 class Serie(models.Model):
     name                = models.CharField(max_length=200,null=True,blank=True)
     banner              = models.CharField(max_length=200, default='',null=True,blank=True)
-    show_name           = models.CharField(max_length=200,default='',null=True)
-    avatar              = models.CharField(max_length=200, default='',null=True)
-    dir                 = models.CharField(max_length=200, default='',null=True)
-    web_dir = models.CharField(max_length=200, default='', null=True)
-    country             = models.CharField(max_length=200, default='',null=True)
-    description         = models.TextField(default='',null=True)
+    show_name           = models.CharField(max_length=200,default='',null=True,blank=True)
+    avatar              = models.CharField(max_length=200, default='',null=True,blank=True)
+    dir                 = models.CharField(max_length=200, default='',null=True,blank=True)
+    web_dir = models.CharField(max_length=200, default='', null=True,blank=True)
+    country             = models.CharField(max_length=200, default='',null=True,blank=True)
+    description         = models.TextField(default='',null=True,blank=True)
     added               = models.DateTimeField(auto_now=True)
     years               = models.CharField(max_length=200, default='', null=True,blank=True)
     number_of_sezons    = models.IntegerField(default=0)
@@ -181,9 +182,6 @@ class Serie(models.Model):
 
     def delete(self, *args, **kwargs):
         delete(Serie, self)
-
-    def save(self, *args, **kwargs):
-        save(Serie, self)
 
     def __str__(self):
         return self.name

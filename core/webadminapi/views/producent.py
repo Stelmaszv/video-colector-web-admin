@@ -14,7 +14,7 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractItems,
                                    AddRelation,
                                    Top)
-from core.webadminapi.filters import ProducentsFilter
+from core.webadminapi.filters import ProducentsFilter, MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerSeries,
                                           ProducentsSerializer,
@@ -22,7 +22,7 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           ProducetFormSeralizer,
                                           SerieSerializer, StarsSerializer, StatsSerializer, RatingsSerializer,
                                           TagsSerializer, ProducentsSerializerID)
-from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views
+from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views, Movie
 from rest_framework.pagination import PageNumberPagination
 
 
@@ -108,18 +108,17 @@ class ProducentsFormView(generics.ListAPIView):
     queryset = Producents.objects.all()
     Model = Producents
 
-class ProducentsMoviesView(AbstractGenericsAPIViewExtended):
+class ProducentsMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
-    queryset = Producents.objects.all()
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = MovieFilter
     Model = Producents
+    queryset = Movie.objects
 
-    def filter_queryset(self):
-        movies =[]
+    def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
-        for Serie in Model.series.all():
-            for Movie in Serie.movies.all():
-                movies.append(Movie)
-        return movies
+        return Model.movies.all()
+
 
 class ProducentStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = StarsSerializer
