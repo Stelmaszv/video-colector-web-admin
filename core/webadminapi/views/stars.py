@@ -40,18 +40,16 @@ class StarsMoviesView(AbstractGenericsAPIView):
     filterset_class  = MovieFilter
     queryset = Movie.objects
     order_by ='-date_relesed'
-    Model = Star
 
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.movies.all()
 
-    def get_object(self, pk):
+    def get_object(self,id):
         try:
-            return self.Model.objects.get(pk=pk)
-        except self.Model.DoesNotExist:
+            return Star.objects.get(pk=id)
+        except Star.DoesNotExist:
             raise Http404
-
 
 class StarsPhotoView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerMovie
