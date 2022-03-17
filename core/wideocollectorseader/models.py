@@ -255,6 +255,9 @@ class Movie(models.Model):
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='MovieDisLike', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',blank=True)
 
+    def save(self, *args, **kwargs):
+        save(Movie, self)
+
     def delete(self, *args, **kwargs):
         delete(Movie,self)
 

@@ -13,7 +13,8 @@ export class TopSectionComponent extends BaseListComponent {
   @Input() public override url:any
   @Input() public order:String='-views_count'
   protected override paginate=false
-  override debug =true
+  public override title: string='Home'
+  
   
   public order_form = new FormControl();
   public override on_before_load_data(): void 

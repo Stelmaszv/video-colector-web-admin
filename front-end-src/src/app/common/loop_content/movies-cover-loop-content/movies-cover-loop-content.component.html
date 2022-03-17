@@ -10,7 +10,7 @@
         alt="assets/icon/movie.jpg">
     <div class="card-body">
       <h5 class="card-title"><a [routerLink]="['/movie/',El.id]" >{{El.name | stringLenght:30}}</a></h5>
-      <p class="card-text">{{El.description | stringLenght:150 }}</p>
+      <p class="card-text">{{El|fullDesc:130 }}</p>
     </div>
     <ng-template [ngIf]="El.likes_count>0">
       <div class="like-procent">
@@ -19,7 +19,9 @@
       </div>
     </ng-template>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a  [routerLink]="['/serie/',El.serie.id]" class="card-link">{{El.serie|name}}</a></li>
+      <ng-template [ngIf]="El.serie">
+        <li class="list-group-item"><a  [routerLink]="['/serie/',El.serie.id]" class="card-link">{{El.serie|name}}</a></li>
+      </ng-template>
       <ng-template [ngIf]="El.stars.length">
         <li class="list-group-item">
             <a class="card-link" [routerLink]="['/star/',El.stars[0].id]">{{El.stars[0]|name}}</a>

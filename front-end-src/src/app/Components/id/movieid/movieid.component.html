@@ -7,7 +7,12 @@
                     <img class="movie_poster" src="{{data.poster}}">
                 </ng-template>
                 <div class="movie_info">
-                    <h1 class="display-4"><b>{{data.serie|name}}</b> - <i>{{data|name}}</i></h1>
+                    <h1 class="display-4">
+                        <ng-template [ngIf]="data.serie">
+                            <b>{{data.serie|name}}</b> 
+                        </ng-template>
+                        <i>{{data|name}}</i>
+                    </h1>
                     <hr class="my-4">
                     <div class="controls d-flex align-items-stretch">
                         <button id="startmovie" class="btn btn-primary btn-lg"><i id="startmovieicon" class="fas fa-play"></i></button>
@@ -116,8 +121,8 @@
                     </ng-template>
                 </div>
                 <div class="col">
-                    <h2 class="name_js d-flex justify-content-center">{{data.name}}</h2>
-                    <p class="description_js movie_description">{{data.description}}</p>
+                    <h2 class="name_js d-flex justify-content-center">{{data|name}}</h2>
+                    <p class="description_js movie_description">{{data|desc}}</p>
                     
                     <div class="table_information">
                         <ng-template [ngIf]="data.producent">
@@ -153,7 +158,7 @@
                                 </div>
                                 <div class="col stars_strig_js table_row">
                                     <span *ngFor="let star of data.stars; let i=index">
-                                        <span class='star-string'><a [routerLink]="['/star/',star.id]" >{{star.name}}</a></span>
+                                        <span class='star-string'><a [routerLink]="['/star/',star.id]" >{{star|name}}</a></span>
                                         <ng-template [ngIf]="i<data.stars.length-1">
                                             ,
                                         </ng-template>
@@ -169,7 +174,7 @@
                                 </div>
                                 <div class="col stars_strig_js">
                                     <span *ngFor="let tag of data.tags; let i=index">
-                                        <span class='tag'><a [routerLink]="['/tag/',tag.id]" >{{tag.name}}</a></span>
+                                        <span class='tag'><a [routerLink]="['/tag/',tag.id]" >{{tag|name}}</a></span>
                                         <ng-template [ngIf]="i<data.tags.length-1">
                                             ,
                                         </ng-template>

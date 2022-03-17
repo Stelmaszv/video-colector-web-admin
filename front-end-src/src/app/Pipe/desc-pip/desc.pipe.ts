@@ -6,7 +6,7 @@ import { Varable } from 'src/app/varables';
 })
 export class DescPipe implements PipeTransform {
 
-  transform(data: any): unknown {
+  transform(data: any): string {
     return (data['description']) ? data['description'] : Varable.desc_defult;
   }
 

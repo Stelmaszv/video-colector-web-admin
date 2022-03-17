@@ -2,7 +2,7 @@
     <img src="{{El | img:'poster'}}" class="card-img-top poster" style="width: 100%;height:200px;" alt="...">
     <div class="card-body">
       <h5 class="card-title"><a [routerLink]="['/movie/',El.id]" >{{El.name_pip | stringLenght:50}}</a></h5>
-      <p class="card-text entry">{{El.description | stringLenght:300  }}</p>
+      <p class="card-text entry">{{El|fullDesc:325}}</p>
     </div>
     
     <ng-template [ngIf]="El.stars.length">
