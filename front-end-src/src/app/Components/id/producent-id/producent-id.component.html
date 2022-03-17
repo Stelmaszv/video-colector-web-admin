@@ -1,13 +1,14 @@
-<div class="d-flex justify-content-center baner">
-    <img src="{{banner}}" class="baner_js">
-</div>
+<ng-template [ngIf]="data.banners">
+    <div class="d-flex justify-content-center baner">
+        <img src="{{banner}}" class="baner_js">
+    </div>
+</ng-template>
 <app-navabr></app-navabr>
 <div class="content">
     <h1 class="d-flex justify-content-center name_js">{{data|name}}</h1>
     <div class="container ditels-section">
         <div class="row">
             <div class="col">
-                {{data|img:'star_avatar'}}
                 <img class="star_avatar avatar_js" src="{{data|img:'avatar'}}">
             </div>
             <div class="col">

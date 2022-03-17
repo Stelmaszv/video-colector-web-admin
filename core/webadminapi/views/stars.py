@@ -1,5 +1,6 @@
 import os
 
+from django.http import Http404
 from django_filters import rest_framework as filters
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
@@ -9,12 +10,12 @@ from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
                                    AbstractUpdateView, SqlAction, AbstractStats, AbstractItems, AddRelation,Top)
-from core.webadminapi.filters import StarFilter
+from core.webadminapi.filters import StarFilter, MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
                                           StarSlectSerializer, StarsSerializer,
                                           StarsSerializerUpdate, StatsSerializer, RatingsSerializer, TagsSerializer)
-from core.wideocollectorseader.models import Star, DisLikess, Views, Likes
+from core.wideocollectorseader.models import Star, DisLikess, Views, Likes, Movie
 from videocolectorwebadmin.global_setings import photo_ext
 
 
@@ -33,14 +34,24 @@ class StarsTopView(Top):
     queryset = Star.objects
     serializer_class = StarsSerializer
 
-class StarsMoviesView(AbstractGenericsAPIViewExtended):
+class StarsMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
-    queryset = Star.objects
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = MovieFilter
+    queryset = Movie.objects
+    order_by ='-date_relesed'
     Model = Star
 
-    def filter_queryset(self):
+    def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.movies.all()
+
+    def get_object(self, pk):
+        try:
+            return self.Model.objects.get(pk=pk)
+        except self.Model.DoesNotExist:
+            raise Http404
+
 
 class StarsPhotoView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerMovie

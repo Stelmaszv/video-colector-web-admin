@@ -193,6 +193,9 @@ class AbstractGenericsAPIViewExtended(AbstractGenericsAPIView):
 
     Model=None
 
+    def filter_queryset(self):
+        pass
+
     def delete_action(self,delete):
         pass
 
