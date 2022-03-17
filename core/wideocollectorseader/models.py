@@ -192,7 +192,7 @@ class Tag(models.Model):
 
 class Star(models.Model):
     name = models.CharField(max_length=200,null=True,blank=True)
-    avatar = models.CharField(max_length=200, default='', null=True)
+    avatar = models.CharField(max_length=200, default='', null=True,blank=True)
     show_name = models.CharField(max_length=200, default='', null=True,blank=True)
     description = models.TextField(default='', null=True,blank=True)
     weight      = models.IntegerField(default=0, null=True,blank=True)

@@ -1,10 +1,10 @@
 <app-navabr></app-navabr>
 <div class="content">
-    <h1 class="d-flex justify-content-center name_js">{{data.show_name}}</h1>
+    <h1 class="d-flex justify-content-center name_js">{{data|name}}</h1>
     <div class="container ditels-section">
         <div class="row tabel-info-js">
             <div class="col">
-                <img class="star_avatar avatar_js" src="{{data.avatar}}">
+                <img class="star_avatar avatar_js" src="{{data.avatar|img:'star_avatar'}}">
                 <div class="procent_likes">
                     <div class="like-procent">
                         <div class="good" [ngStyle]="{'width': good_procent}"></div>
@@ -18,7 +18,7 @@
 
             <div class="col">
                 <h1 class="d-flex justify-content-center">Description</h1>
-                <p class="description_js movie_description">{{data.description}}</p>
+                <p class="description_js movie_description">{{data.description|desc}}</p>
                 <h1 class="d-flex justify-content-center">More Informaton</h1>
                     <div class="table_information">
                         <ng-template [ngIf]="data.tags.length>0">
@@ -36,34 +36,39 @@
                                 </div>
                             </div>
                         </ng-template>
+                        
+                        <ng-template [ngIf]="data.ethnicity">
+                            <div class="row">
+                                <div class="col table_row">
+                                    Ethnicity 
+                                </div>
+                                <div class="col table_row">
+                                    {{data.ethnicity}}
+                                </div>
+                            </div>
+                        </ng-template>
 
+                        <ng-template [ngIf]="data.hair_color">
+                            <div class="row">
+                                <div class="col table_row">
+                                    Hair color
+                                </div>
+                                <div class="col table_row">
+                                    {{data.hair_color}}
+                                </div>
+                            </div>
+                        </ng-template>
+
+                   
                         <div class="row">
                             <div class="col table_row">
-                                Ethnicity 
+                                    Nationality\Birth place
                             </div>
                             <div class="col table_row">
-                                {{data.ethnicity}}
+                                 {{data|nationality}} 
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col table_row">
-                                Hair color
-                            </div>
-                            <div class="col table_row">
-                                {{data.hair_color}}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col table_row">
-                                Nationality
-                            </div>
-                            <div class="col table_row">
-                                {{data.nationality}} (<i>{{data.birth_place}}</i>)
-                            </div>
-                        </div>
-
+            
                         <div class="row">
                             <div class="col table_row">
                                 Date of birth
