@@ -12,18 +12,20 @@ export class TopSectionComponent extends BaseListComponent {
   @Input() public section_title:String=''
   @Input() public override url:any
   @Input() public order:String='-views_count'
-  public start_url:any
   protected override paginate=false
   override debug =true
+  
   public order_form = new FormControl();
-  public override on_before_load_data(): void {
-    this.start_url=this.url
-    this.url=this.url+this.order  
+  public override on_before_load_data(): void 
+  {
+    this.url=this.store_url+this.order  
   } 
 
-  public set_order(){
+  public set_order(): void 
+  {
     this.data=[]
-    this.url=this.start_url+this.order_form.value
+    this.url=this.store_url+this.order_form.value
+    console.log(this.url)
     this.load_data()
   }
 }

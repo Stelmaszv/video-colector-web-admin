@@ -24,7 +24,7 @@ export class BaseListComponent implements OnInit {
   public favorite:any=false
   public stars:any
   public item_count:any
-  private store_url:string=''
+  protected store_url:string=''
   protected results : any;
   protected response : any;
   protected page:number= 1;
@@ -217,8 +217,6 @@ export class BaseListComponent implements OnInit {
         this.loading=false
         if (this.paginate){
           this.url = this.store_url+'?page='+this.page+'&'+this.filter_url
-        }else{
-          this.url = this.store_url
         }
         if (this.debug){
           console.log(this.url)

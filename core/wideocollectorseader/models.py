@@ -177,8 +177,7 @@ class Serie(models.Model):
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='SerieViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Serielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='SerieDisLike', blank=True)
-    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',
-                                       blank=True)
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',blank=True)
 
     def delete(self, *args, **kwargs):
         delete(Serie, self)
