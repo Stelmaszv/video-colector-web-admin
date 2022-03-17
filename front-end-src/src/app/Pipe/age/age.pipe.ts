@@ -7,7 +7,7 @@ export class AgePipe implements PipeTransform {
 
   public transform(data: any): string 
   {
-    return data.date_of_birth+', Age - '+this.get_age(data.date_of_birth)+' years old'  ;
+    return data.date_of_birth+', Age - '+this.get_age(data.date_of_birth)+' years old';
   }
 
   private get_age(data: any):number

@@ -1,8 +1,8 @@
 <div class="card series-cart">
-    <img src="{{El.avatar}}" class="card-img-top">
+    <img src="{{El|img:'avatar'}}" class="card-img-top">
     <div class="card-body">
     </div>
-    <h5 class="card-title">{{El|name}}</h5>
-    <p class="card-text">{{El.description | stringLenght:20 }}</p>
-    <a [routerLink]="['/producent/',El.id]" class="btn btn-primary">{{El|name}}</a>
+    <h5 class="card-title">{{El|fullName:15}}</h5>
+    <p class="card-text">{{El |fullDesc:100 }}</p>
+    <a [routerLink]="['/producent/',El.id]" class="btn btn-primary">{{El|fullName:15}}</a>
 </div>
