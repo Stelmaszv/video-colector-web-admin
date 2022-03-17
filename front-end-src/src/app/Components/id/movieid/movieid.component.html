@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="col table_row producent_item">
                                     <a [routerLink]="['/producent/',data.producent.id]">
-                                        {{data.producent.show_name}}
+                                        {{data.producent|name}}
                                     </a>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="col table_row series_item">
                                     <a [routerLink]="['/serie/',data.serie.id]">
-                                        {{data.serie.show_name}}
+                                        {{data.serie|name}}
                                     </a>
                                 </div>
                             </div>

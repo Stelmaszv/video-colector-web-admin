@@ -215,15 +215,15 @@ export class BaseListComponent implements OnInit {
       if (this.loading){
         this.loading=false
         if (this.paginate){
-          url = this.url+'?page='+this.page+'&'+this.filter_url
+          this.url = this.url+'?page='+this.page+'&'+this.filter_url
         }else{
-          url = this.url
+          this.url = this.url
         }
         if (this.debug){
-          console.log(url)
+          console.log(this.url)
         }
         this.on_set_url()
-        this.httpService.get_url(url).subscribe(
+        this.httpService.get_url(this.url).subscribe(
           (response) => {
             if (this.debug){
               console.log(response)

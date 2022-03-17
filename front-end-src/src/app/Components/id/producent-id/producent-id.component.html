@@ -3,11 +3,12 @@
 </div>
 <app-navabr></app-navabr>
 <div class="content">
-    <h1 class="d-flex justify-content-center name_js">{{data.show_name}}</h1>
+    <h1 class="d-flex justify-content-center name_js">{{data|name}}</h1>
     <div class="container ditels-section">
         <div class="row">
             <div class="col">
-                <img class="star_avatar avatar_js" src="{{data.avatar}}">
+                {{data|img:'star_avatar'}}
+                <img class="star_avatar avatar_js" src="{{data|img:'avatar'}}">
             </div>
             <div class="col">
                 <h1 class="d-flex justify-content-center">Description</h1>
@@ -15,7 +16,7 @@
                 <h1 class="d-flex justify-content-center">More Informaton</h1>
                 <div class="table_information">
 
-                    <ng-template [ngIf]="data.tags.length>0">
+                    <ng-template [ngIf]="data.tags">
                         <div class="row">
                             <div class="col table_row">
                                 Tags

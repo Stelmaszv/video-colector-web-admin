@@ -235,14 +235,14 @@ class Movie(models.Model):
     name = models.CharField(max_length=200,null=True)
     show_name = models.CharField(max_length=200, default='', null=True,blank=True)
     avatar = models.CharField(max_length=200, default='', null=True,blank=True)
-    src = models.CharField(max_length=200, default='', null=True)
-    web_src = models.CharField(max_length=200, default='', null=True)
+    src = models.CharField(max_length=200, default='', null=True,blank=True)
+    web_src = models.CharField(max_length=200, default='', null=True,blank=True)
     poster = models.CharField(max_length=200, default='', null=True,blank=True)
     description = models.TextField(default='', null=True,blank=True)
     country = models.CharField(max_length=200, default='', null=True,blank=True)
     date_relesed = models.DateField(null=True,blank=True)
-    dir = models.CharField(max_length=200, default='', null=True)
-    web_dir = models.CharField(max_length=200, default='', null=True)
+    dir = models.CharField(max_length=200, default='', null=True,blank=True)
+    web_dir = models.CharField(max_length=200, default='', null=True,blank=True)
     added               = models.DateTimeField(auto_now=True)
     avg_rating = models.DecimalField(max_digits=5, decimal_places=2,default=0)
     likes_count = models.IntegerField(default=0)
@@ -260,9 +260,6 @@ class Movie(models.Model):
 
     def delete(self, *args, **kwargs):
         delete(Movie,self)
-
-    def save(self, *args, **kwargs):
-        save(Movie,self)
 
     def __str__(self):
         return self.name
