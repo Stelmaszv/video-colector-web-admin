@@ -81,6 +81,7 @@ import { MoviesCoverLoopContentComponent } from './common/loop_content/movies-co
 import { MoviesPosterLoopContentComponent } from './common/loop_content/movies-poster-loop-content/movies-poster-loop-content.component';
 import { MoviesSerchFormComponent } from './Components/search-form/movies-serch-form/movies-serch-form.component';
 import { FullDescPipe } from './Pipe/full-desc/full-desc.pipe';
+import { FullNamePipe } from './Pipe/full-name/full-name.pipe';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,8 @@ import { FullDescPipe } from './Pipe/full-desc/full-desc.pipe';
     MoviesCoverLoopContentComponent,
     MoviesPosterLoopContentComponent,
     MoviesSerchFormComponent,
-    FullDescPipe
+    FullDescPipe,
+    FullNamePipe
   ],
   imports: [
     AppRoutingModule,

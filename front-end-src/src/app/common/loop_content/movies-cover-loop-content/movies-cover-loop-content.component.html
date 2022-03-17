@@ -9,7 +9,7 @@
                    }" 
         alt="assets/icon/movie.jpg">
     <div class="card-body">
-      <h5 class="card-title"><a [routerLink]="['/movie/',El.id]" >{{El.name | stringLenght:30}}</a></h5>
+      <h5 class="card-title"><a [routerLink]="['/movie/',El.id]" >{{El|fullName:50}}</a></h5>
       <p class="card-text">{{El|fullDesc:130 }}</p>
     </div>
     <ng-template [ngIf]="El.likes_count>0">
