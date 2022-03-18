@@ -151,6 +151,16 @@ class Producents(models.Model):
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
+    def set_country(self):
+        if self.country != '':
+            for Serie in self.series.all():
+                Serie.country = self.country
+                Serie.save()
+
+    def save(self, *args, **kwargs):
+        self.set_country()
+        save(Producents, self)
+
     def __str__(self):
         return self.name
 

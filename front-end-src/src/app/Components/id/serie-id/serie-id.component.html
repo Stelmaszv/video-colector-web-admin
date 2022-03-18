@@ -3,7 +3,7 @@
 </div>
 <app-navabr></app-navabr>
 <div class="content">
-    <h1 class="d-flex justify-content-center">{{data.show_name}}</h1>
+    <h1 class="d-flex justify-content-center">{{data|name}}</h1>
     <div class="container ditels-section">
         <div class="row">
             <div class="col">
@@ -11,7 +11,7 @@
             </div>
             <div class="col">
                 <h1 class="d-flex justify-content-center">Description</h1>
-                <p class="description_js movie_description">{{data.description}}</p>
+                <p class="description_js movie_description">{{data|desc}}</p>
                 <h1 class="d-flex justify-content-center">More Informaton</h1>
                 <div class="table_information">
                     <ng-template [ngIf]="data.Producent">
@@ -21,7 +21,7 @@
                             </div>
                             <div class="col table_row producent_item">
                                 <a [routerLink]="['/producent/',data.Producent.id]">
-                                    {{data.Producent.show_name}}
+                                    {{data.Producent|name}}
                                 </a>
                             </div>
                         </div>
@@ -78,6 +78,34 @@
                             <i class="fas fa-thumbs-down"></i> <span class="stats_item dislike_js">{{data.disLikes_count | bigInt}}</span>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Movies
+                        </div>
+                        <div class="col table_row">
+                            <i class="fas fa-film"></i> <span class="stats_item">{{data.movies.length | bigInt}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Years
+                        </div>
+                        <div class="col table_row">
+                            <span>{{data.years}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Added
+                        </div>
+                        <div class="col table_row">
+                            {{data.added|date}}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="procent_likes">
                     <div class="like-procent">

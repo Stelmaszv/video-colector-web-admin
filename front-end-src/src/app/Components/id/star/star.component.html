@@ -114,8 +114,26 @@
                                 <i class="fas fa-thumbs-down"></i> <span class="stats_item dislike_js">{{data.disLikes_count | bigInt}}</span>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Movies
+                            </div>
+                            <div class="col table_row">
+                                <i class="fas fa-film"></i> <span class="stats_item">{{data.movies.length | bigInt}}</span>
+                            </div>
+                        </div>   
+                                       
+                        <div class="row">
+                            <div class="col table_row">
+                                Added
+                            </div>
+                            <div class="col table_row">
+                                {{data.added|date}}
+                            </div>
+                        </div>
                     </div>
-            </div>
+              </div>
         </div>
     </div>
     <div class="tabs_nav">

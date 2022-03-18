@@ -88,14 +88,25 @@
                             </div>
                         </div>
                     </ng-template>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Movies
+                        </div>
+                        <div class="col table_row">
+                            <i class="fas fa-film"></i> <span class="stats_item">{{data.movies.length | bigInt}}</span>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col table_row">
                             Added
                         </div>
                         <div class="col table_row">
-                            {{data.added}}
+                            {{data.added|date}}
                         </div>
                     </div>
+
                 </div>
                 <div class="procent_likes">
                     <div class="like-procent">
