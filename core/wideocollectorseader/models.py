@@ -179,6 +179,31 @@ class Serie(models.Model):
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='SerieDisLike', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',blank=True)
 
+    def set_country(self):
+        if self.country !='':
+            for Movie in self.movies.all():
+                Movie.country=self.country
+                Movie.save()
+
+    def set_years(self):
+        small=None
+        big=None
+        if self.years !='':
+            for Movie in self.movies.all():
+                if Movie.date_relesed is not None:
+                    data=Movie.date_relesed
+                    if small == None or small > data.year:
+                        small = data.year
+
+                    if big == None or big < data.year:
+                        big = data.year
+            self.years=str(small)+' - '+str(big)
+
+    def save(self, *args, **kwargs):
+        self.set_country()
+        self.set_years()
+        save(Serie, self)
+
     def delete(self, *args, **kwargs):
         delete(Serie, self)
 
