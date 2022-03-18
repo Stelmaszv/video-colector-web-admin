@@ -43,6 +43,7 @@ class ApstractSeader(ABC):
             with open('./jsondb/' + self.file_name) as json_file:
                 data = json.load(json_file)
                 for item in data:
+                    print(item['name'])
                     if len(self.Model.objects.filter(name=item['name'])) == 0:
                         self.add_model(item)
         else:
@@ -60,6 +61,7 @@ class ApstractSeader(ABC):
 
     def add_one_many_loop(self,item,Model,atribute_name,AddModel):
         for tag in item:
+
             Tag=AddModel.objects.get(name=tag)
             getattr(Model, atribute_name).add(Tag)
 

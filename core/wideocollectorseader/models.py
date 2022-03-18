@@ -210,8 +210,10 @@ class Serie(models.Model):
             self.years=str(small)+' - '+str(big)
 
     def save(self, *args, **kwargs):
-        self.set_country()
-        self.set_years()
+        save_mode = get_josn_file()['save_mode']
+        if save_mode is False:
+            self.set_country()
+            self.set_years()
         save(Serie, self)
 
     def delete(self, *args, **kwargs):
