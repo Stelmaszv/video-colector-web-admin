@@ -12,7 +12,7 @@
     <tbody>
       <tr *ngFor="let el of data; let i = index">
         <td>{{el.User.username}}</td>
-        <td>{{el.added}}</td>
+        <td>{{el.added|date}}</td>
         <ng-template [ngIf]="rateing">
           <td>{{el.rate}}</td>
         </ng-template>

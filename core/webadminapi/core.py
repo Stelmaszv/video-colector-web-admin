@@ -263,7 +263,7 @@ class AbstractStats(AbstractGenericsAPIViewExtended):
 
     def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
-        return getattr(Model,self.place).all()
+        return getattr(Model,self.place).order_by('-added')
 
 class AddRelation(AbstractDeteilsView):
     serializer_class = []
