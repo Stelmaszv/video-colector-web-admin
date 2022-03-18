@@ -71,7 +71,7 @@ ROOT_URLCONF = 'videocolectorwebadmin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templete')],
+        'DIRS': [os.path.join(BASE_DIR,'core/templete')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,7 +139,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'web')
 
 MEDIA_URL = '/web/'
 
-STATIC_URL = '/static/'
+STATIC_ROOT =os.path.join(BASE_DIR,'deploy')
+
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
