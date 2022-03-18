@@ -26,7 +26,6 @@ export class MoviesComponent extends BaseListComponent{
     disLikes_count:new FormControl(),
     country:new FormControl()
   });
-
   public onInitID(){
 
   }

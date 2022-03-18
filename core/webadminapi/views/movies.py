@@ -55,10 +55,12 @@ class MoviesWithStarsView(AbstractGenericsAPIViewExtended):
 
     def filter_queryset(self):
         Movies=[]
+
         Model = self.get_object(self.kwargs.get("pk"))
         for Star in Model.stars.all():
             for Movie in Star.movies.all():
-                Movies.append(Movie)
+                if Movie not in Movies:
+                    Movies.append(Movie)
         return Movies
 
 class MovieDeteilsView(AbstractDeteilsView):
