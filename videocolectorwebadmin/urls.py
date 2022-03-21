@@ -16,18 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework_simplejwt import views as jwt_views
-
 from django.conf import settings
 from django.conf.urls.static import static
 
+from core.wideocollectorseader.views import StartView, StartSeederView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.wideocollectorseader.urls')),
+    path('seed',                    StartSeederView.as_view(), name='start_seeder'),
     path('api/', include('core.webadminapi.urls')),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('custom-url/', include('drf_expiring_token.urls')),
+    path('', StartView.as_view(), name="start")
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

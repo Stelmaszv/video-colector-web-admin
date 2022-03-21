@@ -1,15 +1,17 @@
 <div class="card cart-item">
-    <img src="{{El|img:'avatar'}}" 
-        class="card-img-top cover" 
-        [ngClass]="{
-                        'rating_color_good' 
-                        : RatingService.if_good_rating(El),'movie_rating_mid' 
-                        : RatingService.if_mid_rating(El),'movie_rating_low' 
-                        : RatingService.if_low_rating(El)
-                   }" 
-        alt="assets/icon/movie.jpg">
+    <a href="/movie/{{El.id}}" >
+      <img src="{{El|img:'avatar'}}" 
+          class="card-img-top cover" 
+          [ngClass]="{
+                          'rating_color_good' 
+                          : RatingService.if_good_rating(El),'movie_rating_mid' 
+                          : RatingService.if_mid_rating(El),'movie_rating_low' 
+                          : RatingService.if_low_rating(El)
+                    }" 
+          alt="assets/icon/movie.jpg">
+    </a>
     <div class="card-body">
-      <h5 class="card-title"><a [routerLink]="['/movie/',El.id]" >{{El|fullName:25}}</a></h5>
+      <h5 class="card-title"><a href="/movie/{{El.id}}" >{{El|fullName:25}}</a></h5>
       <p class="card-text">{{El|fullDesc:130 }}</p>
     </div>
     <ng-template [ngIf]="El.likes_count>0">

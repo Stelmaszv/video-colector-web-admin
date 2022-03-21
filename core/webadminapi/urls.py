@@ -85,10 +85,10 @@ from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           AddStarTag,
                                           StarsTopView)
 from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
+from core.wideocollectorseader.views import StartView
 
 app_name = 'webadminapi'
-from django.urls import path
-
+from django.urls import path, re_path
 
 urlpatterns = [
     #top
@@ -203,7 +203,7 @@ urlpatterns = [
     path('favorite/movies',                      FavoritsMovies.as_view(),  name='favorits_list'),
     path('favorite/stars',                       FavoritsStars.as_view(),   name='favorits_stars'),
     path('favorite/producents',                  FavoritsProducents.as_view(),  name='favorits_producents'),
-    path('favorite/series',                       FavoritsSeries.as_view(),  name='favorits_series'),
+    path('favorite/series',                      FavoritsSeries.as_view(),  name='favorits_series'),
     path('favorite/movie/<int:pk>/',             FavoritsAddMovie.as_view(),  name='favorits_producents'),
     path('favorite/star/<int:pk>/',              FavoritsAddStar.as_view(),  name='favorits_stars'),
     path('favorite/serie/<int:pk>/',             FavoritsAddSerie.as_view(),  name='favorits_stars'),
@@ -216,6 +216,8 @@ urlpatterns = [
     path('delete/dislike/<int:pk>/',            DeleteDisLikessView.as_view(),  name='delete_dislike'),
     path('delete/rating/<int:pk>/',             DeleteRattingView.as_view(),  name='delete_rating'),
     path('delete/views/<int:pk>/',              DeleteViewsView.as_view(),   name='delete_views'),
+
+
 ]
 
 
