@@ -38,7 +38,6 @@
                 </div>
             </div> 
             <div class="movie section_movie_play" style="background-color: black;" style="height:1250px">
-                <ng-template [ngIf]="mode=='poster'">
                     <div class="if_poster">
                         <video style="min-height:100%" src="{{data.src}}"
                             class="wideo_src" id="bgvid" poster="{{data.poster}}" muted>
@@ -72,14 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </ng-template>
-                <ng-template [ngIf]="mode=='cover'">
-                    <div class="wideo-section d-flex justify-content-center cover_show">
-                        <img class="cover_js" src="{{data.avatar}}">
-                    </div>
-                </ng-template>
-           
+                    </div>        
             </div>
         </section>
     </form>
@@ -88,7 +80,7 @@
             <h1 class="d-flex justify-content-center star-name">Stars</h1>
             <div class="d-flex justify-content-center stars_js">
                 <a *ngFor="let star of data.stars" [routerLink]="['/star/',star.id]" class="card-link star_item">
-                    <img src="{{star.avatar}}" class="img-thubnail star_src">
+                    <img src="{{star|img:'star_avatar'}}" class="img-thubnail star_src">
                 </a>
             </div>
         </div>
