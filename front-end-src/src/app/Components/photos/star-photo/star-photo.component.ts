@@ -13,7 +13,7 @@ export class StarPhotoComponent extends BasePhotosComponent {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/stars/photo/'+this.ID
+      this.url='api/stars/photo/'+this.ID+'?page='+this.page
     }
   }
 

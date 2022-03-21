@@ -9,7 +9,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class ProducentEditComponent extends AbstractEditComponent {
 
-  override url='http://127.0.0.1:8000/producent/updata/'
+  override url='api/producent/updata/'
   protected override auth:any=true
 
   public override Edit = new FormGroup({
@@ -20,6 +20,7 @@ export class ProducentEditComponent extends AbstractEditComponent {
   });
 
   protected override on_get_result(data:any){
+
     this.Edit = new FormGroup({
       show_name: new FormControl(data.show_name),
       country:new FormControl(data.country),

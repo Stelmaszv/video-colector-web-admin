@@ -7,10 +7,10 @@ import { HttpService } from '../http/http.service';
 export class RelationSelectService {
 
   constructor(protected httpService: HttpService) { }
-  private producents_select_url:string = 'http://127.0.0.1:8000/producentsformview'
-  private series_select_url:string = 'http://127.0.0.1:8000/series_select'
-  private star_select_url:string = 'http://127.0.0.1:8000/stars_form'
-  private tag_select_url:string = 'http://127.0.0.1:8000/tags'
+  private producents_select_url:string = 'api/producentsformview'
+  private series_select_url:string = 'api/series_select'
+  private star_select_url:string = 'api/stars_form'
+  private tag_select_url:string = 'api/tags'
   public tags:any
   public stars:any
   public series_select:any

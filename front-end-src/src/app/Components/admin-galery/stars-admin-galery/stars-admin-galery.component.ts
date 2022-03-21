@@ -8,8 +8,8 @@ import { BaseGaleryAdminComponent } from '../base-galery-admin/base-galery-admin
 })
 export class StarsAdminGaleryComponent extends BaseGaleryAdminComponent {
   public override generate_stan=false
-  public override url = 'http://127.0.0.1:8000/star/' 
-  public override edit_url='http://127.0.0.1:8000/star/updata/'
-  public override galery_url='http://127.0.0.1:8000/stars/photo/'
+  public override url = 'api/star/' 
+  public override edit_url='api/star/updata/'
+  public override galery_url='api/stars/photo/'
   public override section='star'
 }

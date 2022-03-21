@@ -3,7 +3,6 @@ from django.http import Http404
 from django_filters import rest_framework as filters
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
@@ -20,8 +19,12 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           ProducentsSerializer,
                                           ProducentsSerializerUpdate,
                                           ProducetFormSeralizer,
-                                          SerieSerializer, StarsSerializer, StatsSerializer, RatingsSerializer,
-                                          TagsSerializer, ProducentsSerializerID)
+                                          SerieSerializer,
+                                          StarsSerializer,
+                                          StatsSerializer,
+                                          RatingsSerializer,
+                                          TagsSerializer,
+                                          ProducentsSerializerID, BaseSeraliser)
 from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views, Movie
 from rest_framework.pagination import PageNumberPagination
 
@@ -59,12 +62,10 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
         photos=[]
         for photo in miandir:
             if photo.endswith(photo_ext):
-                photos.append(
-                    {
-                     "url"     :   Model.dir+'\\'+photo,
-                     "name"    :   Model.show_name
-                     },
-                )
+                photos.append({
+                         "url"     :   Model.dir+'\photo\DATA\\'+photo,
+                         "name"    :   Model.show_name
+                })
         for Serie in Model.series.all():
             for Movie in Serie.movies.all():
                 for photo in os.listdir(Movie.dir):
@@ -196,26 +197,26 @@ class AdminStatsProducentRatings(AbstractStats):
     place = 'ratings'
 
 class ProducentSeriesView(AbstractItems):
-    serializer_class = SerieSerializer
+    serializer_class = BaseSeraliser
     queryset = []
     Model = Producents
     RelationModel = Serie
     place = 'series'
 
 class ProducentAddSerie(AddRelation):
-    serializer_class = MoviesSerializer
+    serializer_class = BaseSeraliser
     queryset = []
     Model = Producents
     object_index = 'series'
 
 class ProducentTagsView(AbstractItems):
-    serializer_class = TagsSerializer
+    serializer_class = BaseSeraliser
     queryset = []
     Model = Producents
     place = 'tags'
 
 class ProducentAddTag(AddRelation):
-    serializer_class = ProducentsSerializer
+    serializer_class = BaseSeraliser
     queryset = []
     Model = Producents
     object_index='tags'

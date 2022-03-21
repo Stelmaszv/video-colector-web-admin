@@ -1,7 +1,3 @@
-
-from django.conf import settings
-from django.conf.urls.static import static
-
 from core.webadminapi.core import DeleteLikeView, DeleteDisLikessView, DeleteRattingView, DeleteViewsView
 from core.webadminapi.views.favorite import FavoritsMovies, FavoritsStars, FavoritsSeries, FavoritsProducents, \
     FavoritsAddMovie, FavoritsAddStar, FavoritsAddSerie, FavoritsAddProducent, FavoritsIsMovies, FavoritsIsStars, \
@@ -221,8 +217,6 @@ urlpatterns = [
     path('delete/rating/<int:pk>/',             DeleteRattingView.as_view(),  name='delete_rating'),
     path('delete/views/<int:pk>/',              DeleteViewsView.as_view(),   name='delete_views'),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)
+
 
 

@@ -8,15 +8,15 @@ import { BaseItemsSectionsComponent } from '../base-items-sections/base-items-se
 })
 export class AdminItemsProducentComponent extends BaseItemsSectionsComponent {
 
-  public override url = 'http://127.0.0.1:8000/producent/' 
+  public override url = 'api/producent/' 
 
-  public override tag_url: string="http://127.0.0.1:8000/series/tags/";
-  public override tag_item_url = "http://127.0.0.1:8000/add/tag/serie/"
+  public override tag_url: string="api/producent/tags/";
+  public override tag_item_url = "api/add/tag/serie/"
   public override tag_add_section='tags'
   public override place:string="producent"
 
-  public override series_url: string="http://127.0.0.1:8000/producent/tags/";
-  public override series_item_url = "http://127.0.0.1:8000/add/tag/producent/"
+  public override series_url: string="api/producent/series/";
+  public override series_item_url = "api/add/serie/producent/"
   public override series_add_section='series'
 
   protected override sections={
@@ -24,5 +24,7 @@ export class AdminItemsProducentComponent extends BaseItemsSectionsComponent {
     'tags'   : true,
     'series' : true,
   }
+
+
 
 }

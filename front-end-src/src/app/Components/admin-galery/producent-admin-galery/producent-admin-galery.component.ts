@@ -8,8 +8,8 @@ import { BaseGaleryAdminComponent } from '../base-galery-admin/base-galery-admin
 })
 export class ProducentAdminGaleryComponent extends BaseGaleryAdminComponent {
   public override generate_stan=false
-  public override url = 'http://127.0.0.1:8000/producent/' 
-  public override edit_url='http://127.0.0.1:8000/producent/updata/'
-  public override galery_url='http://127.0.0.1:8000/producent/photo/'
+  public override url = 'api/producent/' 
+  public override edit_url='api/producent/updata/'
+  public override galery_url='api/producent/photos/'
   public override section='producent'
 }

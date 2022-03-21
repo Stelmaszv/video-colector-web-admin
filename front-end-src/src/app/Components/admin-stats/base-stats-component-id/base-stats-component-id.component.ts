@@ -13,10 +13,10 @@ export class BaseStatsComponentIDComponent extends BaseIDComponent {
   public disliks_url='' 
   public views_url=''
   public ratings_url=''
-  public delete_like='http://127.0.0.1:8000/delete/like/'
-  public delete_dislike='http://127.0.0.1:8000/delete/dislike/'
-  public delete_ratings='http://127.0.0.1:8000/delete/rating/'
-  public delete_views='http://127.0.0.1:8000/delete/views/'
+  public delete_like='api/delete/like/'
+  public delete_dislike='api/delete/dislike/'
+  public delete_ratings='api/delete/rating/'
+  public delete_views='api/delete/views/'
   protected override  auth=true
   public section=''
 

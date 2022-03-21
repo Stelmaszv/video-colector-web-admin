@@ -11,15 +11,15 @@ import { FormControl ,FormGroup} from '@angular/forms';
 export class MovieidComponent extends BaseIDComponent{
 
   public mode='poster'
-  protected override url='http://127.0.0.1:8000/movie/'
-  protected override add_to_like_url:string='movieaddtolike/'
-  protected override add_to_rating_url:string='movieaddtorating/'
-  protected override add_to_dislike_url:string='movieaddtodislike/'
-  protected override update_views_url:string='movieaupdateviews/'
-  protected override fovorits_url:string='favorite/movie/'
-  protected override chceck_favorit_stan_url='favoriteis/movies/'
-  private next_movie_url ='http://127.0.0.1:8000/movienextinseries/'
-  private next_movie_with_star_url ='http://127.0.0.1:8000/moviemextwithstar/'
+  protected override url='api/movie/'
+  protected override add_to_like_url:string='api/movieaddtolike/'
+  protected override add_to_rating_url:string='api/movieaddtorating/'
+  protected override add_to_dislike_url:string='api/movieaddtodislike/'
+  protected override update_views_url:string='api/movieaupdateviews/'
+  protected override fovorits_url:string='api/favorite/movie/'
+  protected override chceck_favorit_stan_url='api/favoriteis/movies/'
+  private next_movie_url ='api/movienextinseries/'
+  private next_movie_with_star_url ='api/moviemextwithstar/'
   protected override edit_url_heder:string='/admin/movie/edit/'
   private stars_under_movie=5
   private min_count=3

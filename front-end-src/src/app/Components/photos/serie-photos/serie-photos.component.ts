@@ -14,7 +14,7 @@ export class SeriePhotosComponent extends BasePhotosComponent {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/series/photo/'+this.ID
+      this.url='api/series/photo/'+this.ID+'?page='+this.page
     }
   }
 }

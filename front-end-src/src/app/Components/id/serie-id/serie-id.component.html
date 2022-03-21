@@ -87,15 +87,28 @@
                             <i class="fas fa-film"></i> <span class="stats_item">{{data.movies.length | bigInt}}</span>
                         </div>
                     </div>
+                    
+                    <ng-template [ngIf]="data.years">
+                        <div class="row">
+                            <div class="col table_row">
+                                Years
+                            </div>
+                            <div class="col table_row">
+                                <span>{{data.years}}</span>
+                            </div>
+                        </div>
+                    </ng-template>
 
-                    <div class="row">
-                        <div class="col table_row">
-                            Years
+                    <ng-template [ngIf]="data.country">
+                        <div class="row">
+                            <div class="col table_row">
+                                Country
+                            </div>
+                            <div class="col table_row">
+                                <span>{{data.country}}</span>
+                            </div>
                         </div>
-                        <div class="col table_row">
-                            <span>{{data.years}}</span>
-                        </div>
-                    </div>
+                    </ng-template>
 
                     <div class="row">
                         <div class="col table_row">

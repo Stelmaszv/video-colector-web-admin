@@ -9,7 +9,7 @@ import { BaseListComponent } from '../../list/base-list/base-list.component';
 export class BaseGaleryComponent extends BaseListComponent {
   @Input() public override url=''
   @Input() public edit_url=''
-  @Input() public delete_url='http://127.0.0.1:8000/admin/galery/movie/delete/'
+  @Input() public delete_url='api/admin/galery/movie/delete/'
   @Input() movies:any=false
   @Input() cover:any=''
   @Input() poster:any=''
@@ -18,9 +18,9 @@ export class BaseGaleryComponent extends BaseListComponent {
   protected override auth: any=true;
   protected override no_title:boolean=true
 
-  public override on_before_load_data():void
+  public override on_set_url():void
   {
-    this.url=this.url+this.id
+    this.url=this.store_url+this.id+'?page='+this.page
   } 
 
   public update_poster(url:any,index:number){

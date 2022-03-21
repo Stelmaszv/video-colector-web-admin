@@ -15,7 +15,7 @@ export class ProducentSeriesComponent extends SeriesComponent {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/producentsseries/'+this.ID
+      this.url='api/producentsseries/'+this.ID+'?page='+this.page
     }
   }
 }

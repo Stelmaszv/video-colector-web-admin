@@ -137,7 +137,7 @@ USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'web')
 
-MEDIA_URL = '/web/'
+MEDIA_URL = 'web/'
 
 STATIC_ROOT =os.path.join(BASE_DIR,'deploy')
 

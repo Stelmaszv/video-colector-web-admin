@@ -7,8 +7,8 @@ import { FormControl ,FormGroup} from '@angular/forms';
   styleUrls: ['./stars.component.scss']
 })
 export class StarsComponent extends BaseListComponent{
-  override url='http://127.0.0.1:8000/stars'
-  public override fav_url:string='http://127.0.0.1:8000/favorite/stars'
+  override url='api/stars'
+  public override fav_url:string='api/favorite/stars'
   protected override debug: any=true
   public override title:string='Stars'
 

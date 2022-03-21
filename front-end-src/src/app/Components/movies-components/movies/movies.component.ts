@@ -13,8 +13,8 @@ export class MoviesComponent extends BaseListComponent{
   found_top='150px'
   public override title: string='Movies';
   
-  public override url:string='http://127.0.0.1:8000/movies'
-  public override fav_url:string='http://127.0.0.1:8000/favorite/movies'
+  public override url:string='api/movies'
+  public override fav_url:string='api/favorite/movies'
   
   public override search = new FormGroup({
     name: new FormControl(),

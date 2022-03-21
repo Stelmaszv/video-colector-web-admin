@@ -9,13 +9,13 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 
 export class SerieEditComponent extends AbstractEditComponent {
-  override url='http://127.0.0.1:8000/serie/updata/'
+  override url='api/serie/updata/'
   protected override auth:any=true
   public override Edit = new FormGroup({
     show_name: new FormControl(),
     country:new FormControl(),
     description: new FormControl(),
-    producent     :new FormControl(),
+    Producent     :new FormControl(),
   });
 
   protected override on_get_result(data:any){
@@ -23,7 +23,7 @@ export class SerieEditComponent extends AbstractEditComponent {
       show_name: new FormControl(data.show_name),
       country:new FormControl(data.country),
       description: new FormControl(data.description),
-      producent     :new FormControl(data.producent),
+      Producent     :new FormControl(data.Producent),
     });
   }
 }

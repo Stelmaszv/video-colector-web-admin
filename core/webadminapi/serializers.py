@@ -249,7 +249,7 @@ def set_banners(instance):
         if if_dir_exit_miandir:
             for photo in os.listdir(dir):
                 if 'banner' == Path(photo).stem:
-                     banners_array.append({'url': 'http://127.0.0.1:8000/' + instance.dir + '/photo/DATA/' + photo})
+                     banners_array.append({'url': 'http://127.0.0.1:8000/'+instance.dir + '/photo/DATA/' + photo})
     return banners_array
 
 def set_avatar_for_top_stars(instance):
@@ -292,6 +292,13 @@ class ProducentsSerializerID(ProducentsSerializer):
         representation = super().to_representation(instance)
         representation["banners"] = set_banners(instance)
         return representation
+
+
+class BaseSeraliser(serializers.ModelSerializer):
+    class Meta:
+        model = Serie
+        fields = ['id','name']
+
 
 #Stars
 class SeriesSerlizerForStars(ShortSeries):

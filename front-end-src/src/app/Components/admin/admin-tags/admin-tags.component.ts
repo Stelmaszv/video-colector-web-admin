@@ -8,7 +8,7 @@ import { ApstractAdminComponent } from '../apstract-admin/apstract-admin.compone
 })
 export class AdminTagsComponent extends ApstractAdminComponent {
 
-  public override url:string='http://127.0.0.1:8000/admin/tags'
+  public override url:string='api/admin/tags'
   protected override auth=true;
   protected override item_url='tag'
   public override title: string="Admin Tags"

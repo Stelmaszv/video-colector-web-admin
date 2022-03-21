@@ -9,7 +9,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class StarsEditComponent extends AbstractEditComponent {
 
-  override url='http://127.0.0.1:8000/star/update/'
+  override url='api/star/update/'
   protected override auth:any=true
 
   public override Edit = new FormGroup({

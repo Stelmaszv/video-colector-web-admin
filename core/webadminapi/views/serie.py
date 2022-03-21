@@ -36,7 +36,10 @@ class SeriesPhotosView(AbstractGenericsAPIViewExtended):
         miandir=os.listdir(Model.dir+'\photo\DATA')
         photos=[]
         for photo in miandir:
+
+
             if photo.endswith(photo_ext):
+
                 photos.append(
                     {
                      "url"     :   Model.dir+'\photo\DATA\\'+photo,
@@ -227,7 +230,7 @@ class SeriesTagsView(AbstractItems):
     place = 'tags'
 
 class SerieAddTag(AddRelation):
-    serializer_class = MoviesSerializer
+    serializer_class = TagsSerializer
     queryset = Serie.objects
     Model = Serie
     object_index='tags'

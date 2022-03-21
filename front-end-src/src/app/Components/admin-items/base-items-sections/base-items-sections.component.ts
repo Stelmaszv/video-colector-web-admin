@@ -44,4 +44,16 @@ export class BaseItemsSectionsComponent extends BaseIDComponent {
   {
     return this.sections['series']
   }
+
+  public return_series_url(){
+    return this.series_url+this.id
+  }
+
+  public return_tag_url(){
+    return this.tag_url+this.id
+  }
+  
+  public return_stars_url(){
+    return this.stars_url+this.id
+  }
 }

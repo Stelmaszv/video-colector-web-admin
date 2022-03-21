@@ -7,8 +7,8 @@ import { FormControl ,FormGroup} from '@angular/forms';
   styleUrls: ['./producent.component.scss']
 })
 export class ProducentComponent extends BaseListComponent {
-  override url='http://127.0.0.1:8000/producents'
-  public override fav_url:string='http://127.0.0.1:8000/favorite/producents'
+  override url='api/producents'
+  public override fav_url:string='api/favorite/producents'
   public override title:string='Producents'
 
   public override search = new FormGroup({

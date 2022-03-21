@@ -15,6 +15,6 @@ export class StarMoviesComponent extends MoviesComponent {
 
   public override on_set_url():void
   {
-    this.url = 'http://127.0.0.1:8000/starsmovie/'+this.ID+'?page='+this.page+'&'+this.filter_url
+    this.url = 'api/starsmovie/'+this.ID+'?page='+this.page+'&'+this.filter_url
   }
 }

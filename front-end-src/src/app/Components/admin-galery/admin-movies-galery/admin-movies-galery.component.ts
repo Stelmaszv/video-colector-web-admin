@@ -8,10 +8,10 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./admin-movies-galery.component.scss']
 })
 export class AdminMoviesGaleryComponent extends BaseIDComponent {
-  public override url = 'http://127.0.0.1:8000/movie/' 
-  public galery_url='http://127.0.0.1:8000/moviephotosview/'
-  public edit_url='http://127.0.0.1:8000/movieupdata/'
-  public generate_url="http://127.0.0.1:8000/admin/galery/generate/moviecap/"
+  public override url = 'api/movie/' 
+  public galery_url='api/moviephotosview/'
+  public edit_url='api/movieupdata/'
+  public generate_url="api/admin/galery/generate/moviecap/"
   public generate_stan=false
   
   photos = new FormGroup({

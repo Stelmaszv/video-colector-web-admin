@@ -8,8 +8,8 @@ import { DescPipe } from 'src/app/Pipe/desc-pip/desc.pipe';
   styleUrls: ['./series.component.scss']
 })
 export class SeriesComponent extends BaseListComponent {
-  override url='http://127.0.0.1:8000/series'
-  public override fav_url:string='http://127.0.0.1:8000/favorite/series'
+  override url='api/series'
+  public override fav_url:string='api/favorite/series'
   public override title:string='Series'
   protected override debug: any=true
 

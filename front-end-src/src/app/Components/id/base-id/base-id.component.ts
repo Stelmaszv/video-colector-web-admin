@@ -65,26 +65,26 @@ export class BaseIDComponent implements OnInit {
   protected on_get_result(response:any):void {}
 
   public return_add_to_ratng_url(){
-    return this.server+this.add_to_rating_url+this.id+'/'
+    return this.add_to_rating_url+this.id+'/'
   }
 
   public return_add_to_like_url(){
-    return this.server+this.add_to_like_url+this.id+'/'
+    return this.add_to_like_url+this.id+'/'
   }
 
   public return_add_to_dislike_url(){
-    return this.server+this.add_to_dislike_url+this.id+'/'
+    return this.add_to_dislike_url+this.id+'/'
   }
   
   public return_add_to_favorite_url(){
-    return this.server+this.fovorits_url+this.id+'/'
+    return this.fovorits_url+this.id+'/'
   }
   public return_chceck_favorit_stan_url(){
-    return this.server+this.chceck_favorit_stan_url+this.id+'/'
+    return this.chceck_favorit_stan_url+this.id+'/'
   }
 
   public return_update_views_url(){
-    return this.server+this.update_views_url+this.id+'/'
+    return this.update_views_url+this.id+'/'
   }
 
   public return_edit_url(){

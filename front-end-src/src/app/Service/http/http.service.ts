@@ -10,11 +10,14 @@ import { TokkenService } from '../tokken/tokken.service';
 
 export class HttpService {
   tokken:any
-  constructor(public http:HttpClient) { }
+  server:string=''
+  constructor(public http:HttpClient) {
+      this.server='http://127.0.0.1:8000/'
+   }
 
   
   public get_url(url :string) {
-    return this.http.get(url);
+    return this.http.get(this.server+url);
   }
 
   private update_tokken(tokken:any){
@@ -39,7 +42,7 @@ export class HttpService {
     }else{
       headers = new HttpHeaders({'Authorization' : 'Bearer '+localStorage['tokkenAccess']});
     }
-    return this.http.delete(url,{
+    return this.http.delete(this.server+url,{
       headers
     });
   }
@@ -63,7 +66,7 @@ export class HttpService {
       }else{
         headers = new HttpHeaders({'Authorization' : 'Bearer '+localStorage['tokkenAccess']});
       }
-      return this.http.get(url,{
+      return this.http.get(this.server+url,{
         headers
       });
   }
@@ -95,7 +98,7 @@ export class HttpService {
     }else{
       headers = new HttpHeaders({'Authorization' : 'Bearer '+localStorage['tokkenAccess']});
     }
-    return this.http.put(url,data,{headers});
+    return this.http.put(this.server+url,data,{headers});
   }
 }
 

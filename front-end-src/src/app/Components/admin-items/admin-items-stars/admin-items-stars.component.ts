@@ -8,11 +8,11 @@ import { BaseItemsSectionsComponent } from '../base-items-sections/base-items-se
 })
 export class AdminItemsStarsComponent extends BaseItemsSectionsComponent {
 
-  public override url = 'http://127.0.0.1:8000/star/' 
+  public override url = 'api/star/' 
   public override place:string="star"
 
-  public override tag_url: string="http://127.0.0.1:8000/star/tags/";
-  public override tag_item_url = "http://127.0.0.1:8000/add/tag/star/"
+  public override tag_url: string="api/star/tags/";
+  public override tag_item_url = "api/add/tag/star/"
   public override tag_add_section='tags'
 
   protected override sections={

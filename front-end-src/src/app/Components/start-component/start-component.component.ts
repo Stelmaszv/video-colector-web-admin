@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartComponentComponent implements OnInit {
 
-  public movies_url:string='http://127.0.0.1:8000/top/movies?order='
-  public series_url:string='http://127.0.0.1:8000/top/series?order='
-  public stars_url:string='http://127.0.0.1:8000/top/stars?order='
-  public producents_url:string='http://127.0.0.1:8000/top/producents?order='
+  public movies_url:string='api/top/movies?order='
+  public series_url:string='api/top/series?order='
+  public stars_url:string='api/top/stars?order='
+  public producents_url:string='api/top/producents?order='
 
   ngOnInit(): void {
     console.log('wqdd')

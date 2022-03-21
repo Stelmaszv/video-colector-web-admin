@@ -14,7 +14,7 @@ export class MoviesWithStarsComponent extends MoviesComponent {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/movieswithstars/'+this.ID
+      this.url='api/movieswithstars/'+this.ID+'?page='+this.page
     }
   }
 }

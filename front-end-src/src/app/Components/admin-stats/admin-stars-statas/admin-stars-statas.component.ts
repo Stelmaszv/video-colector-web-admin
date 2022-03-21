@@ -8,11 +8,11 @@ import { BaseStatsComponentIDComponent } from '../base-stats-component-id/base-s
 })
 export class AdminStarsStatasComponent extends BaseStatsComponentIDComponent {
 
-  public override url = 'http://127.0.0.1:8000/star/'
-  public override liks_url='http://127.0.0.1:8000/admin/stats/star/laiks/' 
-  public override disliks_url='http://127.0.0.1:8000/admin/stats/star/disliks/' 
-  public override views_url='http://127.0.0.1:8000/admin/stats/star/views/'
-  public override ratings_url='http://127.0.0.1:8000/admin/stats/star/ratings/'
+  public override url = 'api/star/'
+  public override liks_url='api/admin/stats/star/laiks/' 
+  public override disliks_url='api/admin/stats/star/disliks/' 
+  public override views_url='api/admin/stats/star/views/'
+  public override ratings_url='api/admin/stats/star/ratings/'
   public override section='star'
 
 }

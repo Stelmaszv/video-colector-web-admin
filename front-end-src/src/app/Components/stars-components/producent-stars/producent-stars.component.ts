@@ -15,7 +15,7 @@ export class ProducentStarsComponent extends StarsComponent  {
   public override on_set_url():void
   {
     if (this.start){
-      this.url='http://127.0.0.1:8000/producentsstar/'+this.ID
+      this.url='api/producentsstar/'+this.ID+'?page='+this.page
     }
   }
 }
