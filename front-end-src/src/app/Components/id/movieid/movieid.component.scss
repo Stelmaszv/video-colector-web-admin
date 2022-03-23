@@ -59,13 +59,13 @@ $rating_color_good:1px solid rgb(0, 182, 61);
 .section_movie_play{
     text-align: center;
     background: black;
-    width: 99vw;
+    width: 100vw;
 }
 
 video#bgvid {
-    height: 87vh;
-    width: 99vw;
-    object-fit:cover;
+    height:1250px;
+    width: 100vw;
+    object-fit:fill;
 } 
 
 .serie-movies{

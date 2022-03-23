@@ -4,11 +4,15 @@ $rating_color_good:1px solid rgb(0, 182, 61);
 $starsBGColor:black;
 .video-section{
     .section_movie_play{
+        position: relative;
         display: none;
+        .video{
+            height: 10px;
+        }
         .movie_Info{
             position: absolute;
             color: white;
-            top: 85%;
+            bottom:92%;
             left: 3%;
             .serie_name{
                 font-style: italic;
@@ -18,6 +22,10 @@ $starsBGColor:black;
             }
         }
         .movie_controls{
+            position: absolute;
+            bottom:2;
+            top: 92%;
+
             opacity: .1;
         }
     }
@@ -27,7 +35,7 @@ $starsBGColor:black;
         position: relative;
         .movie_poster{
             width: 100%; 
-            height: 1245px;
+            height: 1250px;
             opacity: .6;
         }
         .movie_info{
@@ -154,7 +162,6 @@ $starsBGColor:black;
         }
     }
     .cover{
-        
         width: 13rem; 
         height: 20rem;
     }
