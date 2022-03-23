@@ -1,0 +1,51 @@
+<div class="card cart_poster_item">
+    <a href="/movie/{{El.id}}" >
+      <img src="{{El | img:'poster'}}" class="card-img-top poster" style="width: 100%;height:200px;" alt="...">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title"><a href="/movie/{{El.id}}" >{{El|fullName:50}}</a></h5>
+      <p class="card-text entry">{{El|fullDesc:325}}</p>
+    </div>
+    
+    <ng-template [ngIf]="El.stars.length">
+      <div class="card-body star_list">
+        <a href="#" [routerLink]="['/star/',El.stars[0].id]" class="card-link star_item">{{El.stars[0]|name}}</a>
+        <ng-template [ngIf]="El.stars.length>1">
+          <a href="#" [routerLink]="['/star/',El.stars[1].id]" class="card-link star_item">{{El.stars[1]|name}}</a>
+        </ng-template>
+        <ng-template  [ngIf]="El.stars.length>2">
+          <a href="#" [routerLink]="['/star/',El.stars[2].id]" class="card-link star_item">{{El.stars[2]|name}}</a>
+        </ng-template>
+        <ng-template [ngIf]="El.stars.length>3">
+          + <i>{{El.stars.length-3}}</i>
+        </ng-template>
+      </div>
+    </ng-template>
+
+    <div class="stats">
+      <span class="stat_item">
+        <span class="stats_font">
+          <i class="fas fa-thumbs-up"></i>
+        </span>
+        <span class="stats_rate">
+          {{ El.likes_count | bigInt }}
+        </span>
+      </span>
+      <span class="stat_item">
+        <span class="stats_font">
+          <i class="fas fa-eye"></i>
+        </span>
+        <span class="stats_rate">
+            {{ El.views_count | bigInt }}
+        </span>
+      </span>
+      <span class="stat_item">
+        <span class="stats_font">
+          <i class="fas fa-thumbs-down"></i>
+        </span>
+        <span class="stats_rate">
+            {{ El.likes_count | bigInt }}
+        </span>
+      </span>
+    </div>
+  </div>

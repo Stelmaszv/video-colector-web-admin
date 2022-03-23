@@ -34,6 +34,56 @@ import { MianMoviesComponent } from './Components/main-components/mian-movies/mi
 import { MianSeriesComponent } from './Components/main-components/mian-series/mian-series.component';
 import { MainStarsComponent } from './Components/main-components/main-stars/main-stars.component';
 import { MainProducentComponent } from './Components/main-components/main-producent/main-producent.component';
+import { LoginComponent } from './Components/login/login.component';
+import { LogoutComponent } from './Components/logout/logout.component';
+import { ActionsComponent } from './common/actions/actions.component';
+import { AdminMoviesComponent } from './Components/admin/admin-movies/admin-movies.component';
+import { ApstractAdminComponent } from './Components/admin/apstract-admin/apstract-admin.component';
+import { AdminNavbarComponent } from './Components/admin/admin-navbar/admin-navbar.component';
+import { AdminProducentComponent } from './Components/admin/admin-producent/admin-producent.component';
+import { AdminStarsComponent } from './Components/admin/admin-stars/admin-stars.component';
+import { AdminSeriesComponent } from './Components/admin/admin-series/admin-series.component';
+import { AdminTagsComponent } from './Components/admin/admin-tags/admin-tags.component';
+import { AdminComponent } from './Components/admin/admin/admin.component';
+import { MovieEditComponent } from './Components/admin-edit/movie-edit/movie-edit.component';
+import { AbstractEditComponent } from './Components/admin-edit/abstract-edit/abstract-edit.component';
+import { BaseGaleryComponent } from './Components/admin-galery/base-galery/base-galery.component';
+import { AdminMoviesGaleryComponent } from './Components/admin-galery/admin-movies-galery/admin-movies-galery.component';
+import { AbstractAdminNavbarComponent } from './Components/admin-navbar/abstract-admin-navbar/abstract-admin-navbar.component';
+import { MoviesAdminNavbarComponent } from './Components/admin-navbar/movies-admin-navbar/movies-admin-navbar.component';
+import { AdminItemsMoviesComponent } from './Components/admin-items/admin-items-movies/admin-items-movies.component';
+import { AdminMoviesStatsComponent } from './Components/admin-stats/admin-movies-stats/admin-movies-stats.component';
+import { AdminStatsBaseComponent } from './Components/admin-stats/admin-stats-base/admin-stats-base.component';
+import { SerieEditComponent } from './Components/admin-edit/serie-edit/serie-edit.component';
+import { StarsEditComponent } from './Components/admin-edit/stars-edit/stars-edit.component';
+import { ProducentEditComponent } from './Components/admin-edit/producent-edit/producent-edit.component';
+import { AdminSeriesGaleryComponent } from './Components/admin-galery/admin-series-galery/admin-series-galery.component';
+import { StarsAdminGaleryComponent } from './Components/admin-galery/stars-admin-galery/stars-admin-galery.component';
+import { ProducentAdminGaleryComponent } from './Components/admin-galery/producent-admin-galery/producent-admin-galery.component';
+import { BaseStatsComponentIDComponent } from './Components/admin-stats/base-stats-component-id/base-stats-component-id.component';
+import { AdminSeriesStatasComponent } from './Components/admin-stats/admin-series-statas/admin-series-statas.component';
+import { AdminStarsStatasComponent } from './Components/admin-stats/admin-stars-statas/admin-stars-statas.component';
+import { BaseGaleryAdminComponent } from './Components/admin-galery/base-galery-admin/base-galery-admin.component';
+import { AdminProducenrStatsComponent } from './Components/admin-stats/admin-producenr-stats/admin-producenr-stats.component';
+import { BaseItemListComponent } from './Components/admin-items/base-item-list/base-item-list.component';
+import { BaseItemsSectionsComponent } from './Components/admin-items/base-items-sections/base-items-sections.component';
+import { AdminItemsSeriesComponent } from './Components/admin-items/admin-items-series/admin-items-series.component';
+import { AdminItemsStarsComponent } from './Components/admin-items/admin-items-stars/admin-items-stars.component';
+import { AdminItemsProducentComponent } from './Components/admin-items/admin-items-producent/admin-items-producent.component';
+import { ImgPipe } from './Pipe/img/img.pipe';
+import { NamePipe } from './Pipe/name/name.pipe';
+import { DescPipe } from './Pipe/desc-pip/desc.pipe';
+import { TopSectionComponent } from './Components/top-section/top-section.component';
+import { StarLoopContetComponent } from './common/loop_content/star-loop-contet/star-loop-contet.component';
+import { ProducentLoopComponentComponent } from './common/loop_content/producent-loop-component/producent-loop-component.component';
+import { SeriesLoopContentComponent } from './common/loop_content/series-loop-content/series-loop-content.component';
+import { MoviesCoverLoopContentComponent } from './common/loop_content/movies-cover-loop-content/movies-cover-loop-content.component';
+import { MoviesPosterLoopContentComponent } from './common/loop_content/movies-poster-loop-content/movies-poster-loop-content.component';
+import { MoviesSerchFormComponent } from './Components/search-form/movies-serch-form/movies-serch-form.component';
+import { FullDescPipe } from './Pipe/full-desc/full-desc.pipe';
+import { FullNamePipe } from './Pipe/full-name/full-name.pipe';
+import { NationalityPipe } from './Pipe/nationality/nationality.pipe';
+import { AgePipe } from './Pipe/age/age.pipe';
 
 @NgModule({
   declarations: [
@@ -66,7 +116,57 @@ import { MainProducentComponent } from './Components/main-components/main-produc
     MianMoviesComponent,
     MianSeriesComponent,
     MainStarsComponent,
-    MainProducentComponent
+    MainProducentComponent,
+    LoginComponent,
+    LogoutComponent,
+    ActionsComponent,
+    AdminMoviesComponent,
+    ApstractAdminComponent,
+    AdminNavbarComponent,
+    AdminProducentComponent,
+    AdminStarsComponent,
+    AdminSeriesComponent,
+    AdminTagsComponent,
+    AdminComponent,
+    MovieEditComponent,
+    AbstractEditComponent,
+    BaseGaleryComponent,
+    AdminMoviesGaleryComponent,
+    AbstractAdminNavbarComponent,
+    MoviesAdminNavbarComponent,
+    AdminItemsMoviesComponent,
+    AdminMoviesStatsComponent,
+    AdminStatsBaseComponent,
+    SerieEditComponent,
+    StarsEditComponent,
+    ProducentEditComponent,
+    AdminSeriesGaleryComponent,
+    StarsAdminGaleryComponent,
+    ProducentAdminGaleryComponent,
+    BaseStatsComponentIDComponent,
+    AdminSeriesStatasComponent,
+    AdminStarsStatasComponent,
+    BaseGaleryAdminComponent,
+    AdminProducenrStatsComponent,
+    BaseItemListComponent,
+    BaseItemsSectionsComponent,
+    AdminItemsSeriesComponent,
+    AdminItemsStarsComponent,
+    AdminItemsProducentComponent,
+    ImgPipe,
+    NamePipe,
+    DescPipe,
+    TopSectionComponent,
+    StarLoopContetComponent,
+    ProducentLoopComponentComponent,
+    SeriesLoopContentComponent,
+    MoviesCoverLoopContentComponent,
+    MoviesPosterLoopContentComponent,
+    MoviesSerchFormComponent,
+    FullDescPipe,
+    FullNamePipe,
+    NationalityPipe,
+    AgePipe
   ],
   imports: [
     AppRoutingModule,

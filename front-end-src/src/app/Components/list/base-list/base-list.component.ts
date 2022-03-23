@@ -1,8 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit,Input} from '@angular/core';
 import {HttpService} from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import {ProcentService} from '../../../Service/procent/procent.service'
-
+import {TokkenService}  from '../../../Service/tokken/tokken.service'
+import { Router } from '@angular/router';
+import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
+import { Title } from '@angular/platform-browser';
+import { AlertService } from 'src/app/Service/alert/alert.service';
 @Component({
   selector: 'app-base-list',
   templateUrl: './base-list.component.html',
@@ -11,24 +15,35 @@ import {ProcentService} from '../../../Service/procent/procent.service'
 export class BaseListComponent implements OnInit {
   public data:any;
   public url:string=''
+  public fav_url:string=''
   public filter_url:string=""
-  public tags_form:any
-  public stars_form:any
+  public tags_form:any=[]
+  public stars_form:any=[]
   public loading:boolean=true
   public search:any
-  public tags:any
+  public favorite:any=false
   public stars:any
-  public producents_select:any
-  public series_select:any
-  private series_select_url:string = 'http://127.0.0.1:8000/series_select'
-  private producents_select_url:string = 'http://127.0.0.1:8000/producentsformview'
-  private tag_select_url:string = 'http://127.0.0.1:8000/tags'
-  private star_select_url:string = 'http://127.0.0.1:8000/stars_form'
+  public item_count:any
+  protected store_url:string=''
   protected results : any;
   protected response : any;
-  protected page:number=1 ;
+  protected page:number= 1;
+  protected auth:any=false
+  protected debug:any=true
+  protected no_title:boolean=false
+  public title:string=''
+  protected paginate=true
+  @Input() top:any='50px'
 
-  public constructor(protected httpService: HttpService,public RatingService:RatingService ,public ProcentService:ProcentService) { }
+  public constructor(
+    public RelationSelectService:RelationSelectService,
+    private TitleService: Title,
+    protected httpService: HttpService,
+    public RatingService:RatingService ,
+    public TokkenService:TokkenService, 
+    public ProcentService:ProcentService,
+    public AlertService:AlertService,
+    private Router:Router) { }
 
   public add_star(add_star:number):void
   {
@@ -53,16 +68,8 @@ export class BaseListComponent implements OnInit {
 
   public load_items_for_form():void
   {
-    this.httpService.get_url(this.tag_select_url).subscribe(
-      (response) => {
-          this.tags=response
-      }
-    );
-    this.httpService.get_url(this.star_select_url).subscribe(
-      (response) => {
-          this.stars=response
-      }
-    );
+    this.RelationSelectService.get_stars()
+    this.RelationSelectService.get_tags()
   }
 
   public serch():void
@@ -75,7 +82,9 @@ export class BaseListComponent implements OnInit {
 
   public ngOnInit(): void 
   {
+    this.store_url=this.url
     this.data=[]
+    this.on_before_load_data()
     this.load_data()
     this.onInit()
     this.scroller()
@@ -83,6 +92,7 @@ export class BaseListComponent implements OnInit {
 
   public reset_form():void
   {
+    
     let form_elments = Object.keys(this.search.value);
     for (let item of form_elments){
       if (this.search.value[item]!=null){
@@ -90,13 +100,33 @@ export class BaseListComponent implements OnInit {
       }
     }
     this.filter_url=''
-    this.load_data()
     this.tags_form=[]
     this.stars_form=[]
+    this.data=[]
+    this.load_data()
   }
 
   public onInit():void
   {}
+
+  public on_before_load_data():void
+  {}
+
+  public get_favorits(){
+    this.page=1
+    if (!this.favorite){
+      this.data=[]
+      this.store_url=this.fav_url
+      this.auth=true
+      this.load_data()
+    }else{
+      this.data=[]
+      this.store_url=this.url
+      this.load_data()
+    }
+
+    this.favorite=!this.favorite
+  }
 
   private set_results():void{
     for (let movie of this.response.results){
@@ -127,7 +157,7 @@ export class BaseListComponent implements OnInit {
       }
 
     }
-
+    
     for (let star of this.stars_form){
       let string ='stars='+star
       this.filter_url+=string+'&'
@@ -155,43 +185,96 @@ export class BaseListComponent implements OnInit {
     }
   }
 
+  private set_count(response:any)
+  {
+    this.item_count=response.count
+  }
+
   protected load_select():void
   {
-    this.httpService.get_url(this.series_select_url).subscribe(
-      (response) => {
-          this.series_select=response
-      }
-    );
-
-    this.httpService.get_url(this.producents_select_url).subscribe(
-      (response) => {
-          this.producents_select=response
-      }
-    );
+    this.RelationSelectService.get_series()
+    this.RelationSelectService.get_producent()
   }
 
   protected on_set_results(movie:any):void
   {}
 
-  protected on_set_url():void{
-    
+  protected on_after_set_results(response:any)
+  {}
+
+  protected on_set_url():void
+  {}
+
+  protected set_title(response:any):string
+  {
+    return this.title
   }
 
   protected load_data():void
   {
-    if (this.loading){
-      this.loading=false
-      console.log(this.url+this.page+'&'+this.filter_url)
-      this.on_set_url()
-      this.httpService.get_url(this.url+this.page+'&'+this.filter_url).subscribe(
-        (response) => {
-          if (response.hasOwnProperty('results')){
-            this.response=response
-            this.set_results()
-            this.loading=true
-          }
+    if (this.auth==false){
+      if (this.loading){
+        this.loading=false
+        if (this.paginate){
+          this.url = this.store_url+'?page='+this.page+'&'+this.filter_url
         }
-      );
+        if (this.debug){
+          console.log(this.url)
+        }
+        this.on_set_url()
+        this.httpService.get_url(this.url).subscribe(
+          (response) => {
+            if (this.debug){
+              console.log(response)
+            }
+            if (response.hasOwnProperty('count')){
+              this.set_count(response)
+            }
+            if (response.hasOwnProperty('results')){
+              this.response=response
+              this.set_count(response)
+              this.set_results()
+              this.on_after_set_results(response)
+              if (!this.no_title){
+                this.TitleService.setTitle(this.set_title(response));
+              }
+              this.loading=true
+            }
+          }
+        );
+      }
+    }else{
+      if (this.loading){
+        this.loading=false
+        this.url=this.store_url+'?page='+this.page+'&'+this.filter_url
+        if (this.debug){
+          console.log(this.url)
+        }
+        this.on_set_url()
+        this.httpService.get_url_auth(this.url).subscribe(
+          (response) => {
+            if (response.hasOwnProperty('count')){
+              this.set_count(response)
+            }
+            if (response.hasOwnProperty('results')){
+              this.response=response
+              this.set_results()
+              this.set_count(response)
+              this.on_after_set_results(response)
+              if (!this.no_title){
+                this.TitleService.setTitle(this.set_title(response));
+              }
+              this.loading=true
+            }
+          },
+          (error) => {
+            console.log(error.statusText)
+            if (error.statusText == 'Unauthorized'){
+              console.log('Unauthorized')
+            }
+          }
+        );
+      }
     }
   }
 
@@ -208,19 +291,21 @@ export class BaseListComponent implements OnInit {
 
   protected scroller():void
   {
-    let obj=this
-    window.addEventListener("scroll", (event) => {
-      if (obj.loading){
-        var limit = document.body.offsetHeight - window.innerHeight;
-        let scrol_pos=90/100*limit
-          if (window.scrollY>scrol_pos){
-            if (obj.data.length < obj.response.count){
-              obj.page = obj.set_next()
-              obj.load_data()
+    if (this.paginate){
+      let obj=this
+      window.addEventListener("scroll", (event) => {
+        if (obj.loading){
+          var limit = document.body.offsetHeight - window.innerHeight;
+          let scrol_pos=90/100*limit
+            if (window.scrollY>scrol_pos){
+              if (obj.data.length < obj.response.count){
+                obj.page = obj.set_next()
+                obj.load_data()
+              }
             }
-          }
-      }
-    })
+        }
+      })
+    }
   }
 
 }

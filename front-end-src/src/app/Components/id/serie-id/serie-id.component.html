@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-center baner">
-    <img src="{{data.banner}}" class="baner_js">
+    <img src="{{banner}}" class="baner_js">
 </div>
 <app-navabr></app-navabr>
 <div class="content">
-    <h1 class="d-flex justify-content-center">{{data.show_name}}</h1>
+    <h1 class="d-flex justify-content-center">{{data|name}}</h1>
     <div class="container ditels-section">
         <div class="row">
             <div class="col">
@@ -11,7 +11,7 @@
             </div>
             <div class="col">
                 <h1 class="d-flex justify-content-center">Description</h1>
-                <p class="description_js movie_description">{{data.description}}</p>
+                <p class="description_js movie_description">{{data|desc}}</p>
                 <h1 class="d-flex justify-content-center">More Informaton</h1>
                 <div class="table_information">
                     <ng-template [ngIf]="data.Producent">
@@ -21,7 +21,7 @@
                             </div>
                             <div class="col table_row producent_item">
                                 <a [routerLink]="['/producent/',data.Producent.id]">
-                                    {{data.Producent.show_name}}
+                                    {{data.Producent|name}}
                                 </a>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             Likes 
                         </div>
                         <div class="col table_row">
-                            <i class="fas fa-thumbs-up"></i> {{data.likes_count | bigInt}}
+                            <i class="fas fa-thumbs-up"></i> <span class="stats_item like_js">{{data.likes_count | bigInt}}</span>
                         </div>
                     </div>
                    
@@ -57,7 +57,7 @@
                             Ratings
                         </div>
                         <div class="col table_row">
-                            <i class="fas fa-star"></i> {{data.ratings_count | bigInt}} ({{data.avg_rating}})
+                            <i class="fas fa-star"></i> <span class="stats_item ratting_js">{{data.ratings_count | bigInt}}</span> ({{data.avg_rating}})
                         </div>
                     </div>
                     
@@ -66,7 +66,7 @@
                             Views
                         </div>
                         <div class="col table_row">
-                            <i class="fas fa-eye"></i> {{data.views_count | bigInt}}
+                            <i class="fas fa-eye"></i> <span class="stats_item views_js">{{data.views_count | bigInt}} </span>
                         </div>
                     </div>
                     
@@ -75,9 +75,50 @@
                             Dis Likes
                         </div>
                         <div class="col table_row">
-                            <i class="fas fa-thumbs-down"></i> {{data.disLikes_count | bigInt}}
+                            <i class="fas fa-thumbs-down"></i> <span class="stats_item dislike_js">{{data.disLikes_count | bigInt}}</span>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Movies
+                        </div>
+                        <div class="col table_row">
+                            <i class="fas fa-film"></i> <span class="stats_item">{{data.movies.length | bigInt}}</span>
+                        </div>
+                    </div>
+                    
+                    <ng-template [ngIf]="data.years">
+                        <div class="row">
+                            <div class="col table_row">
+                                Years
+                            </div>
+                            <div class="col table_row">
+                                <span>{{data.years}}</span>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <ng-template [ngIf]="data.country">
+                        <div class="row">
+                            <div class="col table_row">
+                                Country
+                            </div>
+                            <div class="col table_row">
+                                <span>{{data.country}}</span>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <div class="row">
+                        <div class="col table_row">
+                            Added
+                        </div>
+                        <div class="col table_row">
+                            {{data.added|date}}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="procent_likes">
                     <div class="like-procent">
@@ -85,11 +126,17 @@
                         <div class="bad"  [ngStyle]="{'width': bad_procent}"></div>
                     </div>
                 </div>
-                <div class="actions">
-                    <button (click)="add_like()" class="action-item" [ngClass]="{'click' : if_liked}" [disabled]="if_liked"><i class="fas fa-thumbs-up"></i></button>
-                    <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}" [disabled]="if_favorite"><i class="fas fa-star"></i></button>
-                    <button (click)="add_dislike()" class="action-item" [ngClass]="{'click' : if_disliked}" [disabled]="if_disliked"><i class="fas fa-thumbs-down" ></i></button>
-                </div>
+                <ng-template [ngIf]="TokkenService.if_isset_tokken()">
+                    <app-actions add_to_favorite_url="{{return_add_to_favorite_url()}}" 
+                                edit_link="{{return_edit_url()}}" 
+                                favorite_stan="{{return_chceck_favorit_stan_url()}}" 
+                                update_views_url="{{return_update_views_url()}}" 
+                                add_to_favorite_url="{{return_add_to_favorite_url()}}" 
+                                add_like_url="{{return_add_to_like_url()}}" 
+                                add_to_dislike_url="{{return_add_to_dislike_url()}}" 
+                                add_to_rating_url="{{return_add_to_ratng_url()}}">
+                    </app-actions>
+                </ng-template>
             </div>
         </div>
     </div>
@@ -100,14 +147,14 @@
             <li class="nav-item galery_tab_js nav_tab" name="galery" role="presentation nav_tab">
                 <button class="nav-link" id="pills-galery-tab" data-bs-toggle="pill"
                         data-bs-target="#galery-tab" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Galery
+                        aria-selected="false" (click)="button_section='galery'">Galery
                 </button>
             </li>
 
             <li class="nav-item nav_tab movies_series_tab" name="movies_series" role="presentation nav_tab">
                 <button class="nav-link name_js series_name_js" id="pills-stars-movies" data-bs-toggle="pill"
                         data-bs-target="#movis-stars" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">{{data.show_name}}
+                        aria-selected="false" (click)="button_section='serie'">Movies in Series {{data | name}}
                 </button>
             </li>
 
@@ -115,7 +162,7 @@
             <li class="nav-item nav_tab movies_series_stars_tab" name="movies_series_stars" role="presentation">
                 <button class="nav-link" id="pills-stars-tab" data-bs-toggle="pill"
                         data-bs-target="#stars-tab" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">Top Stars
+                        aria-selected="false" (click)="button_section='top-stars'">Top Stars in {{data|name}}
                 </button>
             </li>
 
@@ -126,24 +173,27 @@
             aria-labelledby="pills-galery-tab">
            <div class="container">
                <div class="row galery galery-run">
-                <app-serie-photos ID={{data.id}}></app-serie-photos>
+                <ng-template [ngIf]="button_section=='galery'">
+                    <app-serie-photos title="Photos {{data | name}}" ID={{data.id}}></app-serie-photos>
+                </ng-template>
                </div>
            </div>
             </div>
 
             <div class="tab-pane fade tab_content movies_series_tab" id="movis-stars" role="tabpanel" type="movies_in_series"
                  aria-labelledby="pills-stars-movies">
-                 <app-serie-movies ID={{data.id}} top="100px"></app-serie-movies>
+                 <ng-template [ngIf]="button_section=='serie'">
+                    <app-serie-movies title="Movies in Series {{data | name}}" ID={{data.id}} top="100px"></app-serie-movies>
+                </ng-template>
             </div>
 
             <div class="tab-pane fade tab_content movies_series_stars_tab" id="stars-tab" role="tabpanel"
                  type="top-stars"
                  aria-labelledby="pills-stars-tab">
-                 <app-series-stars ID={{data.id}}></app-series-stars>
+                 <ng-template [ngIf]="button_section=='top-stars'">
+                    <app-series-stars title="Top Stars in {{data | name}}" ID={{data.id}}></app-series-stars>
+                </ng-template>
             </div>
-
         </div>
-        
     </div>
-
 </div>

@@ -1,14 +1,12 @@
 import json
 from abc import ABC, abstractmethod
 from pathlib import Path
-
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from core.setings import save_mode_defult, setings_set_defult, update_setings
-
 from .models import Movie, Producents, Serie, Star, Tag
+from django.views.generic.base import TemplateView
 
 
 class StartSeederView(APIView):
@@ -81,6 +79,7 @@ class ProducentSeader(ApstractSeader):
             show_name=item['show_name'],
             avatar=item['avatar'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             country=item['country'],
             description=item['description']
         ).save()
@@ -102,6 +101,7 @@ class SeriesSeader(ApstractSeader):
             show_name=item['show_name'],
             avatar=item['avatar'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             country=item['country'],
             description=item['description'],
             years = item['years'],
@@ -113,7 +113,6 @@ class SeriesSeader(ApstractSeader):
         if Producent is not None:
             self.add_one_many_conection(SerieItem,Producent,'series')
         self.add_one_many_loop(item['tags'],SerieItem,'tags',Tag)
-
 
 class TagSeader(ApstractSeader):
 
@@ -145,6 +144,7 @@ class StarSeader(ApstractSeader):
             birth_place=item['birth_place'],
             nationality=item['nationality'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             date_of_birth = self.add_data(item['date_of_birth'])
         ).save()
         StarItem = Star.objects.latest('id')
@@ -167,6 +167,7 @@ class MoviesSeader(ApstractSeader):
             description=item['description'],
             country=item['country'],
             dir=item['dir'],
+            web_dir=item['web_dir'],
             src=item['src'],
             web_src=item['web_src'],
             date_relesed= self.add_data(item['date_relesed']),
@@ -182,5 +183,10 @@ class MoviesSeader(ApstractSeader):
             StarObj=Star.objects.get(name=star)
             Model.stars.add(StarObj)
             StarObj.movies.add(Model)
+
+
+class StartView(TemplateView):
+    template_name = 'start_view.html'
+
 
 

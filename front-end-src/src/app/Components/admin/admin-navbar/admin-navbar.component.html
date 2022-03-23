@@ -1,0 +1,26 @@
+<nav class="nav-admin navbar navbar-expand-lg navbar-light bg-light sticky-top admin-navbar justify-content-center">
+    <a class="navbar-brand">Admin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/movies']" [routerLinkActive]="'active'">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/series']" [routerLinkActive]="'active'">Series</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/stars']" [routerLinkActive]="'active'">Stars</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/producents']" [routerLinkActive]="'active'">Producents</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/tags']" [routerLinkActive]="'active'">Tags</a>
+        </li>
+        
+      </ul>
+    </div>
+</nav>

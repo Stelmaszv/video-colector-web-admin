@@ -1,0 +1,22 @@
+<table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Data</th>
+        <ng-template [ngIf]="rateing">
+          <th scope="col">Rate</th>
+        </ng-template>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let el of data; let i = index">
+        <td>{{el.User.username}}</td>
+        <td>{{el.added|date}}</td>
+        <ng-template [ngIf]="rateing">
+          <td>{{el.rate}}</td>
+        </ng-template>
+        <td><a class="item" (click)="delete_el(i,el.id)"><i class="fas fa-trash icon"></i></a></td>
+      </tr>
+    </tbody>
+  </table>

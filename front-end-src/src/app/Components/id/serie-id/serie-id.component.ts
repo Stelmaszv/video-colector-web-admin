@@ -7,5 +7,13 @@ BaseIDComponent
   styleUrls: ['./serie-id.component.scss']
 })
 export class SerieIdComponent extends BaseIDComponent {
-  override url='http://127.0.0.1:8000/serie/'
+  override url='api/serie/'
+  protected override add_to_like_url:string='api/serieaddtolike/'
+  protected override add_to_rating_url:string='api/staraddtorating/'
+  protected override add_to_dislike_url:string='api/serieaddtosislike/'
+  protected override update_views_url:string='api/serieupdateview/'
+  protected override fovorits_url:string='api/favorite/serie/'
+  protected override chceck_favorit_stan_url='api/favoriteis/series/'
+  protected override edit_url_heder:string='/admin/serie/edit/'
+
 }

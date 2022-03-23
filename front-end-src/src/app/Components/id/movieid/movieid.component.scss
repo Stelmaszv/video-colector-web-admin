@@ -56,6 +56,11 @@ $rating_color_good:1px solid rgb(0, 182, 61);
     color:white;
 }
 
+.section_movie_play{
+    text-align: center;
+    background: black;
+    width: 99vw;
+}
 
 video#bgvid {
     height: 87vh;
@@ -69,4 +74,13 @@ video#bgvid {
 
 .custum-form{
     color: red;
+}
+.input_poster{
+    margin-left: 10px;
+}
+.control-item{
+    color: white;
+    &#fullScreen{
+        margin-left: 10px;
+    }
 }

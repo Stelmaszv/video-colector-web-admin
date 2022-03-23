@@ -1,0 +1,32 @@
+<div class="actions">
+    <button (click)="add_like()" class="action-item"><i class="fas fa-thumbs-up"></i></button>
+    <button class="action-item" data-bs-toggle="modal" data-bs-target="#rate"><i class="fas fa-star"></i></button>
+    <button (click)="add_to_if_favorite()" class="action-item" [ngClass]="{'click' : if_favorite}"><i class="fas fa-heart"></i></button>
+    <button (click)="edit()" class="action-item" ><i class="fas fa-edit icon"></i></button>
+    <button (click)="add_dislike()" class="action-item" ><i class="fas fa-thumbs-down" ></i></button>
+</div>
+<div class="modal fade" id="rate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Rate</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addrate">
+                    <div class="row">
+                        <div class="col">
+                            <label for="name">Rate: </label>
+                        </div>
+                        <div class="col">
+                            <input id="rate" type="number" value=1 formControlName="rate" min=1 max=5 value="{{addrate.value.rate}}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="add_to_rating()" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

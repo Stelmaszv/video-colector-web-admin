@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from secret import DEBUG, SECRET_KEY
@@ -27,8 +28,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'core.wideocollectorseader',
-    'core.webadminapi'
+    'core.webadminapi',
+    'corsheaders',
+    'drf_expiring_token'
 ]
 
 REST_FRAMEWORK = {
@@ -55,11 +57,13 @@ MIDDLEWARE = [
     'core.webadminapi.core.RangesMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'videocolectorwebadmin.urls'
@@ -67,7 +71,7 @@ ROOT_URLCONF = 'videocolectorwebadmin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templete')],
+        'DIRS': [os.path.join(BASE_DIR,'core/templete')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,9 +87,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'videocolectorwebadmin.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+EXPIRING_TOKEN_DURATION=timedelta(hours=1)
 
 DATABASES = {
     'default': {
@@ -133,13 +137,24 @@ USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'web')
 
-MEDIA_URL = '/web/'
+MEDIA_URL = 'web/'
 
-STATIC_URL = '/static/'
+STATIC_ROOT =os.path.join(BASE_DIR,'deploy')
+
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'drf_expiring_token.authentication.ExpiringTokenAuthentication'
     ]
 }
+
+CORS_ORIGIN_WHITELIST = 'http://localhost:4200',

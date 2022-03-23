@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table table-hover">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Delete (only from object)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let el of list ; let i = index">
+              <th scope="row">{{el.id}}</th>
+              <td>{{el.name}}</td>
+              <td></td>
+              <td (click)="item_remove(i,el.id)"><a class="item"><i class="fas fa-trash icon"></i></a></td>
+            </tr>
+          </tbody>
+      </table>
+      <div class="row justify-content-md-center" [hidden]="list.length">
+        List is Empty !!
+      </div>
+    </div>
+    <div class="col">
+        <select *ngIf="add_section=='stars'" class="form-select" multiple aria-label="multiple select example">
+          <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star)" value="{{star.id}}" [hidden]="!if_exist_in_list(star.id)" selected>{{star.name}}</option>
+          <option *ngFor="let star of RelationSelectService.stars" (click)="add_item(star)" value="{{star.id}}" [hidden]="if_exist_in_list(star.id)" >{{star.name}}</option>
+        </select>
+        <select *ngIf="add_section=='tags'" class="form-select" multiple aria-label="multiple select example">
+          <option *ngFor="let tag of RelationSelectService.tags" (click)="add_item(tag)" value="{{tag.id}}" [hidden]="!if_exist_in_list(tag.id)" selected>{{tag.name}}</option>
+          <option *ngFor="let tag of RelationSelectService.tags" (click)="add_item(tag)" value="{{tag.id}}" [hidden]="if_exist_in_list(tag.id)" >{{tag.name}}</option>
+        </select>
+        <select *ngIf="add_section=='series'" class="form-select" multiple aria-label="multiple select example">
+          <option *ngFor="let serie of RelationSelectService.series_select" (click)="add_item(serie)" value="{{serie.id}}" [hidden]="!if_exist_in_list(serie.id)" selected>{{serie.name}}</option>
+          <option *ngFor="let serie of RelationSelectService.series_select" (click)="add_item(serie)" value="{{serie.id}}" [hidden]="if_exist_in_list(serie.id)" >{{serie.name}}</option>
+        </select>
+    </div>
+  </div>
+</div>
+
+

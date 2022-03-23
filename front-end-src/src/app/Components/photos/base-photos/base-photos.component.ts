@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component,Input} from '@angular/core';
 import {BaseListComponent} from '../../list/base-list/base-list.component'
 @Component({
   selector: 'app-base-photos',
@@ -11,6 +11,7 @@ export class BasePhotosComponent extends BaseListComponent {
   public next:any
   public back:any
   public index:any
+  @Input() override title:string=''
   public show_big_photo(photo:any,index:number){
 
       this.index=index

@@ -7,7 +7,14 @@ import {BaseIDComponent} from '../base-id/base-id.component'
   styleUrls: ['./producent-id.component.scss']
 })
 export class ProducentIdComponent extends BaseIDComponent {
-  override url='http://127.0.0.1:8000/producent/'
+  override url='api/producent/'
+  protected override add_to_like_url:string='api/producentaddtolike/'
+  protected override add_to_rating_url:string='api/producentaddtorating/'
+  protected override add_to_dislike_url:string='api/producentaddtodislike/'
+  protected override update_views_url:string='api/producentupdateviews/'
+  protected override fovorits_url:string='api/favorite/movie/'
+  protected override chceck_favorit_stan_url='api/favoriteis/movies/'
+  protected override edit_url_heder:string='/admin/producent/edit/'
 }
 
 

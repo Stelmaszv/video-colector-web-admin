@@ -1,0 +1,28 @@
+<app-navabr></app-navabr>
+<div class="container">
+
+    <ng-template [ngIf]="TokkenService.tokken_error">
+        <div class="alert alert-danger alert-error-login" role="alert">
+            Invalid <b>Login</b> or <b>password</b>!
+        </div>
+    </ng-template>
+
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <h2>Login</h2>
+            <form [formGroup]="login" class="login-form">
+                <div class="form-group">
+                <label for="exampleInputEmail1">Login</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" formControlName="login" value="{{login.value.login}}">
+                </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" formControlName="password" value="{{login.value.password}}" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="row justify-content-md-center">
+                    <button type="submit" class="btn btn-secondary login-btn" (click)="start_login()">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

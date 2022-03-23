@@ -1,21 +1,21 @@
 import os
 
+from django.http import Http404
 from django_filters import rest_framework as filters
 from rest_framework import generics
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication)
-from core.webadminapi.filters import StarFilter
+                                   AbstractUpdateView, SqlAction, AbstractStats, AbstractItems, AddRelation,Top)
+from core.webadminapi.filters import StarFilter, MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerMovie,
                                           StarSlectSerializer, StarsSerializer,
-                                          StarsSerializerUpdate)
-from core.wideocollectorseader.models import Star
+                                          StarsSerializerUpdate, StatsSerializer, RatingsSerializer, TagsSerializer)
+from core.wideocollectorseader.models import Star, DisLikess, Views, Likes, Movie
 from videocolectorwebadmin.global_setings import photo_ext
 
 
@@ -24,12 +24,24 @@ class StarsPaginator(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 10
 
-class StarsMoviesView(AbstractGenericsAPIViewExtended):
-    serializer_class = MoviesSerializer
+class AdminStarsPaginator(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
+
+class StarsTopView(Top):
     queryset = Star.objects
+    serializer_class = StarsSerializer
+
+class StarsMoviesView(AbstractGenericsAPIView):
+    serializer_class = MoviesSerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class  = MovieFilter
+    queryset = Movie.objects
     Model = Star
 
-    def filter_queryset(self):
+    def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         return Model.movies.all()
 
@@ -47,7 +59,6 @@ class StarsPhotoView(AbstractGenericsAPIViewExtended):
                 photo.append(
                     {"url"  :Model.dir+'\\photo\\DATA\\' + photo_item}
                 )
-
         for Movie in Model.movies.all():
             list=os.listdir(Movie.dir)
             for item in list:
@@ -71,6 +82,10 @@ class StarView(AbstractGenericsAPIView):
     order_by ='-added'
     pagination_class = StarsPaginator
 
+class AdminStarView(StarView):
+    pagination_class = AdminStarsPaginator
+    permission_classes = [IsAuthenticated]
+
 class StarUpdateView(AbstractUpdateView):
     serializer_class = StarsSerializerUpdate
     queryset = Star.objects
@@ -81,11 +96,10 @@ class StarSelectOptionView(generics.ListAPIView):
     queryset = Star.objects.all()
 
 #actions
-class StarAddToFavoriteView(AbstractDeteilsView):
+class StarAddToFavoriteView(SqlAction):
     serializer_class = StarsSerializer
     queryset = Star.objects
     Model = Star
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):
@@ -96,12 +110,64 @@ class StarAddToRatingView(StarAddToFavoriteView):
     def exc_action_before_query(self):
         self.add_raiting()
 
-class StarAddToLikeView(AbstractDeteilsView):
+class StarAddToLikeView(StarAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_like()
 
-class StarAddToDisLikeView(AbstractDeteilsView):
+class StarAddToDisLikeView(StarAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_disLikes()
+
+class StarUpdateViewsView(StarAddToFavoriteView):
+
+    def exc_action_before_query(self):
+        self.update_views()
+
+class AdminStatsStarLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Likes.objects.all()
+    Model = Star
+    place = 'likes'
+
+class AdminStatsStarDisLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = DisLikess.objects.all()
+    Model = Star
+    place = 'disLikes'
+
+class AdminStatsStarViews(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Views.objects.all()
+    Model = Star
+    place = 'views'
+
+class AdminStatsStareRatings(AbstractStats):
+    serializer_class = RatingsSerializer
+    queryset = Views.objects.all()
+    Model = Star
+    place = 'ratings'
+
+class StarTagsView(AbstractItems):
+    serializer_class = TagsSerializer
+    queryset = []
+    Model = Star
+    place = 'tags'
+
+class AddStarTag(AddRelation):
+    serializer_class = StarsSerializer
+    queryset = []
+    Model = Star
+    object_index='tags'
+
+
+
+
+
+
+
+
+
+
+

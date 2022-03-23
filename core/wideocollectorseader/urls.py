@@ -1,8 +1,8 @@
-from core.wideocollectorseader.views import StartSeederView
+from core.wideocollectorseader.views import StartSeederView, StartView
 
 app_name = 'wideocollectorseader'
-from django.urls import path
+from django.urls import re_path,path
 
 urlpatterns = [
-    path('',                    StartSeederView.as_view(), name='start_seeder')
+    path('seed',                    StartSeederView.as_view(), name='start_seeder')
 ]

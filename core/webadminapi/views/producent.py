@@ -1,26 +1,44 @@
 import os
-
 from django.http import Http404
 from django_filters import rest_framework as filters
 from rest_framework import generics
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication,
-                                   LargeResultsSetPagination)
-from core.webadminapi.filters import ProducentsFilter
+                                   AbstractUpdateView,
+                                   LargeResultsSetPagination,
+                                   SqlAction,
+                                   AbstractStats,
+                                   AbstractItems,
+                                   AddRelation,
+                                   Top)
+from core.webadminapi.filters import ProducentsFilter, MovieFilter
 from core.webadminapi.serializers import (MoviesSerializer,
                                           PhotoSerializerSeries,
                                           ProducentsSerializer,
                                           ProducentsSerializerUpdate,
                                           ProducetFormSeralizer,
-                                          SerieSerializer, StarsSerializer)
-from core.wideocollectorseader.models import Producents, Serie
+                                          SerieSerializer,
+                                          StarsSerializer,
+                                          StatsSerializer,
+                                          RatingsSerializer,
+                                          TagsSerializer,
+                                          ProducentsSerializerID, BaseSeraliser)
+from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views, Movie
+from rest_framework.pagination import PageNumberPagination
+
 
 photo_ext = ('.png', '.jpg', '.jpeg', '.jfif', ".JPG")
+
+class ProducentAdminPaginator(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
+class ProducentsTopView(Top):
+    queryset = Producents.objects
+    serializer_class = ProducentsSerializer
 
 class ProducentsView(AbstractGenericsAPIView):
     serializer_class = ProducentsSerializer
@@ -28,6 +46,10 @@ class ProducentsView(AbstractGenericsAPIView):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = ProducentsFilter
     order_by ='-added'
+
+class AdminProducentsView(ProducentsView):
+    permission_classes = [IsAuthenticated]
+    pagination_class = ProducentAdminPaginator
 
 class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries
@@ -40,12 +62,10 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
         photos=[]
         for photo in miandir:
             if photo.endswith(photo_ext):
-                photos.append(
-                    {
-                     "url"     :   Model.dir+'\\'+photo,
-                     "name"    :   Model.show_name
-                     },
-                )
+                photos.append({
+                         "url"     :   Model.dir+'\photo\DATA\\'+photo,
+                         "name"    :   Model.show_name
+                })
         for Serie in Model.series.all():
             for Movie in Serie.movies.all():
                 for photo in os.listdir(Movie.dir):
@@ -75,7 +95,7 @@ class ProducentsSeriesView(AbstractGenericsAPIView):
             raise Http404
 
 class ProducentsDeteilsView(AbstractDeteilsView):
-    serializer_class = ProducentsSerializer
+    serializer_class = ProducentsSerializerID
     queryset = Producents.objects
     Model = Producents
 
@@ -89,18 +109,17 @@ class ProducentsFormView(generics.ListAPIView):
     queryset = Producents.objects.all()
     Model = Producents
 
-class ProducentsMoviesView(AbstractGenericsAPIViewExtended):
+class ProducentsMoviesView(AbstractGenericsAPIView):
     serializer_class = MoviesSerializer
-    queryset = Producents.objects.all()
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_class = MovieFilter
     Model = Producents
+    queryset = Movie.objects
 
-    def filter_queryset(self):
-        movies =[]
+    def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
-        for Serie in Model.series.all():
-            for Movie in Serie.movies.all():
-                movies.append(Movie)
-        return movies
+        return Model.movies.all()
+
 
 class ProducentStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = StarsSerializer
@@ -128,11 +147,10 @@ class ProducentStarsView(AbstractGenericsAPIViewExtended):
         return stars
 
 #actions
-class ProducentAddToFavoriteView(AbstractDeteilsView):
+class ProducentAddToFavoriteView(SqlAction):
     serializer_class = ProducentsSerializer
     queryset = Producents.objects
     Model = Producents
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):
@@ -149,3 +167,57 @@ class ProducentAddToLikeView(ProducentAddToFavoriteView):
 class ProducentAddToDisLikeView(ProducentAddToFavoriteView):
     def exc_action_before_query(self):
         self.add_disLikes()
+
+class ProducentUpdateViewsView(ProducentAddToFavoriteView):
+    def exc_action_before_query(self):
+        self.update_views()
+
+class AdminStatsProducentLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Likes.objects.all()
+    Model = Producents
+    place = 'likes'
+
+class AdminStatsProducentDisLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = DisLikess.objects.all()
+    Model = Producents
+    place = 'disLikes'
+
+class AdminStatsProducentViews(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Views.objects.all()
+    Model = Producents
+    place = 'views'
+
+class AdminStatsProducentRatings(AbstractStats):
+    serializer_class = RatingsSerializer
+    queryset = Views.objects.all()
+    Model = Producents
+    place = 'ratings'
+
+class ProducentSeriesView(AbstractItems):
+    serializer_class = BaseSeraliser
+    queryset = []
+    Model = Producents
+    RelationModel = Serie
+    place = 'series'
+
+class ProducentAddSerie(AddRelation):
+    serializer_class = BaseSeraliser
+    queryset = []
+    Model = Producents
+    object_index = 'series'
+
+class ProducentTagsView(AbstractItems):
+    serializer_class = BaseSeraliser
+    queryset = []
+    Model = Producents
+    place = 'tags'
+
+class ProducentAddTag(AddRelation):
+    serializer_class = BaseSeraliser
+    queryset = []
+    Model = Producents
+    object_index='tags'
+

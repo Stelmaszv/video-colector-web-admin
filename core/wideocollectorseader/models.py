@@ -1,12 +1,10 @@
 import json
 import os
 import shutil
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
-
 from core.setings import get_josn_file
-
 
 def set_model(Model):
     def set_avg(Model):
@@ -23,12 +21,14 @@ def set_model(Model):
     Model.disLikes_count = Model.disLikes.count()
     Model.ratings_count = Model.ratings.count()
     Model.views_count = Model.views.count()
+    if hasattr(Model, "movies_count"):
+        Model.movies_count = Model.movies.count()
     return Model
 
 def delete(Model,self):
     save_mode = get_josn_file()['save_mode']
     if save_mode is False:
-        shutil.rmtree(Model.dir)
+        shutil.rmtree(Model.web_dir)
         if hasattr(Model,"web_src"):
             os.remove(Model.web_src)
         super(Model, self).delete()
@@ -38,7 +38,7 @@ def save(Model,self):
     save_mode = get_josn_file()['save_mode']
     if save_mode is False:
         set_model(self)
-        UpdateJSON(self)
+        #UpdateJSON(self)
         super(Model, self).save()
     super(Model, self).save()
 
@@ -119,27 +119,21 @@ class DisLikess(models.Model):
     def __str__(self):
         return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
 
-class Favourite(models.Model):
-    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    added = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.id)+" - "+str(self.User)+" - "+str(self.added)
-
 class Rating(models.Model):
     User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
-    rate = models.IntegerField(default=0)
+    rate = models.IntegerField(default=0,validators=[MinValueValidator(1),MaxValueValidator(5)])
     added = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "Rate "+str(self.rate)+" - "+str(self.User)+" - "+str(self.added)
 
 class Producents(models.Model):
-    name      = models.CharField(max_length=200)
+    name      = models.CharField(max_length=200,null=True,blank=True)
     banner    = models.CharField(max_length=200, default='',null=True,blank=True)
-    show_name = models.CharField(max_length=200,default='',null=True)
-    avatar = models.CharField(max_length=200, default='',null=True)
-    dir = models.CharField(max_length=200, default='',null=True)
+    show_name = models.CharField(max_length=200,default='',null=True,blank=True)
+    avatar = models.CharField(max_length=200, default='',null=True,blank=True)
+    dir = models.CharField(max_length=200, default='',null=True,blank=True)
+    web_dir = models.CharField(max_length=200, default='', null=True,blank=True)
     country = models.CharField(max_length=200, default='',null=True,blank=True)
     description = models.TextField(default='',null=True,blank=True)
     year        = models.DateField(null=True,blank=True)
@@ -149,31 +143,36 @@ class Producents(models.Model):
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
     views_count = models.IntegerField(default=0)
+    movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='ProducentsMovie', blank=True)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='ProducentsSerie', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='ProducentsViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Producentslikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='ProducentDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='ProducentFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
-    def save(self, *args, **kwargs):
-        save(Producents, self)
+    def set_country(self):
+        if self.country != '':
+            for Serie in self.series.all():
+                Serie.country = self.country
+                Serie.save()
 
-    def delete(self, *args, **kwargs):
-        delete(Producents, self)
+    def save(self, *args, **kwargs):
+        self.set_country()
+        save(Producents, self)
 
     def __str__(self):
         return self.name
 
 class Serie(models.Model):
-    name                = models.CharField(max_length=200)
+    name                = models.CharField(max_length=200,null=True,blank=True)
     banner              = models.CharField(max_length=200, default='',null=True,blank=True)
-    show_name           = models.CharField(max_length=200,default='',null=True)
-    avatar              = models.CharField(max_length=200, default='',null=True)
-    dir                 = models.CharField(max_length=200, default='',null=True)
-    country             = models.CharField(max_length=200, default='',null=True)
-    description         = models.TextField(default='',null=True)
+    show_name           = models.CharField(max_length=200,default='',null=True,blank=True)
+    avatar              = models.CharField(max_length=200, default='',null=True,blank=True)
+    dir                 = models.CharField(max_length=200, default='',null=True,blank=True)
+    web_dir = models.CharField(max_length=200, default='', null=True,blank=True)
+    country             = models.CharField(max_length=200, default='',null=True,blank=True)
+    description         = models.TextField(default='',null=True,blank=True)
     added               = models.DateTimeField(auto_now=True)
     years               = models.CharField(max_length=200, default='', null=True,blank=True)
     number_of_sezons    = models.IntegerField(default=0)
@@ -188,15 +187,37 @@ class Serie(models.Model):
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='SerieViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Serielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='SerieDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='SerieFavourite', blank=True)
-    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',
-                                       blank=True)
+    ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',blank=True)
+
+    def set_country(self):
+        if self.country !='':
+            for Movie in self.movies.all():
+                Movie.country=self.country
+                Movie.save()
+
+    def set_years(self):
+        small=None
+        big=None
+        if self.years !='':
+            for Movie in self.movies.all():
+                if Movie.date_relesed is not None:
+                    data=Movie.date_relesed
+                    if small == None or small > data.year:
+                        small = data.year
+
+                    if big == None or big < data.year:
+                        big = data.year
+            self.years=str(small)+' - '+str(big)
+
+    def save(self, *args, **kwargs):
+        save_mode = get_josn_file()['save_mode']
+        if save_mode is False:
+            self.set_country()
+            self.set_years()
+        save(Serie, self)
 
     def delete(self, *args, **kwargs):
         delete(Serie, self)
-
-    def save(self, *args, **kwargs):
-        save(Serie, self)
 
     def __str__(self):
         return self.name
@@ -207,17 +228,18 @@ class Tag(models.Model):
         return self.name
 
 class Star(models.Model):
-    name = models.CharField(max_length=200)
-    avatar = models.CharField(max_length=200, default='', null=True)
-    show_name = models.CharField(max_length=200, default='', null=True)
+    name = models.CharField(max_length=200,null=True,blank=True)
+    avatar = models.CharField(max_length=200, default='', null=True,blank=True)
+    show_name = models.CharField(max_length=200, default='', null=True,blank=True)
     description = models.TextField(default='', null=True,blank=True)
-    weight      = models.IntegerField(default=0)
-    height     = models.IntegerField(default=0)
-    ethnicity = models.CharField(max_length=200, default='', null=True)
-    hair_color = models.CharField(max_length=200, default='', null=True)
-    birth_place = models.CharField(max_length=200, default='', null=True)
+    weight      = models.IntegerField(default=0, null=True,blank=True)
+    height     = models.IntegerField(default=0, null=True,blank=True)
+    ethnicity = models.CharField(max_length=200, default='', null=True,blank=True)
+    hair_color = models.CharField(max_length=200, default='', null=True,blank=True)
+    birth_place = models.CharField(max_length=200, default='', null=True,blank=True)
     nationality = models.CharField(max_length=200, default='', null=True,blank=True)
     dir = models.CharField(max_length=200, default='', null=True)
+    web_dir = models.CharField(max_length=200, default='', null=True)
     series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='StarSerie', blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='Starstags', blank=True)
     date_of_birth = models.DateField(null=True,blank=True)
@@ -227,11 +249,11 @@ class Star(models.Model):
     disLikes_count = models.IntegerField(default=0)
     ratings_count = models.IntegerField(default=0)
     views_count = models.IntegerField(default=0)
+    movies_count = models.IntegerField(default=0)
     movies              = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='StarsMovies', blank=True)
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='StarViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Starlikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='StarDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='StarFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='StarRating',blank=True)
 
     def save(self, *args, **kwargs):
@@ -246,14 +268,15 @@ class Star(models.Model):
 class Movie(models.Model):
     name = models.CharField(max_length=200,null=True)
     show_name = models.CharField(max_length=200, default='', null=True,blank=True)
-    avatar = models.CharField(max_length=200, default='', null=True)
-    src = models.CharField(max_length=200, default='', null=True)
-    web_src = models.CharField(max_length=200, default='', null=True)
+    avatar = models.CharField(max_length=200, default='', null=True,blank=True)
+    src = models.CharField(max_length=200, default='', null=True,blank=True)
+    web_src = models.CharField(max_length=200, default='', null=True,blank=True)
     poster = models.CharField(max_length=200, default='', null=True,blank=True)
     description = models.TextField(default='', null=True,blank=True)
     country = models.CharField(max_length=200, default='', null=True,blank=True)
     date_relesed = models.DateField(null=True,blank=True)
-    dir = models.CharField(max_length=200, default='', null=True)
+    dir = models.CharField(max_length=200, default='', null=True,blank=True)
+    web_dir = models.CharField(max_length=200, default='', null=True,blank=True)
     added               = models.DateTimeField(auto_now=True)
     avg_rating = models.DecimalField(max_digits=5, decimal_places=2,default=0)
     likes_count = models.IntegerField(default=0)
@@ -267,16 +290,24 @@ class Movie(models.Model):
     views = models.ManyToManyField(to='wideocollectorseader.Views', related_name='MovieViews', blank=True)
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Movielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='MovieDisLike', blank=True)
-    favourite = models.ManyToManyField(to='wideocollectorseader.Favourite', related_name='MovieFavourite', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',blank=True)
+
+    def save(self, *args, **kwargs):
+        save(Movie, self)
 
     def delete(self, *args, **kwargs):
         delete(Movie,self)
 
-    def save(self, *args, **kwargs):
-        save(Movie,self)
-
     def __str__(self):
         return self.name
 
+class UserFavorits(models.Model):
+    User = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    stars = models.ManyToManyField(to='wideocollectorseader.Star', related_name='Stars', blank=True)
+    movies = models.ManyToManyField(to='wideocollectorseader.Movie', related_name='Movies', blank=True)
+    producents = models.ManyToManyField(to='wideocollectorseader.Producents', related_name='Producents', blank=True)
+    series = models.ManyToManyField(to='wideocollectorseader.Serie', related_name='Serie', blank=True)
+
+    def __str__(self):
+        return self.User.username
 

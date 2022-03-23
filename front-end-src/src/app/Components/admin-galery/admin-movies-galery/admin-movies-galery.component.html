@@ -1,0 +1,81 @@
+<app-navabr></app-navabr>
+<app-movies-admin-navbar id="{{data.id}}" title="{{data.name}}" place="movie"></app-movies-admin-navbar>
+<div class="actual_photo">
+    <table class="table-borderless table set_img">
+        <thead>
+          <tr>
+            <th scope="col">Cover</th>
+            <th scope="col">Poster</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="{{data | img:'avatar' }}" class="avatar"></td>
+            <td><img src="{{data | img:'poster'}}"  class="poster"></td>
+          </tr>
+          <tr class="actions">
+            <td class="new_photo">Generete New Cover</td>
+            <td class="new_photo">Generete New Poster</td>
+          </tr>
+        </tbody>
+    </table>
+    <table class="table-borderless table set_img">
+        <thead>
+            <tr class="actions">
+                <td class="new_photo" data-bs-toggle="modal" data-bs-target="#generete-new-photos">Generete New Photos</td>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div class="small_menu">
+    <div class="col">
+      Avatar
+    </div>
+    <div class="col">
+      <img src="{{data | img:'avatar' }}" class="avatar_small">
+    </div>
+    <div class="col">
+      Cover
+    </div>
+    <div class="col">
+      <img src="{{data | img:'poster'}}" class="poster_small">
+    </div>
+</div>
+
+<div class="container">
+    <app-base-galery 
+      class="manage-galery" 
+      cover="{{data.avatar}}" 
+      poster="{{data.poster}}" 
+      id="{{data.id}}" 
+      url="{{galery_url}}" 
+      edit_url="{{edit_url}}">
+    </app-base-galery>
+</div>
+
+<div class="modal fade" id="generete-new-photos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Generete New Photos How Many ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ng-template [ngIf]="!generate_stan">
+            <form class="login-form" [formGroup]="photos">
+              <label for="number_of_generation">New Photos How Many ? </label>
+              <input id="number_of_generation" class="form-control" type="number"  formControlName="number"  >
+            </form>
+        </ng-template>
+        <ng-template [ngIf]="generate_stan">
+            Genereteing photos !!!
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <ng-template [ngIf]="!generate_stan">
+          <button type="button" class="btn btn-primary" (click)="generate_photos()">Save</button>
+       </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<app-navabr></app-navabr>
+<app-movies-admin-navbar id="{{data.id}}" title="{{data.name}}" place="serie"></app-movies-admin-navbar>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <h2>Edit  - {{data.name}}</h2>
+            <form class="login-form" [formGroup]="Edit">
+                <div class="form-group">
+                <label for="show_name">Show name</label>
+                <input type="text" class="form-control" value="{{data.show_name}}" id="show_name" aria-describedby="emailHelp" placeholder="Enter Show name" formControlName="show_name">
+                </div>
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" value="{{data.country}}" id="country" aria-describedby="emailHelp" placeholder="Enter Country" formControlName="country">
+                </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea class="form-control" value="{{data.description}}" formControlName="description" placeholder="Enter Description"></textarea>
+                </div>
+                <label for="producent">Producent</label>
+                <div class="form-group">
+                  <select class="form-control" aria-label="Default select example" formControlName="Producent" id="producent">
+                    <option></option>
+                    <option *ngFor="let producent of RelationSelectService.producents_select"  value="{{producent.id}}" >{{producent.name}}</option>
+                  </select>
+                </div>
+                <div class="row justify-content-md-center">
+                    <button type="submit" class="btn btn-secondary login-btn" (click)="save()" >Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

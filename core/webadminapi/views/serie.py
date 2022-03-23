@@ -10,16 +10,20 @@ from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
                                    AbstractGenericsAPIViewExtended,
-                                   AbstractUpdateView, Authentication)
+                                   AbstractUpdateView,
+                                   Authentication,
+                                   SqlAction, AbstractStats, AbstractItems, AddRelation,Top)
 from core.webadminapi.filters import MovieFilter, SerieFilter
 from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           PhotoSerializerSeries,
                                           SerieSerializer,
                                           SerieSerializerUpdate,
                                           SerieSlectSerializer,
-                                          StarsSerializer)
-from core.wideocollectorseader.models import Serie
+                                          StarsSerializer, StatsSerializer, RatingsSerializer, TagsSerializer,
+                                          SerieSerializerID, StarsSerializerTop)
+from core.wideocollectorseader.models import Serie, Likes, DisLikess, Views,Movie
 from videocolectorwebadmin.global_setings import photo_ext
+from rest_framework.pagination import PageNumberPagination
 
 
 class SeriesPhotosView(AbstractGenericsAPIViewExtended):
@@ -32,7 +36,10 @@ class SeriesPhotosView(AbstractGenericsAPIViewExtended):
         miandir=os.listdir(Model.dir+'\photo\DATA')
         photos=[]
         for photo in miandir:
+
+
             if photo.endswith(photo_ext):
+
                 photos.append(
                     {
                      "url"     :   Model.dir+'\photo\DATA\\'+photo,
@@ -55,8 +62,6 @@ class SeriesBennersView(AbstractGenericsAPIView):
     queryset = Serie.objects.all()
     Model = Serie
 
-
-
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
         dir= Model.dir+'\\banners'
@@ -73,13 +78,26 @@ class SeriesBennersView(AbstractGenericsAPIView):
         else:
             return banners
         return banners
-    
+
+class SerieAdminPaginator(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 50
+
 class SerieView(AbstractGenericsAPIView):
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class  = SerieFilter
     order_by ='-added'
+
+class SeriesTopView(Top):
+    queryset = Serie.objects
+    serializer_class = SerieSerializer
+
+class AdminSerieView(SerieView):
+    permission_classes = [IsAuthenticated]
+    pagination_class = SerieAdminPaginator
 
 class SelectOptionView(generics.ListAPIView):
     serializer_class = SerieSlectSerializer
@@ -104,7 +122,7 @@ class SerieMoviesView(AbstractGenericsAPIView):
             raise Http404
 
 class SeriesStarsView(AbstractGenericsAPIViewExtended):
-    serializer_class = StarsSerializer
+    serializer_class = StarsSerializerTop
     queryset = Serie.objects.all()
     Model = Serie
 
@@ -134,7 +152,7 @@ class SeriesStarsView(AbstractGenericsAPIViewExtended):
             raise Http404
 
 class SerieDeteilsView(AbstractDeteilsView):
-    serializer_class = SerieSerializer
+    serializer_class = SerieSerializerID
     queryset = Serie.objects
     Model = Serie
 
@@ -152,11 +170,10 @@ class SerieUpdataView(AbstractUpdateView):
     Model = Serie
 
 #actions
-class SerieAddToFavoriteView(AbstractDeteilsView):
+class SerieAddToFavoriteView(SqlAction):
     serializer_class = SerieSerializer
     queryset = Serie.objects
     Model = Serie
-    authentication_classes = (SessionAuthentication, Authentication,)
     permission_classes = [IsAuthenticated]
 
     def exc_action_before_query(self):
@@ -176,3 +193,45 @@ class SerieAddToDisLikeView(SerieAddToFavoriteView):
 
     def exc_action_before_query(self):
         self.add_disLikes()
+
+class SerieUpdateViewView(SerieAddToFavoriteView):
+
+    def exc_action_before_query(self):
+        self.update_views()
+
+class AdminStatsSerieLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Likes.objects.all()
+    Model = Serie
+    place = 'likes'
+
+class AdminStatsSerieDisLiks(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = DisLikess.objects.all()
+    Model = Serie
+    place = 'disLikes'
+
+class AdminStatsSerieViews(AbstractStats):
+    serializer_class = StatsSerializer
+    queryset = Views.objects.all()
+    Model = Serie
+    place = 'views'
+
+class AdminStatsSerieRatings(AbstractStats):
+    serializer_class = RatingsSerializer
+    queryset = Views.objects.all()
+    Model = Serie
+    place = 'ratings'
+
+class SeriesTagsView(AbstractItems):
+    serializer_class = TagsSerializer
+    queryset = []
+    Model = Serie
+    place = 'tags'
+
+class SerieAddTag(AddRelation):
+    serializer_class = TagsSerializer
+    queryset = Serie.objects
+    Model = Serie
+    object_index='tags'
+
