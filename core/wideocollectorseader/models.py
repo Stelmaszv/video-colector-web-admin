@@ -26,19 +26,20 @@ def set_model(Model):
     return Model
 
 def delete(Model,self):
-    save_mode = get_josn_file()['save_mode']
-    if save_mode is False:
-        shutil.rmtree(Model.web_dir)
+    save_mode = get_josn_file()['delete']
+    if save_mode:
+        shutil.rmtree(self.web_dir)
         if hasattr(Model,"web_src"):
-            os.remove(Model.web_src)
+            os.remove(self.web_src)
         super(Model, self).delete()
     super(Model, self).delete()
 
+
 def save(Model,self):
-    save_mode = get_josn_file()['save_mode']
-    if save_mode is False:
+    save_mode = get_josn_file()['udpdate_relation']
+    if save_mode:
         set_model(self)
-        #UpdateJSON(self)
+        UpdateJSON(self)
         super(Model, self).save()
     super(Model, self).save()
 
@@ -88,7 +89,7 @@ def UpdateJSON(Model):
         data['fields']=  return_fields(Model)
         data['tags']  =  return_tags(Model)
         if hasattr(Model, "stars"):
-            data['stars'] =  return_stars(Model) #erorr in main collector
+            data['stars'] =  return_stars(Model)
         return json.dumps(data)
 
     config=Model.dir + '/config.JSON'
@@ -155,7 +156,6 @@ class Producents(models.Model):
         save_mode = get_josn_file()['udpdate_relation']
         if self.country != '' and save_mode:
             for Serie in self.series.all():
-                print('error')
                 Serie.country = self.country
                 Serie.save()
 
@@ -192,7 +192,7 @@ class Serie(models.Model):
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',blank=True)
 
     def set_country(self):
-        save_mode = get_josn_file()['save_mode']
+        save_mode = get_josn_file()['udpdate_relation']
         if self.country !='' and save_mode:
             for Movie in self.movies.all():
                 Movie.country=self.country
@@ -213,8 +213,8 @@ class Serie(models.Model):
             self.years=str(small)+' - '+str(big)
 
     def save(self, *args, **kwargs):
-        save_mode = get_josn_file()['save_mode']
-        if save_mode is False:
+        save_mode = get_josn_file()['udpdate_relation']
+        if save_mode:
             self.set_country()
             self.set_years()
         save(Serie, self)

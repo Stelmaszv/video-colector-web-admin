@@ -27,8 +27,16 @@ class StartSeederView(APIView):
             MoviesSeader()
         ]
         self.opserver(opservers)
+        save_mode_defult['udpdate_relation'] = True
         setings_set_defult()
+        self.update_item()
         return Response(data=[], status=status.HTTP_200_OK)
+
+    def update_item(self):
+        producents_all=Producents.objects.all()
+        for producent in producents_all:
+            producent.save()
+
     def get(self, request, *args, **kwargs):
         return self.api_get(request)
 
