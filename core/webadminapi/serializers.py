@@ -237,19 +237,19 @@ class SerieSerializer(BaseSeralizer):
 
 def set_banners(instance):
     banners_array = []
-    if instance.dir:
-        if_dir_exit = os.path.isdir(instance.dir + '\\banners')
-        banners= os.listdir(instance.dir+'\\banners')
-        if len(banners)>0 or if_dir_exit:
+    if_dir_exit = os.path.isdir(instance.dir + '\\banners')
+    if if_dir_exit:
+        banners = os.listdir(instance.dir + '\\banners')
+        if len(banners) > 0 or if_dir_exit:
             for banner in banners:
-                banners_array.append({'url':'http://127.0.0.1:8000/'+instance.dir+'/banners/'+banner})
+                banners_array.append({'url': 'http://127.0.0.1:8000/' + instance.dir + '/banners/' + banner})
 
-        dir=instance.dir + '\photo\DATA'
-        if_dir_exit_miandir = os.path.isdir(dir)
-        if if_dir_exit_miandir:
-            for photo in os.listdir(dir):
-                if 'banner' == Path(photo).stem:
-                     banners_array.append({'url': 'http://127.0.0.1:8000/'+instance.dir + '/photo/DATA/' + photo})
+    dir = instance.dir + '\photo\DATA'
+    if_dir_exit_miandir = os.path.isdir(dir)
+    if if_dir_exit_miandir:
+        for photo in os.listdir(dir):
+            if 'banner' == Path(photo).stem:
+                banners_array.append({'url': 'http://127.0.0.1:8000/' + instance.dir + '/photo/DATA/' + photo})
     return banners_array
 
 def set_avatar_for_top_stars(instance):

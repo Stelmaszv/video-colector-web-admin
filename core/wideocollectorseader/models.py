@@ -210,7 +210,8 @@ class Serie(models.Model):
 
                     if big == None or big < data.year:
                         big = data.year
-            self.years=str(small)+' - '+str(big)
+            if small is not None and big is not None:
+                self.years=str(small)+' - '+str(big)
 
     def save(self, *args, **kwargs):
         save_mode = get_josn_file()['udpdate_relation']
