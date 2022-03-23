@@ -9,7 +9,7 @@ import { NamePipe } from 'src/app/Pipe/name/name.pipe';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent extends BaseListComponent{
-  public mode:string ='cover'
+  public mode:string ='poster'
   found_top='150px'
   public override title: string='Movies';
   
