@@ -2,7 +2,9 @@ import json
 import os
 
 save_mode_defult={
-   "save_mode": False
+   "save_mode": True,
+   "udpdate_relation":True,
+   "delete":True,
 }
 
 def get_josn_file():

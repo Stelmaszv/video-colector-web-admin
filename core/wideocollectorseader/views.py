@@ -17,6 +17,7 @@ class StartSeederView(APIView):
 
     def api_get(self, request, *args, **kwargs):
         save_mode_defult['save_mode']=True
+        save_mode_defult['udpdate_relation'] = False
         update_setings(save_mode_defult)
         opservers=[
             TagSeader(),
@@ -26,8 +27,16 @@ class StartSeederView(APIView):
             MoviesSeader()
         ]
         self.opserver(opservers)
+        save_mode_defult['udpdate_relation'] = True
         setings_set_defult()
+        self.update_item()
         return Response(data=[], status=status.HTTP_200_OK)
+
+    def update_item(self):
+        producents_all=Producents.objects.all()
+        for producent in producents_all:
+            producent.save()
+
     def get(self, request, *args, **kwargs):
         return self.api_get(request)
 
@@ -157,7 +166,15 @@ class MoviesSeader(ApstractSeader):
     Model=Movie
 
     def add_model(self,item):
-        serieel = self.add_one_many(item['series'][0], Serie)
+        Producent=None
+        serieel=None
+
+        if len(item['producent'])==1:
+            Producent = self.add_one_many(item['producent'][0], Producents)
+
+        if len(item['series'])==1:
+            serieel = self.add_one_many(item['series'][0], Serie)
+
         print('Add Movie ' + item['name'])
         self.Model(
             name=item['name'],
@@ -171,7 +188,8 @@ class MoviesSeader(ApstractSeader):
             src=item['src'],
             web_src=item['web_src'],
             date_relesed= self.add_data(item['date_relesed']),
-            serie=serieel
+            serie=serieel,
+            producent = Producent
         ).save()
         MovieItem = Movie.objects.latest('id')
         self.add_one_many_loop(item['tags'], MovieItem, 'tags', Tag)
@@ -183,7 +201,6 @@ class MoviesSeader(ApstractSeader):
             StarObj=Star.objects.get(name=star)
             Model.stars.add(StarObj)
             StarObj.movies.add(Model)
-
 
 class StartView(TemplateView):
     template_name = 'start_view.html'
