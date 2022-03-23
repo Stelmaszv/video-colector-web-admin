@@ -17,6 +17,7 @@ class StartSeederView(APIView):
 
     def api_get(self, request, *args, **kwargs):
         save_mode_defult['save_mode']=True
+        save_mode_defult['udpdate_relation'] = False
         update_setings(save_mode_defult)
         opservers=[
             TagSeader(),

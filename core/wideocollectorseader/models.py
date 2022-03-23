@@ -152,8 +152,10 @@ class Producents(models.Model):
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
     def set_country(self):
-        if self.country != '':
+        save_mode = get_josn_file()['udpdate_relation']
+        if self.country != '' and save_mode:
             for Serie in self.series.all():
+                print('error')
                 Serie.country = self.country
                 Serie.save()
 
@@ -190,7 +192,8 @@ class Serie(models.Model):
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='SerieRating',blank=True)
 
     def set_country(self):
-        if self.country !='':
+        save_mode = get_josn_file()['save_mode']
+        if self.country !='' and save_mode:
             for Movie in self.movies.all():
                 Movie.country=self.country
                 Movie.save()
