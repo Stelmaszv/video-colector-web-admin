@@ -114,6 +114,7 @@ class SeriesSeader(ApstractSeader):
             country=item['country'],
             description=item['description'],
             years = item['years'],
+            Producent=Producent,
             number_of_sezons = item['number_of_sezons']
         ).save()
 

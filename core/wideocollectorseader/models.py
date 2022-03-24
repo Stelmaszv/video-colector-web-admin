@@ -67,6 +67,11 @@ def UpdateJSON(Model):
             data_str.append(data.day)
         return data_str
 
+    def return_producent_series(Model):
+        data=[]
+        data.append(Model.Producent.name)
+        return data
+
     def return_fields(Model):
         allow_fields=["show_name","description","date_relesed","country","weight",
                         "height","ethnicity","hair_color","birth_place","nationality","poster",
@@ -88,6 +93,8 @@ def UpdateJSON(Model):
         data={}
         data['fields']=  return_fields(Model)
         data['tags']  =  return_tags(Model)
+        if hasattr(Model, "Producent"):
+            data['producent'] = return_producent_series(Model)
         if hasattr(Model, "stars"):
             data['stars'] =  return_stars(Model)
         return json.dumps(data)
