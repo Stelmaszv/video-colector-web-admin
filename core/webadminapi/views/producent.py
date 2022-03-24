@@ -121,9 +121,7 @@ class ProducentsMoviesView(AbstractGenericsAPIView):
 
     def get_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
-        print(Model.movies.all())
         return Model.movies.all()
-
 
 class ProducentStarsView(AbstractGenericsAPIViewExtended):
     serializer_class = StarsSerializer
