@@ -2,6 +2,7 @@ import os
 from django.http import Http404
 from django_filters import rest_framework as filters
 from rest_framework import generics
+from pathlib import Path
 from rest_framework.permissions import IsAuthenticated
 from core.webadminapi.core import (AbstractDeteilsView,
                                    AbstractGenericsAPIView,
@@ -61,21 +62,23 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
         miandir=os.listdir(Model.dir+'\photo\DATA')
         photos=[]
         for photo in miandir:
-            if photo.endswith(photo_ext):
-                photos.append({
-                         "url"     :   Model.dir+'\photo\DATA\\'+photo,
-                         "name"    :   Model.show_name
-                })
+            if 'avatar' != Path(photo).stem and 'banner' != Path(photo).stem:
+                if photo.endswith(photo_ext):
+                    photos.append({
+                             "url"     :   Model.dir+'\photo\DATA\\'+photo,
+                             "name"    :   Model.show_name
+                    })
         for Serie in Model.series.all():
             for Movie in Serie.movies.all():
                 for photo in os.listdir(Movie.dir):
                     if photo.endswith(photo_ext):
-                        photos.append(
-                            {
-                                "url": Movie.dir + '\\' + photo,
-                                "name": Movie.show_name
-                            },
-                        )
+                        if 'cover' != Path(photo).stem:
+                            photos.append(
+                                {
+                                    "url": Movie.dir + '\\' + photo,
+                                    "name": Movie.show_name
+                                },
+                            )
         return photos
 
 class ProducentsSeriesView(AbstractGenericsAPIView):
