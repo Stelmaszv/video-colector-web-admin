@@ -98,6 +98,17 @@
                         </div>
                     </div>
 
+                    <ng-template [ngIf]="data.years">
+                        <div class="row">
+                            <div class="col table_row">
+                                Years
+                            </div>
+                            <div class="col table_row">
+                                <span>{{data.years}}</span>
+                            </div>
+                        </div>
+                    </ng-template>
+
                     <div class="row">
                         <div class="col table_row">
                             Added
