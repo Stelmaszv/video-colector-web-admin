@@ -208,7 +208,7 @@ class Serie(models.Model):
     def set_years(self):
         small=None
         big=None
-        if self.years !='':
+        if self.years =='':
             for Movie in self.movies.all():
                 if Movie.date_relesed is not None:
                     data=Movie.date_relesed
@@ -217,6 +217,7 @@ class Serie(models.Model):
 
                     if big == None or big < data.year:
                         big = data.year
+
             if small is not None and big is not None:
                 self.years=str(small)+' - '+str(big)
 

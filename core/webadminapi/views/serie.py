@@ -1,6 +1,6 @@
 import os
 import random
-
+from pathlib import Path
 from django.http import Http404
 from django_filters import rest_framework as filters
 from rest_framework import generics
@@ -36,25 +36,24 @@ class SeriesPhotosView(AbstractGenericsAPIViewExtended):
         miandir=os.listdir(Model.dir+'\photo\DATA')
         photos=[]
         for photo in miandir:
-
-
-            if photo.endswith(photo_ext):
-
-                photos.append(
-                    {
-                     "url"     :   Model.dir+'\photo\DATA\\'+photo,
-                     "name"    :   Model.show_name
-                     },
-                )
-        for Movie in Model.movies.all():
-            for photo in os.listdir(Movie.dir):
+            if 'avatar' != Path(photo).stem and 'banner' != Path(photo).stem:
                 if photo.endswith(photo_ext):
                     photos.append(
                         {
-                            "url": Movie.dir + '\\' + photo,
-                            "name": Movie.show_name
-                        },
+                         "url"     :   Model.dir+'\photo\DATA\\'+photo,
+                         "name"    :   Model.show_name
+                         },
                     )
+        for Movie in Model.movies.all():
+            for photo in os.listdir(Movie.dir):
+                if photo.endswith(photo_ext):
+                    if 'cover' != Path(photo).stem:
+                        photos.append(
+                            {
+                                "url": Movie.dir + '\\' + photo,
+                                "name": Movie.show_name
+                            },
+                        )
         return photos
 
 class SeriesBennersView(AbstractGenericsAPIView):
