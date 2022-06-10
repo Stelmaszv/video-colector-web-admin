@@ -114,6 +114,7 @@ class SeriesSeader(ApstractSeader):
             country=item['country'],
             description=item['description'],
             years = item['years'],
+            Producent=Producent,
             number_of_sezons = item['number_of_sezons']
         ).save()
 
@@ -194,6 +195,8 @@ class MoviesSeader(ApstractSeader):
         MovieItem = Movie.objects.latest('id')
         self.add_one_many_loop(item['tags'], MovieItem, 'tags', Tag)
         self.add_one_many_conection(MovieItem, serieel, 'movies')
+        if len(item['producent']) == 1:
+            self.add_one_many_conection(MovieItem, Producent, 'movies')
         self.add_stars(item['stars'],MovieItem)
 
     def add_stars(self,stars,Model):

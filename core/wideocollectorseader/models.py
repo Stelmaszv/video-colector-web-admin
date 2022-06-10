@@ -67,6 +67,11 @@ def UpdateJSON(Model):
             data_str.append(data.day)
         return data_str
 
+    def return_producent_series(Model):
+        data=[]
+        data.append(Model.Producent.name)
+        return data
+
     def return_fields(Model):
         allow_fields=["show_name","description","date_relesed","country","weight",
                         "height","ethnicity","hair_color","birth_place","nationality","poster",
@@ -88,6 +93,8 @@ def UpdateJSON(Model):
         data={}
         data['fields']=  return_fields(Model)
         data['tags']  =  return_tags(Model)
+        if hasattr(Model, "Producent"):
+            data['producent'] = return_producent_series(Model)
         if hasattr(Model, "stars"):
             data['stars'] =  return_stars(Model)
         return json.dumps(data)
@@ -138,6 +145,7 @@ class Producents(models.Model):
     country = models.CharField(max_length=200, default='',null=True,blank=True)
     description = models.TextField(default='',null=True,blank=True)
     year        = models.DateField(null=True,blank=True)
+    years = models.CharField(max_length=200, default='', null=True, blank=True)
     added       = models.DateTimeField(auto_now=True)
     avg_rating = models.DecimalField(default=0,max_digits=5, decimal_places=2)
     likes_count = models.IntegerField(default=0)
@@ -152,6 +160,24 @@ class Producents(models.Model):
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='ProducentRating',blank=True)
     tags = models.ManyToManyField(to='wideocollectorseader.Tag', related_name='producentstags', blank=True)
 
+    def set_years(self):
+        save_mode = get_josn_file()['udpdate_relation']
+        if self.years == '' and save_mode:
+            small=None
+            big=None
+            if self.years =='':
+                for Movie in self.movies.all():
+                    if Movie.date_relesed is not None:
+                        data=Movie.date_relesed
+                        if small == None or small > data.year:
+                            small = data.year
+
+                        if big == None or big < data.year:
+                            big = data.year
+
+                if small is not None and big is not None:
+                    self.years=str(small)+' - '+str(big)
+
     def set_country(self):
         save_mode = get_josn_file()['udpdate_relation']
         if self.country != '' and save_mode:
@@ -161,6 +187,7 @@ class Producents(models.Model):
 
     def save(self, *args, **kwargs):
         self.set_country()
+        self.set_years()
         save(Producents, self)
 
     def __str__(self):
@@ -201,7 +228,7 @@ class Serie(models.Model):
     def set_years(self):
         small=None
         big=None
-        if self.years !='':
+        if self.years =='':
             for Movie in self.movies.all():
                 if Movie.date_relesed is not None:
                     data=Movie.date_relesed
@@ -210,6 +237,7 @@ class Serie(models.Model):
 
                     if big == None or big < data.year:
                         big = data.year
+
             if small is not None and big is not None:
                 self.years=str(small)+' - '+str(big)
 

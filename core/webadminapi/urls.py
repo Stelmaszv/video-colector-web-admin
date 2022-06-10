@@ -215,10 +215,6 @@ urlpatterns = [
     path('delete/like/<int:pk>/',               DeleteLikeView.as_view(),       name='delete_like'),
     path('delete/dislike/<int:pk>/',            DeleteDisLikessView.as_view(),  name='delete_dislike'),
     path('delete/rating/<int:pk>/',             DeleteRattingView.as_view(),  name='delete_rating'),
-    path('delete/views/<int:pk>/',              DeleteViewsView.as_view(),   name='delete_views'),
-
-
+    path('delete/views/<int:pk>/',              DeleteViewsView.as_view(),   name='delete_views')
 ]
-
-
 
