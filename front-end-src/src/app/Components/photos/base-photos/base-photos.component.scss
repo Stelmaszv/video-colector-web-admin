@@ -3,13 +3,14 @@
     left: 27%;
     top:0%;
     .modal-content{
-        min-width: 1000px;
-        min-height: 500px;
+        min-width: 1200px;
+        min-height: 900px;
         text-align: center;
         .modal-body{
             .img{
-                max-width: 700px;
-                max-height: 725px;
+                max-width: 1200px;
+                min-height: 900px;
+                object-fit:cover;
             }
         }
     }
