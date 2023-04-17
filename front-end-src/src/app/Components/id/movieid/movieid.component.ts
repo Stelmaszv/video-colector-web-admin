@@ -2,14 +2,12 @@ import { Component} from '@angular/core';
 import {BaseIDComponent} from '../base-id/base-id.component'
 import { FormControl ,FormGroup} from '@angular/forms';
 
-
 @Component({
   selector: 'app-movieid',
   templateUrl: './movieid.component.html',
   styleUrls: ['./movieid.component.scss']
 })
 export class MovieidComponent extends BaseIDComponent{
-
   public mode='poster'
   protected override url='api/movie/'
   protected override add_to_like_url:string='api/movieaddtolike/'
@@ -26,11 +24,11 @@ export class MovieidComponent extends BaseIDComponent{
   private movie_count_player=3
   private movie_count_player_limit=2
   public favorite=true
-  
+
   public star_palyer = new FormGroup({
     star: new FormControl(1),
   });
-  
+
   public next_movie_in_series(){
     this.httpService.get_url(this.next_movie_url+''+this.data.id+'').subscribe(
       (response) => {
@@ -64,15 +62,15 @@ export class MovieidComponent extends BaseIDComponent{
     return stars
   }
 
-  private get_sort_order(prop:any) {    
-    return function(a:any, b:any) {    
-        if (a[prop] > b[prop]) {    
-            return 1;    
-        } else if (a[prop] < b[prop]) {    
-            return -1;    
-        }    
-        return 0;    
-    }    
+  private get_sort_order(prop:any) {
+    return function(a:any, b:any) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
   }
 
   private data_stars_player(){

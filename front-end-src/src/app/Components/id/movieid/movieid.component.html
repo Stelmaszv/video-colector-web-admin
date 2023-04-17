@@ -1,4 +1,5 @@
 <app-navabr></app-navabr>
+{{data.source}}
 <main class="content">
     <form [formGroup]="star_palyer">
         <section class="video-section">
@@ -9,7 +10,7 @@
                 <div class="movie_info">
                     <h1 class="display-4">
                         <ng-template [ngIf]="data.serie">
-                            <b>{{data.serie|name}}</b> 
+                            <b>{{data.serie|name}}</b>
                         </ng-template>
                         <i>{{data|name}}</i>
                     </h1>
@@ -36,11 +37,11 @@
                     </div>
                     <p class="lead description">{{data|desc}}</p>
                 </div>
-            </div> 
+            </div>
             <div class="movie section_movie_play" style="background-color: black;">
                     <div class="if_poster">
-                        <video src="{{data.src}}"
-                            class="wideo_src" id="bgvid" poster="{{data.poster}}" muted>
+                        <video src="{{data.source}}"
+                            class="wideo_src" id="bgvid"  muted>
                             <source type="video/mp4" >
                         </video>
                         <div class="controls movie_controls" style="text-align: center;">
@@ -71,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>
             </div>
         </section>
     </form>
@@ -88,12 +89,12 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <img class="avatar_js movie_avatar" 
+                    <img class="avatar_js movie_avatar"
                         [ngClass]="{
                                     'rating_color_good': RatingService.if_good_rating(data),
                                     'movie_rating_mid' : RatingService.if_mid_rating(data),
                                     'movie_rating_low' : RatingService.if_low_rating(data)
-                                   }" 
+                                   }"
                         src="{{data|img:'avatar'}}">
                     <div class="procent_likes">
                         <div class="like-procent">
@@ -102,20 +103,20 @@
                         </div>
                     </div>
                     <ng-template [ngIf]="TokkenService.if_isset_tokken()">
-                        <app-actions 
-                        update_views_url="{{return_update_views_url()}}" 
-                        edit_link="{{return_edit_url()}}" 
-                        add_to_favorite_url="{{return_add_to_favorite_url()}}" 
-                        favorite_stan="{{return_chceck_favorit_stan_url()}}" 
-                        add_like_url="{{return_add_to_like_url()}}" 
-                        add_to_dislike_url="{{return_add_to_dislike_url()}}" 
+                        <app-actions
+                        update_views_url="{{return_update_views_url()}}"
+                        edit_link="{{return_edit_url()}}"
+                        add_to_favorite_url="{{return_add_to_favorite_url()}}"
+                        favorite_stan="{{return_chceck_favorit_stan_url()}}"
+                        add_like_url="{{return_add_to_like_url()}}"
+                        add_to_dislike_url="{{return_add_to_dislike_url()}}"
                         add_to_rating_url="{{return_add_to_ratng_url()}}"></app-actions>
                     </ng-template>
                 </div>
                 <div class="col">
                     <h2 class="name_js d-flex justify-content-center">{{data|name}}</h2>
                     <p class="description_js movie_description">{{data|desc}}</p>
-                    
+
                     <div class="table_information">
                         <ng-template [ngIf]="data.producent">
                             <div class="row">
@@ -142,7 +143,7 @@
                                 </div>
                             </div>
                         </ng-template>
-                        
+
                         <ng-template [ngIf]="data.stars.length>0">
                             <div class="row">
                                 <div class="col">
@@ -177,13 +178,13 @@
 
                         <div class="row">
                             <div class="col table_row">
-                                Likes 
+                                Likes
                             </div>
                             <div class="col table_row">
                                 <i class="fas fa-thumbs-up"></i><span class="stats_item like_js">{{data.likes_count | bigInt}}</span>
                             </div>
                         </div>
-                       
+
                         <div class="row">
                             <div class="col table_row">
                                 Ratings
@@ -192,7 +193,7 @@
                                 <i class="fas fa-star"></i> <span class="stats_item ratting_js">{{data.ratings_count | bigInt}}</span> ({{data.avg_rating}})
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col table_row">
                                 Views
@@ -201,7 +202,7 @@
                                 <i class="fas fa-eye"></i> <span class="stats_item views_js">{{data.views_count | bigInt}}</span>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col table_row">
                                 Dis Likes
@@ -220,8 +221,8 @@
                                     {{data.date_relesed}}
                                 </div>
                             </div>
-                        </ng-template>  
-                        
+                        </ng-template>
+
                         <div class="row">
                             <div class="col table_row">
                                 Added
@@ -230,52 +231,60 @@
                                 {{data.added|date}}
                             </div>
                         </div>
-                        
+
+                        <div class="row">
+                            <div class="col table_row">
+                                Source
+                            </div>
+                            <div class="col table_row">
+                                <a href="{{data.source}}">{{data.name}}</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 
-        
         <div class="tabs_nav sticky-top tabs_sticky">
-            <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center" 
-                id="pills-tab" 
+            <ul class="nav nav-pills mb-3 tab_nav d-flex justify-content-center"
+                id="pills-tab"
                 role="tablist">
-                <li class="nav-item galery_tab_js nav_tab" 
-                    name="galery" 
+                <li class="nav-item galery_tab_js nav_tab"
+                    name="galery"
                     role="presentation">
-                    <button class="nav-link" 
-                            id="pills-galery-tab" 
+                    <button class="nav-link"
+                            id="pills-galery-tab"
                             data-bs-toggle="pill"
-                            data-bs-target="#galery-tab" 
-                            type="button" 
-                            role="tab" 
+                            data-bs-target="#galery-tab"
+                            type="button"
+                            role="tab"
                             aria-controls="pills-contact"
-                            aria-selected="false" 
+                            aria-selected="false"
                             (click)="button_section='galery'">Galery
                     </button>
                 </li>
-                <li class="nav-item movies_series_tab nav_tab" 
-                    name="movies_series" 
+                <li class="nav-item movies_series_tab nav_tab"
+                    name="movies_series"
                     role="presentation">
-                    <button class="nav-link all-series-name" 
-                            id="pills-home-tab" 
+                    <button class="nav-link all-series-name"
+                            id="pills-home-tab"
                             data-bs-toggle="pill"
-                            data-bs-target="#pills-home" 
-                            type="button" 
-                            role="tab" 
+                            data-bs-target="#pills-home"
+                            type="button"
+                            role="tab"
                             aria-controls="pills-home"
                             aria-selected="false" (click)="button_section='serie'">All movies in series {{data.serie | name}}
                     </button>
                 </li>
-                <li class="nav-item movies_with_stars_tab nav_tab" 
-                    name="movies_with_stars" 
+                <li class="nav-item movies_with_stars_tab nav_tab"
+                    name="movies_with_stars"
                     role="presentation">
-                    <button class="nav-link all-with-star-name" 
-                            id="pills-profile-tab" 
+                    <button class="nav-link all-with-star-name"
+                            id="pills-profile-tab"
                             data-bs-toggle="pill"
-                            data-bs-target="#pills-profile" 
-                            type="button" role="tab" 
+                            data-bs-target="#pills-profile"
+                            type="button" role="tab"
                             aria-controls="pills-profile"
                             aria-selected="false" (click)="button_section='stars-movies'">All movies with star in {{data | name}}
                     </button>
@@ -284,11 +293,11 @@
         </div>
 
         <div class="tab-content" id="pills-tabContent">
-         
-                <div class="tab-pane fade galery_tab_js tab_content" 
-                    id="galery-tab" 
-                    type="Galery" 
-                    role="tabpanel" 
+
+                <div class="tab-pane fade galery_tab_js tab_content"
+                    id="galery-tab"
+                    type="Galery"
+                    role="tabpanel"
                     aria-labelledby="pills-galery-tab">
                     <div class="container">
                         <div class="row galery galery-run">
@@ -299,8 +308,8 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade movies_series_tab tab_content serie-movies" 
-                    id="pills-home" 
+                <div class="tab-pane fade movies_series_tab tab_content serie-movies"
+                    id="pills-home"
                     role="tabpanel"
                     type="movies_in_series"
                     aria-labelledby="pills-home-tab">
@@ -309,15 +318,16 @@
                     </ng-template>
                 </div>
 
-            <div class="tab-pane fade movies_with_stars_tab tab_content" 
-                id="pills-profile" 
+            <div class="tab-pane fade movies_with_stars_tab tab_content"
+                id="pills-profile"
                 role="tabpanel"
                 type="all_movies_with_star"
                 aria-labelledby="pills-profile-tab">
                 <ng-template [ngIf]="button_section=='stars-movies'">
-                    <app-stars-movies title="All movies with star in {{data | name}}" ID={{data.id}} top="100px"></app-stars-movies>  
-                </ng-template>     
+                    <app-stars-movies title="All movies with star in {{data | name}}" ID={{data.id}} top="100px"></app-stars-movies>
+                </ng-template>
             </div>
         </div>
     </div>
 </main>
+-->

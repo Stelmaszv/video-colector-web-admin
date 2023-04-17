@@ -3,10 +3,10 @@ import {ActivatedRoute} from '@angular/router';
 import { HttpService } from '../../../Service/http/http.service';
 import {RatingService} from '../../../Service/ratting/rating.service'
 import { Router } from '@angular/router';
-import { TokkenService } from 'src/app/Service/tokken/tokken.service'; 
+import { TokkenService } from 'src/app/Service/tokken/tokken.service';
 import { FormBuilder, FormControl ,FormGroup} from '@angular/forms';
 import { RelationSelectService } from 'src/app/Service/select/relation-select.service';
-import { Title } from '@angular/platform-browser';
+import {Title} from '@angular/platform-browser';
 import { AlertService } from 'src/app/Service/alert/alert.service';
 
 @Component({
@@ -38,7 +38,8 @@ export class BaseIDComponent implements OnInit {
     rate: new FormControl(1)
   });
 
-  constructor(protected fb: FormBuilder,
+  constructor(
+              protected fb: FormBuilder,
               private TitleService: Title,
               public RelationSelectService:RelationSelectService,
               private activatedRoute: ActivatedRoute,
@@ -46,9 +47,10 @@ export class BaseIDComponent implements OnInit {
               public RatingService:RatingService,
               protected Router:Router,
               public TokkenService:TokkenService,
-              public AlertService:AlertService) { }
+              public AlertService:AlertService) {
+              }
 
-  public ngOnInit(): void 
+  public ngOnInit(): void
   {
     this.set_id()
     this.get_url(this.id)
@@ -75,7 +77,7 @@ export class BaseIDComponent implements OnInit {
   public return_add_to_dislike_url(){
     return this.add_to_dislike_url+this.id+'/'
   }
-  
+
   public return_add_to_favorite_url(){
     return this.fovorits_url+this.id+'/'
   }
@@ -92,8 +94,8 @@ export class BaseIDComponent implements OnInit {
   }
 
   protected on_get_url(){}
-  
-  private set_id(): void  
+
+  private set_id(): void
   {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -108,7 +110,7 @@ export class BaseIDComponent implements OnInit {
     this.banner=this.random_banneer(data)
   }
 
-  protected get_url(id:number): void 
+  protected get_url(id:number): void
   {
     if (this.auth==false){
       this.httpService.get_url(this.url+''+id+'').subscribe(
