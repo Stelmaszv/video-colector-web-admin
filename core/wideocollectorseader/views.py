@@ -83,7 +83,7 @@ class ApstractSeader(ABC):
 
 class ProducentSeader(ApstractSeader):
 
-    Model=Producents
+    Model = Producents
     index = 'producents'
 
     def add_model(self,item,data):
@@ -102,7 +102,7 @@ class ProducentSeader(ApstractSeader):
 
 class SeriesSeader(ApstractSeader):
 
-    Model=Serie
+    Model = Serie
     index = 'series'
 
     def add_model(self,item,data):
@@ -152,7 +152,7 @@ class TagSeader(ApstractSeader):
 class StarSeader(ApstractSeader):
 
     index = 'stars'
-    Model=Star
+    Model = Star
 
 
     def add_model(self,item,data):
@@ -181,7 +181,7 @@ class StarSeader(ApstractSeader):
 
 class MoviesSeader(ApstractSeader):
 
-    Model=Movie
+    Model = Movie
     index = 'movies'
 
     def add_model(self,item,data):

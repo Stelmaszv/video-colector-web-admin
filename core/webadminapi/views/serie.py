@@ -132,7 +132,6 @@ class SeriesStarsView(AbstractGenericsAPIViewExtended):
                 if el == id:
                     count = count + 1
             return count
-
         stars = []
         star_counter = []
         Model = self.get_object(self.kwargs.get("pk"))

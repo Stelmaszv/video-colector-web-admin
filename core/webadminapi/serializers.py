@@ -316,7 +316,7 @@ class StarsSerializerTop(StarsSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation["avatar"] = set_avatar_for_top_stars(instance)
+        #representation["avatar"] = set_avatar_for_top_stars(instance)
         return representation
 
 #Movies

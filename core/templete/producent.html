@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container text-center">
+    <h2>{{ result.show_name | default:result.name }}</h2>
+    <div class="btn-group p-3" role="group" aria-label="Basic example">
+        <a href="{% url 'webapp:producentsstar' result.id %}?title={{result.name}}&&id={{result.id}}&place=producent" class="btn btn-primary">Stars in {{result.name}}</a>
+        <a href="{% url 'webapp:moviesinproducent' result.id %}?title={{result.name}}&&id={{result.id}}&place=producent" class="btn btn-primary">Movies in {{result.name}}</a>
+        <a href="{% url 'webapp:seriesinproducent' result.id %}?title={{result.name}}&&id={{result.id}}" class="btn btn-primary">Series in {{result.name}}</a>
+        <a href="{% url 'webapp:producentphoto' result.id %}?title={{result.name}}&id={{result.id}}&&place=producent" class="btn btn-primary">Photos</a>
+    </div>
+    <div class="row">
+        <div class="col">
+            <img width="300" height="300" class="cover" src="{{ result.avatar | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
+        </div>
+        <div class="col">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                    <td>Show Name</td>
+                    <td>{{ result.show_name | default:result.name }}</td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>{{result.country}}</td>
+                </tr>
+                <tr>
+                    <td>Years</td>
+                    <td>{{result.years}}</td>
+                </tr>
+                <tr>
+                    <td>Date Relesed</td>
+                    <td>{{result.date_relesed}}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td style="text-align: justify;">{{result.description}}</td>
+                </tr>
+                <tr>
+                    <td>Tags</td>
+                    <td>
+                        {% for tag in result.tags %}
+                        {{tag.name}}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container text-center">
+        <h2>
+            Photos
+            {% if data.id %}
+            - <a href="http://127.0.0.1:8000/producent/{{data.id}}">{{title}}</a>
+            {% endif %}
+        </h2>
+
+        {% for photo in results %}
+            <img width="100" height="100" src="{{photo.url}}">
+        {% endfor %}
+        </div>
+
+{% endblock %}

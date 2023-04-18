@@ -27,8 +27,9 @@ urlpatterns = [
     path('api/', include('core.webadminapi.urls')),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('', include('core.webapp.urls')),
     path('custom-url/', include('drf_expiring_token.urls')),
-    path('', StartView.as_view(), name="start")
+    path('aps', StartView.as_view(), name="start")
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

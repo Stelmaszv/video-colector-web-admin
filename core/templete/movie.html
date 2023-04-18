@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container text-center">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <a href="{% url 'webapp:moviessithstars' result.id %}?title=stars from {{result.name}}&id={{result.id}}&&place=movie" class="btn btn-primary">Movies With Stars</a>
+        <a href="{% url 'webapp:moviephoto' result.id %}?title={{result.name}}&id={{result.id}}&&place=movie" class="btn btn-primary">Photos</a>
+        {% if user.is_authenticated %}
+            <a href="../../admin/wideocollectorseader/movie/{{result.id}}/change" class="btn btn-primary">Edit</a>
+            <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Actions
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{{add_like}}">Add Like</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{add_dislike}}">Add Dislike</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{add_favorite}}">
+                    {% if stan_favorite == False %}
+                        Add to favorite
+                    {% endif %}
+                </a>
+                <a class="dropdown-item" href="{{add_favorite}}">
+                    {% if stan_favorite == True %}
+                        Remowe to favorite
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+      </div>
+        {% endif %}
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Stars
+        </button>
+        <ul class="dropdown-menu">
+            {% for star in result.stars %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'webapp:star' star.id %}">
+                        {{star.name}}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <h2>{{ result.show_name | default:result.name }}</h2>
+    {% if result.source %}
+    <a href="{{result.source}}">
+        <img width="1300" height="700" src="{{ result.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
+    </a>
+    {% endif %}
+    {% if result.source == '' %}
+        <video width="1300" height="700" poster="{{result.poster}}" muted controls>
+          <source src="{{result.src}}" type="video/mp4">
+        </video>
+    {% endif %}
+
+    <h2>Data</h2>
+
+    <div class="row">
+        <div class="col">
+            <img width="350" height="800" class="cover" src="{{ result.front_cover | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
+        </div>
+        <div class="col">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                    <td>Show Name</td>
+                    <td>{{ result.show_name | default:result.name }}</td>
+                </tr>
+                <tr>
+                    <td>Producent</td>
+                    <td><a href="{% url 'webapp:producet' result.producent.id %}">{{result.producent.name}}</a></td>
+                </tr>
+                <tr>
+                    <td>Serie</td>
+                    <td><a href="{% url 'webapp:serie' result.serie.id %}">{{result.serie.name}}</a></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>{{result.country}}</td>
+                </tr>
+                <tr>
+                    <td>Date Relesed</td>
+                    <td>{{result.date_relesed}}</td>
+                </tr>
+                <tr>
+                    <td>Date Relesed</td>
+                    <td>{{result.date_relesed}}</td>
+                </tr>
+
+                {% if result.stars %}
+                <tr>
+                    <td>
+                        Stars
+                    </td>
+                    <td>
+                        {% for star in result.stars %}
+                        <div>
+                            <a href="{% url 'webapp:star' star.id %}">{{star.name}}</a>
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
+
+                {% if result.description %}
+                <tr>
+                    <td>Description</td>
+                    <td style="text-align: justify;">{{result.description}}</td>
+                </tr>
+                {% endif %}
+
+                <tr>
+                    <td>Tags</td>
+                    <td>
+                        {% for tag in result.tags %}
+                        {{tag.name}}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

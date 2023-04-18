@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container text-center">
+    <h2>{{ result.show_name | default:result.name }}</h2>
+    <div class="btn-group p-3" role="group" aria-label="Basic example">
+        <a href="{% url 'webapp:movieswithstars' result.id %}?title={{result.name}}&&id={{result.id}}&place=star" class="btn btn-primary">Movies with {{result.name}}</a>
+        <a href="{% url 'webapp:starsphoto' result.id %}?title={{result.name}}&id={{result.id}}&&place=star" class="btn btn-primary">Photos</a>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Actions
+        </button>
+                <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{{add_like}}">Add Like</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{add_dislike}}">Add Dislike</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{add_favorite}}">
+                    {% if stan_favorite == False %}
+                        Add to favorite
+                    {% endif %}
+                </a>
+                <a class="dropdown-item" href="{{add_favorite}}">
+                    {% if stan_favorite == True %}
+                        Remowe to favorite
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <img width="350" height="500" class="cover" src="{{ result.avatar | default:'http://127.0.0.1:8000/static/assets/img/castum-no_avatar_star.png' }}">
+        </div>
+        <div class="col">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                    <td>Show Name</td>
+                    <td>{{ result.show_name | default:result.name }}</td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>{{result.country}}</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>{{result.weights}}</td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td>{{result.height}}</td>
+                </tr>
+                <tr>
+                    <td>Ethnicity</td>
+                    <td>{{result.ethnicity}}</td>
+                </tr>
+                <tr>
+                    <td>Hair color</td>
+                    <td>{{result.hair_color}}</td>
+                </tr>
+                <tr>
+                    <td>Nationality</td>
+                    <td>{{result.nationality}}</td>
+                </tr>
+                <tr>
+                    <td>Birth Place</td>
+                    <td>{{resultbirth_place}}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td style="text-align: justify;">{{result.description}}</td>
+                </tr>
+                <tr>
+                    <td>Tags</td>
+                    <td>
+                        {% for tag in result.tags %}
+                        {{tag.name}}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
