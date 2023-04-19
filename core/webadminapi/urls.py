@@ -1,7 +1,7 @@
 from core.webadminapi.core import DeleteLikeView, DeleteDisLikessView, DeleteRattingView, DeleteViewsView
 from core.webadminapi.views.favorite import FavoritsMovies, FavoritsStars, FavoritsSeries, FavoritsProducents, \
     FavoritsAddMovie, FavoritsAddStar, FavoritsAddSerie, FavoritsAddProducent, FavoritsIsMovies, FavoritsIsStars, \
-    FavoritsIsSeries
+    FavoritsIsSeries, FavoritsIsProducents
 from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MovieAddToLikeView,
                                            MovieAddToRatingView,
@@ -84,6 +84,8 @@ from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarTagsView,
                                           AddStarTag,
                                           StarsTopView)
+from core.webadminapi.views.liks import (LiksProducents,LiksSeries,LiksStars,LiksMovies,
+                                         DisLiksProducents,DisLiksSeries,DisLiksStars,DisLiksMovies)
 from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
 from core.wideocollectorseader.views import StartView
 
@@ -211,6 +213,17 @@ urlpatterns = [
     path('favoriteis/movies/<int:pk>/',          FavoritsIsMovies.as_view(),  name='favorits_movie'),
     path('favoriteis/stars/<int:pk>/',           FavoritsIsStars.as_view(),  name='favoritsis_stars'),
     path('favoriteis/series/<int:pk>/',          FavoritsIsSeries.as_view(),  name='favoritsis_series'),
+    path('favoriteis/producents/<int:pk>/',      FavoritsIsProducents.as_view(),  name='favoritsis_producents'),
+    #likks
+    path('liks/producents/<int:pk>/',            LiksProducents.as_view(),  name='liks_producents'),
+    path('liks/series/<int:pk>/',                LiksSeries.as_view(),  name='liks_series'),
+    path('liks/stars/<int:pk>/',                 LiksStars.as_view(),  name='liks_stars'),
+    path('liks/movies/<int:pk>/',                LiksMovies.as_view(),  name='liks_movies'),
+    # dislike
+    path('dislike/producents/<int:pk>/', DisLiksProducents.as_view(), name='dis_liks_producents'),
+    path('dislike/series/<int:pk>/', DisLiksSeries.as_view(), name='dis_liks_series'),
+    path('dislike/stars/<int:pk>/', DisLiksStars.as_view(), name='dis_liks_stars'),
+    path('dislike/movies/<int:pk>/', DisLiksMovies.as_view(), name='dis_liks_movies'),
     #delete
     path('delete/like/<int:pk>/',               DeleteLikeView.as_view(),       name='delete_like'),
     path('delete/dislike/<int:pk>/',            DeleteDisLikessView.as_view(),  name='delete_dislike'),

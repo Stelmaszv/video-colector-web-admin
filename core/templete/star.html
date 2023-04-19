@@ -5,6 +5,7 @@
     <div class="btn-group p-3" role="group" aria-label="Basic example">
         <a href="{% url 'webapp:movieswithstars' result.id %}?title={{result.name}}&&id={{result.id}}&place=star" class="btn btn-primary">Movies with {{result.name}}</a>
         <a href="{% url 'webapp:starsphoto' result.id %}?title={{result.name}}&id={{result.id}}&&place=star" class="btn btn-primary">Photos</a>
+        <a href="../../admin/wideocollectorseader/star/{{result.id}}/change" class="btn btn-primary">Edit</a>
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Actions
         </button>

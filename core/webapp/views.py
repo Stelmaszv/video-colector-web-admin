@@ -209,32 +209,48 @@ class Movie(BaseId):
     reverse = 'webapp:movie'
     url = "http://127.0.0.1:8000/api/movie/"
     template_name = 'movie.html'
+
     add_like_url = "http://127.0.0.1:8000/api/movieaddtolike/"
     add_dislike_url = "http://127.0.0.1:8000/api/movieaddtodislike/"
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/movie/"
     check_favorites = "http://127.0.0.1:8000/api/favoriteis/movies/"
-    update_views = "http://127.0.0.1:8000/api/favoriteis/movies/"
+    update_views = "http://127.0.0.1:8000/api/movieaupdateviews"
 
 class Star(BaseId):
 
     reverse = 'webapp:star'
     url = "http://127.0.0.1:8000/api/star/"
     template_name = 'star.html'
-    add_like_url = "http://127.0.0.1:8000/api/movieaddtolike/"
-    add_dislike_url = "http://127.0.0.1:8000/api/movieaddtodislike/"
-    add_to_favorite = "http://127.0.0.1:8000/api/favorite/movie/"
-    check_favorites = "http://127.0.0.1:8000/api/favoriteis/movies/"
-    update_views = "http://127.0.0.1:8000/api/favoriteis/movies/"
+
+    add_like_url = "http://127.0.0.1:8000/api/staraddtolike/"
+    add_dislike_url = "http://127.0.0.1:8000/api/staraddtodislike/"
+    add_to_favorite = "http://127.0.0.1:8000/api/favorite/star/"
+    check_favorites = "http://127.0.0.1:8000/api/favoriteis/stars/"
+    update_views = "http://127.0.0.1:8000/api/starupdateviews/"
 
 class Serie(BaseId):
 
+    reverse = 'webapp:serie'
     url = "http://127.0.0.1:8000/api/serie/"
     template_name = 'serie.html'
 
+    add_like_url = "http://127.0.0.1:8000/api/serieaddtolike/"
+    add_dislike_url = "http://127.0.0.1:8000/api/serieaddtosislike/"
+    add_to_favorite = "http://127.0.0.1:8000/api/favorite/serie/"
+    check_favorites = "http://127.0.0.1:8000/api/favoriteis/series/"
+    update_views = "http://127.0.0.1:8000/api/serieupdateview/"
+
 class Producent(BaseId):
 
+    reverse = 'webapp:producet'
     url = "http://127.0.0.1:8000/api/producent/"
     template_name = 'producent.html'
+
+    add_like_url = "http://127.0.0.1:8000/api/producentaddtolike/"
+    add_dislike_url = "http://127.0.0.1:8000/api/producentaddtodislike/"
+    add_to_favorite = "http://127.0.0.1:8000/api/favorite/producent/"
+    check_favorites = "http://127.0.0.1:8000/api/favoriteis/producents/"
+    update_views = "http://127.0.0.1:8000/api/producentupdateviews/"
 
 class StarsMovie(MoviesBase):
 

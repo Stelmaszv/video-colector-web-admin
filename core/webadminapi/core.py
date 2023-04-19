@@ -116,7 +116,7 @@ class AbstractDeteilsView(APIView):
         self.query.save()
 
     def add_disLikes(self):
-        DisLik =DisLikess(User=self.request.user)
+        DisLik = DisLikess(User=self.request.user)
         DisLik.save()
         self.query.disLikes.add(DisLik)
         self.query.save()
@@ -132,6 +132,12 @@ class AbstractDeteilsView(APIView):
 
     def is_favourite(self,instance):
         for Fav in self.query.favourite.all():
+            if Fav.User == self.request.user:
+                return True
+        return False
+
+    def is_liked(self,instance):
+        for Fav in self.query.Likes.all():
             if Fav.User == self.request.user:
                 return True
         return False

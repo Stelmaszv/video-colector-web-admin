@@ -61,6 +61,7 @@ class MoviesRatingView(serializers.ModelSerializer):
         return representation
 
 class StarsFavoritBase(serializers.ModelSerializer):
+
     fovorite_item = 'movies'
 
     class Meta:
@@ -82,6 +83,111 @@ class StarsFavoritBase(serializers.ModelSerializer):
         if query:
             return True
         return False
+
+class LikesSeraliser(serializers.ModelSerializer):
+    class Meta:
+        model = Likes
+        fields = '__all__'
+
+class LikesBase(serializers.ModelSerializer):
+
+    like_item = 'movies'
+    likes = LikesSeraliser(many=True)
+    index = likes
+    serializer_index = 'is_liked'
+
+    class Meta:
+        model = Movie
+        fields = ['name','likes']
+
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation[self.serializer_index] = self.is_liked(representation[self.index],self.data_put['request'].user.id)
+        return representation
+
+    def is_liked(self,likes,id):
+
+        for like in likes:
+            return str(like['User']) == str(id)
+        return False
+
+class DisLikesBase(LikesBase):
+
+    like_item = 'movies'
+    disLikes = LikesSeraliser(many=True)
+    index = 'disLikes'
+    serializer_index = 'is_dis_liked'
+
+    class Meta:
+        model = Movie
+        fields = ['name','disLikes']
+
+class ProducentDisLiks(DisLikesBase):
+
+    like_item = 'producents'
+
+    class Meta:
+        model = Producents
+        fields = ['name','disLikes']
+
+class MoviesDisLiks(DisLikesBase):
+
+    like_item = 'movies'
+
+    class Meta:
+        model = Movie
+        fields = ['name','disLikes']
+
+class SeriesDisLiks(DisLikesBase):
+
+    like_item = 'Series'
+
+    class Meta:
+        model = Serie
+        fields = ['name','disLikes']
+
+class StarsDisLiks(DisLikesBase):
+
+    like_item = 'stars'
+
+    class Meta:
+        model = Star
+        fields = ['name','disLikes']
+
+class ProducentLiks(LikesBase):
+
+    like_item = 'producents'
+
+    class Meta:
+        model = Producents
+        fields = ['name','likes']
+
+class MoviesLiks(LikesBase):
+
+    like_item = 'movies'
+
+    class Meta:
+        model = Movie
+        fields = ['name','likes']
+
+class StarsLiks(LikesBase):
+
+    like_item = 'stars'
+
+    class Meta:
+        model = Star
+        fields = ['name','likes']
+
+class SeriesLiks(LikesBase):
+
+    like_item = 'Series'
+
+    class Meta:
+        model = Serie
+        fields = ['name','likes']
 
 class MoviesFavorit(StarsFavoritBase):
     fovorite_item = 'movies'
@@ -108,7 +214,7 @@ class ProducentFavorit(StarsFavoritBase):
     fovorite_item = 'producents'
 
     class Meta:
-        model = Star
+        model = Producents
         fields = ['name']
 
 class MoviesLiksView(serializers.ModelSerializer):
