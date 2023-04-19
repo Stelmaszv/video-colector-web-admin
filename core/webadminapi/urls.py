@@ -86,6 +86,7 @@ from core.webadminapi.views.stars import (StarAddToDisLikeView,
                                           StarsTopView)
 from core.webadminapi.views.liks import (LiksProducents,LiksSeries,LiksStars,LiksMovies,
                                          DisLiksProducents,DisLiksSeries,DisLiksStars,DisLiksMovies)
+from core.webadminapi.views.ratings import (RatingProducentsView,RatingSeriesView,RatingMoviesView,RatingStarssView)
 from core.webadminapi.views.tags import TagDeteilsView, TagView, AdminTagView
 from core.wideocollectorseader.views import StartView
 
@@ -228,6 +229,11 @@ urlpatterns = [
     path('delete/like/<int:pk>/',               DeleteLikeView.as_view(),       name='delete_like'),
     path('delete/dislike/<int:pk>/',            DeleteDisLikessView.as_view(),  name='delete_dislike'),
     path('delete/rating/<int:pk>/',             DeleteRattingView.as_view(),  name='delete_rating'),
-    path('delete/views/<int:pk>/',              DeleteViewsView.as_view(),   name='delete_views')
+    path('delete/views/<int:pk>/',              DeleteViewsView.as_view(),   name='delete_views'),
+    #ratings
+    path('ratings/producents/<int:pk>/', RatingProducentsView.as_view(), name='ratings_producents'),
+    path('ratings/series/<int:pk>/', RatingSeriesView.as_view(), name='ratings_series'),
+    path('ratings/movies/<int:pk>/', RatingMoviesView.as_view(), name='ratings_movies'),
+    path('ratings/stars/<int:pk>/', RatingStarssView.as_view(), name='ratings_stars')
 ]
 

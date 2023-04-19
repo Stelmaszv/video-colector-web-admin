@@ -17,7 +17,10 @@ class BaseId(TemplateView):
     add_to_favorite = ''
     check_favorites = ''
     update_views = ''
-
+    check_likes_url = ''
+    check_dis_likes_url = ''
+    rate_url = ''
+    check_rate_url = ''
 
     def get(self, request, *args, **kwargs):
 
@@ -33,6 +36,10 @@ class BaseId(TemplateView):
             requests.get(self.add_to_favorite + str(self.kwargs.get('pk')),
                          auth=(User, Passsward))
             return HttpResponseRedirect(reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')}))
+        
+        if "rate" in self.request.GET:
+            requests.get(self.rate_url + str(self.kwargs.get('pk'))+'?rate='+self.request.GET['rate'],auth=(User, Passsward))
+            return HttpResponseRedirect(reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')}))
 
         response = requests.get(self.url+str(self.kwargs.get('pk'))).json()
 
@@ -43,12 +50,36 @@ class BaseId(TemplateView):
 
         requests.get(self.update_views + str(self.kwargs.get('pk')), auth=(User, Passsward))
         return render(request, self.template_name, {
+            'action': {
+                'like'    : self.set_add_like(),
+                'dis_like': self.set_add_dis_like(),
+                'stan_favorite': self.favorite,
+                'set_rating':self.set_rating,
+            },
+            'rating':self.set_rating(),
+            'rattings':range(0,self.set_rating()),
+            'rattings_rest': range(0, 5 - self.set_rating()),
             'result': response,
             'add_like': self.set_like_url(),
             'add_dislike': self.set_dislike_url(),
             'add_favorite': self.set_add_to_favorite(),
             'stan_favorite' : self.favorite
         })
+
+    def set_rating(self):
+        rating = requests.get(self.check_rate_url + '/' + str(self.kwargs.get('pk')), auth=(User, Passsward)).json()
+
+        return rating['rate']
+
+    def set_add_like(self):
+        likes = requests.get(self.check_likes_url+ '/' +str(self.kwargs.get('pk')),auth=(User, Passsward)).json()
+
+        return likes['is_liked'];
+
+    def set_add_dis_like(self):
+        dis_likes = requests.get(self.check_dis_likes_url+ '/' +str(self.kwargs.get('pk')),auth=(User, Passsward)).json()
+
+        return dis_likes['is_dis_liked'];
 
     def set_like_url(self):
         return reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')})+'?like=true';
@@ -85,15 +116,14 @@ class Base(TemplateView):
         if "page" in self.request.GET:
             self.page = int(self.request.GET['page'])
 
-
         self.set_url()
 
         response = requests.get(self.url+'?page='+str(self.page)).json()
 
         return render(request, self.template_name, {
-            'title'  : self.title,
-            'results': response['results'],
-            'data' : {
+            'title'   : self.title,
+            'results' : response['results'],
+            'data'    :  {
                 'count'        : response['count'],
                 'next'         : response['next'],
                 'previous'     : response['previous'],
@@ -215,6 +245,10 @@ class Movie(BaseId):
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/movie/"
     check_favorites = "http://127.0.0.1:8000/api/favoriteis/movies/"
     update_views = "http://127.0.0.1:8000/api/movieaupdateviews"
+    check_likes_url = 'http://127.0.0.1:8000/api/liks/movies'
+    check_dis_likes_url = 'http://127.0.0.1:8000/api/dislike/movies'
+    rate_url = 'http://127.0.0.1:8000/api/movieaddtorating/'
+    check_rate_url = 'http://127.0.0.1:8000/api/ratings/movies'
 
 class Star(BaseId):
 
@@ -227,6 +261,10 @@ class Star(BaseId):
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/star/"
     check_favorites = "http://127.0.0.1:8000/api/favoriteis/stars/"
     update_views = "http://127.0.0.1:8000/api/starupdateviews/"
+    check_likes_url = 'http://127.0.0.1:8000/api/liks/stars'
+    check_dis_likes_url = 'http://127.0.0.1:8000/api/dislike/stars'
+    rate_url = 'http://127.0.0.1:8000/api/staraddrating/'
+    check_rate_url = 'http://127.0.0.1:8000/api/ratings/stars'
 
 class Serie(BaseId):
 
@@ -239,6 +277,10 @@ class Serie(BaseId):
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/serie/"
     check_favorites = "http://127.0.0.1:8000/api/favoriteis/series/"
     update_views = "http://127.0.0.1:8000/api/serieupdateview/"
+    check_likes_url = 'http://127.0.0.1:8000/api/liks/series'
+    check_dis_likes_url = 'http://127.0.0.1:8000/api/dislike/series'
+    rate_url = 'http://127.0.0.1:8000/api/staraddtorating/'
+    check_rate_url = 'http://127.0.0.1:8000/api/ratings/series'
 
 class Producent(BaseId):
 
@@ -251,6 +293,10 @@ class Producent(BaseId):
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/producent/"
     check_favorites = "http://127.0.0.1:8000/api/favoriteis/producents/"
     update_views = "http://127.0.0.1:8000/api/producentupdateviews/"
+    check_likes_url = 'http://127.0.0.1:8000/api/liks/producents'
+    check_dis_likes_url = 'http://127.0.0.1:8000/api/dislike/producents'
+    rate_url = 'http://127.0.0.1:8000/api/producentaddtorating/'
+    check_rate_url = 'http://127.0.0.1:8000/api/ratings/producents'
 
 class StarsMovie(MoviesBase):
 

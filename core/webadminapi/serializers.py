@@ -93,8 +93,6 @@ class LikesBase(serializers.ModelSerializer):
 
     like_item = 'movies'
     likes = LikesSeraliser(many=True)
-    index = likes
-    serializer_index = 'is_liked'
 
     class Meta:
         model = Movie
@@ -105,7 +103,7 @@ class LikesBase(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation[self.serializer_index] = self.is_liked(representation[self.index],self.data_put['request'].user.id)
+        representation['is_liked'] = self.is_liked(representation['likes'],self.data_put['request'].user.id)
         return representation
 
     def is_liked(self,likes,id):
@@ -114,16 +112,90 @@ class LikesBase(serializers.ModelSerializer):
             return str(like['User']) == str(id)
         return False
 
-class DisLikesBase(LikesBase):
+class DisLikesBase(serializers.ModelSerializer):
 
     like_item = 'movies'
     disLikes = LikesSeraliser(many=True)
-    index = 'disLikes'
-    serializer_index = 'is_dis_liked'
 
     class Meta:
         model = Movie
         fields = ['name','disLikes']
+
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['is_dis_liked'] = self.is_liked(representation['disLikes'],self.data_put['request'].user.id)
+        return representation
+
+    def is_liked(self,likes,id):
+
+        for like in likes:
+            return str(like['User']) == str(id)
+        return False
+
+class RatingSeraliser(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = '__all__'
+
+class RatingBase(serializers.ModelSerializer):
+
+    like_item = 'movies'
+    ratings = RatingSeraliser(many=True)
+
+    class Meta:
+        model = Movie
+        fields = ['name','ratings']
+
+    def set_data(self,data):
+        self.data_put=data
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['rate'] = self.set_rate(representation['ratings'], self.data_put['request'].user.id)
+        return representation
+
+    def set_rate(self,likes,id):
+
+        for like in likes:
+            if str(like['User']) == str(id):
+                return like['rate']
+        return False
+
+class ProducentRating(RatingBase):
+
+    like_item = 'producents'
+
+    class Meta:
+        model = Producents
+        fields = ['name','ratings']
+
+class MoviesRating(RatingBase):
+
+    like_item = 'movie'
+
+    class Meta:
+        model = Movie
+        fields = ['name','ratings']
+
+class SeriesRating(RatingBase):
+
+    like_item = 'serie'
+
+    class Meta:
+        model = Serie
+        fields = ['name','ratings']
+
+class StarsRating(RatingBase):
+
+    like_item = 'stars'
+
+    class Meta:
+        model = Star
+        fields = ['name','ratings']
+
 
 class ProducentDisLiks(DisLikesBase):
 

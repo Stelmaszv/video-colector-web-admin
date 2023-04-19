@@ -5,35 +5,51 @@
     <div class="btn-group p-3" role="group" aria-label="Basic example">
         <a href="{% url 'webapp:movieswithstars' result.id %}?title={{result.name}}&&id={{result.id}}&place=star" class="btn btn-primary">Movies with {{result.name}}</a>
         <a href="{% url 'webapp:starsphoto' result.id %}?title={{result.name}}&id={{result.id}}&&place=star" class="btn btn-primary">Photos</a>
-        <a href="../../admin/wideocollectorseader/star/{{result.id}}/change" class="btn btn-primary">Edit</a>
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          Actions
-        </button>
-                <ul class="dropdown-menu">
-            <li>
-                <a class="dropdown-item" href="{{add_like}}">Add Like</a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="{{add_dislike}}">Add Dislike</a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="{{add_favorite}}">
-                    {% if stan_favorite == False %}
-                        Add to favorite
-                    {% endif %}
-                </a>
-                <a class="dropdown-item" href="{{add_favorite}}">
-                    {% if stan_favorite == True %}
-                        Remowe to favorite
-                    {% endif %}
-                </a>
-            </li>
-        </ul>
+        {% if user.is_authenticated %}
+            <a href="../../admin/wideocollectorseader/star/{{result.id}}/change" class="btn btn-primary">Edit</a>
+        {% endif %}
     </div>
 
     <div class="row">
         <div class="col">
+            {% if user.is_authenticated %}
+                <div class="btn-group" role="group" aria-label="Buttons">
+                    <a class="btn btn-info"><i class="fa-light fa-solid fa-eye fa-lg"></i> {{ result.views_count }}</a>
+                    {% if action.like is False %}
+                        <a class="btn btn-success" href="{{add_like}}"><i class="fa-solid fa-thumbs-up"></i> {{ result.likes_count }}</a>
+                    {% endif %}
+                    {% if action.like is True %}
+                        <a class="btn btn-success disabled" href="{{add_like}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.likes_count }}</a>
+                    {% endif %}
+
+                    {% if action.dis_like is False %}
+                        <a class="btn btn-danger" href="{{add_dislike}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.disLikes_count }}</a>
+                    {% endif %}
+                    {% if action.dis_like is True %}
+                        <a class="btn btn-danger disabled" href="{{add_dislike}}"><i class="fa-solid fa-thumbs-down fa-lg"></i> {{ result.disLikes_count }}</a>
+                    {% endif %}
+
+                    {% if action.stan_favorite is False %}
+                        <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart" style="color: #ff0000;"></i></a>
+                    {% endif %}
+                    {% if action.stan_favorite is True %}
+                        <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart fa-lg"></i></a>
+                    {% endif %}
+                </div>
+            {% endif %}
             <img width="350" height="500" class="cover" src="{{ result.avatar | default:'http://127.0.0.1:8000/static/assets/img/castum-no_avatar_star.png' }}">
+            {% if action.set_rating is False %}
+            <div class="rating">
+                <a href="{{rate_url}}?rate=1"><i class="far fa-star"></i></a>
+                <a href="{{rate_url}}?rate=2"><i class="far fa-star"></i></a>
+                <a href="{{rate_url}}?rate=3"><i class="far fa-star"></i></a>
+                <a href="{{rate_url}}?rate=4"><i class="far fa-star"></i></a>
+                <a href="{{rate_url}}?rate=5"><i class="far fa-star"></i></a>
+            </div>
+            {% endif %}
+            <div class="rating">
+                {{rating}} / {{result.avg_rating}}
+            </div>
         </div>
         <div class="col">
             <table class="table table-borderless">
@@ -87,4 +103,34 @@
         </div>
     </div>
 </div>
+<style>
+     .rating__star {
+        cursor: pointer;
+        color: #dabd18b2;
+     }
+</style>
+<script>
+    const ratingStars = [...document.getElementsByClassName("fa-star")];
+
+    function executeRating(stars) {
+      const starClassActive = "rating__star  fas fa-star";
+      const starClassInactive = "far fa-star";
+      const starsLength = stars.length;
+      let i;
+      stars.map((star) => {
+        star.onmouseover = () => {
+          i = stars.indexOf(star);
+    
+          if (star.className===starClassInactive) {
+            for (i; i >= 0; --i) stars[i].className = starClassActive;
+          } else {
+            for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+          }
+        };
+      });
+    }
+    executeRating(ratingStars);
+
+   
+</script>
 {% endblock %}

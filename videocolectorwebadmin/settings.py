@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'core.wideocollectorseader',
     'core.webadminapi',
     'corsheaders',
-    'drf_expiring_token'
+    'drf_expiring_token',
+    'fontawesomefree'
 ]
 
 REST_FRAMEWORK = {
