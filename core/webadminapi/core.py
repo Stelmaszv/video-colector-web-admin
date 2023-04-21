@@ -45,9 +45,9 @@ class RangesMiddleware(MiddlewareMixin):
 
 
 class TopPaginator(PageNumberPagination):
-    page_size = 4
+    page_size = 6
     page_size_query_param = 'page_size'
-    max_page_size = 4
+    max_page_size = 6
 
 class CustomCorsMiddleware:
     def __init__(self, get_response):

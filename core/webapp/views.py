@@ -97,6 +97,8 @@ class Base(TemplateView):
     base_url = ''
     height = 30
     reverse = ''
+    name = ''
+    page = 1
 
     def set_url(self):
         pass
@@ -108,22 +110,35 @@ class Base(TemplateView):
 
         if "title" in self.request.GET:
             self.title = self.request.GET['title']
+
         if "id" in self.request.GET:
             self.id = self.request.GET['id']
+
         if "place" in self.request.GET:
             self.place = self.request.GET['place']
 
         if "page" in self.request.GET:
             self.page = int(self.request.GET['page'])
-
+            
+        if 'name' in self.request.GET:
+            self.name = self.request.GET['name']
+        
         self.set_url()
 
-        response = requests.get(self.url+'?page='+str(self.page)).json()
+        response = requests.get(self.url+'?page='+str(self.page)+'&name='+self.name).json()
+        
+        if 'pk' in self.kwargs:
+            reverseSet = reverse(self.reverse,kwargs={"pk": self.kwargs.get('pk')})
+        else:
+            reverseSet = reverse(self.reverse) 
 
         return render(request, self.template_name, {
             'title'   : self.title,
             'results' : response['results'],
+            'request_get_full_path' : reverseSet,
             'data'    :  {
+                'page'         : self.page,
+                'get'          : len(self.request.GET),
                 'count'        : response['count'],
                 'next'         : response['next'],
                 'previous'     : response['previous'],
@@ -132,15 +147,15 @@ class Base(TemplateView):
                 'head'         : self.head,
                 'base_url'     : self.base_url,
                 'height'       : self.height,
-                'next_page_url': self.next_page(),
-                'previous_page_url': self.previous_page()
+                'next_page_url': self.next_page(self.page),
+                'previous_page_url': self.previous_page(self.page)
             }
         })
 
 
-    def previous_page(self):
-        self.page = self.page - 2
-        url = '?page=' + str(self.page);
+    def previous_page(self,page):
+        npage = page - 1
+        url = '?page=' + str(npage);
 
         if "title" in self.request.GET:
             url = url + '&title=' + self.title
@@ -150,12 +165,12 @@ class Base(TemplateView):
             url = url + '&place=' + self.place
 
         if 'pk' in self.kwargs:
-            return reverse(self.reverse,kwargs={"pk": self.kwargs.get('pk')})+url;
-        return reverse(self.reverse) + url;
+            return reverse(self.reverse,kwargs={"pk": self.kwargs.get('pk')})+url+'&name='+self.name;
+        return reverse(self.reverse) + url+'&name='+self.name;
 
-    def next_page(self):
-        self.page = self.page + 1
-        url = '?page='+str(self.page);
+    def next_page(self,page):
+        npage = page + 1
+        url = '?page='+str(npage);
 
         if "title" in self.request.GET:
             url = url + '&title='+self.title
@@ -165,8 +180,8 @@ class Base(TemplateView):
             url = url + '&place=' + self.place
 
         if 'pk' in self.kwargs:
-            return reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')}) + url;
-        return reverse(self.reverse) + url;
+            return reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')}) + url+'&name='+self.name;
+        return reverse(self.reverse) + url+'&name='+self.name;
 
 class MoviesBase(Base):
 
@@ -214,14 +229,14 @@ class ProducentStar(StarsBase):
     reverse = 'webapp:producentsstar'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/producentsstar/' + self.id
+        self.url = 'http://127.0.0.1:8000/api/producentsstar/' + str(self.kwargs.get('pk'))
 
 class SeriesStar(StarsBase):
 
     reverse = 'webapp:seriesstar'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/series/stars/' + self.id
+        self.url = 'http://127.0.0.1:8000/api/series/stars/' + str(self.kwargs.get('pk'))
 
 class Producents(ProducentBase):
     url = 'http://127.0.0.1:8000/api/producents'
@@ -303,28 +318,28 @@ class StarsMovie(MoviesBase):
     reverse = 'webapp:moviessithstars'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/starsmovie/'+self.id
+        self.url = 'http://127.0.0.1:8000/api/starsmovie/'+str(self.kwargs.get('pk'))
 
 class MoviesInSerie(MoviesBase):
 
     reverse = 'webapp:moviesinserie'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/seriemoviesview/'+self.id
+        self.url = 'http://127.0.0.1:8000/api/seriemoviesview/'+str(self.kwargs.get('pk'))
 
 class MoviesInProducent(MoviesBase):
 
     reverse = 'webapp:moviesinproducent'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/producentsmovies/'+self.id
+        self.url = 'http://127.0.0.1:8000/api/producentsmovies/'+str(self.kwargs.get('pk'))
 
 class MoviesWithStars(MoviesBase):
 
     reverse = 'webapp:movieswithstars'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/movieswithstars/'+self.id
+        self.url = 'http://127.0.0.1:8000/api/movieswithstars/'+str(self.kwargs.get('pk'))
 
 class SerieGalery(GaleryBase):
 
@@ -359,4 +374,35 @@ class SeriesInProducent(SeriesBase):
     reverse = 'webapp:seriesinproducent'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/producentsseries/'+self.id
+        self.url = 'http://127.0.0.1:8000/api/producentsseries/'+str(self.id)
+
+class Start(TemplateView):
+
+    template_name = 'index.html'
+    order = None
+    section = None
+
+    def get(self, request, *args, **kwargs):
+
+        if "order" in self.request.GET:
+            self.order = self.request.GET['order']
+
+        if "section" in self.request.GET:
+            self.section = self.request.GET['section']
+
+        return render(request, self.template_name, {
+            "section" : self.section,
+            "movies": self.get_url_top('http://127.0.0.1:8000/api/top/movies','views')['results'],
+            "movies_count" : self.get_url_top('http://127.0.0.1:8000/api/top/movies','views')['count'],
+            "stars" : self.get_url_top('http://127.0.0.1:8000/api/top/stars', 'views')['results'],
+            "stars_count": self.get_url_top('http://127.0.0.1:8000/api/top/stars', 'views')['count'],
+            "series": self.get_url_top('http://127.0.0.1:8000/api/top/series', 'views')['results'],
+            "series_count": self.get_url_top('http://127.0.0.1:8000/api/top/series', 'views')['count'],
+            "producents": self.get_url_top('http://127.0.0.1:8000/api/top/producents', 'views')['results'],
+            "producents_count": self.get_url_top('http://127.0.0.1:8000/api/top/producents', 'views')['count'],
+        })
+
+    def get_url_top(self,url,order):
+        if self.order == None:
+            return requests.get(url + '?order=' + order).json()
+        return requests.get(url + '?order=' + self.order).json()

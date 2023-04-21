@@ -4,6 +4,7 @@ from . import views
 app_name = 'webapp'
 
 urlpatterns = [
+    path('',views.Start.as_view(),name="index"),
     path('movies',views.Movies.as_view(),name="movies"),
     path('series',views.Series.as_view(),name="series"),
     path('stars', views.Stars.as_view(), name="stars"),

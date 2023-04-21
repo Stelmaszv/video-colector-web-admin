@@ -1,19 +1,163 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container text-center">
-        {% for i in results %}
-            <div class="row">
+<div class="container text-center">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button{% if section != 'movies'  %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Movies ({{movies_count}})
+              </button>
+            </h2>
+                <div id="flush-collapseOne" class="accordion-collapse {% if section != 'movies'  %} collapse {% endif %}" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                      <div class="row">
                 <div class="col">
-                    <div class="card">
-                      <img src="{{i.poster}}" class="card-img-top" alt="...">
+                   <select class="form-select" onchange="select(this.value,'movies')">
+                       <option value="views">views</option>
+                       <option value="likes_count">Likes Count</option>
+                       <option value="disLikes_count">DisLikes Count</option>
+                       <option value="ratings_count">Ratings Count</option>
+                   </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+            {% for i in movies %}
+                <div class="col">
+                    <div class="card" style="width: 15rem;  height:30rem;">
+                      <img src="{{ i.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" class="card-img-top" alt="..." style="width: 15rem;  height:10rem;">
                       <div class="card-body">
-                        <h5 class="card-title">{{i.name}}</h5>
-                        <p class="card-text">{{i.description}}</p>
-                        <a href="{% url 'webapp:movie' i.id %}" class="btn btn-primary">Watch !</a>
+                          <div class="card-body">
+                              <h5 class="card-title">{{i.name}}</h5>
+                              <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:20 }}</p>
+                              </div>
+                          <a href="http://127.0.0.1:8000/movie/{{i.id}}" class="btn btn-primary">Watch !</a>
                       </div>
                     </div>
                 </div>
+            {% endfor %}
             </div>
-        {% endfor %}
+          </div>
         </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+        <button class="accordion-button{% if section != 'stars'  %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            Stars ({{stars_count}})
+        </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse{% if section != 'stars'  %} collapse {% endif %}" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+            <div class="row">
+                <div class="col">
+                   <select class="form-select" onchange="select(this.value,'stars')">
+                       <option value="views">views</option>
+                       <option value="likes_count">Likes Count</option>
+                       <option value="disLikes_count">DisLikes Count</option>
+                       <option value="ratings_count">Ratings Count</option>
+                   </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+            {% for i in stars %}
+                <div class="col">
+                    <div class="card" style="width: 15rem;  height:30rem;">
+                      <img src="{{ i.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" class="card-img-top" alt="..." style="width: 15rem;  height:10rem;">
+                      <div class="card-body">
+                          <div class="card-body">
+                              <h5 class="card-title">{{i.name}}</h5>
+                              <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:20 }}</p>
+                              </div>
+                          <a href="http://127.0.0.1:8000/star/{{i.id}}" class="btn btn-primary">Watch !</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+     </div>
+    </div>
+
+          
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button{% if section != 'producents'  %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            Producents ({{producents_count}})
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse{% if section != 'producents'  %} collapse {% endif %}" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            <div class="row">
+                <div class="col">
+                   <select class="form-select" onchange="select(this.value,'producents')">
+                       <option value="views">views</option>
+                       <option value="likes_count">Likes Count</option>
+                       <option value="disLikes_count">DisLikes Count</option>
+                       <option value="ratings_count">Ratings Count</option>
+                   </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+            {% for i in producents %}
+                <div class="col">
+                    <div class="card" style="width: 15rem;  height:30rem;">
+                      <img src="{{ i.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" class="card-img-top" alt="..." style="width: 15rem;  height:10rem;">
+                      <div class="card-body">
+                          <div class="card-body">
+                              <h5 class="card-title">{{i.name}}</h5>
+                              <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:20 }}</p>
+                              </div>
+                          <a href="http://127.0.0.1:8000/producent/{{i.id}}" class="btn btn-primary">Watch !</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button{% if section != 'series'  %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFor" aria-expanded="false" aria-controls="flush-collapseFor">
+            Series ({{series_count}})
+          </button>
+        </h2>
+        <div id="flush-collapseFor" class="accordion-collapse{% if section != 'series'  %} collapse {% endif %}" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            <div class="row">
+                <div class="col">
+                   <select class="form-select" onchange="select(this.value,'series')">
+                       <option value="views">views</option>
+                       <option value="likes_count">Likes Count</option>
+                       <option value="disLikes_count">DisLikes Count</option>
+                       <option value="ratings_count">Ratings Count</option>
+                   </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+            {% for i in series %}
+                <div class="col">
+                    <div class="card" style="width: 15rem;  height:30rem;">
+                      <img src="{{ i.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" class="card-img-top" alt="..." style="width: 15rem;  height:10rem;">
+                      <div class="card-body">
+                          <div class="card-body">
+                              <h5 class="card-title">{{i.name}}</h5>
+                              <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:20 }}</p>
+                              </div>
+                          <a href="http://127.0.0.1:8000/serie/{{i.id}}" class="btn btn-primary">Watch !</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+</div>
+<script>
+    function select(value,section){
+        window.location.assign("?order="+value+"&section="+section)
+    }
+</script>
 {% endblock %}

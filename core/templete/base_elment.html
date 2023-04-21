@@ -1,6 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container text-center">
+        <form>
+            <div class="row" >
+        
+                <div class="col-auto">
+                    <label for="name" class="col-form-label">Name:</label>
+                </div>
+        
+                <div class="col-auto">
+                    <input type="text" id="search_name" name="search_name" class="form-control">
+                </div>  
+
+                <div class="col-auto">
+                    <button id="search">Submit</button>
+                </div>
+        
+            </div>
+        </form>
+
         <div class="row" >
             <div class="col p-2" style="">
                 <a class="page-item" href="{{data.previous_page_url}}">
@@ -41,5 +59,16 @@
                 {% endfor %}
             </div>
     </div>
+    <script>
+        document.getElementById("search").addEventListener("click", function(event){
+
+            event.preventDefault()
+            let search_name = document.getElementById("search_name").value    
+
+            const page_url = '{{request_get_full_path}}?page=1&name='+search_name
+
+            window.location.assign(page_url)
+        });
+    </script>
 {% endblock %}
 
