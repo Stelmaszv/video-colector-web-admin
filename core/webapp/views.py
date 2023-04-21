@@ -98,12 +98,23 @@ class Base(TemplateView):
     height = 30
     reverse = ''
     name = ''
+    serie = ''
+    producent = ''
+    favorite_url = ''
     page = 1
+    filters = []
+    series_select = []
+    producents_select = []
+    favorite = 'false'
 
     def set_url(self):
         pass
+    
+    def set_on_get(self):
+        pass
 
     def get(self, request, *args, **kwargs):
+        self.set_on_get()
         self.id = None
         self.place = None
         self.page = 1
@@ -122,10 +133,26 @@ class Base(TemplateView):
             
         if 'name' in self.request.GET:
             self.name = self.request.GET['name']
+
+        if 'serie' in self.request.GET:
+            self.serie = self.request.GET['serie']
+            
+        if 'producent' in self.request.GET:
+            self.producent = self.request.GET['producent']
         
         self.set_url()
 
-        response = requests.get(self.url+'?page='+str(self.page)+'&name='+self.name).json()
+        if 'favorite' in self.request.GET:
+            self.favorite = self.request.GET['favorite']
+            if self.request.GET['favorite'] == 'true':
+                url = self.favorite_url+'?page='+str(self.page)+'&name='+self.name+'&serie='+self.serie+'&producent='+self.producent
+                response = requests.get(url,auth=(User, Passsward)).json()
+            else:
+                url = self.url+'?page='+str(self.page)+'&name='+self.name+'&serie='+self.serie+'&producent='+self.producent
+                response = requests.get(url).json()
+        else:
+            url = self.url+'?page='+str(self.page)+'&name='+self.name+'&serie='+self.serie+'&producent='+self.producent
+            response = requests.get(url).json()
         
         if 'pk' in self.kwargs:
             reverseSet = reverse(self.reverse,kwargs={"pk": self.kwargs.get('pk')})
@@ -136,7 +163,18 @@ class Base(TemplateView):
             'title'   : self.title,
             'results' : response['results'],
             'request_get_full_path' : reverseSet,
+            'search' : {
+                'series_select'      : self.series_select,
+                'producents_select'  : self.producents_select,
+                'form':{
+                    'name':self.name,
+                    'serie':self.serie,
+                    'producent':self.producent,
+                    'favorite':self.favorite
+                },
+            },
             'data'    :  {
+                'filters'      : self.filters,
                 'page'         : self.page,
                 'get'          : len(self.request.GET),
                 'count'        : response['count'],
@@ -190,6 +228,12 @@ class MoviesBase(Base):
     base_url = 'movie'
     reverse = 'webapp:movies'
     height = 30
+    favorite_url = 'http://127.0.0.1:8000/api/favorite/movies'
+    filters = ['serie','producent']
+    
+    def set_on_get(self):
+        self.series_select = response = requests.get('http://127.0.0.1:8000/api/series_select').json()
+        self.producents_select = response = requests.get('http://127.0.0.1:8000/api/producentsformview').json()
 
 class GaleryBase(Base):
 
@@ -202,6 +246,7 @@ class StarsBase(Base):
     title = 'Stars'
     base_url = 'star'
     template_name = 'stars.html'
+    favorite_url = 'http://127.0.0.1:8000/api/favorite/stars'
     height = 15
     reverse = 'webapp:stars'
 
@@ -211,6 +256,8 @@ class SeriesBase(Base):
     title = 'Series'
     base_url = 'serie'
     reverse = 'webapp:series'
+    favorite_url = 'http://127.0.0.1:8000/api/favorite/series'
+    filters = ['producent']
     height = 14
 
 class ProducentBase(Base):
@@ -219,6 +266,8 @@ class ProducentBase(Base):
     title = 'Producent'
     base_url = 'producent'
     reverse = 'webapp:producents'
+    favorite_url = 'http://127.0.0.1:8000/api/favorite/producents'
+    filters = []
     height = 14
 
 class Stars(StarsBase):

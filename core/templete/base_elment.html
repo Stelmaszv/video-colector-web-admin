@@ -9,8 +9,52 @@
                 </div>
         
                 <div class="col-auto">
-                    <input type="text" id="search_name" name="search_name" class="form-control">
+                    <input type="text" id="Name" name="name" value="{{search.form.name}}" class="form-control">
                 </div>  
+                
+                {% if user.is_authenticated %}
+                    <div class="col-auto">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="Favorite">Favorite: </label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="Favorite"
+                            {% if search.form.favorite == 'true' %}
+                            checked
+                            {% endif %}
+                            >
+                        </div>
+                    </div>
+                {% endif %}
+        
+                {% if 'producent' in data.filters %}
+
+                    <div class="col-auto">
+                        <label for="name" class="col-form-label">Series:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select id="Producent" class="form-control">
+                            <option></option>
+                            {% for serie in search.producents_select %}
+                                <option value="{{serie.id}}">{{serie.name}}<option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                {% endif %}
+
+                {% if 'serie' in data.filters %}
+                    <div class="col-auto">
+                        <label for="name" class="col-form-label">Series:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select id="Series" class="form-control">
+                            <option></option>
+                            {% for serie in search.series_select %}
+                                <option value="{{serie.id}}">{{serie.name}}
+                                <option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endif %}
 
                 <div class="col-auto">
                     <button id="search">Submit</button>
@@ -60,13 +104,40 @@
             </div>
     </div>
     <script>
+        select =document.getElementById("Series")
+        for (let el of select){
+            if (el.value === '{{search.form.serie}}'){
+                el.selected = true
+            }
+        }
+
+        select =document.getElementById("Producent")
+        for (let el of select){
+            if (el.value === '{{search.form.producent}}'){
+                el.selected = true
+            }
+        }
+
         document.getElementById("search").addEventListener("click", function(event){
 
             event.preventDefault()
-            let search_name = document.getElementById("search_name").value    
+            let Name = document.getElementById("Name").value 
+            let Series = document.getElementById("Series")
+            let Producent = document.getElementById("Producent")
+            let Favorite = document.getElementById("Favorite").checked
 
-            const page_url = '{{request_get_full_path}}?page=1&name='+search_name
+            let page_url = '{{request_get_full_path}}?page=1&name='+Name
+            
+            if (Series){
+                page_url=page_url += '&serie='+Series.value
+            }
 
+            if (Producent){
+                page_url=page_url += '&producent='+Producent.value
+            }
+            
+            page_url+= '&favorite='+Favorite
+        
             window.location.assign(page_url)
         });
     </script>
