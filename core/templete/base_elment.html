@@ -11,7 +11,7 @@
                 <div class="col-auto">
                     <input type="text" id="Name" name="name" value="{{search.form.name}}" class="form-control">
                 </div>  
-                
+
                 {% if user.is_authenticated %}
                     <div class="col-auto">
                         <div class="form-check form-switch">
@@ -28,13 +28,13 @@
                 {% if 'producent' in data.filters %}
 
                     <div class="col-auto">
-                        <label for="name" class="col-form-label">Series:</label>
+                        <label for="name" class="col-form-label">Producents:</label>
                     </div>
                     <div class="col-auto">
                         <select id="Producent" class="form-control">
                             <option></option>
-                            {% for serie in search.producents_select %}
-                                <option value="{{serie.id}}">{{serie.name}}<option>
+                            {% for producent in search.producents_select %}
+                                <option value="{{producent.id}}">{{producent.name}}<option>
                             {% endfor %}
                         </select>
                     </div>

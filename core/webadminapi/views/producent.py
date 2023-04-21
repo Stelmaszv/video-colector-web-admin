@@ -65,7 +65,7 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
             if 'avatar' != Path(photo).stem and 'banner' != Path(photo).stem:
                 if photo.endswith(photo_ext):
                     photos.append({
-                             "url"     :   Model.dir+'\photo\DATA\\'+photo,
+                             "url"     :   Model.web_dir+'\photo\DATA\\'+photo,
                              "name"    :   Model.show_name
                     })
         for Serie in Model.series.all():
@@ -75,7 +75,7 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
                         if 'cover' != Path(photo).stem:
                             photos.append(
                                 {
-                                    "url": Movie.dir + '\\' + photo,
+                                    "url": Movie.web_dir + '\\' + photo,
                                     "name": Movie.show_name
                                 },
                             )

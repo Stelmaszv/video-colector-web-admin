@@ -9,34 +9,33 @@
             <a href="../../admin/wideocollectorseader/star/{{result.id}}/change" class="btn btn-primary">Edit</a>
         {% endif %}
     </div>
+    {% if user.is_authenticated %}
+        <div class="btn-group" role="group" aria-label="Buttons">
+            <a class="btn btn-info"><i class="fa-light fa-solid fa-eye fa-lg"></i> {{ result.views_count }}</a>
+            {% if action.like is False %}
+                <a class="btn btn-success" href="{{add_like}}"><i class="fa-solid fa-thumbs-up"></i> {{ result.likes_count }}</a>
+            {% endif %}
+            {% if action.like is True %}
+                <a class="btn btn-success disabled" href="{{add_like}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.likes_count }}</a>
+            {% endif %}
 
+            {% if action.dis_like is False %}
+                <a class="btn btn-danger" href="{{add_dislike}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.disLikes_count }}</a>
+            {% endif %}
+            {% if action.dis_like is True %}
+                <a class="btn btn-danger disabled" href="{{add_dislike}}"><i class="fa-solid fa-thumbs-down fa-lg"></i> {{ result.disLikes_count }}</a>
+            {% endif %}
+
+            {% if action.stan_favorite is False %}
+                <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart fa-lg"></i></a>
+            {% endif %}
+            {% if action.stan_favorite is True %}
+                <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart" style="color: #ff0000;"></i></a>
+            {% endif %}
+        </div>
+    {% endif %}
     <div class="row">
         <div class="col">
-            {% if user.is_authenticated %}
-                <div class="btn-group" role="group" aria-label="Buttons">
-                    <a class="btn btn-info"><i class="fa-light fa-solid fa-eye fa-lg"></i> {{ result.views_count }}</a>
-                    {% if action.like is False %}
-                        <a class="btn btn-success" href="{{add_like}}"><i class="fa-solid fa-thumbs-up"></i> {{ result.likes_count }}</a>
-                    {% endif %}
-                    {% if action.like is True %}
-                        <a class="btn btn-success disabled" href="{{add_like}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.likes_count }}</a>
-                    {% endif %}
-
-                    {% if action.dis_like is False %}
-                        <a class="btn btn-danger" href="{{add_dislike}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.disLikes_count }}</a>
-                    {% endif %}
-                    {% if action.dis_like is True %}
-                        <a class="btn btn-danger disabled" href="{{add_dislike}}"><i class="fa-solid fa-thumbs-down fa-lg"></i> {{ result.disLikes_count }}</a>
-                    {% endif %}
-
-                    {% if action.stan_favorite is False %}
-                        <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart fa-lg"></i></a>
-                    {% endif %}
-                    {% if action.stan_favorite is True %}
-                        <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart" style="color: #ff0000;"></i></a>
-                    {% endif %}
-                </div>
-            {% endif %}
             <img width="350" height="500" class="cover" src="{{ result.avatar | default:'http://127.0.0.1:8000/static/assets/img/castum-no_avatar_star.png' }}">
             {% if action.set_rating is False %}
             <div class="rating">

@@ -54,17 +54,19 @@ class StarsPhotoView(AbstractGenericsAPIViewExtended):
         photo=[]
         Model = self.get_object(self.kwargs.get("pk"))
         star_dir = os.listdir(Model.dir+'/photo/DATA')
+        
         for photo_item in star_dir:
             if photo_item.endswith(photo_ext):
                 photo.append(
-                    {"url"  :Model.dir+'\\photo\\DATA\\' + photo_item}
+                    {"url"  :Model.web_dir+'\photo\DATA\\' + photo_item}
                 )
+                
         for Movie in Model.movies.all():
             list=os.listdir(Movie.dir)
             for item in list:
                 if item.endswith(photo_ext):
                     photo.append(
-                        {"url": Movie.dir + '\\' + item}
+                        {"url": Movie.web_dir + '\\' + item}
                     )
 
         return photo

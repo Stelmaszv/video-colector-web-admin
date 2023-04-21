@@ -161,7 +161,7 @@ class MoviePhotosView(AbstractGenericsAPIViewExtended):
         for item in os.listdir(Model.dir):
             if item.endswith(photo_ext):
                 photo.append(
-                    {"url"     :   Model.dir+'\\'+item}
+                    {"url"     :   Model.web_dir+'\\'+item}
                 )
         return photo
 

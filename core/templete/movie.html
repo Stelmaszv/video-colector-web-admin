@@ -28,38 +28,44 @@
         <img width="1300" height="700" src="{{ result.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
     </a>
     {% endif %}
-    {% if user.is_authenticated %}
-    <div class="btn-group" role="group" aria-label="Buttons">
-        <a class="btn btn-info"><i class="fa-light fa-solid fa-eye fa-lg"></i> {{ result.views_count }}</a>
-        {% if action.like is False %}
-            <a class="btn btn-success" href="{{add_like}}"><i class="fa-solid fa-thumbs-up"></i> {{ result.likes_count }}</a>
-        {% endif %}
-        {% if action.like is True %}
-            <a class="btn btn-success disabled" href="{{add_like}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.likes_count }}</a>
-        {% endif %}
-
-        {% if action.dis_like is False %}
-            <a class="btn btn-danger" href="{{add_dislike}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.disLikes_count }}</a>
-        {% endif %}
-        {% if action.dis_like is True %}
-            <a class="btn btn-danger disabled" href="{{add_dislike}}"><i class="fa-solid fa-thumbs-down fa-lg"></i> {{ result.disLikes_count }}</a>
-        {% endif %}
-
-        {% if action.stan_favorite is False %}
-            <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart fa-lg"></i></a>
-        {% endif %}
-        {% if action.stan_favorite is True %}
-            <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart" style="color: #ff0000;"></i></a>
-        {% endif %}
-    </div>
-    {% endif %}
     {% if result.source == '' %}
         <video width="1300" height="700" poster="{{result.poster}}" muted controls>
           <source src="{{result.src}}" type="video/mp4">
         </video>
     {% endif %}
+    <div class="row">
+        <div class="col">
+            <h2>Data</h2>
+        </div>
+        <div class="col">
+            {% if user.is_authenticated %}
+            <div class="btn-group" role="group" aria-label="Buttons">
+                <a class="btn btn-info"><i class="fa-light fa-solid fa-eye fa-lg"></i> {{ result.views_count }}</a>
+                {% if action.like is False %}
+                    <a class="btn btn-success" href="{{add_like}}"><i class="fa-solid fa-thumbs-up"></i> {{ result.likes_count }}</a>
+                {% endif %}
+                {% if action.like is True %}
+                    <a class="btn btn-success disabled" href="{{add_like}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.likes_count }}</a>
+                {% endif %}
+        
+                {% if action.dis_like is False %}
+                    <a class="btn btn-danger" href="{{add_dislike}}"><i class="fa-sharp fa-solid fa-thumbs-up fa-lg"></i> {{ result.disLikes_count }}</a>
+                {% endif %}
+                {% if action.dis_like is True %}
+                    <a class="btn btn-danger disabled" href="{{add_dislike}}"><i class="fa-solid fa-thumbs-down fa-lg"></i> {{ result.disLikes_count }}</a>
+                {% endif %}
+        
+                {% if action.stan_favorite is False %}
+                    <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart fa-lg"></i></a>
+                {% endif %}
+                {% if action.stan_favorite is True %}
+                    <a class="btn btn-info" href="{{add_favorite}}"><i class="fa-sharp fa-solid fa-heart" style="color: #ff0000;"></i></a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>    
 
-    <h2>Data</h2>
 
     <div class="row">
         <div class="col">

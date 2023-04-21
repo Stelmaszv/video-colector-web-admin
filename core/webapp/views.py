@@ -259,6 +259,9 @@ class SeriesBase(Base):
     favorite_url = 'http://127.0.0.1:8000/api/favorite/series'
     filters = ['producent']
     height = 14
+    
+    def set_on_get(self):
+        self.producents_select = response = requests.get('http://127.0.0.1:8000/api/producentsformview').json()
 
 class ProducentBase(Base):
 
