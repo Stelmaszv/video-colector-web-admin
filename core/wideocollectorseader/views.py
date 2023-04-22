@@ -68,7 +68,6 @@ class ApstractSeader(ABC):
     def add_one_many_loop(self,item,Model,atribute_name,AddModel):
         for tag in item:
             if len(AddModel.objects.filter(name=tag)) == 0:
-                print(tag)
                 AddModel(name=tag).save()
 
     def add_data(self,Data):
@@ -238,7 +237,7 @@ class MoviesSeader(ApstractSeader):
             StarObj=Star.objects.get(name=star)
             Model.stars.add(StarObj)
             StarObj.movies.add(Model)
-
+                
 class StartView(TemplateView):
     template_name = 'start_view.html'
 

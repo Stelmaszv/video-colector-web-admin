@@ -79,7 +79,7 @@
                 let Name = document.getElementById("Name").value 
                 let Series = document.getElementById("Series")
                 let Producent = document.getElementById("Producent")
-                let Favorite = document.getElementById("Favorite").checked
+                let Favorite = document.getElementById("Favorite")
     
                 let page_url = '{{request_get_full_path}}?page=1&name='+Name
                 
@@ -90,8 +90,11 @@
                 if (Producent){
                     page_url=page_url += '&producent='+Producent.value
                 }
-                
-                page_url+= '&favorite='+Favorite
+
+                if (Favorite){
+                    page_url=page_url+= '&favorite='+Favorite.checked
+                }
+
             
                 window.location.assign(page_url)
             });

@@ -40,7 +40,7 @@ class SeriesPhotosView(AbstractGenericsAPIViewExtended):
                 if photo.endswith(photo_ext):
                     photos.append(
                         {
-                            "url"     :   Model.web_dir+'\photo\DATA\\'+photo,
+                            "url"     :   Model.web_dir+'\photos\\'+photo,
                             "name"    :   Model.show_name
                          },
                     )

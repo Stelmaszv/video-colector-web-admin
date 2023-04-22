@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container text-center">
-        <h2>
-            Photos
-            {% if data.id %}
-            - <a href="http://127.0.0.1:8000/producent/{{data.id}}">{{title}}</a>
-            {% endif %}
-        </h2>
+        <div class="row" >
+            <div class="col p-2" style="">
+                <a class="page-item" href="{{data.previous_page_url}}">
+                    {% if data.previous %}
+                        Previous
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col p-2" style="">
+                <h2>
+                    Photos
+                    {% if data.id %}
+                    - <a href="http://127.0.0.1:8000/producent/{{data.id}}">{{title}}</a>
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="col p-2" style="">
+                <a class="page-item" href="{{data.next_page_url}}">
+                    {% if data.next %}
+                        Next
+                    {% endif %}
+                </a>
+            </div>
+        </div>
 
         {% for photo in results %}
         <img width="350" height="500" class="cover" src="{{photo.url}}">

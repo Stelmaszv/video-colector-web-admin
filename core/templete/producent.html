@@ -39,18 +39,20 @@
     <div class="row">
         <div class="col">
             <img width="300" height="300" class="cover" src="{{ result.avatar | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
-            {% if action.set_rating is False %}
-            <div class="rating">
-                <a href="{{rate_url}}?rate=1"><i class="far fa-star"></i></a>
-                <a href="{{rate_url}}?rate=2"><i class="far fa-star"></i></a>
-                <a href="{{rate_url}}?rate=3"><i class="far fa-star"></i></a>
-                <a href="{{rate_url}}?rate=4"><i class="far fa-star"></i></a>
-                <a href="{{rate_url}}?rate=5"><i class="far fa-star"></i></a>
-            </div>
+            {% if user.is_authenticated %}
+                {% if action.set_rating is False %}
+                <div class="rating">
+                    <a href="{{rate_url}}?rate=1"><i class="far fa-star"></i></a>
+                    <a href="{{rate_url}}?rate=2"><i class="far fa-star"></i></a>
+                    <a href="{{rate_url}}?rate=3"><i class="far fa-star"></i></a>
+                    <a href="{{rate_url}}?rate=4"><i class="far fa-star"></i></a>
+                    <a href="{{rate_url}}?rate=5"><i class="far fa-star"></i></a>
+                </div>
+                {% endif %}
+                <div class="rating">
+                    {{rating}} / {{result.avg_rating}}
+                </div>
             {% endif %}
-            <div class="rating">
-                {{rating}} / {{result.avg_rating}}
-            </div>
         </div>
         <div class="col">
             <table class="table table-borderless">

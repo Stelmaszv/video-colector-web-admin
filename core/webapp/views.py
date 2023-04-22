@@ -21,6 +21,7 @@ class BaseId(TemplateView):
     check_dis_likes_url = ''
     rate_url = ''
     check_rate_url = ''
+    favorite = ''
 
     def get(self, request, *args, **kwargs):
 
@@ -67,19 +68,24 @@ class BaseId(TemplateView):
         })
 
     def set_rating(self):
-        rating = requests.get(self.check_rate_url + '/' + str(self.kwargs.get('pk')), auth=(User, Passsward)).json()
+        if self.request.user.is_authenticated:
+            rating = requests.get(self.check_rate_url + '/' + str(self.kwargs.get('pk')), auth=(User, Passsward)).json()
 
-        return rating['rate']
+            return rating['rate']
+        return 0
 
     def set_add_like(self):
-        likes = requests.get(self.check_likes_url+ '/' +str(self.kwargs.get('pk')),auth=(User, Passsward)).json()
-
-        return likes['is_liked'];
+        if self.request.user.is_authenticated:
+            
+            likes = requests.get(self.check_likes_url+ '/' +str(self.kwargs.get('pk')),auth=(User, Passsward)).json()
+            
+            return likes['is_liked'];
 
     def set_add_dis_like(self):
-        dis_likes = requests.get(self.check_dis_likes_url+ '/' +str(self.kwargs.get('pk')),auth=(User, Passsward)).json()
+        if self.request.user.is_authenticated:
+            dis_likes = requests.get(self.check_dis_likes_url+ '/' +str(self.kwargs.get('pk')),auth=(User, Passsward)).json()
 
-        return dis_likes['is_dis_liked'];
+            return dis_likes['is_dis_liked'];
 
     def set_like_url(self):
         return reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')})+'?like=true';
