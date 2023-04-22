@@ -1,4 +1,8 @@
 import json
+
+from django.http import HttpResponseRedirect
+from django.views.generic.base import TemplateView
+from django.urls import reverse
 from abc import ABC, abstractmethod
 from pathlib import Path
 from rest_framework import status
@@ -6,8 +10,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from core.setings import save_mode_defult, setings_set_defult, update_setings
 from .models import Movie, Producents, Serie, Star, Tag
-from django.views.generic.base import TemplateView
-
 
 class StartSeederView(APIView):
 
@@ -29,13 +31,18 @@ class StartSeederView(APIView):
         self.opserver(opservers)
         save_mode_defult['udpdate_relation'] = True
         setings_set_defult()
-        self.update_item()
-        return Response(data=[], status=status.HTTP_200_OK)
+        self.update_items()
+        
+        return HttpResponseRedirect(reverse('webapp:index'))
 
-    def update_item(self):
+    def update_items(self):
         producents_all=Producents.objects.all()
         for producent in producents_all:
             producent.save()
+            
+        producents_all=Serie.objects.all()
+        for serie in producents_all:
+            serie.save()
 
     def get(self, request, *args, **kwargs):
         return self.api_get(request)
@@ -152,7 +159,6 @@ class StarSeader(ApstractSeader):
 
     index = 'stars'
     Model = Star
-
 
     def add_model(self,item,data):
         item = data[self.index][item]
