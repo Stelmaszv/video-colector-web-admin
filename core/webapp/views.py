@@ -302,6 +302,7 @@ class Producents(ProducentBase):
 class Series(SeriesBase):
 
     url = 'http://127.0.0.1:8000/api/series'
+    template_name = 'series.html'
 
 class Movies(MoviesBase):
 

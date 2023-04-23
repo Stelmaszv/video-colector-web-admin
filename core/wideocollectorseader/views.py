@@ -22,7 +22,7 @@ class StartSeederView(APIView):
         save_mode_defult['udpdate_relation'] = False
         update_setings(save_mode_defult)
         opservers=[
-            TagSeader(),
+            #TagSeader(),
             ProducentSeader(),
             SeriesSeader(),
             StarSeader(),
