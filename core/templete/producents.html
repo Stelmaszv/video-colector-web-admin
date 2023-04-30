@@ -97,7 +97,7 @@
                         <h5 class="card-title">{{i.name}}</h5>
                         <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:30 }}</p>
                       </div>
-                        <a href="http://127.0.0.1:8000/serie/{{i.id}}" class="btn btn-primary">Watch !</a>
+                        <a href="http://127.0.0.1:8000/{{data.base_url}}/{{i.id}}" class="btn btn-primary">Watch !</a>
                     </div>
                 </div>
                 {% endfor %}

@@ -87,21 +87,54 @@
                 </a>
             </div>
         </div>
-
+        <div class="container movies" style="margin-top:0px;">
             <div class="row" >
                 {% for i in results %}
-                <div class="col p-2" style="">
-                    <div class="card" style="width:12rem; height: 25em;">
-                     <img height="130" src="{{ i.avatar | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" class="card-img-top" alt="{{i.name}}">
-                      <div class="card-body">
-                        <h5 class="card-title">{{i.name}}</h5>
-                        <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:30 }}</p>
-                      </div>
-                        <a href="http://127.0.0.1:8000/serie/{{i.id}}" class="btn btn-primary">Watch !</a>
+                <div class="card" style="width: 30rem; margin:1rem;">
+                    <a href="http://127.0.0.1:8000/{{data.base_url}}/{{i.id}}" >
+                        <img class="card-img-top" src="{{ i.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                    <h5 class="card-title card-link">{{ i.show_name | default:i.name }}</h5>
+                      <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:30 }}</p>
                     </div>
+                    <div class="card-body">
+                        {% for star in i.stars|slice:":4" %}
+                        <a href="http://127.0.0.1:8000/star/{{star.id}}" class="card-link">{{star.name}}</a>
+                        {% endfor %}
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="http://127.0.0.1:8000/producent/{{i.id}}" class="card-link">{{i.producent.name}}</a></li>
+                        <li class="list-group-item"><a href="http://127.0.0.1:8000/serie/{{i.id}}" class="card-link">{{i.serie.name}}</a></li>
+                    </ul>
                 </div>
                 {% endfor %}
             </div>
+        </div>
+        <div class="row" >
+            <div class="col p-2" style="">
+                <a class="page-item" href="{{data.previous_page_url}}">
+                    {% if data.previous %}
+                        Previous
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col p-2" style="">
+                <h2>
+                    {{data.head}}
+                    {% if data.id and data.place %}
+                    - <a href="http://127.0.0.1:8000/{{data.place}}/{{data.id}}">{{title}}</a>
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="col p-2" style="">
+                <a class="page-item" href="{{data.next_page_url}}">
+                    {% if data.next %}
+                        Next
+                    {% endif %}
+                </a>
+            </div>
+        </div>
     </div>
     <script>
         select =document.getElementById("Series")
@@ -143,4 +176,43 @@
             window.location.assign(page_url)
         });
     </script>
+    <style>
+        .cart_poster_item {
+          margin: 15px;
+          height: 570px;
+        }
+        
+        .cart_poster_item .poster {
+          width: 100%;
+          height: 300px;
+        }
+        
+        .cart_poster_item .card-title a {
+          text-decoration: none;
+          color: black;
+        }
+        
+        .cart_poster_item .star_list a.star_item {
+          font-style: italic;
+          text-decoration: none;
+        }
+        
+        .cart_poster_item .stats {
+          display: inline;
+          text-align: center;
+          font-size: 1rem;
+        }
+        
+        .cart_poster_item .stats .stat_item {
+          margin-left: 10px;
+          margin-bottom: 5px;
+        }
+        
+        .cart_poster_item .stats .stats_rate {
+          font-style: italic;
+        }
+      </style>
 {% endblock %}
+
+
+

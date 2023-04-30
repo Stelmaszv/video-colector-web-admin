@@ -6,7 +6,6 @@ from django.views.generic import TemplateView
 from secret import User,Passsward
 from django.urls import reverse
 
-
 class BaseId(TemplateView):
 
     url = "http://127.0.0.1:8000/api/movie/"
@@ -233,6 +232,7 @@ class MoviesBase(Base):
     title = 'Movies'
     base_url = 'movie'
     reverse = 'webapp:movies'
+    template_name = 'movies.html'
     height = 30
     favorite_url = 'http://127.0.0.1:8000/api/favorite/movies'
     filters = ['serie','producent']
@@ -265,6 +265,7 @@ class SeriesBase(Base):
     favorite_url = 'http://127.0.0.1:8000/api/favorite/series'
     filters = ['producent']
     height = 30
+    template_name = 'series.html'
     
     def set_on_get(self):
         self.producents_select = response = requests.get('http://127.0.0.1:8000/api/producentsformview').json()
@@ -298,11 +299,12 @@ class SeriesStar(StarsBase):
 
 class Producents(ProducentBase):
     url = 'http://127.0.0.1:8000/api/producents'
+    template_name = 'producents.html'
 
 class Series(SeriesBase):
 
     url = 'http://127.0.0.1:8000/api/series'
-    template_name = 'series.html'
+
 
 class Movies(MoviesBase):
 
@@ -398,7 +400,7 @@ class MoviesWithStars(MoviesBase):
     reverse = 'webapp:movieswithstars'
 
     def set_url(self):
-        self.url = 'http://127.0.0.1:8000/api/movieswithstars/'+str(self.kwargs.get('pk'))
+        self.url = 'http://127.0.0.1:8000/api/starsmovie/'+str(self.kwargs.get('pk'))
 
 class SerieGalery(GaleryBase):
 

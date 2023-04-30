@@ -97,7 +97,7 @@ class ProducentSeader(ApstractSeader):
         print('Add Producent '+item['name'])
         self.Model(
             name=item['name'],
-            banner='',
+            banner=item['banner'],
             show_name=item['show_name'],
             avatar=item['avatar'],
             dir=item['dir'],
@@ -123,7 +123,7 @@ class SeriesSeader(ApstractSeader):
 
         self.Model(
             name=item['name'],
-            banner='',
+            banner=item['banner'],
             show_name=item['show_name'],
             avatar=item['avatar'],
             dir=item['dir'],

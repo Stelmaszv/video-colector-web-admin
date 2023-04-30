@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container text-center">
+<div class="video-player">
+    <video id="video"  width="2030" height="700" poster="{{result.poster}}" muted controls>
+        <source src="{{result.source}}" type="video/mp4">
+    </video>
+</div>
+<div class="container text-center" style="margin-top: 650px;">
+    <h2>{{ result.show_name | default:result.name }}</h2>
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <a href="{% url 'webapp:moviessithstars' result.id %}?title=stars from {{result.name}}&id={{result.id}}&&place=movie" class="btn btn-primary">Movies With Stars</a>
         <a href="{% url 'webapp:moviephoto' result.id %}?title={{result.name}}&id={{result.id}}&&place=movie" class="btn btn-primary">Photos</a>
@@ -22,12 +28,13 @@
         </ul>
       </div>
     </div>
-    <h2>{{ result.show_name | default:result.name }}</h2>
+    <!--
     {% if result.source %}
     <a href="{{result.source}}">
         <img width="1300" height="700" src="{{ result.poster | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
     </a>
     {% endif %}
+    -->
     {% if result.source == '' %}
         <video width="1300" height="700" poster="{{result.poster}}" muted controls>
           <source src="{{result.src}}" type="video/mp4">
@@ -69,7 +76,7 @@
 
     <div class="row">
         <div class="col">
-            <img width="350" height="800" class="cover" src="{{ result.front_cover | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
+            <img width="350" height="800" class="cover" id="cover" back="{{ result.back_cover | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" front="{{ result.front_cover | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}" src="{{ result.front_cover | default:'http://127.0.0.1:8000/static/assets/img/no_poster.jpg' }}">
             {% if action.set_rating is False %}
             <div class="rating">
                 <a href="{{rate_url}}?rate=1"><i class="far fa-star"></i></a>
@@ -153,6 +160,18 @@
         cursor: pointer;
         color: #dabd18b2;
      }
+     .video-player {
+        width: 30rem;
+        height: 16.5rem;
+        position: relative;
+        top:0;
+      }
+      video {
+        height:970px;
+        width: 99vw;
+        object-fit:fill;
+        background:black;
+      }
 </style>
 <script>
     const ratingStars = [...document.getElementsByClassName("fa-star")];
@@ -176,6 +195,15 @@
     }
     executeRating(ratingStars);
 
+    let cover = document.getElementById("cover")
+
+    cover.onmouseover= ()=>{
+        cover.src = cover.getAttribute('back')
+    };
+
+    cover.onmouseleave = () =>{
+        cover.src = cover.getAttribute('front')
+    };
 
 </script>
 {% endblock %}

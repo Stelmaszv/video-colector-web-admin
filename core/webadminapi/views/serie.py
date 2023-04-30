@@ -33,7 +33,7 @@ class SeriesPhotosView(AbstractGenericsAPIViewExtended):
 
     def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
-        miandir=os.listdir(Model.dir+'\photo\DATA')
+        miandir=os.listdir(Model.dir+'\photo')
         photos=[]
         for photo in miandir:
             if 'avatar' != Path(photo).stem and 'banner' != Path(photo).stem:
@@ -71,7 +71,7 @@ class SeriesBennersView(AbstractGenericsAPIView):
                 if photo.endswith(photo_ext):
                     banners.append(
                         {
-                            "url": Model.dir + '\\' + photo
+                            "url": Model.web_dir + '/banners/' + photo
                         },
                     )
         else:

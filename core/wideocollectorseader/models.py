@@ -39,7 +39,7 @@ def save(Model,self):
     save_mode = get_josn_file()['udpdate_relation']
     if save_mode:
         set_model(self)
-        UpdateJSON(self)
+        #UpdateJSON(self)
         super(Model, self).save()
     super(Model, self).save()
 
@@ -76,6 +76,7 @@ def UpdateJSON(Model):
         allow_fields=["show_name","description","date_relesed","country","weight",
                         "height","ethnicity","hair_color","birth_place","nationality","poster",
                         "banner","avatar","date_of_birth"]
+
         fields = []
         for field in Model._meta.get_fields():
             if field.name in allow_fields:
@@ -312,7 +313,7 @@ class Movie(models.Model):
     date_relesed = models.DateField(null=True,blank=True)
     dir = models.CharField(max_length=200, default='', null=True,blank=True)
     web_dir = models.CharField(max_length=200, default='', null=True,blank=True)
-    added               = models.DateTimeField(auto_now=True)
+    added = models.DateTimeField(auto_now=True)
     avg_rating = models.DecimalField(max_digits=5, decimal_places=2,default=0)
     likes_count = models.IntegerField(default=0)
     disLikes_count = models.IntegerField(default=0)
