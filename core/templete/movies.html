@@ -99,7 +99,7 @@
                       <p class="card-text" style="text-align: justify;">{{ i.description|truncatewords:30 }}</p>
                     </div>
                     <div class="card-body">
-                        {% for star in i.stars|slice:":4" %}
+                        {% for star in i.stars|slice:":3" %}
                         <a href="http://127.0.0.1:8000/star/{{star.id}}" class="card-link">{{star.name}}</a>
                         {% endfor %}
                     </div>
@@ -109,30 +109,6 @@
                     </ul>
                 </div>
                 {% endfor %}
-            </div>
-        </div>
-        <div class="row" >
-            <div class="col p-2" style="">
-                <a class="page-item" href="{{data.previous_page_url}}">
-                    {% if data.previous %}
-                        Previous
-                    {% endif %}
-                </a>
-            </div>
-            <div class="col p-2" style="">
-                <h2>
-                    {{data.head}}
-                    {% if data.id and data.place %}
-                    - <a href="http://127.0.0.1:8000/{{data.place}}/{{data.id}}">{{title}}</a>
-                    {% endif %}
-                </h2>
-            </div>
-            <div class="col p-2" style="">
-                <a class="page-item" href="{{data.next_page_url}}">
-                    {% if data.next %}
-                        Next
-                    {% endif %}
-                </a>
             </div>
         </div>
     </div>

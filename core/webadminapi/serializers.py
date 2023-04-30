@@ -196,7 +196,6 @@ class StarsRating(RatingBase):
         model = Star
         fields = ['name','ratings']
 
-
 class ProducentDisLiks(DisLikesBase):
 
     like_item = 'producents'
@@ -395,6 +394,7 @@ class PhotoSerializerMovie(serializers.Serializer):
 class PhotoSerializerSeries(serializers.Serializer):
     url  = serializers.CharField(max_length=200)
     name = serializers.CharField(max_length=200)
+
 #photos
 class BannerSerializer(serializers.Serializer):
     url = serializers.CharField(max_length=200)
@@ -541,5 +541,16 @@ class MoviesSerializer(BaseSeralizer):
         representation = super().to_representation(instance)
         representation["stars"] = sorted(representation["stars"], key=lambda x: x["views_count"],reverse=True)
         return representation
-
-
+    
+class MoviesSeasonSerializer(BaseSeralizer):
+    class Meta:
+        model = Movie
+        fields = ['id','name','show_name']
+            
+class SeriesSezonSerializer(serializers.Serializer):
+    number  = serializers.CharField(max_length=10)
+    name  = serializers.CharField(max_length=10)
+    show_name  = serializers.CharField(max_length=10)
+    front_cover = serializers.CharField(max_length=200)
+    back_cover = serializers.CharField(max_length=200)
+    movies = MoviesSeasonSerializer(many=True)

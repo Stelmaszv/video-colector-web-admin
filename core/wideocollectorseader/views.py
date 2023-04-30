@@ -129,10 +129,10 @@ class SeriesSeader(ApstractSeader):
             dir=item['dir'],
             web_dir=item['web_dir'],
             country=item['country'],
-            description=item['description'],
+            description=item['number_of_sezons'],
             years = '',
             Producent=Producent,
-            number_of_sezons = 0
+            number_of_sezons = item['description']
         ).save()
 
         SerieItem = Serie.objects.filter(name=item['name'])[0]
@@ -224,6 +224,7 @@ class MoviesSeader(ApstractSeader):
             back_cover = item['back_cover'],
             front_cover= item['front_cover'],
             source = source,
+            season = item['season']
         ).save()
         MovieItem = Movie.objects.latest('id')
 

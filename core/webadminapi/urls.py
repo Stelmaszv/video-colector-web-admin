@@ -44,6 +44,7 @@ from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
                                               AdminStatsProducentRatings, ProducentSeriesView, ProducentAddSerie,
                                               ProducentTagsView, ProducentAddTag, ProducentsTopView)
 from core.webadminapi.views.serie import (SelectOptionView,
+                                          SerieSeasonView,
                                           SerieAddToDisLikeView,
                                           SerieAddToFavoriteView,
                                           SerieAddToLikeView,
@@ -169,6 +170,7 @@ urlpatterns = [
     path('stars/photo/<int:pk>',                 StarsPhotoView.as_view(), name='starsphoto'),
     #series
     path('series',                               SerieView.as_view(), name='series'),
+    path('serie/season/<int:pk>/',               SerieSeasonView.as_view(), name='movieaddtodislike'),
     path('series/stars/<int:pk>/',               SeriesStarsView.as_view(), name='seriesstarsview'),
     path('serie/<int:pk>/',                      SerieDeteilsView.as_view(), name='serie'),
     path('serie/updata/<int:pk>/',               SerieUpdataView.as_view(), name='serieupdata'),

@@ -327,6 +327,7 @@ class Movie(models.Model):
     likes = models.ManyToManyField(to='wideocollectorseader.likes', related_name='Movielikes', blank=True)
     disLikes = models.ManyToManyField(to='wideocollectorseader.DisLikess', related_name='MovieDisLike', blank=True)
     ratings = models.ManyToManyField(to='wideocollectorseader.Rating', related_name='MovieRating',blank=True)
+    season = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         save(Movie, self)

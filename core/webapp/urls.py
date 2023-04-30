@@ -21,6 +21,7 @@ urlpatterns = [
     path('movies/in/producent/<int:pk>/', views.MoviesInProducent.as_view(), name="moviesinproducent"),
     path('serie/photo/<int:pk>/', views.SerieGalery.as_view(), name="seriephoto"),
     path('series/star/<int:pk>/', views.SeriesStar.as_view(), name="seriesstar"),
+    path('series/seazon/<int:pk>/', views.SeriesSeazon.as_view(), name="seriesseazonstar"),
     path('producent/photo/<int:pk>/', views.ProducentGalery.as_view(), name="producentphoto"),
     path('stars/photo/<int:pk>/', views.StarsGalery.as_view(), name="starsphoto"),
     path('movie/photo/<int:pk>/', views.MovieGalery.as_view(), name="moviephoto"),

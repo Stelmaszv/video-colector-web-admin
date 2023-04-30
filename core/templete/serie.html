@@ -9,6 +9,7 @@
         <a href="{% url 'webapp:seriesstar' result.id %}?title={{result.name}}&&id={{result.id}}&place=serie" class="btn btn-primary">Stars in {{result.name}}</a>
         <a href="{% url 'webapp:moviesinserie' result.id %}?title={{result.name}}&&id={{result.id}}&place=serie" class="btn btn-primary">Movies in {{result.name}}</a>
         <a href="{% url 'webapp:seriephoto' result.id %}?title={{result.name}}&id={{result.id}}&&place=serie" class="btn btn-primary">Photos</a>
+        <a href="{% url 'webapp:seriesseazonstar' result.id %}" class="btn btn-primary">Seazons</a>
         {% if user.is_authenticated %}
             <a href="../../admin/wideocollectorseader/serie/{{result.id}}/change" class="btn btn-primary">Edit</a>
         {% endif %}

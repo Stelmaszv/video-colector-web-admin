@@ -20,11 +20,58 @@ from core.webadminapi.serializers import (BannerSerializer, MoviesSerializer,
                                           SerieSerializerUpdate,
                                           SerieSlectSerializer,
                                           StarsSerializer, StatsSerializer, RatingsSerializer, TagsSerializer,
-                                          SerieSerializerID, StarsSerializerTop)
+                                          SerieSerializerID, StarsSerializerTop,SeriesSezonSerializer)
 from core.wideocollectorseader.models import Serie, Likes, DisLikess, Views,Movie
 from videocolectorwebadmin.global_setings import photo_ext
 from rest_framework.pagination import PageNumberPagination
 
+class SerieSeasonView(AbstractGenericsAPIViewExtended):
+    serializer_class = SeriesSezonSerializer
+    queryset = Serie.objects.all()
+    Model = Serie
+    
+    def filter_queryset(self):
+        self.ItemModel = self.get_object(self.kwargs.get("pk"))
+        photos=[]
+        for el in range(1,self.ItemModel.number_of_sezons+1):
+            photos.append(
+                {
+                    "number" : str(el),
+                    "name" : self.ItemModel.name,
+                    "show_name" : self.ItemModel.show_name,
+                    "front_cover" : self.ItemModel.web_dir+'/covers/'+self.found_front_cover(el),
+                    "back_cover" : self.ItemModel.web_dir+'/covers/'+self.found_back_cover(el),
+                    "movies" : self.set_movies(el)
+                },
+            )
+        return photos
+    
+    def found_front_cover(self,index):
+        covers = os.listdir(self.ItemModel.dir+'\covers')
+        for el in covers:
+            name = el.split('_')
+            if name[0] == str(index) and name[1] == 'front.jpg':
+                return el
+    
+    def found_back_cover(self,index):
+        covers = os.listdir(self.ItemModel.dir+'\covers')
+        for el in covers:
+            name = el.split('_')
+            if name[0] == str(index) and name[1] == 'back.jpg':
+                return el
+    
+    def set_movies(self,index):
+        movies = []
+        for movie in self.ItemModel.movies.all():
+            if movie.season == index:
+                movies.append(
+                    {
+                        "id": movie.id,
+                        "name": movie.name,
+                        "show_name":movie.show_name
+                    }
+                )
+        return movies
 
 class SeriesPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries

@@ -160,6 +160,7 @@ class Base(TemplateView):
             response = requests.get(url).json()
         
         if 'pk' in self.kwargs:
+            print(self.reverse)
             reverseSet = reverse(self.reverse,kwargs={"pk": self.kwargs.get('pk')})
         else:
             reverseSet = reverse(self.reverse) 
@@ -225,7 +226,53 @@ class Base(TemplateView):
         if 'pk' in self.kwargs:
             return reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')}) + url+'&name='+self.name;
         return reverse(self.reverse) + url+'&name='+self.name;
+    
+class SeriesSeazon(TemplateView):
+    template_name = 'seazons.html'
+    page = 1
+    reverse = 'webapp:seriesseazonstar'
+    
+    def get(self, request, *args, **kwargs):
+  
+        if "page" in self.request.GET:
+            self.page = int(self.request.GET['page'])
+        
+        response = requests.get('http://127.0.0.1:8000/api/serie/season/'+str(self.kwargs.get('pk'))+'/?page='+str(self.page)).json()
+        
+        return render(request, self.template_name, {
+            'results' : response['results'],
+            'next'         : response['next'],
+            'previous'     : response['previous'],
+            'next_page_url': self.next_page(self.page),
+            'previous_page_url': self.previous_page(self.page),
+            'serie' : {
+                'name':response['results'][0]['name'],
+                'show_name':response['results'][0]['show_name'],
+            }
+        })
+        
+    def previous_page(self,page):
+        npage = page - 1
+        url = '?page=' + str(npage);
 
+        if "id" in self.request.GET:
+            url = url + '&id=' + self.id
+
+        if 'pk' in self.kwargs:
+            return reverse(self.reverse,kwargs={"pk": self.kwargs.get('pk')})+url;
+        return reverse(self.reverse) + url;
+        
+    def next_page(self,page):
+        npage = page + 1
+        url = '?page='+str(npage);
+
+        if "id" in self.request.GET:
+            url = url + '&id=' + self.id
+
+        if 'pk' in self.kwargs:
+            return reverse(self.reverse, kwargs={"pk": self.kwargs.get('pk')}) + url;
+        return reverse(self.reverse) + url;
+        
 class MoviesBase(Base):
 
     head = 'Movies'
