@@ -111,6 +111,8 @@
      }
 </style>
 <script>
+    document.title = "{{ result.show_name | default:result.name }}"
+
     const ratingStars = [...document.getElementsByClassName("fa-star")];
 
     function executeRating(stars) {

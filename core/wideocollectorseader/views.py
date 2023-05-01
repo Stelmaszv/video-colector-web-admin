@@ -129,10 +129,10 @@ class SeriesSeader(ApstractSeader):
             dir=item['dir'],
             web_dir=item['web_dir'],
             country=item['country'],
-            description=item['number_of_sezons'],
+            description=item['description'],
             years = '',
             Producent=Producent,
-            number_of_sezons = item['description']
+            number_of_sezons = item['number_of_sezons']
         ).save()
 
         SerieItem = Serie.objects.filter(name=item['name'])[0]

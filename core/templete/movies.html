@@ -111,8 +111,34 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="row" >
+            <div class="col p-2" style="">
+                <a class="page-item" href="{{data.previous_page_url}}">
+                    {% if data.previous %}
+                        Previous
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col p-2" style="">
+                <h2>
+                    {{data.head}}
+                    {% if data.id and data.place %}
+                    - <a href="http://127.0.0.1:8000/{{data.place}}/{{data.id}}">{{title}}</a>
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="col p-2" style="">
+                <a class="page-item" href="{{data.next_page_url}}">
+                    {% if data.next %}
+                        Next
+                    {% endif %}
+                </a>
+            </div>
+        </div>
     </div>
     <script>
+        document.title = "Movies"
+
         select =document.getElementById("Series")
         for (let el of select){
             if (el.value === '{{search.form.serie}}'){
