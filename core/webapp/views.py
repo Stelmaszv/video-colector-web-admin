@@ -72,8 +72,11 @@ class BaseId(TemplateView):
     def set_banner(self,response):
         if self.banner:
             return self.on_set_baner(response)
-            
-        return response['banner']
+        
+        if 'banner' in response:
+            return response['banner']
+        
+        return ''
 
     def set_rating(self):
         if self.request.user.is_authenticated:
