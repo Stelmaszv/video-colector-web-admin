@@ -73,7 +73,39 @@ class ProducentBennersView(AbstractGenericsAPIView):
         else:
             return banners
         return banners
+    
+class ProducentSeriesBannersView(AbstractGenericsAPIView):
+    serializer_class = BannerSerializer
+    Model = Producents
+    queryset = Producents.objects.all()
+    
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        dir= Model.dir+'\\banners'
+        banners=[]
+        if os.path.isdir(dir):
+            list=os.listdir(dir)
+            for photo in list:
+                if photo.endswith(photo_ext):
+                    banners.append(
+                        {
+                            "url": Model.web_dir + '\\banners\\' + photo
+                        },
+                    )
+                    
+        for serie in Model.series.all():
+            dir = serie.dir+'\\banners'
+            list = os.listdir(dir)
+            for photo in list:
+                if photo.endswith(photo_ext):
+                    banners.append(
+                        {
+                            "url": serie.web_dir + '\\banners\\' + photo
+                        },
+                    )         
 
+        return banners;
+    
 class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries
     queryset = Producents.objects.all()
@@ -81,7 +113,7 @@ class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
 
     def filter_queryset(self):
         Model = self.get_object(self.kwargs.get("pk"))
-        miandir=os.listdir(Model.dir+'\photo\DATA')
+        miandir=os.listdir(Model.dir+'\photos')
         photos=[]
         for photo in miandir:
             if 'avatar' != Path(photo).stem and 'banner' != Path(photo).stem:

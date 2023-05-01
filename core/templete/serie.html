@@ -2,7 +2,7 @@
 {% block content %}
 <center>
     {% if banner %}
-        <img src="{{ banner }}" width="1980">
+        <img src="{{ banner }}" width="2000">
     {% endif %}
 </center>
 <div class="container text-center">
@@ -82,6 +82,7 @@
                     <td>Description</td>
                     <td style="text-align: justify;">{{result.description}}</td>
                 </tr>
+                {% if result.tags %}
                 <tr>
                     <td>Tags</td>
                     <td>
@@ -90,6 +91,7 @@
                         {% endfor %}
                     </td>
                 </tr>
+                {% endif %}
               </tbody>
             </table>
         </div>

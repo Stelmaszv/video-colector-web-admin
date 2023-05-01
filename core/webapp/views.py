@@ -361,7 +361,6 @@ class Series(SeriesBase):
 
     url = 'http://127.0.0.1:8000/api/series'
 
-
 class Movies(MoviesBase):
 
     url = 'http://127.0.0.1:8000/api/movies'
@@ -371,7 +370,7 @@ class Movie(BaseId):
     reverse = 'webapp:movie'
     url = "http://127.0.0.1:8000/api/movie/"
     template_name = 'movie.html'
-
+    
     add_like_url = "http://127.0.0.1:8000/api/movieaddtolike/"
     add_dislike_url = "http://127.0.0.1:8000/api/movieaddtodislike/"
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/movie/"
@@ -415,21 +414,22 @@ class Serie(BaseId):
     check_rate_url = 'http://127.0.0.1:8000/api/ratings/series'
     
     def on_set_baner(self,response):
-        if response['banner'] == None:
-            series = requests.get('http://127.0.0.1:8000/api/seriesbenners/'+str(self.kwargs.get('pk'))+'/').json()
-            if len(series['results']) > 0:
-                return random.choice(series['results'])['url']
+        series = requests.get('http://127.0.0.1:8000/api/seriesbenners/'+str(self.kwargs.get('pk'))+'/').json()
+        if len(series['results']) > 0:
+            return random.choice(series['results'])['url']
                 
-            producents = requests.get('http://127.0.0.1:8000/api/producent/benners/'+str(self.kwargs.get('pk'))+'/').json()
-            if len(producents['results']) > 0:
-                return random.choice(producents['results'])['url']
+        producents = requests.get('http://127.0.0.1:8000/api/producent/series/banners/'+str(response['Producent']['id'])+'/').json()
+        if len(producents['results']) > 0:
+            return random.choice(producents['results'])['url']
+        
+        return response['banner']
 
 class Producent(BaseId):
 
     reverse = 'webapp:producet'
     url = "http://127.0.0.1:8000/api/producent/"
     template_name = 'producent.html'
-
+    banner = True
     add_like_url = "http://127.0.0.1:8000/api/producentaddtolike/"
     add_dislike_url = "http://127.0.0.1:8000/api/producentaddtodislike/"
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/producent/"
@@ -439,6 +439,14 @@ class Producent(BaseId):
     check_dis_likes_url = 'http://127.0.0.1:8000/api/dislike/producents'
     rate_url = 'http://127.0.0.1:8000/api/producentaddtorating/'
     check_rate_url = 'http://127.0.0.1:8000/api/ratings/producents'
+    
+    def on_set_baner(self,response):
+        producents = requests.get('http://127.0.0.1:8000/api/producent/series/banners/'+str(self.kwargs.get('pk'))+'/').json()
+        
+        if len(producents['results']) > 0:
+            return random.choice(producents['results'])['url']
+        
+        return response['banner']
 
 class StarsMovie(MoviesBase):
 
