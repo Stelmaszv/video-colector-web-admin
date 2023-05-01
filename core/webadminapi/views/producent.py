@@ -25,6 +25,7 @@ from core.webadminapi.serializers import (MoviesSerializer,
                                           StatsSerializer,
                                           RatingsSerializer,
                                           TagsSerializer,
+                                          BannerSerializer,
                                           ProducentsSerializerID, BaseSeraliser)
 from core.wideocollectorseader.models import Producents, Serie, Likes, DisLikess, Views, Movie
 from rest_framework.pagination import PageNumberPagination
@@ -51,6 +52,27 @@ class ProducentsView(AbstractGenericsAPIView):
 class AdminProducentsView(ProducentsView):
     permission_classes = [IsAuthenticated]
     pagination_class = ProducentAdminPaginator
+    
+class ProducentBennersView(AbstractGenericsAPIView):
+    serializer_class = BannerSerializer
+    Model = Producents
+    
+    def get_queryset(self):
+        Model = self.get_object(self.kwargs.get("pk"))
+        dir= Model.dir+'\\banners'
+        banners=[]
+        if os.path.isdir(dir):
+            list=os.listdir(dir)
+            for photo in list:
+                if photo.endswith(photo_ext):
+                    banners.append(
+                        {
+                            "url": Model.web_dir + '\\banners\\' + photo
+                        },
+                    )
+        else:
+            return banners
+        return banners
 
 class ProducentsPhotosView(AbstractGenericsAPIViewExtended):
     serializer_class = PhotoSerializerSeries

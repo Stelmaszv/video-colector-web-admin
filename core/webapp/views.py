@@ -1,4 +1,5 @@
 import requests
+import random
 from django.http import HttpResponseRedirect
 
 from django.shortcuts import render
@@ -21,6 +22,7 @@ class BaseId(TemplateView):
     rate_url = ''
     check_rate_url = ''
     favorite = ''
+    banner = False
 
     def get(self, request, *args, **kwargs):
 
@@ -56,6 +58,7 @@ class BaseId(TemplateView):
                 'stan_favorite': self.favorite,
                 'set_rating':self.set_rating,
             },
+            'banner':self.set_banner(response),
             'rating':self.set_rating(),
             'rattings':range(0,self.set_rating()),
             'rattings_rest': range(0, 5 - self.set_rating()),
@@ -65,6 +68,12 @@ class BaseId(TemplateView):
             'add_favorite': self.set_add_to_favorite(),
             'stan_favorite' : self.favorite
         })
+        
+    def set_banner(self,response):
+        if self.banner:
+            return self.on_set_baner(response)
+            
+        return response['banner']
 
     def set_rating(self):
         if self.request.user.is_authenticated:
@@ -394,7 +403,7 @@ class Serie(BaseId):
     reverse = 'webapp:serie'
     url = "http://127.0.0.1:8000/api/serie/"
     template_name = 'serie.html'
-
+    banner = True
     add_like_url = "http://127.0.0.1:8000/api/serieaddtolike/"
     add_dislike_url = "http://127.0.0.1:8000/api/serieaddtosislike/"
     add_to_favorite = "http://127.0.0.1:8000/api/favorite/serie/"
@@ -404,6 +413,16 @@ class Serie(BaseId):
     check_dis_likes_url = 'http://127.0.0.1:8000/api/dislike/series'
     rate_url = 'http://127.0.0.1:8000/api/staraddtorating/'
     check_rate_url = 'http://127.0.0.1:8000/api/ratings/series'
+    
+    def on_set_baner(self,response):
+        if response['banner'] == None:
+            series = requests.get('http://127.0.0.1:8000/api/seriesbenners/'+str(self.kwargs.get('pk'))+'/').json()
+            if len(series['results']) > 0:
+                return random.choice(series['results'])['url']
+                
+            producents = requests.get('http://127.0.0.1:8000/api/producent/benners/'+str(self.kwargs.get('pk'))+'/').json()
+            if len(producents['results']) > 0:
+                return random.choice(producents['results'])['url']
 
 class Producent(BaseId):
 

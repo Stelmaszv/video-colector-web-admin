@@ -25,6 +25,7 @@ from core.webadminapi.views.movies import (MovieAddToDisLikeView,
                                            MovieTagsView,
                                            MoviesTopView)
 from core.webadminapi.views.producent import (ProducentAddToDisLikeView,
+                                              ProducentBennersView,
                                               ProducentAddToFavoriteView,
                                               ProducentAddToLikeView,
                                               ProducentAddToRatingView,
@@ -200,6 +201,7 @@ urlpatterns = [
     path('producentupdateviews/<int:pk>/',       ProducentUpdateViewsView.as_view(), name='producentupdateviews'),
     path('producentsformview',                   ProducentsFormView.as_view(), name='producentsformview'),
     path('producentsseries/<int:pk>/',           ProducentsSeriesView.as_view(), name='producentsseries'),
+    path('producent/benners/<int:pk>/',          ProducentBennersView.as_view(), name='producentbenners'),
     #tags
     path('tags',                                 TagView.as_view(), name='tas'),
     path('tag/<int:pk>/',                        TagDeteilsView.as_view(), name='tag'),

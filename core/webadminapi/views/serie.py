@@ -118,7 +118,7 @@ class SeriesBennersView(AbstractGenericsAPIView):
                 if photo.endswith(photo_ext):
                     banners.append(
                         {
-                            "url": Model.web_dir + '/banners/' + photo
+                            "url": Model.web_dir + '\\banners\\' + photo
                         },
                     )
         else:

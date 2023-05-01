@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <center>
-    <img src="{{ result.banner }}" width="1980">
+    {% if banner %}
+        <img src="{{ banner }}" width="1980">
+    {% endif %}
 </center>
 <div class="container text-center">
     <h2>{{ result.show_name | default:result.name }}</h2>
