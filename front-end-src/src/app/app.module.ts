@@ -84,6 +84,7 @@ import { FullDescPipe } from './Pipe/full-desc/full-desc.pipe';
 import { FullNamePipe } from './Pipe/full-name/full-name.pipe';
 import { NationalityPipe } from './Pipe/nationality/nationality.pipe';
 import { AgePipe } from './Pipe/age/age.pipe';
+import { SezonsComponent } from './Components/list/sezons/sezons.component';
 
 @NgModule({
   declarations: [
@@ -166,7 +167,8 @@ import { AgePipe } from './Pipe/age/age.pipe';
     FullDescPipe,
     FullNamePipe,
     NationalityPipe,
-    AgePipe
+    AgePipe,
+    SezonsComponent
   ],
   imports: [
     AppRoutingModule,

@@ -16,7 +16,6 @@ export class SeriesStarsComponent extends StarsComponent {
     if (this.start){
       this.url='api/series/stars/'+this.ID+'?page='+this.page
     }
-
   }
 
 }

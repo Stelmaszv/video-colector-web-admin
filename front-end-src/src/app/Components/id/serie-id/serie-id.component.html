@@ -166,6 +166,13 @@
                 </button>
             </li>
 
+            <li class="nav-item nav_tab movies_series_sezons" name="movies_series_sezons" role="presentation">
+                <button class="nav-link" id="pills-stars-tab" data-bs-toggle="pill"
+                        data-bs-target="#sezons" type="button" role="tab" aria-controls="pills-contact"
+                        aria-selected="false" (click)="button_section='sezons'">Sezons in {{data|name}}
+                </button>
+            </li>
+
         </ul>
         <div class="tab-content" id="pills-tabContent">
 
@@ -192,6 +199,14 @@
                  aria-labelledby="pills-stars-tab">
                  <ng-template [ngIf]="button_section=='top-stars'">
                     <app-series-stars title="Top Stars in {{data | name}}" ID={{data.id}}></app-series-stars>
+                </ng-template>
+            </div>
+
+            <div class="tab-pane fade tab_content movies_series_stars_tab" id="sezons" role="tabpanel"
+            type="sezons"
+            aria-labelledby="pills-stars-tab">
+                <ng-template [ngIf]="button_section=='sezons'">
+                    <app-sezons></app-sezons>
                 </ng-template>
             </div>
         </div>

@@ -70,7 +70,9 @@ class SerieSeasonView(AbstractGenericsAPIViewExtended):
                     {
                         "id": movie.id,
                         "name": movie.name,
-                        "show_name":movie.show_name
+                        "show_name":movie.show_name,
+                        "description": movie.description,
+                        "stars": movie.stars
                     }
                 )
         return movies

@@ -543,9 +543,11 @@ class MoviesSerializer(BaseSeralizer):
         return representation
     
 class MoviesSeasonSerializer(BaseSeralizer):
+    stars = StarsForMovies(many=True)
+    
     class Meta:
         model = Movie
-        fields = ['id','name','show_name']
+        fields = ['id','name','show_name','stars','description']
             
 class SeriesSezonSerializer(serializers.Serializer):
     number  = serializers.CharField(max_length=10)
