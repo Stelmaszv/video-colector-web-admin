@@ -4,5 +4,6 @@ app_name = 'wideocollectorseader'
 from django.urls import re_path,path
 
 urlpatterns = [
-    path('seed',    StartSeederView.as_view(), name='start_seeder')
+    path('seed',    StartSeederView.as_view(), name='start_seeder'),
+    path('',    StartView.as_view(), name='data')
 ]

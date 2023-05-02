@@ -15,5 +15,25 @@ export class SerieIdComponent extends BaseIDComponent {
   protected override fovorits_url:string='api/favorite/serie/'
   protected override chceck_favorit_stan_url='api/favoriteis/series/'
   protected override edit_url_heder:string='/admin/serie/edit/'
+  protected override banner_url:string='api/producent/series/banners'
+
+  override set_banner(id:number){
+    if (this.banner_url){
+      this.httpService.get_url(this.banner_url+'/'+id+'/').subscribe(
+        (response) => {
+          this.banner = this.random_banner(Object.values(response)[3])
+        }
+      );
+    }
+    if(this.banner == ''){
+      if (this.banner_url){
+        this.httpService.get_url('api/producent/series/banners/'+this.data.producent.id+'/').subscribe(
+          (response) => {
+            this.banner = this.random_banner(Object.values(response)[3])
+          }
+        );
+      }
+    }
+  }
 
 }

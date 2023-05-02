@@ -52,6 +52,7 @@ class SerieSeasonView(AbstractGenericsAPIViewExtended):
             name = el.split('_')
             if name[0] == str(index) and name[1] == 'front.jpg':
                 return el
+        return ''
     
     def found_back_cover(self,index):
         covers = os.listdir(self.ItemModel.dir+'\covers')
@@ -59,6 +60,7 @@ class SerieSeasonView(AbstractGenericsAPIViewExtended):
             name = el.split('_')
             if name[0] == str(index) and name[1] == 'back.jpg':
                 return el
+        return ''
     
     def set_movies(self,index):
         movies = []

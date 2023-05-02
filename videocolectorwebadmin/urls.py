@@ -23,13 +23,13 @@ from core.wideocollectorseader.views import StartView, StartSeederView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('seed',                    StartSeederView.as_view(), name='start_seeder'),
+    path('seed',StartSeederView.as_view(), name='start_seeder'),
     path('api/', include('core.webadminapi.urls')),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('', include('core.webapp.urls')),
+    path('', include('api.urls')),
+    path('admin', include('core.webapp.urls')),
     path('custom-url/', include('drf_expiring_token.urls')),
-    path('aps', StartView.as_view(), name="start")
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,6 +15,7 @@ export class ProducentIdComponent extends BaseIDComponent {
   protected override fovorits_url:string='api/favorite/movie/'
   protected override chceck_favorit_stan_url='api/favoriteis/movies/'
   protected override edit_url_heder:string='/admin/producent/edit/'
+  protected override banner_url:string='api/producent/series/banners'
 }
 
 

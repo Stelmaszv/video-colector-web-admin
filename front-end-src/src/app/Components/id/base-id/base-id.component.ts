@@ -23,6 +23,7 @@ export class BaseIDComponent implements OnInit {
   public bad_procent:any
   public if_favorite=false
   protected server:string='http://127.0.0.1:8000/'
+  protected banner_url:string=''
   protected add_to_like_url:string=''
   protected add_to_rating_url:string=''
   protected add_to_dislike_url:string=''
@@ -55,11 +56,10 @@ export class BaseIDComponent implements OnInit {
     this.set_id()
     this.get_url(this.id)
     this.on_init()
-
   }
 
-  public random_banneer(data:any){
-    return data.banners[Math.floor(Math.random()*data.banners.length)].url
+  public random_banner(data:any){
+    return data[Math.floor(Math.random()*data.length)].url
   }
 
   protected on_init():void {}
@@ -106,8 +106,14 @@ export class BaseIDComponent implements OnInit {
     return response['name']
   }
 
-  protected set_banner(data:any){
-    this.banner=this.random_banneer(data)
+  protected set_banner(id:number){
+    if (this.banner_url){
+      this.httpService.get_url(this.banner_url+'/'+id+'/').subscribe(
+        (response) => {
+          this.banner = this.random_banner(Object.values(response)[3])
+        }
+      );
+    }
   }
 
   protected get_url(id:number): void
@@ -119,29 +125,26 @@ export class BaseIDComponent implements OnInit {
             this.on_get_url()
             this.set_procent(response)
             this.TitleService.setTitle(this.set_title(response));
-            this.set_banner(response)
             this.on_get_result(response)
         }
       );
     }else{
       this.httpService.get_url_auth(this.url+''+id+'').subscribe(
         (response) => {
-            console.log(response)
             this.data=response
             this.on_get_url()
             this.set_procent(response)
             this.on_get_result(response)
             this.TitleService.setTitle(this.set_title(response));
-            this.set_banner(response)
         },
         (error) => {
-          console.log(error.statusText)
           if (error.statusText == 'Unauthorized'){
             console.log('Unauthorized')
           }
         }
       );
     }
+    this.set_banner(id)
   }
 
   private set_procent(data:any):void
