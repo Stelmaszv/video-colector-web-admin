@@ -542,8 +542,14 @@ class MoviesSerializer(BaseSeralizer):
         representation["stars"] = sorted(representation["stars"], key=lambda x: x["views_count"],reverse=True)
         return representation
     
+class StarsForSeazons(BaseSeralizer):
+    
+    class Meta:
+        model = Movie
+        fields = ['id','name']
+    
 class MoviesSeasonSerializer(BaseSeralizer):
-    stars = StarsForMovies(many=True)
+    stars = StarsForSeazons(many=True)
     
     class Meta:
         model = Movie
