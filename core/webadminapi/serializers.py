@@ -546,7 +546,7 @@ class StarsForSeazons(BaseSeralizer):
     
     class Meta:
         model = Movie
-        fields = ['id','name']
+        fields = ['id','name','show_name']
     
 class MoviesSeasonSerializer(BaseSeralizer):
     stars = StarsForSeazons(many=True)
