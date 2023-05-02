@@ -5,6 +5,7 @@ app_name = 'api'
 
 urlpatterns = [
     path('start', views.StartView.as_view(), name="start"),
+    path('login', views.StartView.as_view(), name="start"),
     path('movies', views.StartView.as_view(), name="start"),
     path('movie/<int:pk>/', views.StartView.as_view(), name="start"),
     path('series', views.StartView.as_view(), name="start"),

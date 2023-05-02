@@ -6,10 +6,10 @@ videocolectorwebadmin/__pycache__/__init__.cpython-38.pyc
 /front-end-src/src/assets/web/
 /templete/movies.html
 /web/
-/static/
 core/wideocollectorseader/migrations/0004_auto_20220208_1254.py
 core/wideocollectorseader/migrations/0002_auto_20220208_1251.py
 core/wideocollectorseader/migrations/0003_auto_20220208_1252.py
 setings.JSON
 /Producents/
 !/secret.py
+/static/
