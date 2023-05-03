@@ -14,25 +14,29 @@ export class BasePhotosComponent extends BaseListComponent {
   @Input() override title:string=''
   public show_big_photo(photo:any,index:number){
 
-      this.index=index
+      this.index = index
 
       if (this.data[index+1]){
-        this.next=true
+        this.next = true
       }else{
-        this.next=false
+        this.next = false
       }
 
       if (this.data[index-1]){
-        this.back=true
+        this.back = true
       }else{
-        this.back=false
+        this.back = false
       }
 
-      this.photo=photo
-      this.big_photo_url='http://127.0.0.1:8000/'+photo.url
+      this.photo = photo
+      this.big_photo_url = photo.url
   }
 
   public next_photo(){
+    if (this.data.length < this.response.count){
+      this.page = this.set_next()
+      this.load_data()
+    }
     this.show_big_photo(this.data[this.index+1],this.index+1)
   }
 

@@ -137,7 +137,7 @@ export class BaseListComponent implements OnInit {
     }
   }
 
-  private set_next():number
+  protected set_next():number
   {
     if (this.response.next != null){
       return this.page+1

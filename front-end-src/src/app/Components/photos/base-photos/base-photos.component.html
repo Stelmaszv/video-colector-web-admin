@@ -1,11 +1,11 @@
-<img *ngFor="let photo of data ; let i=index" class="galery-item" (click)="show_big_photo(photo,i)" src="http://127.0.0.1:8000/{{photo.url}}" data-bs-toggle="modal" data-bs-target="#photo">
+<img *ngFor="let photo of data ; let i=index" class="galery-item" (click)="show_big_photo(photo,i)" src="{{photo.url}}" data-bs-toggle="modal" data-bs-target="#photo">
 
 <ng-template [ngIf]="data.length==0">
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     Empty Galery
   </div>
 </ng-template>
-
+<i class="fa-brands fa-twitter"></i>
 <div class="modal fade" id="photo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -13,9 +13,19 @@
           <h5 class="modal-title" id="exampleModalLabel">Galery</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <ng-template [ngIf]="back">
+          <span class="nav-gallery left" (click)="back_photo()">
+            <i class="fas fa-chevron-circle-right fa-rotate-180"></i>
+          </span>
+        </ng-template>
         <div class="modal-body">
             <img src="{{big_photo_url}}" class="img">
         </div>
+        <ng-template [ngIf]="next">
+          <span class="nav-gallery right" (click)="next_photo()">
+            <i class="fas fa-chevron-circle-right"></i>
+          </span>
+        </ng-template>
       </div>
     </div>
 </div>

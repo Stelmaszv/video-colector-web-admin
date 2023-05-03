@@ -35,7 +35,6 @@ export class ActionsComponent implements OnInit{
     this.AlertService.alert('Object '+stan+' favorite')
   }
 
-
   public addrate = new FormGroup({
     rate: new FormControl(1)
   });
@@ -97,12 +96,12 @@ export class ActionsComponent implements OnInit{
     this.add_action(this.update_views_url,'.views_js')
   }
 
-
   private update_elemnt(selector:string){
     function to_int(value:any):any{
       return value*1
     }
     let domEl: HTMLElement | null = document.querySelector(selector);
+    console.log(domEl && (domEl.innerHTML = to_int(domEl.innerHTML)+1))
     domEl && (domEl.innerHTML =to_int(domEl.innerHTML)+1);
   }
 

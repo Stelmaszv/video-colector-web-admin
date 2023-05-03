@@ -8,10 +8,27 @@
         text-align: center;
         .modal-body{
             .img{
-                max-width: 1200px;
+                max-width: 1150px;
                 min-height: 900px;
                 object-fit:cover;
             }
         }
     }
+}
+
+.nav-gallery{
+    top:35%;
+    position: fixed;
+    width: 100px;
+    font-weight: bolder;
+    font-size: 80px;
+    color: white;
+}
+
+.left{
+    left: 23%;
+}
+
+.right{
+    left: 74%;
 }
